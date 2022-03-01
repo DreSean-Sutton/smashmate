@@ -1,0 +1,43 @@
+/* stylelint-disable selector-class-pattern */
+
+/* BASE CSS SELECTORS */
+header {
+  position: relative;
+  margin: 0 auto 6rem;
+}
+
+main {
+  margin: auto;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* HEADER SECTION */
+.header-layout {
+  padding: 1.5rem;
+}
+
+/* MAIN SECTION */
+
+.content-layout {
+  margin: auto;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 7.5%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.character-card {
+  padding: 0 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.character-card__name {
+  /* display: inline-block; */
+  margin: 0;
+  padding: 0.5rem 0;
+}

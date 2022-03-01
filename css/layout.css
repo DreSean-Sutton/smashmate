@@ -1,0 +1,18 @@
+.hidden {
+  display: none;
+}
+
+.container {
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  width: 100%;
+}
+
+.card-column {
+  width: 45%;
+}

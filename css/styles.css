@@ -1,0 +1,77 @@
+/* stylelint-disable selector-class-pattern */
+:root {
+
+}
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+/* BASE CSS SELECTORS */
+
+main {
+
+}
+
+h1 {
+  /* position: relative; */
+  font-size: 1.25rem;
+  text-transform: capitalize;
+}
+
+h3 {
+  text-transform: capitalize;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* HEADER SECTION */
+
+.navbar-top {
+  color: white;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.background-images {
+  position: fixed;
+  top: 15%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  min-height: 100vh;
+  opacity: 0.8;
+}
+
+.character-card {
+  position: relative;
+  background-color: rgba(255 255 255 / 0.93);
+  border-radius: 12px;
+}
+
+.character-card__name {
+  font-size: 1rem;
+  border-top: 1.5px solid #c4c4c4;
+  text-align: center;
+}
+
+.character-card__number {
+  font-size: 1.25rem;
+  font-weight: bold;
+  position: absolute;
+  top: 2px;
+  right: 5px;
+}
+
+/* Nintendo slider
+  opacity: 1;
+  width: 60000px;
+  transform: translate3d(-5054px, 0px, 0px);
+  transition: transform 30000ms linear 0s; */

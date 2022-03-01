@@ -7,12 +7,48 @@
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/utilities.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <div class="container navbar-top">
+      <div class="row header-layout">
+        <div class="column-full">
+          <h1>smash ultimate fighter list</h1>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="container">
+    <div id="image-carousel" class="background-images">
+      <img data-carousel-index="0" class="" src="/images/smash-ultimate-background/ajax_background_1.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="1" class="hidden" src="/images/smash-ultimate-background/ajax_background_2.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="2" class="hidden" src="/images/smash-ultimate-background/ajax_background_3.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="3" class="hidden" src="/images/smash-ultimate-background/ajax_background_4.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="4" class="hidden" src="/images/smash-ultimate-background/ajax_background_5.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="5" class="hidden" src="/images/smash-ultimate-background/ajax_background_6.jpg" alt="smash ultimate characters">
+    </div>
+    <div class="row content-layout">
+      <div class="card-column">
+        <div class="row character-card">
+          <div class="column-full">
+            <img src="/images/smash-ultimate-sprites/chara_5_mario_00.png" alt="">
+            <span class="character-card__number">01</span>
+            <h3 class="character-card__name">mario</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card-column">
+        <div class="row character-card">
+          <div class="column-full">
+            <img src="/images/smash-ultimate-sprites/chara_5_mario_00.png" alt="">
+            <span class="character-card__number">01</span>
+            <h3 class="character-card__name">mario</h3>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
