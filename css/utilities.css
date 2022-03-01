@@ -2,8 +2,7 @@
 
 /* BASE CSS SELECTORS */
 header {
-  position: relative;
-  margin: 0 auto 6rem;
+  margin: 0 auto 4.5rem;
 }
 
 main {
@@ -15,6 +14,7 @@ h1 {
 }
 
 /* HEADER SECTION */
+
 .header-layout {
   padding: 1.5rem;
 }
@@ -32,12 +32,16 @@ h1 {
 
 .character-card {
   padding: 0 1rem;
+  margin: 1rem 0;
   justify-content: center;
   align-items: center;
 }
 
 .character-card__name {
-  /* display: inline-block; */
   margin: 0;
   padding: 0.5rem 0;
 }
+
+/* .footer-layout {
+  padding: 1.5rem;
+} */

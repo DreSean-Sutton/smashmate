@@ -1,21 +1,30 @@
 /* stylelint-disable selector-class-pattern */
 :root {
-
+  --card-color: rgba(255 255 255 / 0.93);
+  --character-name-border-top: #c4c4c4;
 }
+
+/* BASE CSS SELECTORS */
 
 body {
   font-family: Roboto, sans-serif;
 }
 
-/* BASE CSS SELECTORS */
+header {
+  position: relative;
+}
 
 main {
 
 }
 
+footer {
+  position: relative;
+}
+
 h1 {
   /* position: relative; */
-  font-size: 1.25rem;
+  font-size: 1rem;
   text-transform: capitalize;
 }
 
@@ -38,27 +47,40 @@ img {
   right: 0;
   left: 0;
   z-index: 9999;
+  box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
 }
 
 .background-images {
   position: fixed;
-  top: 15%;
+  top: 10%;
   right: 0;
   bottom: 0;
   left: 0;
-  min-height: 100vh;
+  min-width: 85vh;
+  height: 100vh;
   opacity: 0.8;
 }
 
 .character-card {
   position: relative;
-  background-color: rgba(255 255 255 / 0.93);
+  background-color: var(--card-color);
   border-radius: 12px;
+  box-shadow: 0 4px 5px 4px black;
+  transition: transform 150ms;
+  cursor: pointer;
+}
+
+.character-card:hover {
+  transform: translateY(2%);
+}
+
+.character-card:active {
+  transform: scale(0.98);
 }
 
 .character-card__name {
   font-size: 1rem;
-  border-top: 1.5px solid #c4c4c4;
+  border-top: 1.5px solid var(--character-name-border-top);
   text-align: center;
 }
 
@@ -69,6 +91,18 @@ img {
   top: 2px;
   right: 5px;
 }
+
+/* FOOTER SECTION */
+
+/* .navbar-bottom {
+  background-color: black;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  box-shadow: 0 0 10px 2px black;
+} */
 
 /* Nintendo slider
   opacity: 1;
