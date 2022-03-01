@@ -13,6 +13,11 @@ h1 {
   margin: 0;
 }
 
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
 /* HEADER SECTION */
 
 .header-layout {
@@ -31,15 +36,23 @@ h1 {
 }
 
 .character-card {
+  margin: auto;
   padding: 0 1rem;
-  margin: 1rem 0;
   justify-content: center;
   align-items: center;
+  width: 140px;
+  height: 200px;
 }
 
 .character-card__name {
   margin: 0;
   padding: 0.5rem 0;
+}
+
+.character-card__img {
+  /* width: 10%; */
+
+  /* min-height: 160px; */
 }
 
 /* .footer-layout {

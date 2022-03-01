@@ -14,10 +14,6 @@ header {
   position: relative;
 }
 
-main {
-
-}
-
 footer {
   position: relative;
 }
@@ -30,11 +26,6 @@ h1 {
 
 h3 {
   text-transform: capitalize;
-}
-
-img {
-  width: 100%;
-  max-width: 100%;
 }
 
 /* HEADER SECTION */

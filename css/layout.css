@@ -3,7 +3,7 @@
 }
 
 .container {
-
+  max-width: 1200px;
 }
 
 .row {
@@ -16,4 +16,28 @@
 
 .card-column {
   width: 45%;
+  margin: 1rem auto;
+}
+
+@media screen and (min-width: 575px) {
+  .card-column {
+    width: 25%;
+    margin: 1.5rem auto;
+    transform: scale(1.03);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-column {
+    width: 18%;
+    margin: 2rem auto;
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .card-column {
+    margin: 3rem auto;
+    transform: scale(1.3);
+  }
 }

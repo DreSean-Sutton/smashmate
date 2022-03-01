@@ -1,310 +1,387 @@
 /* exported data */
 const data = {
   view: 'characterList',
-  characters: [
-    mario = {
+  characters: {
+    mario: {
       name: 'mario',
-      imgURL: ''
+      imgURL: 'chara_5_mario_00.png',
+      id: 1
     },
-    donkeyKong = {
+    donkeyKong: {
       name: 'donkeyKong',
-      imgURL:
+      imgURL: 'chara_5_donkey_kong_00.png',
+      id: 2
+
     },
-    link = {
+    link: {
       name: 'link',
-      imgURL:
+      imgURL: 'chara_5_link_00.png',
+      id: 3
     },
-    samus = {
+    samus: {
       name: 'samus',
-      imgURL:
+      imgURL: 'chara_5_samus_00.png',
+      id: 4
     },
-    darkSamus = {
+    darkSamus: {
       name: 'dark samus',
-      imgURL:
+      imgURL: 'chara_5_dark_samus_00.png',
+      id: 5
     },
-    yoshi = {
+    yoshi: {
       name: 'yoshi',
-      imgURL:
+      imgURL: 'chara_5_yoshi_07.png',
+      id: 6
     },
-    kirby = {
+    kirby: {
       name: 'kirby',
-      imgURL:
+      imgURL: 'chara_5_kirby_00.png',
+      id: 7
     },
-    fox = {
+    fox: {
       name: 'fox',
-      imgURL:
+      imgURL: 'chara_5_fox_00.png',
+      id: 8
     },
-    pikachu = {
+    pikachu: {
       name: 'pikachu',
-      imgURL:
+      imgURL: 'chara_5_pikachu_00.png',
+      id: 9
     },
-    luigi = {
+    luigi: {
       name: 'luigi',
-      imgURL:
+      imgURL: 'chara_5_luigi_00.png',
+      id: 10
     },
-    ness = {
+    ness: {
       name: 'ness',
-      imgURL:
+      imgURL: 'chara_5_ness_00.png',
+      id: 11
     },
-    captainFalcon = {
+    captainFalcon: {
       name: 'captainFalcon',
-      imgURL:
+      imgURL: 'chara_5_captain_falcon_00.png',
+      id: 12
     },
-    jigglypuff = {
+    jigglypuff: {
       name: 'jigglypuff',
-      imgURL:
+      imgURL: 'chara_5_jigglypuff_00.png',
+      id: 13
     },
-    peach = {
+    peach: {
       name: 'peach',
-      imgURL:
+      imgURL: 'chara_5_peach_00.png',
+      id: 14
     },
-    daisy = {
+    daisy: {
       name: 'daisy',
-      imgURL:
+      imgURL: 'chara_5_daisy_00.png',
+      id: 15
     },
-    bowser = {
+    bowser: {
       name: 'bowser',
-      imgURL:
+      imgURL: 'chara_5_bowser_00.png',
+      id: 16
     },
-    iceClimbers = {
+    iceClimbers: {
       name: 'iceClimbers',
-      imgURL:
+      imgURL: 'chara_5_ice_climbers_00.png',
+      id: 17
     },
-    sheik = {
+    sheik: {
       name: 'sheik',
-      imgURL:
+      imgURL: 'chara_5_sheik_00.png',
+      id: 18
     },
-    zelda = {
+    zelda: {
       name: 'zelda',
-      imgURL:
+      imgURL: 'chara_5_zelda_00.png',
+      id: 19
     },
-    drMario = {
+    drMario: {
       name: 'drMario',
-      imgURL:
+      imgURL: 'chara_5_dr_mario_00.png',
+      id: 20
     },
-    pichu = {
+    pichu: {
       name: 'pichu',
-      imgURL:
+      imgURL: 'chara_5_pichu_00.png',
+      id: 21
     },
-    falco = {
+    falco: {
       name: 'falco',
-      imgURL:
+      imgURL: 'chara_5_falco_00.png',
+      id: 22
     },
-    marth = {
+    marth: {
       name: 'marth',
-      imgURL:
+      imgURL: 'chara_5_marth_00.png',
+      id: 23
     },
-    lucina = {
+    lucina: {
       name: 'Lucina',
-      imgURL:
+      imgURL: 'chara_5_lucina_00.png',
+      id: 24
     },
-    youngLink = {
+    youngLink: {
       name: 'youngLink',
-      imgURL:
+      imgURL: 'chara_5_young_link_00.png',
+      id: 25
     },
-    ganondorf = {
+    ganondorf: {
       name: 'ganondorf',
-      imgURL:
+      imgURL: 'chara_5_ganondorf_00.png',
+      id: 26
     },
-    mewtwo = {
+    mewtwo: {
       name: 'mewtwo',
-      imgURL:
+      imgURL: 'chara_5_mewtwo_00.png',
+      id: 27
     },
-    roy = {
+    roy: {
       name: 'roy',
-      imgURL:
+      imgURL: 'chara_5_roy_00.png',
+      id: 28
     },
-    chrom = {
+    chrom: {
       name: 'chrom',
-      imgURL:
+      imgURL: 'chara_5_chrom_00.png',
+      id: 29
     },
-    mrGameWatch = {
+    mrGameWatch: {
       name: 'mrGameWatch',
-      imgURL:
+      imgURL: 'chara_5_mrGameWatch_00.png',
+      id: 30
     },
-    metaKnight = {
+    metaKnight: {
       name: 'metaKnight',
-      imgURL:
+      imgURL: 'chara_5_metaKnight_00.png',
+      id: 31
     },
-    pit = {
+    pit: {
       name: 'pit',
-      imgURL:
+      imgURL: 'chara_5_pit_00.png',
+      id: 32
     },
-    darkPit = {
+    darkPit: {
       name: 'darkPit',
-      imgURL:
+      imgURL: 'chara_5_darkpit_00.png',
+      id: 33
     },
-    zeroSuitSamus = {
+    zeroSuitSamus: {
       name: 'zeroSuitSamus',
-      imgURL:
+      imgURL: 'chara_5_zss_00.png',
+      id: 34
     },
-    wario = {
+    wario: {
       name: 'wario',
-      imgURL:
+      imgURL: 'chara_5_wario_00.png',
+      id: 35
     },
-    snake = {
+    snake: {
       name: 'snake',
-      imgURL:
+      imgURL: 'chara_5_snake_00.png',
+      id: 36
     },
-    ike = {
+    ike: {
       name: 'ike',
-      imgURL:
+      imgURL: 'chara_5_ike_01.png',
+      id: 37
     },
-    squirtle = {
+    squirtle: {
       name: 'squirtle',
-      imgURL:
+      imgURL: 'chara_5_pokemon_squirtle_00.png',
+      id: 38
     },
-    ivysaur = {
+    ivysaur: {
       name: 'ivysaur',
-      imgURL:
+      imgURL: 'chara_5_pokemon_ivysaur_00.png',
+      id: 39
     },
-    charizard = {
+    charizard: {
       name: 'charizard',
-      imgURL:
+      imgURL: 'chara_5_pokemon_charizard_00.png',
+      id: 40
     },
-    diddyKong = {
-      name: 'diddyKong',
-      imgURL:
+    diddyKong: {
+      name: 'didd yKong',
+      imgURL: 'chara_5_didd y_kong_00.png',
+      id: 41
     },
-    lucas = {
+    lucas: {
       name: 'lucas',
-      imgURL:
+      imgURL: 'chara_5_lucas_00.png',
+      id: 42
     },
-    sonic = {
+    sonic: {
       name: 'sonic',
-      imgURL:
+      imgURL: 'chara_5_sonic_00.png',
+      id: 43
     },
-    king Dedede = {
+    kingDedede: {
       name: 'kingDedede',
-      imgURL:
+      imgURL: 'chara_5_dedede_00.png',
+      id: 44
     },
-    olimar = {
+    olimar: {
       name: 'olimar',
-      imgURL:
+      imgURL: 'chara_5_olimar_00.png',
+      id: 45
     },
-    lucario = {
+    lucario: {
       name: 'lucario',
-      imgURL:
+      imgURL: 'chara_5_lucario_00.png',
+      id: 46
     },
-    rob = {
+    rob: {
       name: 'rob',
-      imgURL:
+      imgURL: 'chara_5_rob_01.png',
+      id: 47
     },
-    toonLink = {
+    toonLink: {
       name: 'toonLink',
-      imgURL:
+      imgURL: 'chara_5_toon_link_00.png',
+      id: 48
     },
-    wolf = {
+    wolf: {
       name: 'wolf',
-      imgURL:
+      imgURL: 'chara_5_wolf_00.png',
+      id: 49
     },
-    villager = {
+    villager: {
       name: 'villager',
-      imgURL:
+      imgURL: 'chara_5_villager_00.png',
+      id: 50
     },
-    megaMan = {
+    megaMan: {
       name: 'megaMan',
-      imgURL:
+      imgURL: 'chara_5_megaman_00.png',
+      id: 51
     },
-    wiiFitTrainer = {
+    wiiFitTrainer: {
       name: 'wiiFitTrainer',
-      imgURL:
+      imgURL: 'chara_5_wiifit_00.png',
+      id: 52
     },
-    rosalinaLuma = {
+    rosalinaLuma: {
       name: 'rosalinaLuma',
-      imgURL:
+      imgURL: 'chara_5_rosalina_luma_00.png',
+      id: 53
     },
-    little Mac = {
+    littleMac: {
       name: 'littleMac',
-      imgURL:
+      imgURL: 'chara_5_littlemac_00.png',
+      id: 54
     },
-    greninja = {
+    greninja: {
       name: 'greninja',
-      imgURL:
+      imgURL: 'chara_5_greninja_00.png',
+      id: 55
     },
-    miiBrawler = {
-      name: '/ Mii Fighter(Brawler',
-      imgURL:
+    miiBrawler: {
+      name: 'miiBrawler',
+      imgURL: 'chara_5_miibrawler_00.png',
+      id: 56
     },
-    miiSwordfighter = {
-      name: '/ Mii Fighter(Swordfighter',
-      imgURL:
+    miiSwordfighter: {
+      name: 'miiSwordfighter',
+      imgURL: 'chara_5_miiswordman_00.png',
+      id: 57
     },
-    miiGunner = {
-      name: '/ Mii Fighter(Gunner',
-      imgURL:
+    miiGunner: {
+      name: 'miiGunner',
+      imgURL: 'chara_5_miigunner_00.png',
+      id: 58
     },
-    palutena = {
+    palutena: {
       name: 'palutena',
-      imgURL:
+      imgURL: 'chara_5_palutena_00.png',
+      id: 59
     },
-    pacMan = {
+    pacMan: {
       name: 'pacMan',
-      imgURL:
+      imgURL: 'chara_5_pacman_00.png',
+      id: 60
     },
-    robin = {
+    robin: {
       name: 'robin',
-      imgURL:
+      imgURL: 'chara_5_robin_00.png',
+      id: 61
     },
-    shulk = {
+    shulk: {
       name: 'shulk',
-      imgURL:
+      imgURL: 'chara_5_shulk_00.png',
+      id: 62
     },
-    bowerJr = {
+    bowerJr: {
       name: 'BowserJr',
-      imgURL:
+      imgURL: 'chara_5_bower_jr_00.png',
+      id: 63
     },
-    duckHunt = {
+    duckHunt: {
       name: 'duckHunt',
-      imgURL:
+      imgURL: 'chara_5_duckhunt_00.png',
+      id: 64
     },
-    ryu = {
+    ryu: {
       name: 'ryu',
-      imgURL:
+      imgURL: 'chara_5_ryu_00.png',
+      id: 65
     },
-    ken = {
+    ken: {
       name: 'ken',
-      imgURL:
+      imgURL: 'chara_5_ken_00.png',
+      id: 66
     },
-    cloud = {
+    cloud: {
       name: 'cloud',
-      imgURL:
+      imgURL: 'chara_5_cloud_01.png',
+      id: 67
     },
-    corrin = {
+    corrin: {
       name: 'corrin',
-      imgURL:
+      imgURL: 'chara_5_corrin_00.png',
+      id: 68
     },
-    bayonetta = {
+    bayonetta: {
       name: 'bayonetta',
-      imgURL:
+      imgURL: 'chara_5_bayonetta_00.png',
+      id: 69
     },
-    inkling = {
+    inkling: {
       name: 'inkling',
-      imgURL:
+      imgURL: 'chara_5_inkling_00.png',
+      id: 70
     },
-    ridley = {
-      name: 'ridley',
-      imgURL:
+    ridley: {
+      name: 'ridl ey',
+      imgURL: 'chara_5_ridl ey_00.png',
+      id: 71
     },
-    simon = {
+    simon: {
       name: 'simon',
-      imgURL:
+      imgURL: 'chara_5_simon_00.png',
+      id: 72
     },
-    richter = {
+    richter: {
       name: 'richter',
-      imgURL:
+      imgURL: 'chara_5_richter_00.png',
+      id: 73
     },
-    kingKRool = {
+    kingKRool: {
       name: 'KingKRool',
-      imgURL:
+      imgURL: 'chara_5_krool_00.png',
+      id: 74
     },
-    isabelle = {
+    isabelle: {
       name: 'isabelle',
-      imgURL:
+      imgURL: 'chara_5_isabelle_00.png',
+      id: 75
     },
-    incineroa = {
+    incineroar: {
       name: 'incineroar',
-      imgURL:
+      imgURL: 'chara_5_incineroar_00.png',
+      id: 76
     }
-  ]
+  }
 };
