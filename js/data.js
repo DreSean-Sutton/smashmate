@@ -9,7 +9,7 @@ const data = {
       number: 1
     },
     {
-      name: 'donkeyKong',
+      name: 'donkey kong',
       imgURL: 'chara_5_donkey_kong_00.png',
       id: 2,
       number: 2
@@ -28,7 +28,7 @@ const data = {
       number: 4
     },
     {
-      name: 'darkSamus',
+      name: 'dark samus',
       imgURL: 'chara_5_dark_samus_00.png',
       id: 5,
       number: 4
@@ -70,7 +70,7 @@ const data = {
       number: 10
     },
     {
-      name: 'captainFalcon',
+      name: 'captain falcon',
       imgURL: 'chara_5_captain_falcon_00.png',
       id: 12,
       number: 11
@@ -100,7 +100,7 @@ const data = {
       number: 14
     },
     {
-      name: 'iceClimbers',
+      name: 'ice climbers',
       imgURL: 'chara_5_ice_climbers_00.png',
       id: 17,
       number: 15
@@ -148,7 +148,7 @@ const data = {
       number: 21
     },
     {
-      name: 'youngLink',
+      name: 'young link',
       imgURL: 'chara_5_young_link_00.png',
       id: 25,
       number: 22
@@ -178,13 +178,13 @@ const data = {
       number: 25
     },
     {
-      name: 'mrGameWatch',
+      name: 'mr game watch',
       imgURL: 'chara_5_mr_game_watch_00.png',
       id: 30,
       number: 26
     },
     {
-      name: 'metaKnight',
+      name: 'meta knight',
       imgURL: 'chara_5_metaKnight_00.png',
       id: 31,
       number: 27
@@ -196,13 +196,13 @@ const data = {
       number: 28
     },
     {
-      name: 'darkPit',
+      name: 'dark pit',
       imgURL: 'chara_5_darkpit_00.png',
       id: 33,
       number: 28
     },
     {
-      name: 'zeroSuitSamus',
+      name: 'zero suit samus',
       imgURL: 'chara_5_zss_00.png',
       id: 34,
       number: 29
@@ -244,7 +244,7 @@ const data = {
       number: 35
     },
     {
-      name: 'diddyKong',
+      name: 'diddy kong',
       imgURL: 'chara_5_diddy_kong_00.png',
       id: 41,
       number: 36
@@ -262,7 +262,7 @@ const data = {
       number: 38
     },
     {
-      name: 'kingDedede',
+      name: 'king dedede',
       imgURL: 'chara_5_dedede_00.png',
       id: 44,
       number: 39
@@ -286,7 +286,7 @@ const data = {
       number: 42
     },
     {
-      name: 'toonLink',
+      name: 'toon link',
       imgURL: 'chara_5_toon_link_00.png',
       id: 48,
       number: 43
@@ -304,25 +304,25 @@ const data = {
       number: 45
     },
     {
-      name: 'megaMan',
+      name: 'mega man',
       imgURL: 'chara_5_megaman_00.png',
       id: 51,
       number: 46
     },
     {
-      name: 'wiiFitTrainer',
+      name: 'wii fit trainer',
       imgURL: 'chara_5_wiifit_00.png',
       id: 52,
       number: 47
     },
     {
-      name: 'rosalinaLuma',
+      name: 'rosalina & Luma',
       imgURL: 'chara_5_rosalina_luma_00.png',
       id: 53,
       number: 48
     },
     {
-      name: 'littleMac',
+      name: 'little mac',
       imgURL: 'chara_5_littlemac_00.png',
       id: 54,
       number: 49
@@ -334,19 +334,19 @@ const data = {
       number: 50
     },
     {
-      name: 'miiBrawler',
+      name: 'mii brawler',
       imgURL: 'chara_5_miibrawler_00.png',
       id: 56,
       number: 51
     },
     {
-      name: 'miiSwordfighter',
+      name: 'mii swordfighter',
       imgURL: 'chara_5_miiswordman_00.png',
       id: 57,
       number: 52
     },
     {
-      name: 'miiGunner',
+      name: 'mii gunner',
       imgURL: 'chara_5_miigunner_00.png',
       id: 58,
       number: 53
@@ -358,7 +358,7 @@ const data = {
       number: 54
     },
     {
-      name: 'pacMan',
+      name: 'pacman',
       imgURL: 'chara_5_pacman_00.png',
       id: 60,
       number: 55
@@ -376,7 +376,7 @@ const data = {
       number: 57
     },
     {
-      name: 'BowserJr',
+      name: 'bowser jr',
       imgURL: 'chara_5_bowser_jr_00.png',
       id: 63,
       number: 58
@@ -442,7 +442,7 @@ const data = {
       number: 66
     },
     {
-      name: 'KingKRool',
+      name: 'King K Rool',
       imgURL: 'chara_5_krool_00.png',
       id: 74,
       number: 67
@@ -460,7 +460,7 @@ const data = {
       number: 69
     },
     {
-      name: 'piranhaPlant',
+      name: 'piranha plant',
       imgURL: 'chara_5_piranha_plant_00.png',
       id: 77,
       number: 70
@@ -496,7 +496,7 @@ const data = {
       number: 75
     },
     {
-      name: 'minmin',
+      name: 'min min',
       imgURL: 'chara_5_min_min_00.png',
       id: 83,
       number: 76

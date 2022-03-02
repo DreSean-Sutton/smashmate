@@ -27,7 +27,11 @@ const renderCharacterList = entry => {
   } else {
     $characterCardNum.textContent = entry.number;
   }
-  $characterCardName.textContent = entry.name;
+  if (entry.id === 30) {
+    $characterCardName.textContent = 'game & watch';
+  } else {
+    $characterCardName.textContent = entry.name;
+  }
 
   $cardColumn.appendChild($characterCard);
   $characterCard.appendChild($columnFull);
@@ -36,3 +40,10 @@ const renderCharacterList = entry => {
   $columnFull.appendChild($characterCardName);
   return $cardColumn;
 };
+const handleCharacterList = () => {
+  for (let i = 0; i < data.characters.length; i++) {
+    $characterList.appendChild(renderCharacterList(data.characters[i]));
+  }
+};
+
+handleCharacterList();
