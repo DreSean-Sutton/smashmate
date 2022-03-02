@@ -3,7 +3,7 @@
 /* BASE CSS SELECTORS */
 
 header {
-  margin: 0 auto 4.5rem;
+  margin: 0 auto 2.5rem;
 }
 
 main {
@@ -22,7 +22,7 @@ img {
 /* HEADER SECTION */
 
 .header-layout {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 /* MAIN SECTION */
@@ -53,4 +53,14 @@ img {
 .character-card__img {
   width: 160px;
   height: 160px;
+}
+
+@media screen and (min-width: 375px) {
+  header {
+    margin: 0 auto 4.5rem;
+  }
+
+  .header-layout {
+    padding: 1.5rem;
+  }
 }

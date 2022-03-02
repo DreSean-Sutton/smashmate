@@ -19,7 +19,7 @@ footer {
 }
 
 h1 {
-  font-size: 1rem;
+  font-size: 0.6rem;
   text-transform: capitalize;
 }
 
@@ -92,5 +92,11 @@ h3 {
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  h1 {
+    font-size: 1rem;
   }
 }
