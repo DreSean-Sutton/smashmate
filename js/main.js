@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* exported data */
-
+let currentCharacterId = 0;
 const $characterList = document.querySelector('#character-list');
 
-const renderCharacterList = (entry, handleCharacterId) => {
+const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
   const $characterCard = document.createElement('div');
   const $columnFull = document.createElement('div');
@@ -17,52 +17,36 @@ const renderCharacterList = (entry, handleCharacterId) => {
   $characterCardImg.classList = 'character-card__img';
   $characterCardNum.classList = 'character-card__number';
   $characterCardName.classList = 'character-card__name';
-  $cardColumn.setAttribute('data-card-id', handleCharacterId.currentId);
-  $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.imgURL}`;
+
+  // STUFF BELOW WILL BE AFFECTED BY API
+  $cardColumn.setAttribute('data-card-id', currentCharacterId);
+  $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.name}`;
   $characterCardImg.alt = entry.name;
 
-  if (handleCharacterId.currentNumber < 10) {
-    $characterCardNum.textContent = `0${handleCharacterId.currentNumber}`;
-  } else {
-    $characterCardNum.textContent = handleCharacterId.currentNumber;
-  }
-  if (entry.id === 30) {
-    $characterCardName.textContent = 'game & watch';
-  } else {
-    $characterCardName.textContent = entry.name;
-  }
-  if ((handleCharacterId.currentNumber === 4 ||
-    handleCharacterId.currentNumber === 13 ||
-    handleCharacterId.currentNumber === 21 ||
-    handleCharacterId.currentNumber === 25 ||
-    handleCharacterId.currentNumber === 28 ||
-    handleCharacterId.currentNumber === 60 ||
-    handleCharacterId.currentNumber === 66) &&
-    (handleCharacterId.ignoreDuplicateCounter === 0)) {
-    handleCharacterId.ignoreDuplicateCounter++;
-  } else {
-    handleCharacterId.currentNumber++;
-    handleCharacterId.ignoreDuplicateCounter = 0;
-  }
-  handleCharacterId.currentId++;
   $cardColumn.appendChild($characterCard);
   $characterCard.appendChild($columnFull);
   $columnFull.appendChild($characterCardImg);
   $columnFull.appendChild($characterCardNum);
   $columnFull.appendChild($characterCardName);
+  currentCharacterId++;
   return $cardColumn;
 };
 
-const handleCharacterList = () => {
-  const handleCharacterId = {
-    currentId: 1,
-    currentNumber: 1,
-    ignoreDuplicateCounter: 0
-  };
+const handleCharacterList = characterListURL => {
 
-  for (let i = 0; i < data.characters.length; i++) {
-    $characterList.appendChild(renderCharacterList(data.characters[i], handleCharacterId));
-  }
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', characterListURL);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    console.log('xhr status:', xhr.status);
+    console.log('xhr response:', xhr.response);
+    for (let i = 1; i < xhr.response.length; i++) {
+      $characterList.appendChild(renderCharacterList(xhr.response[i]));
+      console.log(xhr.response[i]);
+    }
+  });
+  xhr.send();
 };
 
-handleCharacterList();
+handleCharacterList('https://api.kuroganehammer.com/api/characters');
+handleCharacterList('https://api.kuroganehammer.com/api/characters?game=ultimate');
