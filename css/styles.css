@@ -56,12 +56,13 @@ h3 {
   background-color: var(--card-color);
   border-radius: 12px;
   box-shadow: 0 4px 5px 4px black;
-  transition: transform 150ms;
+  transition: transform 150ms, background-color 100ms;
   cursor: pointer;
 }
 
 .character-card:hover {
-  transform: translateY(2%);
+  transform: translateY(5%);
+  background-color: rgba(255 255 255 / 100%);
 }
 
 .character-card:active {
@@ -86,8 +87,10 @@ h3 {
   text-align: center;
 }
 
-/* Nintendo slider
-  opacity: 1;
-  width: 60000px;
-  transform: translate3d(-5054px, 0px, 0px);
-  transition: transform 30000ms linear 0s; */
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 1.4rem;
+  }
+}

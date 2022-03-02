@@ -4,7 +4,6 @@
 const $characterList = document.querySelector('#character-list');
 
 const renderCharacterList = (entry, handleCharacterId) => {
-  // debugger;
   const $cardColumn = document.createElement('div');
   const $characterCard = document.createElement('div');
   const $columnFull = document.createElement('div');
@@ -18,10 +17,11 @@ const renderCharacterList = (entry, handleCharacterId) => {
   $characterCardImg.classList = 'character-card__img';
   $characterCardNum.classList = 'character-card__number';
   $characterCardName.classList = 'character-card__name';
-
+  $cardColumn.setAttribute('data-card-id', handleCharacterId.currentId);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.imgURL}`;
-  // 4, 13, 21, 25, 28, 60, 66
-  if (entry.number < 10) {
+  $characterCardImg.alt = entry.name;
+
+  if (handleCharacterId.currentNumber < 10) {
     $characterCardNum.textContent = `0${handleCharacterId.currentNumber}`;
   } else {
     $characterCardNum.textContent = handleCharacterId.currentNumber;
