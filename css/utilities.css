@@ -1,0 +1,66 @@
+/* stylelint-disable selector-class-pattern */
+
+/* BASE CSS SELECTORS */
+
+header {
+  margin: 0 auto 2.5rem;
+}
+
+main {
+  margin: auto;
+}
+
+h1 {
+  margin: 0;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* HEADER SECTION */
+
+.header-layout {
+  padding: 1rem;
+}
+
+/* MAIN SECTION */
+
+.content-layout {
+  margin: auto;
+  width: 90%;
+  flex-wrap: wrap;
+  gap: 7.5%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.character-card {
+  margin: auto;
+  padding: 0 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 200px;
+}
+
+.character-card__name {
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.character-card__img {
+  width: 160px;
+  height: 160px;
+}
+
+@media screen and (min-width: 375px) {
+  header {
+    margin: 0 auto 4.5rem;
+  }
+
+  .header-layout {
+    padding: 1.5rem;
+  }
+}

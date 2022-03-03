@@ -7,12 +7,29 @@
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/utilities.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
+    <div class="container navbar-top">
+      <div class="row header-layout">
+        <div class="column-full">
+          <h1>smash ultimate fighter list</h1>
+        </div>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="container">
+    <div id="image-carousel" class="background-images">
+      <img data-carousel-index="0" class="backgroundImgs" src="/images/smash-ultimate-background/ajax_background_1.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="1" class="backgroundImgs hidden" src="/images/smash-ultimate-background/ajax_background_2.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="2" class="backgroundImgs hidden" src="/images/smash-ultimate-background/ajax_background_3.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="3" class="backgroundImgs hidden" src="/images/smash-ultimate-background/ajax_background_4.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="4" class="backgroundImgs hidden" src="/images/smash-ultimate-background/ajax_background_5.jpg" alt="smash ultimate characters">
+      <img data-carousel-index="5" class="backgroundImgs hidden" src="/images/smash-ultimate-background/ajax_background_6.jpg" alt="smash ultimate characters">
+    </div>
+    <div id="character-list" data-view="character-list" class="row content-layout"></div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
