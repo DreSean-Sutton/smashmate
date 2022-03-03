@@ -84,7 +84,7 @@ function intervalTimer() {
   clearInterval(backgroundImgIntervalId);
   backgroundImgIntervalId = setInterval(() => {
     handleImageSwap();
-  }, 2000);
+  }, 10000);
 }
 
 intervalTimer();
