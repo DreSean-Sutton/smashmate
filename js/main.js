@@ -41,7 +41,7 @@ const renderCharacterList = entry => {
 };
 
 const handleImageSwap = () => {
-  if (currentBackgroundImgIndex === $backgroundImgs.length - 1) {
+  if (currentBackgroundImgIndex === $backgroundImgs.length - 2) {
     currentBackgroundImgIndex = 0;
   } else {
     currentBackgroundImgIndex++;
@@ -84,7 +84,7 @@ function intervalTimer() {
   clearInterval(backgroundImgIntervalId);
   backgroundImgIntervalId = setInterval(() => {
     handleImageSwap();
-  }, 10000);
+  }, 2000);
 }
 
 intervalTimer();
