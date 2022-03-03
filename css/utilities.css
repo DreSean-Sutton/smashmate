@@ -10,10 +10,6 @@ main {
   margin: auto;
 }
 
-h1 {
-  margin: 0;
-}
-
 h4 {
   margin: 1rem 0;
 }
@@ -24,8 +20,17 @@ img {
 }
 
 table {
-  width: min(100%, 525px);
+  display: block;
+
+  /* width: min(100%, 25px); */
+  height: 200px;
   margin: 0 auto 0.5rem;
+
+  /* overflow-x: auto; */
+
+  max-width: fit-content;
+
+  /* white-space: nowrap; */
 }
 
 /* HEADER SECTION */
@@ -68,10 +73,16 @@ table {
 
 .modal-layout {
   max-width: 250px;
+  min-height: 50vh;
   margin: auto;
   padding: 0.5rem;
   justify-content: center;
   align-items: center;
+}
+
+.img-div__details {
+  margin: auto;
+  width: 70%;
 }
 
 .name-border-length {
@@ -102,11 +113,14 @@ table {
     max-width: 400px;
     padding: 0.5rem 1rem;
   }
-  .character-name
 }
 
 @media screen and (min-width: 575px) {
   .modal-layout {
     max-width: 550px;
+  }
+
+  .frame-data-div {
+    margin-left: 13%;
   }
 }
