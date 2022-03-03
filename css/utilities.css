@@ -14,9 +14,18 @@ h1 {
   margin: 0;
 }
 
+h4 {
+  margin: 1rem 0;
+}
+
 img {
   width: 100%;
   max-width: 100%;
+}
+
+table {
+  width: min(100%, 525px);
+  margin: 0 auto 0.5rem;
 }
 
 /* HEADER SECTION */
@@ -55,6 +64,31 @@ img {
   height: 160px;
 }
 
+/* CHARACTER DETAILS MODAL */
+
+.modal-layout {
+  max-width: 250px;
+  margin: auto;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.name-border-length {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.character-name__details {
+  margin: 0;
+}
+
+/* UTILITY CLASSES */
+
+.justify-center {
+  justify-content: center;
+}
+
 @media screen and (min-width: 375px) {
   header {
     margin: 0 auto 4.5rem;
@@ -62,5 +96,17 @@ img {
 
   .header-layout {
     padding: 1.5rem;
+  }
+
+  .modal-layout {
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+  }
+  .character-name
+}
+
+@media screen and (min-width: 575px) {
+  .modal-layout {
+    max-width: 550px;
   }
 }

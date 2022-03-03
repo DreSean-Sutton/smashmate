@@ -1,7 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 :root {
   --card-color: rgba(255 255 255 / 0.93);
-  --character-name-border-top: #c4c4c4;
+  --character-name-border: #c4c4c4;
 }
 
 /* BASE CSS SELECTORS */
@@ -23,8 +23,35 @@ h1 {
   text-transform: capitalize;
 }
 
-h3 {
+h2,
+h3,
+h4 {
   text-transform: capitalize;
+}
+
+h4 {
+  font-size: 0.9rem;
+}
+
+table {
+  text-transform: capitalize;
+  box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 0.5rem;
+}
+
+th {
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+td {
+  font-size: 0.85rem;
 }
 
 /* HEADER SECTION */
@@ -79,12 +106,33 @@ h3 {
 }
 
 .character-card__img {
-  border-bottom: 1.5px solid var(--character-name-border-top);
+  border-bottom: 1.5px solid var(--character-name-border);
 }
 
 .character-card__name {
   font-size: 0.8rem;
   text-align: center;
+}
+
+/* CHARACTER DETAILS MODAL */
+
+.modal-layout {
+  background-color: var(--card-color);
+  position: fixed;
+  top: 25%;
+  right: 5%;
+  left: 5%;
+  border-radius: 12px;
+  box-shadow: 0 4px 5px 4px black;
+}
+
+.name-border-length {
+  font-size: 1.2rem;
+  border-bottom: 1.5px solid var(--character-name-border);
+  text-align: center;
+}
+
+.character-name__details {
 }
 
 /* MEDIA QUERIES */
@@ -93,10 +141,44 @@ h3 {
   h1 {
     font-size: 1rem;
   }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  th {
+    font-size: 1.1rem;
+  }
+
+  td {
+    font-size: 1rem;
+  }
+
+  .character-name__details {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 575px) {
+  h4 {
+    font-size: 1.4rem;
+  }
+
+  .modal-layout {
+    top: 15%;
+  }
+
+  .character-name__details {
+    font-size: 2.4rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 1.4rem;
   }
+}
+
+@media screen and (min-width: 1000px) {
+
 }
