@@ -15,12 +15,12 @@ const renderCharacterList = entry => {
   const $characterCardNum = document.createElement('span');
   const $characterCardName = document.createElement('h3');
 
-  $cardColumn.classList = 'card-column';
-  $characterCard.classList = 'row character-card';
-  $columnFull.classList = 'column-full';
-  $characterCardImg.classList = 'character-card__img';
-  $characterCardNum.classList = 'character-card__number';
-  $characterCardName.classList = 'character-card__name';
+  $cardColumn.className = 'card-column';
+  $characterCard.className = 'row character-card';
+  $columnFull.className = 'column-full';
+  $characterCardImg.className = 'character-card__img';
+  $characterCardNum.className = 'character-card__number';
+  $characterCardName.className = 'character-card__name';
 
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
