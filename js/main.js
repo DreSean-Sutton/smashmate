@@ -9,6 +9,7 @@ const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
 const $homeButton = document.querySelector('#home-button');
 let $cardColumns = document.querySelectorAll('.card-column');
+const $frameDataSection = document.querySelector('#frame-data-section');
 
 $characterList.addEventListener('click', handleShowCharacterDetails);
 
@@ -16,15 +17,20 @@ $homeButton.addEventListener('click', () => {
   $homeButton.classList.add('hidden');
   $characterList.classList.remove('hidden');
   $characterDetails.classList.add('hidden');
+  data.currentCardIndex = null;
+  data.currentCardOwnerId = null;
+  data.view = 'character-list';
 });
 
 function handleShowCharacterDetails(event) {
   if (event.target === $cardColumns) {
     return;
   }
-
   $homeButton.classList.remove('hidden');
   $characterList.classList.add('hidden');
+  data.currentCardIndex = event.target.closest('.card-column').getAttribute('data-card-id') * 1;
+  data.currentCardOwnerId = event.target.closest('.card-column').getAttribute('data-card-owner-id') * 1;
+  data.view = 'character-details';
 }
 
 const handleCharacterList = () => {
@@ -67,7 +73,7 @@ const renderCharacterList = entry => {
   $characterCardNum.className = 'character-card__number';
   $characterCardName.className = 'character-card__name';
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
-  $cardColumn.setAttribute('data-card-name', entry.Name);
+  $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
@@ -84,6 +90,24 @@ const renderCharacterList = entry => {
   $columnFull.appendChild($characterCardName);
   currentCharacterId++;
   return $cardColumn;
+};
+
+const handleDataTable = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    console.log(xhr.status);
+    console.log(xhr.response);
+    // for (let i = 1; i < xhr.response.length; i++) {
+    //   $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+    // }
+  });
+  xhr.send();
+};
+
+const renderDataTable = entry => {
+
 };
 
 const handleImageSwap = () => {
@@ -113,5 +137,4 @@ intervalTimer();
 
 function stopCardColumnsFromHoisting() {
   $cardColumns = document.querySelectorAll('.card-column');
-  console.log($cardColumns);
 }
