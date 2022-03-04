@@ -38,7 +38,8 @@ table {
   text-transform: capitalize;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
   border-radius: 12px;
-  overflow-y: auto;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 th,
@@ -139,7 +140,7 @@ td {
 .modal-layout {
   background-color: var(--card-color);
   position: fixed;
-  top: 20%;
+  top: 15%;
   right: 5%;
   left: 5%;
   border-radius: 12px;
@@ -193,12 +194,16 @@ td {
     font-size: 1.4rem;
   }
 
-  .house-icon {
-    font-size: 1.6rem;
+  th {
+    font-size: 1.2rem;
   }
 
-  .modal-layout {
-    top: 15%;
+  td {
+    font-size: 1.1rem;
+  }
+
+  .house-icon {
+    font-size: 1.6rem;
   }
 
   .character-name__details {
@@ -209,6 +214,10 @@ td {
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 1.6rem;
+  }
+
+  .modal-layout {
+    top: 18%;
   }
 
   .house-icon {

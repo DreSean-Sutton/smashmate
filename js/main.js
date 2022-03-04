@@ -111,9 +111,7 @@ const handleDataTable = () => {
   xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
-    console.log(xhr.status);
-    console.log(xhr.response);
-    for (let i = 1; i < xhr.response.length - 4; i++) {
+    for (let i = 0; i < xhr.response.length - 4; i++) {
       $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
     }
   });
