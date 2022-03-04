@@ -5,6 +5,7 @@ let currentCharacterId = 1;
 let currentBackgroundImgIndex = 0;
 let backgroundImgIntervalId = null;
 
+const $h1 = document.querySelector('h1');
 const $characterList = document.querySelector('#character-list');
 const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
@@ -31,18 +32,34 @@ $homeButton.addEventListener('click', () => {
   data.currentCardName = null;
   data.currentCardDisplayName = null;
   const $cardColumns = document.querySelectorAll('.card-column');
+  $h1.textContent = 'smash ultimate fighter list';
   for (let i = 0; i < $cardColumns.length; i++) {
-    $cardColumns.classList.remove('hidden');
+    $cardColumns[i].classList.remove('hidden');
   }
   data.view = 'character-list';
 });
 
-// function handleHeartList(event) {
-//   const $cardColumns = document.querySelectorAll('.card-column');
-//   for (let i = 0; i < $cardColumns.length; i++) {
+function handleHeartList(event) {
+  let favoriteCounter = 0;
+  if (data.view === 'character-list') {
 
-//   }
-// }
+    const $cardColumns = document.querySelectorAll('.card-column');
+    for (let i = 0; i < $cardColumns.length; i++) {
+      if ($cardColumns[i].dataset.isFavorite === 'false') {
+        $cardColumns[i].classList.add('hidden');
+      } else {
+        favoriteCounter++;
+      }
+    }
+    // if (favoriteCounter === 0) {
+
+    // }
+    $h1.textContent = 'favorite fighters';
+    $heartList.classList.add('hidden');
+    $homeButton.classList.remove('hidden');
+    data.view = 'favorite-list';
+  }
+}
 
 function handleFavoriting(event) {
   const $cardColumns = document.querySelectorAll('.card-column');

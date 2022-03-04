@@ -194,6 +194,10 @@ td {
     font-size: 1rem;
   }
 
+  .heart-icon__list {
+    font-size: 1.4rem;
+  }
+
   .house-icon {
     font-size: 1.3rem;
   }
@@ -202,7 +206,7 @@ td {
     font-size: 1.8rem;
   }
 
-  .star-icon__details {
+  .heart-icon__details {
     font-size: 1.4rem;
   }
 }
@@ -224,6 +228,10 @@ td {
     font-size: 1.1rem;
   }
 
+  .heart-icon__list {
+    font-size: 1.6rem;
+  }
+
   .house-icon {
     font-size: 1.6rem;
   }
@@ -232,7 +240,7 @@ td {
     font-size: 2.4rem;
   }
 
-  .star-icon__details {
+  .heart-icon__details {
     font-size: 1.6rem;
   }
 }
@@ -244,6 +252,10 @@ td {
 
   .modal-layout {
     top: 18%;
+  }
+
+  .heart-icon__list {
+    font-size: 2rem;
   }
 
   .house-icon {
