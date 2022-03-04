@@ -9,7 +9,6 @@ const $characterList = document.querySelector('#character-list');
 const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
 const $homeButton = document.querySelector('#home-button');
-let $characterCard = document.querySelectorAll('.character-card');
 const $frameDataSection = document.querySelector('#frame-data-section');
 const $characterName = document.querySelector('#character-name');
 const $characterImg = document.querySelector('#character-img');
@@ -62,7 +61,7 @@ const handleCharacterList = () => {
       for (let i = 1; i < xhr2.response.length; i++) {
         $characterList.appendChild(renderCharacterList(xhr2.response[i]));
       }
-      stopcharacterCard$characterCardFromHoisting();
+      var $characterCard = document.querySelectorAll('.character-card');
     });
     xhr2.send();
   });
@@ -158,7 +157,3 @@ function intervalTimer() {
 }
 
 intervalTimer();
-
-function stopcharacterCard$characterCardFromHoisting() {
-  $characterCard = document.querySelectorAll('.character-card');
-}
