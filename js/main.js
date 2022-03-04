@@ -12,20 +12,43 @@ const $homeButton = document.querySelector('#home-button');
 const $frameDataSection = document.querySelector('#frame-data-section');
 const $characterName = document.querySelector('#character-name');
 const $characterImg = document.querySelector('#character-img');
+const $heartDetails = document.querySelector('#heart-icon__details');
+const $heartList = document.querySelector('#heart-icon__list');
 
 $characterList.addEventListener('click', handleShowCharacterDetails);
+$heartDetails.addEventListener('click', handleFavoriting);
+$heartList.addEventListener('click', handleHeartList);
 
 $homeButton.addEventListener('click', () => {
   $homeButton.classList.add('hidden');
   $characterList.classList.remove('hidden');
   $characterDetails.classList.add('hidden');
+  $heartList.classList.remove('hidden');
+  $heartDetails.classList.remove('favorited-heart');
   $frameDataSection.replaceChildren();
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
   data.currentCardName = null;
   data.currentCardDisplayName = null;
+  const $cardColumns = document.querySelectorAll('.card-column');
+  for (let i = 0; i < $cardColumns.length; i++) {
+    $cardColumns.classList.remove('hidden');
+  }
   data.view = 'character-list';
 });
+
+// function handleHeartList(event) {
+//   const $cardColumns = document.querySelectorAll('.card-column');
+//   for (let i = 0; i < $cardColumns.length; i++) {
+
+//   }
+// }
+
+function handleFavoriting(event) {
+  const $cardColumns = document.querySelectorAll('.card-column');
+  $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = true;
+  $heartDetails.classList.add('favorited-heart');
+}
 
 function handleShowCharacterDetails(event) {
   if (event.target.matches('#character-list')) {
@@ -34,14 +57,21 @@ function handleShowCharacterDetails(event) {
   $homeButton.classList.remove('hidden');
   $characterList.classList.add('hidden');
   $characterDetails.classList.remove('hidden');
-  data.currentCardName = event.target.closest('.card-column').getAttribute('data-card-name');
-  data.currentCardIndex = event.target.closest('.card-column').getAttribute('data-card-id') * 1;
-  data.currentCardOwnerId = event.target.closest('.card-column').getAttribute('data-card-owner-id') * 1;
+  $heartList.classList.add('hidden');
   const $currentCardColumn = event.target.closest('.card-column');
+  data.currentCardName = $currentCardColumn.closest('.card-column').getAttribute('data-card-name');
+  data.currentCardIndex = $currentCardColumn.closest('.card-column').getAttribute('data-card-id') * 1;
+  data.currentCardOwnerId = $currentCardColumn.closest('.card-column').getAttribute('data-card-owner-id') * 1;
   const $currentName = $currentCardColumn.querySelector('.character-card__name').textContent;
   $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
   $characterImg.alt = data.currentCardName;
   $characterName.textContent = $currentName;
+  if ($currentCardColumn.dataset.isFavorite === 'true') {
+    $heartDetails.classList.add('favorited-heart');
+  } else {
+    $heartDetails.classList.remove('favorited-heart');
+
+  }
   data.view = 'character-details';
   handleDataTable();
 }
@@ -88,6 +118,7 @@ const renderCharacterList = entry => {
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $cardColumn.setAttribute('data-card-name', entry.Name);
+  $cardColumn.setAttribute('data-is-favorite', false);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
