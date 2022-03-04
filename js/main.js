@@ -5,7 +5,52 @@ let currentBackgroundImgIndex = 0;
 let backgroundImgIntervalId = null;
 
 const $characterList = document.querySelector('#character-list');
+const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
+const $homeButton = document.querySelector('#home-button');
+let $cardColumns = document.querySelectorAll('.card-column');
+
+$characterList.addEventListener('click', handleShowCharacterDetails);
+
+$homeButton.addEventListener('click', () => {
+  $homeButton.classList.add('hidden');
+  $characterList.classList.remove('hidden');
+  $characterDetails.classList.add('hidden');
+});
+
+function handleShowCharacterDetails(event) {
+  if (event.target === $cardColumns) {
+    return;
+  }
+
+  $homeButton.classList.remove('hidden');
+  $characterList.classList.add('hidden');
+}
+
+const handleCharacterList = () => {
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    for (let i = 1; i < xhr.response.length; i++) {
+      $characterList.appendChild(renderCharacterList(xhr.response[i]));
+    }
+    const xhr2 = new XMLHttpRequest();
+    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
+    xhr2.responseType = 'json';
+    xhr2.addEventListener('load', () => {
+      for (let i = 1; i < xhr2.response.length; i++) {
+        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+      }
+      stopCardColumnsFromHoisting();
+    });
+    xhr2.send();
+  });
+  xhr.send();
+};
+
+handleCharacterList();
 
 const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
@@ -22,6 +67,7 @@ const renderCharacterList = entry => {
   $characterCardNum.className = 'character-card__number';
   $characterCardName.className = 'character-card__name';
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
+  $cardColumn.setAttribute('data-card-name', entry.Name);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
@@ -56,30 +102,6 @@ const handleImageSwap = () => {
   intervalTimer();
 };
 
-const handleCharacterList = () => {
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', () => {
-    for (let i = 1; i < xhr.response.length; i++) {
-      $characterList.appendChild(renderCharacterList(xhr.response[i]));
-    }
-    const xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
-    xhr2.responseType = 'json';
-    xhr2.addEventListener('load', () => {
-      for (let i = 1; i < xhr2.response.length; i++) {
-        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
-      }
-    });
-    xhr2.send();
-  });
-  xhr.send();
-};
-
-handleCharacterList();
-
 function intervalTimer() {
   clearInterval(backgroundImgIntervalId);
   backgroundImgIntervalId = setInterval(() => {
@@ -88,3 +110,8 @@ function intervalTimer() {
 }
 
 intervalTimer();
+
+function stopCardColumnsFromHoisting() {
+  $cardColumns = document.querySelectorAll('.card-column');
+  console.log($cardColumns);
+}
