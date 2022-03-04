@@ -139,7 +139,7 @@ td {
 
 .modal-layout {
   background-color: var(--card-color);
-  position: fixed;
+  position: absolute;
   top: 15%;
   right: 5%;
   left: 5%;
