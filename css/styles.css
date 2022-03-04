@@ -157,6 +157,16 @@ td {
   font-size: 1.2rem;
 }
 
+.star-icon__details {
+  font-size: 1.3rem;
+  color: grey;
+}
+
+.favorited-star {
+  color: yellow;
+  transform: scale(1.5);
+}
+
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 375px) {
@@ -183,6 +193,10 @@ td {
   .character-name__details {
     font-size: 1.8rem;
   }
+
+  .star-icon__details {
+    font-size: 1.4rem;
+  }
 }
 
 @media screen and (min-width: 575px) {
@@ -208,6 +222,10 @@ td {
 
   .character-name__details {
     font-size: 2.4rem;
+  }
+
+  .star-icon__details {
+    font-size: 1.6rem;
   }
 }
 
