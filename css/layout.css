@@ -14,6 +14,10 @@
   width: 100%;
 }
 
+.column-nine-tenth {
+  width: 90%;
+}
+
 .card-column {
   width: 45%;
   margin: 1rem auto;

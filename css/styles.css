@@ -61,6 +61,11 @@ td {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
+a {
+  display: inline-block;
+  cursor: pointer;
+}
+
 /* HEADER SECTION */
 
 .navbar-top {
@@ -98,6 +103,8 @@ td {
   transform: scale(1.5);
   color: var(--heart-color);
 }
+
+/* MAIN SECTION */
 
 .background-img-layout {
   position: fixed;
@@ -141,6 +148,27 @@ td {
 .character-card__name {
   font-size: 0.8rem;
   text-align: center;
+}
+
+.no-favorites {
+  background-color: var(--card-color);
+  position: fixed;
+  top: 35%;
+  right: 5%;
+  left: 5%;
+  border-radius: 12px;
+  box-shadow: 0 4px 5px 4px black;
+}
+
+.home-anchor {
+  color: white;
+  background-color: var(--heart-color);
+  border-radius: 12px;
+}
+
+.home-anchor:hover,
+.home-anchor:active {
+  opacity: 0.75;
 }
 
 /* CHARACTER DETAILS MODAL */
@@ -243,6 +271,10 @@ td {
   .heart-icon__details {
     font-size: 1.6rem;
   }
+
+  .no-favorites {
+    font-size: 1.2rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -260,5 +292,9 @@ td {
 
   .house-icon {
     font-size: 2rem;
+  }
+
+  .no-favorites {
+    font-size: 1.5rem;
   }
 }
