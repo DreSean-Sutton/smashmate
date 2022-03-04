@@ -2,5 +2,6 @@
 const data = {
   view: 'character-list',
   currentCardIndex: null,
-  currentCardOwnerId: null
+  currentCardOwnerId: null,
+  currentCardName: null
 };

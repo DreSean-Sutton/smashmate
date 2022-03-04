@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* exported data */
+
 let currentCharacterId = 1;
 let currentBackgroundImgIndex = 0;
 let backgroundImgIntervalId = null;
@@ -8,8 +9,10 @@ const $characterList = document.querySelector('#character-list');
 const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
 const $homeButton = document.querySelector('#home-button');
-let $cardColumns = document.querySelectorAll('.card-column');
+let $characterCard = document.querySelectorAll('.character-card');
 const $frameDataSection = document.querySelector('#frame-data-section');
+const $characterName = document.querySelector('#character-name');
+const $characterImg = document.querySelector('#character-img');
 
 $characterList.addEventListener('click', handleShowCharacterDetails);
 
@@ -19,17 +22,27 @@ $homeButton.addEventListener('click', () => {
   $characterDetails.classList.add('hidden');
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
+  data.currentCardName = null;
+  data.currentCardDisplayName = null;
   data.view = 'character-list';
 });
 
 function handleShowCharacterDetails(event) {
-  if (event.target === $cardColumns) {
+  if (event.target.matches('#character-list')) {
     return;
   }
+
   $homeButton.classList.remove('hidden');
   $characterList.classList.add('hidden');
+  $characterDetails.classList.remove('hidden');
+  data.currentCardName = event.target.closest('.card-column').getAttribute('data-card-name');
   data.currentCardIndex = event.target.closest('.card-column').getAttribute('data-card-id') * 1;
   data.currentCardOwnerId = event.target.closest('.card-column').getAttribute('data-card-owner-id') * 1;
+  const $currentCardColumn = event.target.closest('.card-column');
+  const $currentName = $currentCardColumn.querySelector('.character-card__name').textContent;
+  $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
+  $characterImg.alt = data.currentCardName;
+  $characterName.textContent = $currentName;
   data.view = 'character-details';
 }
 
@@ -49,7 +62,7 @@ const handleCharacterList = () => {
       for (let i = 1; i < xhr2.response.length; i++) {
         $characterList.appendChild(renderCharacterList(xhr2.response[i]));
       }
-      stopCardColumnsFromHoisting();
+      stopcharacterCard$characterCardFromHoisting();
     });
     xhr2.send();
   });
@@ -74,6 +87,7 @@ const renderCharacterList = entry => {
   $characterCardName.className = 'character-card__name';
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
+  $cardColumn.setAttribute('data-card-name', entry.Name);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
@@ -99,15 +113,27 @@ const handleDataTable = () => {
   xhr.addEventListener('load', () => {
     console.log(xhr.status);
     console.log(xhr.response);
-    // for (let i = 1; i < xhr.response.length; i++) {
-    //   $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
-    // }
+    for (let i = 1; i < xhr.response.length; i++) {
+      $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+    }
   });
   xhr.send();
 };
 
 const renderDataTable = entry => {
+  const $tableRow = document.createElement('tr');
+  const $tableCol1 = document.createElement('td');
+  const $tableCol2 = document.createElement('td');
+  const $tableCol3 = document.createElement('td');
 
+  $tableCol1.textContent = entry.Name;
+  $tableCol2.textContent = entry.HitboxActive;
+  $tableCol3.textContent = entry.FirstActionableFrame;
+
+  $tableRow.appendChild($tableCol1);
+  $tableRow.appendChild($tableCol2);
+  $tableRow.appendChild($tableCol3);
+  return $tableRow;
 };
 
 const handleImageSwap = () => {
@@ -135,6 +161,6 @@ function intervalTimer() {
 
 intervalTimer();
 
-function stopCardColumnsFromHoisting() {
-  $cardColumns = document.querySelectorAll('.card-column');
+function stopcharacterCard$characterCardFromHoisting() {
+  $characterCard = document.querySelectorAll('.character-card');
 }
