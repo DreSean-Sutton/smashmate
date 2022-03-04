@@ -15,15 +15,20 @@ const $characterName = document.querySelector('#character-name');
 const $characterImg = document.querySelector('#character-img');
 const $heartDetails = document.querySelector('#heart-icon__details');
 const $heartList = document.querySelector('#heart-icon__list');
+const $noFavorites = document.querySelector('#no-favorites');
+const $homeAnchor = document.querySelector('#home-anchor');
 
 $characterList.addEventListener('click', handleShowCharacterDetails);
 $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
+$homeButton.addEventListener('click', handleShowCharacterList);
+$homeAnchor.addEventListener('click', handleShowCharacterList);
 
-$homeButton.addEventListener('click', () => {
+function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
-  $characterList.classList.remove('hidden');
+  $noFavorites.classList.add('hidden');
   $characterDetails.classList.add('hidden');
+  $characterList.classList.remove('hidden');
   $heartList.classList.remove('hidden');
   $heartDetails.classList.remove('favorited-heart');
   $frameDataSection.replaceChildren();
@@ -37,7 +42,7 @@ $homeButton.addEventListener('click', () => {
     $cardColumns[i].classList.remove('hidden');
   }
   data.view = 'character-list';
-});
+}
 
 function handleHeartList(event) {
   let favoriteCounter = 0;
@@ -51,9 +56,10 @@ function handleHeartList(event) {
         favoriteCounter++;
       }
     }
-    // if (favoriteCounter === 0) {
+    if (favoriteCounter === 0) {
+      $noFavorites.classList.remove('hidden');
+    }
 
-    // }
     $h1.textContent = 'favorite fighters';
     $heartList.classList.add('hidden');
     $homeButton.classList.remove('hidden');
