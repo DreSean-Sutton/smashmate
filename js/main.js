@@ -19,6 +19,7 @@ $homeButton.addEventListener('click', () => {
   $homeButton.classList.add('hidden');
   $characterList.classList.remove('hidden');
   $characterDetails.classList.add('hidden');
+  $frameDataSection.replaceChildren();
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
   data.currentCardName = null;
