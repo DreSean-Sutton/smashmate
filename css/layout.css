@@ -3,7 +3,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  margin: auto;
 }
 
 .row {
@@ -15,7 +15,7 @@
 }
 
 .card-column {
-  width: 100%;
+  width: 60%;
   margin: 1rem auto;
 }
 
@@ -37,7 +37,7 @@
 
 @media screen and (min-width: 768px) {
   .card-column {
-    width: 18%;
+    width: 15%;
     margin: 2.5rem auto;
     transform: scale(1.1);
   }

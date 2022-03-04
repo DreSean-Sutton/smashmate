@@ -1,4 +1,5 @@
 /* stylelint-disable selector-class-pattern */
+
 :root {
   --card-color: rgba(255 255 255 / 0.93);
   --character-name-border: #c4c4c4;
@@ -19,7 +20,7 @@ footer {
 }
 
 h1 {
-  font-size: 0.6rem;
+  font-size: 1rem;
   text-transform: capitalize;
 }
 
@@ -37,7 +38,8 @@ table {
   text-transform: capitalize;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 th,
@@ -48,10 +50,14 @@ td {
 th {
   text-align: left;
   font-size: 0.9rem;
+  border-bottom: 1px solid var(--character-name-border);
+  box-shadow: 0 1px 4px rgba(0 0 0 / 0.1);
 }
 
 td {
   font-size: 0.85rem;
+  border-bottom: 1px solid var(--character-name-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* HEADER SECTION */
@@ -67,9 +73,24 @@ td {
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
 }
 
+.navbar-top > .row {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.house-icon {
+  padding: 0.75rem;
+  transition: transform 200ms, color 200ms;
+}
+
+.house-icon:hover {
+  transform: scale(1.3);
+  color: rgb(180, 180, 180);
+}
+
 .background-img-layout {
   position: fixed;
-  top: 10%;
+  top: 5%;
   right: 0;
   bottom: 0;
   left: 0;
@@ -118,8 +139,8 @@ td {
 
 .modal-layout {
   background-color: var(--card-color);
-  position: fixed;
-  top: 25%;
+  position: absolute;
+  top: 15%;
   right: 5%;
   left: 5%;
   border-radius: 12px;
@@ -133,13 +154,14 @@ td {
 }
 
 .character-name__details {
+  font-size: 1.2rem;
 }
 
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 375px) {
   h1 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   h4 {
@@ -154,18 +176,34 @@ td {
     font-size: 1rem;
   }
 
+  .house-icon {
+    font-size: 1.3rem;
+  }
+
   .character-name__details {
     font-size: 1.8rem;
   }
 }
 
 @media screen and (min-width: 575px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
   h4 {
     font-size: 1.4rem;
   }
 
-  .modal-layout {
-    top: 15%;
+  th {
+    font-size: 1.2rem;
+  }
+
+  td {
+    font-size: 1.1rem;
+  }
+
+  .house-icon {
+    font-size: 1.6rem;
   }
 
   .character-name__details {
@@ -175,10 +213,14 @@ td {
 
 @media screen and (min-width: 768px) {
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
-}
 
-@media screen and (min-width: 1000px) {
+  .modal-layout {
+    top: 18%;
+  }
 
+  .house-icon {
+    font-size: 2rem;
+  }
 }

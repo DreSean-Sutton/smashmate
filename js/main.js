@@ -1,11 +1,75 @@
 /* eslint-disable no-unused-vars */
 /* exported data */
+
 let currentCharacterId = 1;
 let currentBackgroundImgIndex = 0;
 let backgroundImgIntervalId = null;
 
 const $characterList = document.querySelector('#character-list');
+const $characterDetails = document.querySelector('#character-details');
 const $backgroundImgs = document.querySelectorAll('.background-images');
+const $homeButton = document.querySelector('#home-button');
+const $frameDataSection = document.querySelector('#frame-data-section');
+const $characterName = document.querySelector('#character-name');
+const $characterImg = document.querySelector('#character-img');
+
+$characterList.addEventListener('click', handleShowCharacterDetails);
+
+$homeButton.addEventListener('click', () => {
+  $homeButton.classList.add('hidden');
+  $characterList.classList.remove('hidden');
+  $characterDetails.classList.add('hidden');
+  $frameDataSection.replaceChildren();
+  data.currentCardIndex = null;
+  data.currentCardOwnerId = null;
+  data.currentCardName = null;
+  data.currentCardDisplayName = null;
+  data.view = 'character-list';
+});
+
+function handleShowCharacterDetails(event) {
+  if (event.target.matches('#character-list')) {
+    return;
+  }
+  $homeButton.classList.remove('hidden');
+  $characterList.classList.add('hidden');
+  $characterDetails.classList.remove('hidden');
+  data.currentCardName = event.target.closest('.card-column').getAttribute('data-card-name');
+  data.currentCardIndex = event.target.closest('.card-column').getAttribute('data-card-id') * 1;
+  data.currentCardOwnerId = event.target.closest('.card-column').getAttribute('data-card-owner-id') * 1;
+  const $currentCardColumn = event.target.closest('.card-column');
+  const $currentName = $currentCardColumn.querySelector('.character-card__name').textContent;
+  $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
+  $characterImg.alt = data.currentCardName;
+  $characterName.textContent = $currentName;
+  data.view = 'character-details';
+  handleDataTable();
+}
+
+const handleCharacterList = () => {
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    for (let i = 1; i < xhr.response.length; i++) {
+      $characterList.appendChild(renderCharacterList(xhr.response[i]));
+    }
+    const xhr2 = new XMLHttpRequest();
+    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
+    xhr2.responseType = 'json';
+    xhr2.addEventListener('load', () => {
+      for (let i = 1; i < xhr2.response.length; i++) {
+        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+      }
+      var $characterCard = document.querySelectorAll('.character-card');
+    });
+    xhr2.send();
+  });
+  xhr.send();
+};
+
+handleCharacterList();
 
 const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
@@ -22,6 +86,8 @@ const renderCharacterList = entry => {
   $characterCardNum.className = 'character-card__number';
   $characterCardName.className = 'character-card__name';
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
+  $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
+  $cardColumn.setAttribute('data-card-name', entry.Name);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
@@ -40,6 +106,34 @@ const renderCharacterList = entry => {
   return $cardColumn;
 };
 
+const handleDataTable = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', () => {
+    for (let i = 0; i < xhr.response.length - 4; i++) {
+      $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+    }
+  });
+  xhr.send();
+};
+
+const renderDataTable = entry => {
+  const $tableRow = document.createElement('tr');
+  const $tableCol1 = document.createElement('td');
+  const $tableCol2 = document.createElement('td');
+  const $tableCol3 = document.createElement('td');
+
+  $tableCol1.textContent = entry.Name;
+  $tableCol2.textContent = entry.HitboxActive;
+  $tableCol3.textContent = entry.FirstActionableFrame;
+
+  $tableRow.appendChild($tableCol1);
+  $tableRow.appendChild($tableCol2);
+  $tableRow.appendChild($tableCol3);
+  return $tableRow;
+};
+
 const handleImageSwap = () => {
   if (currentBackgroundImgIndex === $backgroundImgs.length - 2) {
     currentBackgroundImgIndex = 0;
@@ -55,30 +149,6 @@ const handleImageSwap = () => {
   }
   intervalTimer();
 };
-
-const handleCharacterList = () => {
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
-  xhr.responseType = 'json';
-  xhr.addEventListener('load', () => {
-    for (let i = 1; i < xhr.response.length; i++) {
-      $characterList.appendChild(renderCharacterList(xhr.response[i]));
-    }
-    const xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
-    xhr2.responseType = 'json';
-    xhr2.addEventListener('load', () => {
-      for (let i = 1; i < xhr2.response.length; i++) {
-        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
-      }
-    });
-    xhr2.send();
-  });
-  xhr.send();
-};
-
-handleCharacterList();
 
 function intervalTimer() {
   clearInterval(backgroundImgIntervalId);

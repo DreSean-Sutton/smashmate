@@ -1,5 +1,7 @@
 /* exported data */
 const data = {
-  view: 'characterList',
-  currentCardIndex: null
+  view: 'character-list',
+  currentCardIndex: null,
+  currentCardOwnerId: null,
+  currentCardName: null
 };
