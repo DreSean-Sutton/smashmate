@@ -65,7 +65,7 @@ table {
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
-  max-width: 250px;
+  max-width: 300px;
   min-height: 50vh;
   margin: auto;
   padding: 0.5rem;

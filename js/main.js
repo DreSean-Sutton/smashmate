@@ -31,7 +31,6 @@ function handleShowCharacterDetails(event) {
   if (event.target.matches('#character-list')) {
     return;
   }
-
   $homeButton.classList.remove('hidden');
   $characterList.classList.add('hidden');
   $characterDetails.classList.remove('hidden');
@@ -44,6 +43,7 @@ function handleShowCharacterDetails(event) {
   $characterImg.alt = data.currentCardName;
   $characterName.textContent = $currentName;
   data.view = 'character-details';
+  handleDataTable();
 }
 
 const handleCharacterList = () => {
@@ -113,7 +113,7 @@ const handleDataTable = () => {
   xhr.addEventListener('load', () => {
     console.log(xhr.status);
     console.log(xhr.response);
-    for (let i = 1; i < xhr.response.length; i++) {
+    for (let i = 1; i < xhr.response.length - 4; i++) {
       $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
     }
   });
