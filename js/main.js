@@ -85,6 +85,7 @@ function handleFavoriting(event) {
     } else {
       $heartDetails.classList.add('favorited-heart');
     }
+    data.favorites.push(data.currentCardName);
   }
 }
 
@@ -158,6 +159,7 @@ const renderCharacterList = entry => {
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $cardColumn.setAttribute('data-card-name', entry.Name);
+  // Create for loop and check if current name is in data.favoriteList. If yes, setAttribute to true
   $cardColumn.setAttribute('data-is-favorite', false);
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
