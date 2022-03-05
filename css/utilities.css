@@ -62,6 +62,16 @@ table {
   height: 160px;
 }
 
+.no-favorites {
+  padding: 2rem;
+  max-width: min(80%, 500px);
+}
+
+.home-anchor {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+}
+
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
@@ -93,6 +103,22 @@ table {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
 @media screen and (min-width: 375px) {
   header {
     margin: 0 auto 6rem;
@@ -106,6 +132,10 @@ table {
     max-width: 400px;
     padding: 0.5rem 1rem;
   }
+
+  .no-favorites {
+    padding: 3rem 2rem;
+  }
 }
 
 @media screen and (min-width: 575px) {
@@ -115,6 +145,10 @@ table {
 
   .modal-layout {
     max-width: 450px;
+  }
+
+  .no-favorites {
+    padding: 4rem 2rem;
   }
 }
 

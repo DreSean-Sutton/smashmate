@@ -14,16 +14,21 @@
   width: 100%;
 }
 
+.column-nine-tenth {
+  width: 90%;
+}
+
 .card-column {
-  width: 60%;
+  width: 45%;
   margin: 1rem auto;
+  transform: scale(0.8);
 }
 
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 375px) {
   .card-column {
-    width: 45%;
+    transform: scale(1);
   }
 }
 
