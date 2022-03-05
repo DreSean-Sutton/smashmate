@@ -165,8 +165,11 @@ const renderCharacterList = entry => {
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $cardColumn.setAttribute('data-card-name', entry.Name);
-  // Create for loop and check if current name is in data.favoriteList. If yes, setAttribute to true
-  $cardColumn.setAttribute('data-is-favorite', false);
+  if (data.favorites.includes(entry.Name)) {
+    $cardColumn.setAttribute('data-is-favorite', true);
+  } else {
+    $cardColumn.setAttribute('data-is-favorite', false);
+  }
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
