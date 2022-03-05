@@ -164,11 +164,15 @@ a {
   color: white;
   background-color: var(--heart-color);
   border-radius: 12px;
+  transition: transform 200ms;
 }
 
-.home-anchor:hover,
-.home-anchor:active {
+.home-anchor:hover {
   opacity: 0.75;
+}
+
+.home-anchor:active {
+  transform: translateY(7px);
 }
 
 /* CHARACTER DETAILS MODAL */
