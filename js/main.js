@@ -23,14 +23,18 @@ $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
 $homeButton.addEventListener('click', handleShowCharacterList);
 $homeAnchor.addEventListener('click', handleShowCharacterList);
+$heartDetails.addEventListener('mouseover', nessHeartHover);
+$heartDetails.addEventListener('mouseleave', nessHeartLeave);
+// window.addEventListener('DOMContentloaded');
 
 function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
   $noFavorites.classList.add('hidden');
   $characterDetails.classList.add('hidden');
-  $characterList.classList.remove('hidden');
+  $characterList.classList.remove('invisible');
   $heartList.classList.remove('hidden');
   $heartDetails.classList.remove('favorited-heart');
+  $heartDetails.classList.remove('ness-heart');
   $frameDataSection.replaceChildren();
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
@@ -46,35 +50,41 @@ function handleShowCharacterList(event) {
 
 function handleHeartList(event) {
   let favoriteCounter = 0;
-  if (data.view === 'character-list') {
 
-    const $cardColumns = document.querySelectorAll('.card-column');
-    for (let i = 0; i < $cardColumns.length; i++) {
-      if ($cardColumns[i].dataset.isFavorite === 'false') {
-        $cardColumns[i].classList.add('hidden');
-      } else {
-        favoriteCounter++;
-      }
+  const $cardColumns = document.querySelectorAll('.card-column');
+  for (let i = 0; i < $cardColumns.length; i++) {
+    if ($cardColumns[i].dataset.isFavorite === 'false') {
+      $cardColumns[i].classList.add('hidden');
+    } else {
+      favoriteCounter++;
     }
-    if (favoriteCounter === 0) {
-      $noFavorites.classList.remove('hidden');
-    }
-
-    $h1.textContent = 'favorite fighters';
-    $heartList.classList.add('hidden');
-    $homeButton.classList.remove('hidden');
-    data.view = 'favorite-list';
   }
+  if (favoriteCounter === 0) {
+    $noFavorites.classList.remove('hidden');
+  }
+
+  $h1.textContent = 'favorite fighters';
+  $heartList.classList.add('hidden');
+  $homeButton.classList.remove('hidden');
+  data.view = 'favorite-list';
 }
 
 function handleFavoriting(event) {
   const $cardColumns = document.querySelectorAll('.card-column');
   if ($cardColumns[data.currentCardIndex - 1].dataset.isFavorite === 'true') {
     $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
-    $heartDetails.classList.remove('favorited-heart');
+    if (data.currentCardName === 'Ness') {
+      $heartDetails.classList.remove('ness-heart');
+    } else {
+      $heartDetails.classList.remove('favorited-heart');
+    }
   } else {
     $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
-    $heartDetails.classList.add('favorited-heart');
+    if (data.currentCardName === 'Ness') {
+      $heartDetails.classList.add('ness-heart');
+    } else {
+      $heartDetails.classList.add('favorited-heart');
+    }
   }
 }
 
@@ -83,7 +93,7 @@ function handleShowCharacterDetails(event) {
     return;
   }
   $homeButton.classList.remove('hidden');
-  $characterList.classList.add('hidden');
+  $characterList.classList.add('invisible');
   $characterDetails.classList.remove('hidden');
   $heartList.classList.add('hidden');
   const $currentCardColumn = event.target.closest('.card-column');
@@ -94,11 +104,13 @@ function handleShowCharacterDetails(event) {
   $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
   $characterImg.alt = data.currentCardName;
   $characterName.textContent = $currentName;
-  if ($currentCardColumn.dataset.isFavorite === 'true') {
+  if ($currentCardColumn.dataset.isFavorite === 'true' &&
+  data.currentCardName === 'Ness') {
+    $heartDetails.classList.add('ness-heart');
+  } else if ($currentCardColumn.dataset.isFavorite === 'true') {
     $heartDetails.classList.add('favorited-heart');
   } else {
-    $heartDetails.classList.remove('favorited-heart');
-
+    $heartDetails.classList.remove('favorited-heart', 'ness-heart');
   }
   data.view = 'character-details';
   handleDataTable();
@@ -217,3 +229,17 @@ function intervalTimer() {
 }
 
 intervalTimer();
+
+function nessHeartHover(event) {
+  if (data.currentCardName === 'Ness') {
+    $characterName.textContent = 'Really?';
+    $characterName.classList.add('ness-heart-mouseover');
+  }
+}
+
+function nessHeartLeave(event) {
+  if (data.currentCardName === 'Ness') {
+    $characterName.textContent = 'Ness';
+    $characterName.classList.remove('ness-heart-mouseover');
+  }
+}

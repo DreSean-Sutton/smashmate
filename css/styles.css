@@ -66,6 +66,10 @@ a {
   cursor: pointer;
 }
 
+i {
+  cursor: pointer;
+}
+
 /* HEADER SECTION */
 
 .navbar-top {
@@ -164,18 +168,19 @@ a {
   color: white;
   background-color: var(--heart-color);
   border-radius: 12px;
+  transition: transform 200ms;
 }
 
 .home-anchor:hover,
 .home-anchor:active {
-  opacity: 0.75;
+  transform: scale(1.2);
 }
 
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
   background-color: var(--card-color);
-  position: absolute;
+  position: fixed;
   top: 15%;
   right: 5%;
   left: 5%;
@@ -196,6 +201,15 @@ a {
 .heart-icon__details {
   font-size: 1.3rem;
   color: grey;
+}
+
+.ness-heart {
+  color: black;
+  transform: scale(0.8);
+}
+
+.ness-heart-mouseover {
+  color: rgb(255, 0, 0);
 }
 
 .favorited-heart {
