@@ -78,6 +78,12 @@ function handleFavoriting(event) {
     } else {
       $heartDetails.classList.remove('favorited-heart');
     }
+    for (let i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.currentCardName) {
+        data.favorites.splice(i, 1);
+        i--;
+      }
+    }
   } else {
     $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
     if (data.currentCardName === 'Ness') {

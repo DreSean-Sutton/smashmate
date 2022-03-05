@@ -89,6 +89,8 @@ i {
 }
 
 .house-icon {
+  position: relative;
+  right: 1rem;
   transition: transform 200ms, color 200ms;
 }
 
