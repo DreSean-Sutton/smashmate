@@ -69,8 +69,13 @@ function handleHeartList(event) {
 
 function handleFavoriting(event) {
   const $cardColumns = document.querySelectorAll('.card-column');
-  $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = true;
-  $heartDetails.classList.add('favorited-heart');
+  if ($cardColumns[data.currentCardIndex - 1].dataset.isFavorite === 'true') {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
+    $heartDetails.classList.remove('favorited-heart');
+  } else {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
+    $heartDetails.classList.add('favorited-heart');
+  }
 }
 
 function handleShowCharacterDetails(event) {
