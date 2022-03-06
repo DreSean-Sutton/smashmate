@@ -90,7 +90,7 @@ i {
 
 .house-icon {
   position: relative;
-  right: 3%;
+  right: 10%;
   transition: transform 200ms, color 200ms;
 }
 
@@ -205,18 +205,35 @@ i {
   color: grey;
 }
 
+.heart-icon__details:hover,
+.heart-icon__details:active {
+  opacity: 0.8;
+}
+
 .ness-heart {
   color: black;
   transform: scale(0.8);
+}
+
+.ness-heart:hover {
+  color: green;
 }
 
 .ness-heart-mouseover {
   color: rgb(255, 0, 0);
 }
 
+.ness-unheart-mouseover {
+  color: green;
+}
+
 .favorited-heart {
   color: var(--heart-color);
   transform: scale(1.4);
+}
+
+.favorited-heart:hover {
+  opacity: 0.85;
 }
 
 /* MEDIA QUERIES */

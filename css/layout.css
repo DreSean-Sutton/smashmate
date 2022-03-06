@@ -3,7 +3,7 @@
 }
 
 .invisible {
-  visibility: hidden;
+  visibility: hidden !important;
 }
 
 .container {

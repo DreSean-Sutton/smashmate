@@ -18,6 +18,7 @@ const $heartList = document.querySelector('#heart-icon__list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
 
+window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
 $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
@@ -25,7 +26,6 @@ $homeButton.addEventListener('click', handleShowCharacterList);
 $homeAnchor.addEventListener('click', handleShowCharacterList);
 $heartDetails.addEventListener('mouseover', nessHeartHover);
 $heartDetails.addEventListener('mouseleave', nessHeartLeave);
-// window.addEventListener('DOMContentloaded');
 
 function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
@@ -75,6 +75,7 @@ function handleFavoriting(event) {
     $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
     if (data.currentCardName === 'Ness') {
       $heartDetails.classList.remove('ness-heart');
+      $characterName.textContent = 'Thank you';
     } else {
       $heartDetails.classList.remove('favorited-heart');
     }
@@ -88,6 +89,7 @@ function handleFavoriting(event) {
     $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
     if (data.currentCardName === 'Ness') {
       $heartDetails.classList.add('ness-heart');
+      $characterName.textContent = 'Ok.';
     } else {
       $heartDetails.classList.add('favorited-heart');
     }
@@ -123,7 +125,7 @@ function handleShowCharacterDetails(event) {
   handleDataTable();
 }
 
-const handleCharacterList = () => {
+function handleCharacterList() {
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
@@ -144,9 +146,9 @@ const handleCharacterList = () => {
     xhr2.send();
   });
   xhr.send();
-};
+}
 
-handleCharacterList();
+// handleCharacterList();
 
 const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
@@ -243,14 +245,24 @@ intervalTimer();
 
 function nessHeartHover(event) {
   if (data.currentCardName === 'Ness') {
-    $characterName.textContent = 'Really?';
-    $characterName.classList.add('ness-heart-mouseover');
+    if (data.favorites.includes('Ness')) {
+      $characterName.textContent = 'please?';
+      $characterName.classList.add('ness-unheart-mouseover');
+    } else {
+      $characterName.textContent = 'really?';
+      $characterName.classList.add('ness-heart-mouseover');
+    }
   }
 }
 
 function nessHeartLeave(event) {
   if (data.currentCardName === 'Ness') {
-    $characterName.textContent = 'Ness';
+    if (data.favorites.includes('Ness')) {
+      $characterName.textContent = 'ok.';
+    } else {
+      $characterName.textContent = 'ness';
+    }
+    $characterName.classList.remove('ness-unheart-mouseover');
     $characterName.classList.remove('ness-heart-mouseover');
   }
 }
