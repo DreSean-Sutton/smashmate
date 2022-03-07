@@ -84,8 +84,14 @@ table {
 }
 
 .img-div__details {
+  text-align: center;
   margin: auto;
   width: 60%;
+}
+
+.character-img {
+  width: 160px;
+  height: 160px;
 }
 
 .name-border-length {
@@ -133,6 +139,11 @@ table {
     padding: 0.5rem 1rem;
   }
 
+  .character-img {
+    width: 200px;
+    height: 200px;
+  }
+
   .no-favorites {
     padding: 3rem 2rem;
   }
@@ -145,6 +156,11 @@ table {
 
   .modal-layout {
     max-width: 450px;
+  }
+
+  .character-img {
+    width: 240px;
+    height: 240px;
   }
 
   .no-favorites {
