@@ -99,13 +99,13 @@ i {
   color: rgb(180, 180, 180);
 }
 
-.heart-icon__list {
+.heart-icon-list {
   font-size: 1.3rem;
   color: white;
   transition: transform 400ms, color 500ms;
 }
 
-.heart-icon__list:hover {
+.heart-icon-list:hover {
   transform: scale(1.5);
   color: var(--heart-color);
 }
@@ -138,7 +138,7 @@ i {
   background-color: rgba(255 255 255 / 100%);
 }
 
-.character-card__number {
+.character-card-number {
   font-size: 1.25rem;
   font-weight: bold;
   position: absolute;
@@ -147,11 +147,11 @@ i {
   z-index: 9998;
 }
 
-.character-card__img {
+.character-card-img {
   border-bottom: 1.5px solid var(--character-name-border);
 }
 
-.character-card__name {
+.character-card-name {
   font-size: 0.8rem;
   text-align: center;
 }
@@ -196,35 +196,18 @@ i {
   text-align: center;
 }
 
-.character-name__details {
+.character-name-details {
   font-size: 1.2rem;
 }
 
-.heart-icon__details {
+.heart-icon-details {
   font-size: 1.3rem;
   color: grey;
 }
 
-.heart-icon__details:hover,
-.heart-icon__details:active {
+.heart-icon-details:hover,
+.heart-icon-details:active {
   opacity: 0.8;
-}
-
-.ness-heart {
-  color: black;
-  transform: scale(0.8);
-}
-
-.ness-heart:hover {
-  color: green;
-}
-
-.ness-heart-mouseover {
-  color: rgb(255, 0, 0);
-}
-
-.ness-unheart-mouseover {
-  color: green;
 }
 
 .favorited-heart {
@@ -255,7 +238,7 @@ i {
     font-size: 1rem;
   }
 
-  .heart-icon__list {
+  .heart-icon-list {
     font-size: 1.4rem;
   }
 
@@ -263,11 +246,11 @@ i {
     font-size: 1.3rem;
   }
 
-  .character-name__details {
+  .character-name-details {
     font-size: 1.8rem;
   }
 
-  .heart-icon__details {
+  .heart-icon-details {
     font-size: 1.4rem;
   }
 }
@@ -289,7 +272,7 @@ i {
     font-size: 1.1rem;
   }
 
-  .heart-icon__list {
+  .heart-icon-list {
     font-size: 1.6rem;
   }
 
@@ -297,11 +280,11 @@ i {
     font-size: 1.6rem;
   }
 
-  .character-name__details {
+  .character-name-details {
     font-size: 2.4rem;
   }
 
-  .heart-icon__details {
+  .heart-icon-details {
     font-size: 1.6rem;
   }
 
@@ -319,7 +302,7 @@ i {
     top: 18%;
   }
 
-  .heart-icon__list {
+  .heart-icon-list {
     font-size: 2rem;
   }
 
