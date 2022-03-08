@@ -66,6 +66,10 @@ a {
   cursor: pointer;
 }
 
+i {
+  cursor: pointer;
+}
+
 /* HEADER SECTION */
 
 .navbar-top {
@@ -85,6 +89,8 @@ a {
 }
 
 .house-icon {
+  position: relative;
+  right: 10%;
   transition: transform 200ms, color 200ms;
 }
 
@@ -164,18 +170,19 @@ a {
   color: white;
   background-color: var(--heart-color);
   border-radius: 12px;
+  transition: transform 200ms;
 }
 
 .home-anchor:hover,
 .home-anchor:active {
-  opacity: 0.75;
+  transform: scale(1.2);
 }
 
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
   background-color: var(--card-color);
-  position: absolute;
+  position: fixed;
   top: 15%;
   right: 5%;
   left: 5%;
@@ -198,9 +205,35 @@ a {
   color: grey;
 }
 
+.heart-icon__details:hover,
+.heart-icon__details:active {
+  opacity: 0.8;
+}
+
+.ness-heart {
+  color: black;
+  transform: scale(0.8);
+}
+
+.ness-heart:hover {
+  color: green;
+}
+
+.ness-heart-mouseover {
+  color: rgb(255, 0, 0);
+}
+
+.ness-unheart-mouseover {
+  color: green;
+}
+
 .favorited-heart {
   color: var(--heart-color);
   transform: scale(1.4);
+}
+
+.favorited-heart:hover {
+  opacity: 0.85;
 }
 
 /* MEDIA QUERIES */

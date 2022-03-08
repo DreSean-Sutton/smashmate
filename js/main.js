@@ -18,6 +18,7 @@ const $heartList = document.querySelector('#heart-icon__list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
 
+window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
 $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
@@ -28,9 +29,10 @@ function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
   $noFavorites.classList.add('hidden');
   $characterDetails.classList.add('hidden');
-  $characterList.classList.remove('hidden');
+  $characterList.classList.remove('invisible');
   $heartList.classList.remove('hidden');
   $heartDetails.classList.remove('favorited-heart');
+  $heartDetails.classList.remove('ness-heart');
   $frameDataSection.replaceChildren();
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
@@ -46,31 +48,41 @@ function handleShowCharacterList(event) {
 
 function handleHeartList(event) {
   let favoriteCounter = 0;
-  if (data.view === 'character-list') {
 
-    const $cardColumns = document.querySelectorAll('.card-column');
-    for (let i = 0; i < $cardColumns.length; i++) {
-      if ($cardColumns[i].dataset.isFavorite === 'false') {
-        $cardColumns[i].classList.add('hidden');
-      } else {
-        favoriteCounter++;
-      }
+  const $cardColumns = document.querySelectorAll('.card-column');
+  for (let i = 0; i < $cardColumns.length; i++) {
+    if ($cardColumns[i].dataset.isFavorite === 'false') {
+      $cardColumns[i].classList.add('hidden');
+    } else {
+      favoriteCounter++;
     }
-    if (favoriteCounter === 0) {
-      $noFavorites.classList.remove('hidden');
-    }
-
-    $h1.textContent = 'favorite fighters';
-    $heartList.classList.add('hidden');
-    $homeButton.classList.remove('hidden');
-    data.view = 'favorite-list';
   }
+  if (favoriteCounter === 0) {
+    $noFavorites.classList.remove('hidden');
+  }
+
+  $h1.textContent = 'favorite fighters';
+  $heartList.classList.add('hidden');
+  $homeButton.classList.remove('hidden');
+  data.view = 'favorite-list';
 }
 
 function handleFavoriting(event) {
   const $cardColumns = document.querySelectorAll('.card-column');
-  $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = true;
-  $heartDetails.classList.add('favorited-heart');
+  if ($cardColumns[data.currentCardIndex - 1].dataset.isFavorite === 'true') {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
+    $heartDetails.classList.remove('favorited-heart');
+    for (let i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.currentCardName) {
+        data.favorites.splice(i, 1);
+        i--;
+      }
+    }
+  } else {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
+    $heartDetails.classList.add('favorited-heart');
+    data.favorites.push(data.currentCardName);
+  }
 }
 
 function handleShowCharacterDetails(event) {
@@ -78,7 +90,7 @@ function handleShowCharacterDetails(event) {
     return;
   }
   $homeButton.classList.remove('hidden');
-  $characterList.classList.add('hidden');
+  $characterList.classList.add('invisible');
   $characterDetails.classList.remove('hidden');
   $heartList.classList.add('hidden');
   const $currentCardColumn = event.target.closest('.card-column');
@@ -93,13 +105,12 @@ function handleShowCharacterDetails(event) {
     $heartDetails.classList.add('favorited-heart');
   } else {
     $heartDetails.classList.remove('favorited-heart');
-
   }
   data.view = 'character-details';
   handleDataTable();
 }
 
-const handleCharacterList = () => {
+function handleCharacterList() {
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
@@ -120,9 +131,9 @@ const handleCharacterList = () => {
     xhr2.send();
   });
   xhr.send();
-};
+}
 
-handleCharacterList();
+// handleCharacterList();
 
 const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
@@ -141,7 +152,11 @@ const renderCharacterList = entry => {
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $cardColumn.setAttribute('data-card-name', entry.Name);
-  $cardColumn.setAttribute('data-is-favorite', false);
+  if (data.favorites.includes(entry.Name)) {
+    $cardColumn.setAttribute('data-is-favorite', true);
+  } else {
+    $cardColumn.setAttribute('data-is-favorite', false);
+  }
   $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;

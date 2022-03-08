@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.invisible {
+  visibility: hidden !important;
+}
+
 .container {
   margin: auto;
 }
