@@ -52,7 +52,7 @@
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1220px) {
   .card-column {
     margin: 5rem auto;
     transform: scale(1.4);
