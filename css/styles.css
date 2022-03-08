@@ -10,13 +10,10 @@
 
 body {
   font-family: Roboto, sans-serif;
+  line-height: 1.6;
 }
 
 header {
-  position: relative;
-}
-
-footer {
   position: relative;
 }
 
