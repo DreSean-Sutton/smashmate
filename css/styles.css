@@ -20,6 +20,7 @@ header {
 h1 {
   font-size: 1rem;
   text-transform: capitalize;
+  line-height: 1.2;
 }
 
 h2,
@@ -185,6 +186,7 @@ i {
   left: 5%;
   border-radius: 12px;
   box-shadow: 0 4px 5px 4px black;
+  line-height: 1.4;
 }
 
 .name-border-length {
