@@ -52,12 +52,12 @@ table {
   height: 200px;
 }
 
-.character-card__name {
+.character-card-name {
   margin: 0;
   padding: 0.5rem 0;
 }
 
-.character-card__img {
+.character-card-img {
   width: 160px;
   height: 160px;
 }
@@ -83,7 +83,7 @@ table {
   align-items: center;
 }
 
-.img-div__details {
+.img-div-details {
   text-align: center;
   margin: auto;
   width: 60%;
@@ -99,7 +99,7 @@ table {
   margin: 0 auto;
 }
 
-.character-name__details {
+.character-name-details {
   margin: 0;
 }
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* exported data */
 
 let currentCharacterId = 1;
@@ -13,8 +12,8 @@ const $homeButton = document.querySelector('#home-button');
 const $frameDataSection = document.querySelector('#frame-data-section');
 const $characterName = document.querySelector('#character-name');
 const $characterImg = document.querySelector('#character-img');
-const $heartDetails = document.querySelector('#heart-icon__details');
-const $heartList = document.querySelector('#heart-icon__list');
+const $heartDetails = document.querySelector('#heart-icon-details');
+const $heartList = document.querySelector('#heart-icon-list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
 
@@ -32,7 +31,6 @@ function handleShowCharacterList(event) {
   $characterList.classList.remove('invisible');
   $heartList.classList.remove('hidden');
   $heartDetails.classList.remove('favorited-heart');
-  $heartDetails.classList.remove('ness-heart');
   $frameDataSection.replaceChildren();
   data.currentCardIndex = null;
   data.currentCardOwnerId = null;
@@ -97,7 +95,7 @@ function handleShowCharacterDetails(event) {
   data.currentCardName = $currentCardColumn.closest('.card-column').getAttribute('data-card-name');
   data.currentCardIndex = $currentCardColumn.closest('.card-column').getAttribute('data-card-id') * 1;
   data.currentCardOwnerId = $currentCardColumn.closest('.card-column').getAttribute('data-card-owner-id') * 1;
-  const $currentName = $currentCardColumn.querySelector('.character-card__name').textContent;
+  const $currentName = $currentCardColumn.querySelector('.character-card-name').textContent;
   $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
   $characterImg.alt = data.currentCardName;
   $characterName.textContent = $currentName;
@@ -126,14 +124,11 @@ function handleCharacterList() {
       for (let i = 1; i < xhr2.response.length; i++) {
         $characterList.appendChild(renderCharacterList(xhr2.response[i]));
       }
-      var $characterCard = document.querySelectorAll('.character-card');
     });
     xhr2.send();
   });
   xhr.send();
 }
-
-// handleCharacterList();
 
 const renderCharacterList = entry => {
   const $cardColumn = document.createElement('div');
@@ -146,9 +141,9 @@ const renderCharacterList = entry => {
   $cardColumn.className = 'card-column';
   $characterCard.className = 'row character-card';
   $columnFull.className = 'column-full';
-  $characterCardImg.className = 'character-card__img';
-  $characterCardNum.className = 'character-card__number';
-  $characterCardName.className = 'character-card__name';
+  $characterCardImg.className = 'character-card-img';
+  $characterCardNum.className = 'character-card-number';
+  $characterCardName.className = 'character-card-name';
   $cardColumn.setAttribute('data-card-id', currentCharacterId);
   $cardColumn.setAttribute('data-card-owner-id', entry.OwnerId);
   $cardColumn.setAttribute('data-card-name', entry.Name);
