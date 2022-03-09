@@ -16,6 +16,7 @@ const $heartDetails = document.querySelector('#heart-icon-details');
 const $heartList = document.querySelector('#heart-icon-list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
+const $loadingSpinner = document.querySelector('#loading-spinner');
 
 window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
@@ -109,7 +110,7 @@ function handleShowCharacterDetails(event) {
 }
 
 function handleCharacterList() {
-
+  $loadingSpinner.classList.remove('hidden');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
   xhr.responseType = 'json';
@@ -124,6 +125,7 @@ function handleCharacterList() {
       for (let i = 1; i < xhr2.response.length; i++) {
         $characterList.appendChild(renderCharacterList(xhr2.response[i]));
       }
+      $loadingSpinner.classList.add('hidden');
     });
     xhr2.send();
   });
@@ -171,6 +173,7 @@ const renderCharacterList = entry => {
 };
 
 const handleDataTable = () => {
+  $loadingSpinner.classList.remove('hidden');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
   xhr.responseType = 'json';
@@ -178,6 +181,7 @@ const handleDataTable = () => {
     for (let i = 0; i < xhr.response.length - 4; i++) {
       $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
     }
+    $loadingSpinner.classList.add('hidden');
   });
   xhr.send();
 };
