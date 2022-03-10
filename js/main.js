@@ -16,6 +16,12 @@ const $heartDetails = document.querySelector('#heart-icon-details');
 const $heartList = document.querySelector('#heart-icon-list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
+const $loadingSpinner = document.querySelector('#loading-spinner');
+const $dataTable = document.querySelector('#data-table');
+const $errorMessageData = document.querySelector('#error-message-data');
+const $errorMessageDataButton = document.querySelector('#reload-button');
+const $errorMessageList = document.querySelector('#error-message-list');
+const $overlay = document.querySelector('#overlay');
 
 window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
@@ -23,6 +29,7 @@ $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
 $homeButton.addEventListener('click', handleShowCharacterList);
 $homeAnchor.addEventListener('click', handleShowCharacterList);
+$errorMessageDataButton.addEventListener('click', handleShowCharacterList);
 
 function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
@@ -108,24 +115,42 @@ function handleShowCharacterDetails(event) {
   handleDataTable();
 }
 
+const error = new Error();
+error.message = 'something';
+
 function handleCharacterList() {
+  $loadingSpinner.classList.remove('hidden');
+  $errorMessageList.classList.add('hidden');
+  $overlay.classList.add('hidden');
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
-    for (let i = 1; i < xhr.response.length; i++) {
-      $characterList.appendChild(renderCharacterList(xhr.response[i]));
-    }
-    const xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
-    xhr2.responseType = 'json';
-    xhr2.addEventListener('load', () => {
-      for (let i = 1; i < xhr2.response.length; i++) {
-        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+    if (xhr.status !== 200) {
+      $errorMessageList.classList.remove('hidden');
+      $overlay.classList.remove('hidden');
+    } else {
+      for (let i = 1; i < xhr.response.length; i++) {
+        $characterList.appendChild(renderCharacterList(xhr.response[i]));
       }
-    });
-    xhr2.send();
+      const xhr2 = new XMLHttpRequest();
+      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimates');
+      xhr2.responseType = 'json';
+      xhr2.addEventListener('load', () => {
+        if (xhr2.status !== 200) {
+          $characterList.classList.add('hidden');
+          $errorMessageList.classList.remove('hidden');
+          $overlay.classList.remove('hidden');
+        } else {
+          for (let i = 1; i < xhr2.response.length; i++) {
+            $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+          }
+        }
+        $loadingSpinner.classList.add('hidden');
+      });
+      xhr2.send();
+    }
   });
   xhr.send();
 }
@@ -171,13 +196,21 @@ const renderCharacterList = entry => {
 };
 
 const handleDataTable = () => {
+  $loadingSpinner.classList.remove('hidden');
+  $dataTable.classList.add('hidden');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
-    for (let i = 0; i < xhr.response.length - 4; i++) {
-      $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+    if (xhr.status !== 200) {
+      $errorMessageData.classList.remove('hidden');
+    } else {
+      for (let i = 0; i < xhr.response.length - 4; i++) {
+        $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+      }
+      $dataTable.classList.remove('hidden');
     }
+    $loadingSpinner.classList.add('hidden');
   });
   xhr.send();
 };
