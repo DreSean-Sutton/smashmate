@@ -17,6 +17,10 @@ const $heartList = document.querySelector('#heart-icon-list');
 const $noFavorites = document.querySelector('#no-favorites');
 const $homeAnchor = document.querySelector('#home-anchor');
 const $loadingSpinner = document.querySelector('#loading-spinner');
+const $dataTable = document.querySelector('#data-table');
+const $errorMessageData = document.querySelector('#error-message-data');
+const $errorMessageList = document.querySelector('#error-message-list');
+const $overlay = document.querySelector('#overlay');
 
 window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
@@ -109,6 +113,9 @@ function handleShowCharacterDetails(event) {
   handleDataTable();
 }
 
+const error = new Error();
+error.message = 'something';
+
 function handleCharacterList() {
   $loadingSpinner.classList.remove('hidden');
   const xhr = new XMLHttpRequest();
@@ -174,14 +181,21 @@ const renderCharacterList = entry => {
 
 const handleDataTable = () => {
   $loadingSpinner.classList.remove('hidden');
+  $errorMessageData.classList.add('hidden');
+  $dataTable.classList.remove('hidden');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
-    for (let i = 0; i < xhr.response.length - 4; i++) {
-      $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+    if (xhr.status !== 200) {
+      $dataTable.classList.add('hidden');
+      $errorMessageData.classList.remove('hidden');
+    } else {
+      for (let i = 0; i < xhr.response.length - 4; i++) {
+        $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
+      }
+      $loadingSpinner.classList.add('hidden');
     }
-    $loadingSpinner.classList.add('hidden');
   });
   xhr.send();
 };

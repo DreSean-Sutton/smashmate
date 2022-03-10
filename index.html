@@ -17,6 +17,12 @@
 </head>
 <body>
   <div id="loading-spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="row">
+    <div>
+      <p>Sorry! Characters cannot be loaded. Try again, later</p>
+    </div>
+  </div>
+  <div id="overlay" class="overlay"></div>
   <header>
     <div class="container navbar-top">
       <div class="row header-layout">
@@ -68,7 +74,15 @@
             <i id="heart-icon-details" class="fa-solid fa-heart heart-icon-details"></i>
           </div>
         </div>
-        <table>
+        <div id="error-message-data" class="error-message-data row hidden">
+          <div class="text-center">
+            <p>Sorry, data is not loading correctly. Try again, later.</p>
+          </div>
+          <div class="reload-button-div">
+            <a id="reload-button" class="reload-button" href="#">Go Back</a>
+          </div>
+        </div>
+        <table id="data-table">
           <thead>
             <tr>
               <th>move</th>
