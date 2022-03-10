@@ -19,6 +19,7 @@ const $homeAnchor = document.querySelector('#home-anchor');
 const $loadingSpinner = document.querySelector('#loading-spinner');
 const $dataTable = document.querySelector('#data-table');
 const $errorMessageData = document.querySelector('#error-message-data');
+const $errorMessageDataButton = document.querySelector('#reload-button');
 const $errorMessageList = document.querySelector('#error-message-list');
 const $overlay = document.querySelector('#overlay');
 
@@ -28,6 +29,7 @@ $heartDetails.addEventListener('click', handleFavoriting);
 $heartList.addEventListener('click', handleHeartList);
 $homeButton.addEventListener('click', handleShowCharacterList);
 $homeAnchor.addEventListener('click', handleShowCharacterList);
+$errorMessageDataButton.addEventListener('click', handleShowCharacterList);
 
 function handleShowCharacterList(event) {
   $homeButton.classList.add('hidden');
@@ -118,23 +120,37 @@ error.message = 'something';
 
 function handleCharacterList() {
   $loadingSpinner.classList.remove('hidden');
+  $errorMessageList.classList.add('hidden');
+  $overlay.classList.add('hidden');
+
   const xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://api.kuroganehammer.com/api/characters');
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
-    for (let i = 1; i < xhr.response.length; i++) {
-      $characterList.appendChild(renderCharacterList(xhr.response[i]));
-    }
-    const xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
-    xhr2.responseType = 'json';
-    xhr2.addEventListener('load', () => {
-      for (let i = 1; i < xhr2.response.length; i++) {
-        $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+    if (xhr.status !== 200) {
+      $errorMessageList.classList.remove('hidden');
+      $overlay.classList.remove('hidden');
+    } else {
+      for (let i = 1; i < xhr.response.length; i++) {
+        $characterList.appendChild(renderCharacterList(xhr.response[i]));
       }
-      $loadingSpinner.classList.add('hidden');
-    });
-    xhr2.send();
+      const xhr2 = new XMLHttpRequest();
+      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
+      xhr2.responseType = 'json';
+      xhr2.addEventListener('load', () => {
+        if (xhr2.status !== 200) {
+          $characterList.classList.add('hidden');
+          $errorMessageList.classList.remove('hidden');
+          $overlay.classList.remove('hidden');
+        } else {
+          for (let i = 1; i < xhr2.response.length; i++) {
+            $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+          }
+        }
+        $loadingSpinner.classList.add('hidden');
+      });
+      xhr2.send();
+    }
   });
   xhr.send();
 }

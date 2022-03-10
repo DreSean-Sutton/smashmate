@@ -78,7 +78,7 @@ i {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 9995;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
 }
 
@@ -110,6 +110,16 @@ i {
 }
 
 /* MAIN SECTION */
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.85);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9998;
+}
 
 .background-img-layout {
   position: fixed;
@@ -178,6 +188,18 @@ i {
   transform: scale(1.2);
 }
 
+.error-message-list {
+  font-size: 1.1rem;
+  background-color: #fff;
+  text-align: center;
+  position: fixed;
+  top: 45%;
+  left: 10%;
+  border-radius: 12px;
+  box-shadow: 0 4px 5px 4px black;
+  z-index: 9999;
+}
+
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
@@ -220,7 +242,7 @@ i {
   opacity: 0.85;
 }
 
-.error-message {
+.error-message-data {
   background-color: white;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
   border-radius: 12px;
@@ -363,6 +385,10 @@ i {
     font-size: 1rem;
   }
 
+  .error-message-list {
+    left: 15%;
+  }
+
   .heart-icon-list {
     font-size: 1.4rem;
   }
@@ -381,6 +407,10 @@ i {
 
   .heart-icon-details {
     font-size: 1.4rem;
+  }
+
+  .error-message-data {
+    font-size: 1.2rem;
   }
 
   .lds-spinner {
@@ -403,6 +433,10 @@ i {
 
   td {
     font-size: 1.1rem;
+  }
+
+  .error-message-list {
+    left: 25%;
   }
 
   .heart-icon-list {
@@ -429,6 +463,10 @@ i {
     font-size: 1.2rem;
   }
 
+  .error-message-data {
+    font-size: 1.4rem;
+  }
+
   .lds-spinner {
     left: 45%;
   }
@@ -437,6 +475,10 @@ i {
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 1.6rem;
+  }
+
+  .error-message-list {
+    left: 35%;
   }
 
   .modal-layout {
@@ -452,6 +494,10 @@ i {
   }
 
   .no-favorites {
+    font-size: 1.5rem;
+  }
+
+  .error-message-data {
     font-size: 1.5rem;
   }
 

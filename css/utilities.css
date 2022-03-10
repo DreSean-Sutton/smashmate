@@ -76,6 +76,11 @@ table {
   padding: 0.5rem 1rem;
 }
 
+.error-message-list {
+  width: 80%;
+  padding: 1rem;
+}
+
 /* CHARACTER DETAILS MODAL */
 
 .modal-layout {
@@ -107,7 +112,7 @@ table {
   margin: 0;
 }
 
-.error-message {
+.error-message-data {
   flex-direction: column;
   justify-content: space-between;
   height: 200px;
@@ -146,6 +151,10 @@ table {
     margin: 0 auto 6rem;
   }
 
+  .error-message-list {
+    width: 70%;
+  }
+
   .header-layout {
     padding: 0.5rem 1.5rem;
   }
@@ -174,6 +183,10 @@ table {
     margin: 0 auto 6.5rem;
   }
 
+  .error-message-list {
+    width: 50%;
+  }
+
   .modal-layout {
     max-width: 450px;
   }
@@ -189,6 +202,10 @@ table {
 }
 
 @media screen and (min-width: 768px) {
+  .error-message-list {
+    width: 30%;
+  }
+
   .no-favorites {
     padding: 4rem 2rem;
   }
