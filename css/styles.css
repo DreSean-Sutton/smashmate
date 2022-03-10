@@ -78,7 +78,7 @@ i {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 9995;
+  z-index: 4;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
 }
 
@@ -118,7 +118,7 @@ i {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9998;
+  z-index: 5;
 }
 
 .background-img-layout {
@@ -153,7 +153,7 @@ i {
   position: absolute;
   top: 1px;
   left: 3px;
-  z-index: 9998;
+  z-index: 3;
 }
 
 .character-card-img {
@@ -194,10 +194,11 @@ i {
   text-align: center;
   position: fixed;
   top: 45%;
-  left: 10%;
+  right: 0;
+  left: 0;
   border-radius: 12px;
-  box-shadow: 0 4px 5px 4px black;
-  z-index: 9999;
+  box-shadow: 0 1px 5px 1px rgb(160, 160, 160);
+  z-index: 6;
 }
 
 /* CHARACTER DETAILS MODAL */
@@ -246,7 +247,7 @@ i {
   background-color: white;
   box-shadow: 0 2px 5px 1px rgb(15, 15, 15);
   border-radius: 12px;
-  z-index: 9999;
+  z-index: 6;
 }
 
 .reload-button-div {
@@ -268,15 +269,20 @@ i {
 
 /* LOADING SPINNER */
 
+.lds-spinner-div {
+  position: fixed;
+  top: 22%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+}
+
 .lds-spinner {
   color: official;
   display: inline-block;
-  position: fixed;
-  top: 50%;
-  left: 39%;
   width: 80px;
   height: 80px;
-  z-index: 9999;
 }
 
 .lds-spinner div {
@@ -385,10 +391,6 @@ i {
     font-size: 1rem;
   }
 
-  .error-message-list {
-    left: 15%;
-  }
-
   .heart-icon-list {
     font-size: 1.4rem;
   }
@@ -409,12 +411,9 @@ i {
     font-size: 1.4rem;
   }
 
-  .error-message-data {
+  .error-message-data,
+  .error-message-list {
     font-size: 1.2rem;
-  }
-
-  .lds-spinner {
-    left: 42%;
   }
 }
 
@@ -433,10 +432,6 @@ i {
 
   td {
     font-size: 1.1rem;
-  }
-
-  .error-message-list {
-    left: 25%;
   }
 
   .heart-icon-list {
@@ -463,22 +458,15 @@ i {
     font-size: 1.2rem;
   }
 
-  .error-message-data {
+  .error-message-data,
+  .error-message-list {
     font-size: 1.4rem;
-  }
-
-  .lds-spinner {
-    left: 45%;
   }
 }
 
 @media screen and (min-width: 768px) {
   h1 {
     font-size: 1.6rem;
-  }
-
-  .error-message-list {
-    left: 35%;
   }
 
   .modal-layout {
@@ -497,11 +485,8 @@ i {
     font-size: 1.5rem;
   }
 
-  .error-message-data {
+  .error-message-data,
+  .error-message-list {
     font-size: 1.5rem;
-  }
-
-  .lds-spinner {
-    left: 47%;
   }
 }

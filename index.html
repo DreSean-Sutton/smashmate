@@ -16,10 +16,18 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div id="loading-spinner" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-  <div id="error-message-list" class="error-message-list row hidden">
-    <div class="column-full text-center">
-      <p>Sorry! Characters aren't loading. Try again, later.</p>
+  <div id="loading-spinner" class="row lds-spinner-div">
+    <div class="">
+      <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+  <div id="error-message-list" class="error-message-list row">
+    <div>
+      <div class="row">
+        <div class="column-full text-center">
+          <p>Sorry! Characters aren't loading. Try again, later.</p>
+        </div>
+      </div>
     </div>
   </div>
   <div id="overlay" class="overlay hidden"></div>

@@ -78,6 +78,7 @@ table {
 
 .error-message-list {
   width: 80%;
+  margin: auto;
   padding: 1rem;
 }
 
@@ -124,6 +125,14 @@ table {
   padding: 0.5rem 1.25rem;
 }
 
+/* LOADING SPINNER */
+
+.lds-spinner-div {
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
 /* UTILITY CLASSES */
 
 .justify-center {
@@ -151,12 +160,12 @@ table {
     margin: 0 auto 6rem;
   }
 
-  .error-message-list {
-    width: 70%;
-  }
-
   .header-layout {
     padding: 0.5rem 1.5rem;
+  }
+
+  .error-message-list {
+    max-width: 300px;
   }
 
   .modal-layout {
@@ -184,7 +193,7 @@ table {
   }
 
   .error-message-list {
-    width: 50%;
+    max-width: 400px;
   }
 
   .modal-layout {
@@ -203,7 +212,7 @@ table {
 
 @media screen and (min-width: 768px) {
   .error-message-list {
-    width: 30%;
+    max-width: 450px;
   }
 
   .no-favorites {
@@ -214,3 +223,6 @@ table {
     margin-top: 3.5rem;
   }
 }
+
+/* git commit -m "Utilized flexbox to reduce the amount of media
+queries required for loading spinner and error messages" */

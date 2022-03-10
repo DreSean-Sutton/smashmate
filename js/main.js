@@ -135,7 +135,7 @@ function handleCharacterList() {
         $characterList.appendChild(renderCharacterList(xhr.response[i]));
       }
       const xhr2 = new XMLHttpRequest();
-      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
+      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimates');
       xhr2.responseType = 'json';
       xhr2.addEventListener('load', () => {
         if (xhr2.status !== 200) {
@@ -197,21 +197,20 @@ const renderCharacterList = entry => {
 
 const handleDataTable = () => {
   $loadingSpinner.classList.remove('hidden');
-  $errorMessageData.classList.add('hidden');
-  $dataTable.classList.remove('hidden');
+  $dataTable.classList.add('hidden');
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://api.kuroganehammer.com/api/characters/${data.currentCardOwnerId}/moves`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', () => {
     if (xhr.status !== 200) {
-      $dataTable.classList.add('hidden');
       $errorMessageData.classList.remove('hidden');
     } else {
       for (let i = 0; i < xhr.response.length - 4; i++) {
         $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
       }
-      $loadingSpinner.classList.add('hidden');
+      $dataTable.classList.remove('hidden');
     }
+    $loadingSpinner.classList.add('hidden');
   });
   xhr.send();
 };
