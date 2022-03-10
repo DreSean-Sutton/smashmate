@@ -1,3 +1,3 @@
-# ajax-project
+# Smash Cove
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A web application for Smash Ultimate nerds interested in seeing the raw data of the fighters
