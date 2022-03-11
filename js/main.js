@@ -103,7 +103,7 @@ function handleShowCharacterDetails(event) {
   data.currentCardIndex = $currentCardColumn.closest('.card-column').getAttribute('data-card-id') * 1;
   data.currentCardOwnerId = $currentCardColumn.closest('.card-column').getAttribute('data-card-owner-id') * 1;
   const $currentName = $currentCardColumn.querySelector('.character-card-name').textContent;
-  $characterImg.src = `../images/smash-ultimate-sprites/${data.currentCardName}.png`;
+  $characterImg.src = `images/smash-ultimate-sprites/${data.currentCardName}.png`;
   $characterImg.alt = data.currentCardName;
   $characterName.textContent = $currentName;
   if ($currentCardColumn.dataset.isFavorite === 'true') {
@@ -177,7 +177,7 @@ const renderCharacterList = entry => {
   } else {
     $cardColumn.setAttribute('data-is-favorite', false);
   }
-  $characterCardImg.src = `../images/smash-ultimate-sprites/${entry.Name}.png`;
+  $characterCardImg.src = `images/smash-ultimate-sprites/${entry.Name}.png`;
   $characterCardImg.alt = entry.DisplayName;
   $characterCardName.textContent = entry.DisplayName;
   if (currentCharacterId < 10) {
