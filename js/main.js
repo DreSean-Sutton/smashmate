@@ -135,7 +135,7 @@ function handleCharacterList() {
         $characterList.appendChild(renderCharacterList(xhr.response[i]));
       }
       const xhr2 = new XMLHttpRequest();
-      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimates');
+      xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
       xhr2.responseType = 'json';
       xhr2.addEventListener('load', () => {
         if (xhr2.status !== 200) {
