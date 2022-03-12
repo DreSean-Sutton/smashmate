@@ -64,6 +64,7 @@ table {
 .character-card-img {
   width: 160px;
   height: 160px;
+  padding-top: 0.5rem;
 }
 
 .no-favorites {

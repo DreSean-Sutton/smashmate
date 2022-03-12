@@ -32,6 +32,7 @@ $homeAnchor.addEventListener('click', handleShowCharacterList);
 $errorMessageDataButton.addEventListener('click', handleShowCharacterList);
 
 function handleShowCharacterList(event) {
+  $errorMessageData.classList.add();
   $homeButton.classList.add('hidden');
   $noFavorites.classList.add('hidden');
   $characterDetails.classList.add('hidden');
@@ -49,45 +50,6 @@ function handleShowCharacterList(event) {
     $cardColumns[i].classList.remove('hidden');
   }
   data.view = 'character-list';
-}
-
-function handleHeartList(event) {
-  let favoriteCounter = 0;
-
-  const $cardColumns = document.querySelectorAll('.card-column');
-  for (let i = 0; i < $cardColumns.length; i++) {
-    if ($cardColumns[i].dataset.isFavorite === 'false') {
-      $cardColumns[i].classList.add('hidden');
-    } else {
-      favoriteCounter++;
-    }
-  }
-  if (favoriteCounter === 0) {
-    $noFavorites.classList.remove('hidden');
-  }
-
-  $h1.textContent = 'favorite fighters';
-  $heartList.classList.add('hidden');
-  $homeButton.classList.remove('hidden');
-  data.view = 'favorite-list';
-}
-
-function handleFavoriting(event) {
-  const $cardColumns = document.querySelectorAll('.card-column');
-  if ($cardColumns[data.currentCardIndex - 1].dataset.isFavorite === 'true') {
-    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
-    $heartDetails.classList.remove('favorited-heart');
-    for (let i = 0; i < data.favorites.length; i++) {
-      if (data.favorites[i] === data.currentCardName) {
-        data.favorites.splice(i, 1);
-        i--;
-      }
-    }
-  } else {
-    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
-    $heartDetails.classList.add('favorited-heart');
-    data.favorites.push(data.currentCardName);
-  }
 }
 
 function handleShowCharacterDetails(event) {
@@ -119,6 +81,7 @@ const error = new Error();
 error.message = 'something';
 
 function handleCharacterList() {
+  handleShowCharacterList();
   $loadingSpinner.classList.remove('hidden');
   $errorMessageList.classList.add('hidden');
   $overlay.classList.add('hidden');
@@ -133,6 +96,7 @@ function handleCharacterList() {
     } else {
       for (let i = 1; i < xhr.response.length; i++) {
         $characterList.appendChild(renderCharacterList(xhr.response[i]));
+        data.duplicateCharacterList.push(xhr.response[i].OwnerId);
       }
       const xhr2 = new XMLHttpRequest();
       xhr2.open('GET', 'https://api.kuroganehammer.com/api/characters?game=ultimate');
@@ -144,9 +108,12 @@ function handleCharacterList() {
           $overlay.classList.remove('hidden');
         } else {
           for (let i = 1; i < xhr2.response.length; i++) {
-            $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+            if (!data.duplicateCharacterList.includes(xhr2.response[i].OwnerId)) {
+              $characterList.appendChild(renderCharacterList(xhr2.response[i]));
+            }
           }
         }
+        data.duplicateCharacterList.splice(0, data.duplicateCharacterList.length);
         $loadingSpinner.classList.add('hidden');
       });
       xhr2.send();
@@ -230,6 +197,45 @@ const renderDataTable = entry => {
   $tableRow.appendChild($tableCol3);
   return $tableRow;
 };
+
+function handleHeartList(event) {
+  let favoriteCounter = 0;
+
+  const $cardColumns = document.querySelectorAll('.card-column');
+  for (let i = 0; i < $cardColumns.length; i++) {
+    if ($cardColumns[i].dataset.isFavorite === 'false') {
+      $cardColumns[i].classList.add('hidden');
+    } else {
+      favoriteCounter++;
+    }
+  }
+  if (favoriteCounter === 0) {
+    $noFavorites.classList.remove('hidden');
+  }
+
+  $h1.textContent = 'favorite fighters';
+  $heartList.classList.add('hidden');
+  $homeButton.classList.remove('hidden');
+  data.view = 'favorite-list';
+}
+
+function handleFavoriting(event) {
+  const $cardColumns = document.querySelectorAll('.card-column');
+  if ($cardColumns[data.currentCardIndex - 1].dataset.isFavorite === 'true') {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'false';
+    $heartDetails.classList.remove('favorited-heart');
+    for (let i = 0; i < data.favorites.length; i++) {
+      if (data.favorites[i] === data.currentCardName) {
+        data.favorites.splice(i, 1);
+        i--;
+      }
+    }
+  } else {
+    $cardColumns[data.currentCardIndex - 1].dataset.isFavorite = 'true';
+    $heartDetails.classList.add('favorited-heart');
+    data.favorites.push(data.currentCardName);
+  }
+}
 
 const handleImageSwap = () => {
   if (currentBackgroundImgIndex === $backgroundImgs.length - 2) {

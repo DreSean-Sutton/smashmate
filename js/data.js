@@ -1,9 +1,12 @@
 /* exported data */
+// debugger;
 let data = {
   view: 'character-list',
   currentCardIndex: null,
   currentCardOwnerId: null,
   currentCardName: null,
+  test: null,
+  duplicateCharacterList: [],
   favorites: []
 };
 
