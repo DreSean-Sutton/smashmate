@@ -5,7 +5,6 @@ let data = {
   currentCardIndex: null,
   currentCardOwnerId: null,
   currentCardName: null,
-  test: null,
   duplicateCharacterList: [],
   favorites: []
 };
