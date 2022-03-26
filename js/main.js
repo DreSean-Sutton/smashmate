@@ -172,6 +172,7 @@ const handleDataTable = () => {
     if (xhr.status !== 200) {
       $errorMessageData.classList.remove('hidden');
     } else {
+      $frameDataSection.replaceChildren();
       for (let i = 0; i < xhr.response.length - 4; i++) {
         $frameDataSection.appendChild(renderDataTable(xhr.response[i]));
       }
