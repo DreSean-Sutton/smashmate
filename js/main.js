@@ -77,9 +77,6 @@ function handleShowCharacterDetails(event) {
   handleDataTable();
 }
 
-const error = new Error();
-error.message = 'something';
-
 function handleCharacterList() {
   handleShowCharacterList();
   $loadingSpinner.classList.remove('hidden');
