@@ -4,7 +4,7 @@ A web application for Smash Ultimate nerds interested in seeing the raw data beh
 
 ### Why build this?
 
-Smash Ultimate is my favorite game to play, whether alone or with friends, and has brought me hundreds of hours of enjoyment. I desired to create an app others and I can use as a reference and give back to the Smash Community!
+Smash Ultimate is my favorite game to play, whether alone or with friends, and has brought me hundreds of hours of enjoyment. My desire is to create an app others and I can use as a reference and give back to the Smash Community!
 
 [Come test it out here!](https://dresean-sutton.github.io/smashmate/)
 
