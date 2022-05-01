@@ -25,14 +25,15 @@
 .card-column {
   width: 45%;
   margin: 1rem auto;
-  transform: scale(0.8);
+
+  /* Change size correctly */
 }
 
 /* MEDIA QUERIES */
 
 @media screen and (min-width: 375px) {
   .card-column {
-    transform: scale(1);
+    /* Change size correctly */
   }
 }
 
@@ -40,7 +41,6 @@
   .card-column {
     width: 25%;
     margin: 1.5rem auto;
-    transform: scale(1.03);
   }
 }
 
@@ -48,13 +48,15 @@
   .card-column {
     width: 19.25%;
     margin: 2.5rem auto;
-    transform: scale(1.1);
+
+    /* Change size correctly */
   }
 }
 
 @media screen and (min-width: 1220px) {
   .card-column {
     margin: 5rem auto;
-    transform: scale(1.4);
+
+    /* Change size correctly */
   }
 }
