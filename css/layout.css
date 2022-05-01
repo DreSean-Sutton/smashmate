@@ -23,40 +23,5 @@
 }
 
 .card-column {
-  width: 45%;
   margin: 1rem auto;
-
-  /* Change size correctly */
-}
-
-/* MEDIA QUERIES */
-
-@media screen and (min-width: 375px) {
-  .card-column {
-    /* Change size correctly */
-  }
-}
-
-@media screen and (min-width: 575px) {
-  .card-column {
-    width: 25%;
-    margin: 1.5rem auto;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .card-column {
-    width: 19.25%;
-    margin: 2.5rem auto;
-
-    /* Change size correctly */
-  }
-}
-
-@media screen and (min-width: 1220px) {
-  .card-column {
-    margin: 5rem auto;
-
-    /* Change size correctly */
-  }
 }

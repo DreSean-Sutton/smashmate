@@ -46,7 +46,7 @@ table {
   margin: auto;
   width: 90%;
   flex-wrap: wrap;
-  gap: 7.5%;
+  gap: 2%;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -56,8 +56,7 @@ table {
   padding: 0 1rem;
   justify-content: center;
   align-items: center;
-  width: 140px;
-  height: 200px;
+  height: 280px;
 }
 
 .character-card-name {
@@ -180,9 +179,13 @@ table {
     padding: 0.5rem 1rem;
   }
 
+  .character-card {
+    /* max-width: 300px; */
+  }
+
   .character-img {
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
   }
 
   .no-favorites {
@@ -208,8 +211,8 @@ table {
   }
 
   .character-img {
-    width: 240px;
-    height: 240px;
+    width: 280px;
+    height: 280px;
   }
 
   .home-anchor {
@@ -218,6 +221,10 @@ table {
 }
 
 @media screen and (min-width: 768px) {
+  .content-layout {
+    width: 95%;
+  }
+
   .error-message-list {
     max-width: 450px;
   }
