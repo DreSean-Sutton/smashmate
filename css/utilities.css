@@ -56,12 +56,11 @@ table {
   padding: 0 1rem;
   justify-content: center;
   align-items: center;
-  height: 280px;
+  height: 240px;
 }
 
 .character-card-name {
-  margin: 0;
-  padding: 0.5rem 0;
+  margin-top: 1rem;
 }
 
 .character-card-img {
@@ -179,10 +178,6 @@ table {
     padding: 0.5rem 1rem;
   }
 
-  .character-card {
-    /* max-width: 300px; */
-  }
-
   .character-img {
     width: 240px;
     height: 240px;
@@ -206,13 +201,17 @@ table {
     max-width: 400px;
   }
 
-  .modal-layout {
-    max-width: 450px;
+  .character-card {
+    height: 280px;
   }
 
-  .character-img {
-    width: 280px;
-    height: 280px;
+  .character-card-img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .modal-layout {
+    max-width: 450px;
   }
 
   .home-anchor {
