@@ -35,7 +35,7 @@ h4 {
 
 table {
   text-transform: capitalize;
-  box-shadow: inset 0 0 1px 1.5px rgb(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 3px 1px rgb(0, 0, 0, 0.4);
   border-radius: 4px;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -53,7 +53,7 @@ th {
   text-align: left;
   font-size: 0.9rem;
   border-bottom: 1px solid var(--character-name-border);
-  box-shadow: 0 1px 2px rgba(0 0 0 / 0.1);
+  box-shadow: 0 0 1px 2px rgba(0 0 0 / 0.1);
 }
 
 td {
