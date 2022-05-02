@@ -39,7 +39,13 @@ table {
 /* MAIN SECTION */
 
 .background-images {
-  /* object-fit: fill; */
+  object-fit: cover;
+  min-height: 100%;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .content-layout {
@@ -193,6 +199,11 @@ table {
 }
 
 @media screen and (min-width: 575px) {
+  background-images {
+    left: 50%;
+    margin-left: -287.5px;
+  }
+
   header {
     margin: 0 auto 6.5rem;
   }
@@ -234,5 +245,11 @@ table {
 
   .home-anchor {
     margin-top: 3.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  background-images {
+    left: 50%;
   }
 }

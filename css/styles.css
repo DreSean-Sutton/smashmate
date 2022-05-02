@@ -41,14 +41,17 @@ table {
   scrollbar-width: none;
 }
 
+thead {
+  position: sticky;
+  top: 0.4px;
+}
+
 th,
 td {
   padding: 0.5rem;
 }
 
 th {
-  position: sticky;
-  top: 0.4px;
   background-color: rgb(244, 244, 244);
   text-align: left;
   font-size: 0.9rem;
