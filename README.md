@@ -30,12 +30,17 @@ Come test it out here: https://dresean-sutton.github.io/smashmate/
 
 ### Functions in Action
 
-![smashmate-readme](https://user-images.githubusercontent.com/90172283/165458580-8ea8de0f-ac37-45d7-a6c1-ac9585af65bb.gif)
+![smashmate-readme-1](https://user-images.githubusercontent.com/90172283/166292914-bf947d6f-64d2-4e3d-8504-cd377bd5b523.gif)
 
 </br>
 </br>
 
-![smashmate-readme2](https://user-images.githubusercontent.com/90172283/165459114-1b265c8d-88ef-454f-be57-0bb8dcb27687.gif)
+![smashmate-readme-2](https://user-images.githubusercontent.com/90172283/166292940-26501919-c146-4452-8168-2317d9249020.gif)
+
+</br>
+</br>
+
+![smashmate-readme-3](https://user-images.githubusercontent.com/90172283/166293062-30f93883-105b-4e05-8dfa-3f48cbb65c17.gif)
 
 
 ## Upcoming Features
