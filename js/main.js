@@ -129,7 +129,6 @@ const renderCharacterList = entry => {
 
   $cardColumn.className = 'card-column';
   $characterCard.className = 'row character-card';
-  $columnFull.className = 'column-full';
   $characterCardImg.className = 'character-card-img';
   $characterCardNum.className = 'character-card-number';
   $characterCardName.className = 'character-card-name';
@@ -236,7 +235,7 @@ function handleFavoriting(event) {
 }
 
 const handleImageSwap = () => {
-  if (currentBackgroundImgIndex === $backgroundImgs.length - 2) {
+  if (currentBackgroundImgIndex === $backgroundImgs.length - 1) {
     currentBackgroundImgIndex = 0;
   } else {
     currentBackgroundImgIndex++;
@@ -255,7 +254,7 @@ function intervalTimer() {
   clearInterval(backgroundImgIntervalId);
   backgroundImgIntervalId = setInterval(() => {
     handleImageSwap();
-  }, 20000);
+  }, 10000);
 }
 
 intervalTimer();
