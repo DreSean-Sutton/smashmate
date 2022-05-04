@@ -22,6 +22,7 @@ const $errorMessageData = document.querySelector('#error-message-data');
 const $errorMessageDataButton = document.querySelector('#reload-button');
 const $errorMessageList = document.querySelector('#error-message-list');
 const $overlay = document.querySelector('#overlay');
+const $imageCarousel = document.querySelector('#image-carousel');
 
 window.addEventListener('DOMContentLoaded', handleCharacterList);
 $characterList.addEventListener('click', handleShowCharacterDetails);
@@ -30,6 +31,7 @@ $heartList.addEventListener('click', handleHeartList);
 $homeButton.addEventListener('click', handleShowCharacterList);
 $homeAnchor.addEventListener('click', handleShowCharacterList);
 $errorMessageDataButton.addEventListener('click', handleShowCharacterList);
+$imageCarousel.addEventListener('click', HandlePreviousView);
 
 function handleShowCharacterList(event) {
   $errorMessageData.classList.add();
@@ -49,13 +51,12 @@ function handleShowCharacterList(event) {
   for (let i = 0; i < $cardColumns.length; i++) {
     $cardColumns[i].classList.remove('hidden');
   }
+  data.previousView = data.view;
   data.view = 'character-list';
 }
 
 function handleShowCharacterDetails(event) {
-  if (event.target.matches('#character-list')) {
-    return;
-  }
+
   $homeButton.classList.remove('hidden');
   $characterList.classList.add('invisible');
   $characterDetails.classList.remove('hidden');
@@ -73,6 +74,7 @@ function handleShowCharacterDetails(event) {
   } else {
     $heartDetails.classList.remove('favorited-heart');
   }
+  data.previousView = data.view;
   data.view = 'character-details';
   handleDataTable();
 }
@@ -213,6 +215,7 @@ function handleHeartList(event) {
   $h1.textContent = 'favorite fighters';
   $heartList.classList.add('hidden');
   $homeButton.classList.remove('hidden');
+  data.previousView = data.view;
   data.view = 'favorite-list';
 }
 
@@ -234,6 +237,18 @@ function handleFavoriting(event) {
   }
 }
 
+function HandlePreviousView(event) {
+  if (data.view === 'character-details') {
+    if (data.previousView === 'character-list') {
+      handleShowCharacterList();
+      return;
+    }
+    if (data.previousView === 'favorite-list') {
+      handleShowCharacterList();
+      handleHeartList();
+    }
+  }
+}
 const handleImageSwap = () => {
   if (currentBackgroundImgIndex === $backgroundImgs.length - 1) {
     currentBackgroundImgIndex = 0;
