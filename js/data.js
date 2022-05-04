@@ -2,6 +2,7 @@
 // debugger;
 let data = {
   view: 'character-list',
+  previousView: null,
   currentCardIndex: null,
   currentCardOwnerId: null,
   currentCardName: null,
