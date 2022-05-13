@@ -44,5 +44,6 @@ module.exports = {
   stats: 'summary',
   performance: {
     hints: false
-  }
+  },
+  target: 'node'
 };
