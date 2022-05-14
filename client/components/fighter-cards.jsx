@@ -1,23 +1,5 @@
 import React from 'react';
 
-// export default function FighterCards(props) {
-//   return (
-//     fetch('https://api.kuroganehammer.com/api/characters?game=ultimate', {
-//     // mode: 'no-cors',
-//       method: 'GET',
-//       headers: {
-//         accept: 'application/json'
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(json => {
-//       // console.log(json);
-//         return (<h1>{json[0].DisplayName}</h1>);
-//       })
-//       .catch(err => console.error('Fetch failed!', err))
-//   );
-// }
-
 export default class FighterCards extends React.Component {
   constructor(props) {
     super(props);
