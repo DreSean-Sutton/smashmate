@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 export default function Navbar(props) {
   function toggleIcon(icon) {
     return props.view === icon
@@ -8,20 +9,16 @@ export default function Navbar(props) {
   }
 
   return (
-    <div className='container navbar-top'>
-      <div className='row header-layout'>
-        <div className='column-full'>
-          <div className='row justify-center'>
-            <div className='column-three-quarter'>
-              <h1>smash ultimate fighter list</h1>
-            </div>
-          </div>
+    <Container fluid className='bg-dark navbar-top'>
+      <Row className='header-layout justify-content-end'>
+        <div className='w-50 text-center'>
+          <h1>smash ultimate fighter list</h1>
         </div>
-        <div className='column-one-quarter'>
+        <div className='text-end w-25'>
           <i className={`fa-solid fa-house-chimney house-icon ${toggleIcon('characterList')}`}></i>
           <i className={`fa-solid fa-heart heart-icon-list ${toggleIcon('favoriteList')}`}></i>
         </div>
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
