@@ -6,9 +6,7 @@ export default class FighterList extends React.Component {
 
   render() {
     return (
-      <ul>
-        <FighterCards />
-      </ul>
+      <FighterCards />
     );
   }
 }

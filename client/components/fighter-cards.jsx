@@ -22,9 +22,9 @@ export default class FighterCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      test: []
+      test: [],
+      cardCounter: 1
     };
-    // this.testFunction = this.testFunction.bind(this);
   }
 
   componentDidMount() {
@@ -45,20 +45,27 @@ export default class FighterCards extends React.Component {
   }
 
   render() {
+    let cardCounter = 0;
     const allCards = this.state.test.map(card => {
+      cardCounter++;
       return (
         <>
-          <h1 key={card.OwnerId}>{card.DisplayName}</h1>
+          <div key={card.OwnerId} className='card-column' data-card-id={cardCounter} data-owner-id={cardCounter + 1} data-card-name={card.DisplayName}>
+            <div className='row character-card'>
+              <div className=''>
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.Name}.png`} alt={card.DisplayName} />
+                <span className='character-card-number'></span>
+                <h3 className='character-card-name'>{card.DisplayName}</h3>
+              </div>
+            </div>
+          </div>
         </>
       );
     });
-    // this.testFunction();
-    // console.log(this.state.test);
     return (
-      <ul>
-        {allCards}
-      </ul>
-      // <h1>{this.testFunction()}</h1>
+      <div className="row content-layout" data-view='character-list'>
+        { allCards }
+      </div>
     );
   }
 }
