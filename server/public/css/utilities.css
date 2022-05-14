@@ -199,10 +199,10 @@ table {
 }
 
 @media screen and (min-width: 575px) {
-  background-images {
+  /* .background-images {
     left: 50%;
     margin-left: -287.5px;
-  }
+  } */
 
   header {
     margin: 0 auto 6.5rem;
@@ -249,7 +249,7 @@ table {
 }
 
 @media screen and (min-width: 1024px) {
-  background-images {
+  /* background-images {
     left: 50%;
-  }
+  } */
 }

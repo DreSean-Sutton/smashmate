@@ -11,7 +11,6 @@ export default class FighterCards extends React.Component {
 
   componentDidMount() {
     fetch('https://api.kuroganehammer.com/api/characters?game=ultimate', {
-      // mode: 'no-cors',
       method: 'GET',
       headers: {
         accept: 'application/json'

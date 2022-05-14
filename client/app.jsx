@@ -1,6 +1,7 @@
 import React from 'react';
 import FighterList from './pages/fighter-list';
 import Navbar from './components/navbar';
+import BackgroundCarousel from './components/background-carousel';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ export default class App extends React.Component {
           <Navbar view={this.state.currentView} />
         </header>
         <main>
+          <BackgroundCarousel />
           <FighterList />
         </main>
       </>
