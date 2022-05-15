@@ -7,10 +7,11 @@ export default class FighterCards extends React.Component {
       test: [],
       cardCounter: 1
     };
+    this.noOneDigitNums = this.noOneDigitNums.bind(this);
   }
 
   componentDidMount() {
-    fetch('https://api.kuroganehammer.com/api/characters?game=ultimate', {
+    fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
       method: 'GET',
       headers: {
         accept: 'application/json'
@@ -25,22 +26,28 @@ export default class FighterCards extends React.Component {
       .catch(err => console.error('Fetch failed!', err));
   }
 
+  noOneDigitNums(num) {
+    return num < 10
+      ? `0${num}`
+      : num;
+  }
+
   render() {
     let cardCounter = 0;
     const allCards = this.state.test.map(card => {
       cardCounter++;
       return (
-        <>
-          <Row key={card.OwnerId} className='card-column w-auto' data-card-id={cardCounter} data-owner-id={cardCounter + 1} data-card-name={card.DisplayName}>
+        <React.Fragment key={card.fighterId}>
+          <Row className='card-column w-auto' data-card-id={cardCounter} data-card-name={card.fighter}>
             <div className='row character-card p-0'>
               <div className=''>
-                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.Name}.png`} alt={card.DisplayName} />
-                <span className='character-card-number'></span>
-                <h3 className='character-card-name'>{card.DisplayName}</h3>
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
+                <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
+                <h3 className='character-card-name'>{card.displayName}</h3>
               </div>
             </div>
           </Row>
-        </>
+        </React.Fragment>
       );
     });
     return (
