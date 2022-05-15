@@ -23,7 +23,7 @@ export default class BackgroundCarousel extends React.Component {
       );
     });
     return (
-      <Carousel fade pause={false} className='background-img-layout'>
+      <Carousel fade controls={false} pause={false} className='background-img-layout'>
       {allThings}
     </Carousel>
     );
