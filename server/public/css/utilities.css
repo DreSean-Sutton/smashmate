@@ -40,6 +40,7 @@ table {
 
 .background-images {
   object-fit: cover;
+  min-height: 100vh;
 }
 
 .content-layout {
