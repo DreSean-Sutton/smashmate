@@ -199,25 +199,10 @@ i {
 
 /* CHARACTER DETAILS MODAL */
 
-.modal-layout {
-  background-color: var(--card-color);
-  position: fixed;
-  top: 10%;
-  right: 5%;
-  left: 5%;
+.fighter-details {
   border-radius: 4px;
-  box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.4);
-  line-height: 1.4;
-}
-
-.name-border-length {
-  font-size: 1.2rem;
-  border-bottom: 1.5px solid var(--character-name-border);
-  text-align: center;
-}
-
-.character-name-details {
-  font-size: 1.2rem;
+  background-color: rgb(3, 3, 3);
+  z-index: 40;
 }
 
 .heart-icon-details {

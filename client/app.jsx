@@ -7,9 +7,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'characterList',
+      currentView: 'characterDetails',
       orderByRosterId: false,
-      currentId: null
+      currentId: 24
     };
     this.handleViewChange = this.handleViewChange.bind(this);
   }
@@ -33,9 +33,8 @@ export default class App extends React.Component {
     } else {
       view =
         <>
-          {/* <BackgroundCarousel /> */}
-          <FighterDetails />
-          <h1>This Worked 😲</h1>;
+          <BackgroundCarousel />
+          <FighterDetails id={ this.state.currentId } />
         </>;
     }
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-export default class FighterCards extends React.Component {
+export default class FighterListCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

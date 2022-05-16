@@ -1,11 +1,11 @@
 import React from 'react';
-import FighterCards from '../components/fighter-cards';
+import FighterListCards from '../components/fighter-list-cards';
 
 export default class FighterList extends React.Component {
 
   render() {
     return (
-      <FighterCards viewChange={this.props.viewChange} />
+      <FighterListCards viewChange={this.props.viewChange} />
     );
   }
 }

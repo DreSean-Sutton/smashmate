@@ -1,9 +1,11 @@
 import React from 'react';
 
+import FighterDetailsCards from '../components/fighter-details-cards';
 export default class FighterDetails extends React.Component {
+
   render() {
     return (
-      <h1>Testing 😊</h1>
+      <FighterDetailsCards id={this.props.id} />
     );
   }
 }
