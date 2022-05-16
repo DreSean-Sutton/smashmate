@@ -40,27 +40,15 @@ table {
 
 .background-images {
   object-fit: cover;
-  min-height: 100%;
-  width: 100%;
-  height: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
 }
 
 .content-layout {
   margin: auto;
   width: 90%;
-  flex-wrap: wrap;
-  gap: 2%;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .character-card {
   margin: auto;
-  padding: 0 1rem;
-  justify-content: center;
   align-items: center;
   height: 240px;
 }
@@ -199,11 +187,6 @@ table {
 }
 
 @media screen and (min-width: 575px) {
-  /* .background-images {
-    left: 50%;
-    margin-left: -287.5px;
-  } */
-
   header {
     margin: 0 auto 6.5rem;
   }
@@ -246,10 +229,4 @@ table {
   .home-anchor {
     margin-top: 3.5rem;
   }
-}
-
-@media screen and (min-width: 1024px) {
-  /* background-images {
-    left: 50%;
-  } */
 }

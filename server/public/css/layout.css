@@ -6,14 +6,6 @@
   visibility: hidden !important;
 }
 
-.container {
-  margin: auto;
-}
-
-.row {
-  display: flex;
-}
-
 .column-full {
   width: 100%;
 }

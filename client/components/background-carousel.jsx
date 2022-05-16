@@ -13,7 +13,7 @@ export default class BackgroundCarousel extends React.Component {
     ];
     const allThings = imageArray.map(image => {
       return (
-        <Carousel.Item interval={5000} key={image.id}>
+        <Carousel.Item interval={10000} key={image.id}>
           <img
             className="background-images"
             src={image.url}
