@@ -18,18 +18,22 @@ export default function MovesData(props) {
       .catch(err => console.error('fetch failed!', err));
   }, [props.id]);
 
-  console.log(moves);
+  function checkNull(data) {
+    return data === null
+      ? '--'
+      : data;
+  }
 
   const allMoves = moves.map(move => {
     return (
       <React.Fragment key={move.moveId}>
-        <Col>
-          <Card style={{ textTransform: 'capitalize' }} className='p-2 m-2 bg-light text-dark typical-box-shadow bold'>
-            <Card.Title className='text-center'>{move.name}</Card.Title>
-            <p className='mb-0 pb pt-1 border-top'>First Frame: {move.firstFrame}</p>
-            <p className='mb-0 pb pt-1 border-top'>Damage: {move.damage}</p>
-            <p className='mb-0 pb pt-1 border-top'>Active Frames: {move.activeFrames}</p>
-            <p className='mb-0 pb pt-1 border-top'>Total Frames: {move.totalFrames}</p>
+        <Col className='p-3'>
+          <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card.Title className='text-center fw-bold'>{move.name}</Card.Title>
+            <p className='mb-0 pb pt-1 border-top'>First Frame: {checkNull(move.firstFrame)}</p>
+            <p className='mb-0 pb pt-1 border-top'>Damage: {checkNull(move.damage)}</p>
+            <p className='mb-0 pb pt-1 border-top'>Active Frames: {checkNull(move.activeFrames)}</p>
+            <p className='mb-0 pb pt-1 border-top'>Total Frames: {checkNull(move.totalFrames)}</p>
             <p className='mb-0 pb pt-1 border-top'>Hitbox Type: {move.moveType}</p>
           </Card>
         </Col>

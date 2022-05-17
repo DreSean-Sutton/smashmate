@@ -17,5 +17,18 @@ export default function StatsData(props) {
       })
       .catch(err => console.error('fetch failed!', err));
   }, [props.id]);
-  console.log(stats);
+
+  const allStats = stats.map(stat => {
+    return (
+      <React.Fragment key={stat.throwId}>
+        <Col className='p-3 text-center'>
+          <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card.Title className='fw-bold'>{stat.name}</Card.Title>
+            <p className='mb-0 pb pt-1 border-top'>{stat.statValue}</p>
+          </Card>
+        </Col>
+      </React.Fragment>
+    );
+  });
+  return allStats;
 }

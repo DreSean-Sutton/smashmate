@@ -17,5 +17,26 @@ export default function ThrowsData(props) {
       })
       .catch(err => console.error('fetch failed!', err));
   }, [props.id]);
-  console.log(throws);
+
+  function checkNull(data) {
+    return data === null
+      ? '--'
+      : data;
+  }
+
+  const allThrows = throws.map(grapple => {
+    return (
+      <React.Fragment key={grapple.throwId}>
+        <Col className='p-3'>
+          <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card.Title className='text-center fw-bold'>{grapple.name}</Card.Title>
+            <p className='mb-0 pb pt-1 border-top'>Damage: {checkNull(grapple.damage)}</p>
+            <p className='mb-0 pb pt-1 border-top'>Active Frames: {grapple.activeFrames}</p>
+            <p className='mb-0 pb pt-1 border-top'>Total Frames: {grapple.totalFrames}</p>
+          </Card>
+        </Col>
+      </React.Fragment>
+    );
+  });
+  return allThrows;
 }

@@ -18,27 +18,27 @@ export default function FighterDetailsCards(props) {
         </Col>
       </Row>
       <Col xs={6} md={4} className='m-auto typical-box-shadow'>
-        <h2 className='text-center mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
       </Col>
-      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center typical-box-shadow pt-2 pb-2'>
+      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center typical-box-shadow p-1'>
         <MovesData id={props.id} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical-box-shadow'>
-        <h2 className='text-center mt-3 mb-3 p-2 bg-warning text-dark rounded'>Throws</h2>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Throws</h2>
       </Col>
-      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center pt-2 pb-2'>
+      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center p-1'>
         <ThrowsData id={props.id} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical-box-shadow'>
-        <h2 className='text-center mt-3 mb-3 p-2 bg-warning text-dark rounded'>Movements</h2>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Movements</h2>
       </Col>
-      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center pt-2 pb-2'>
+      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center p-1'>
         <MovementData id={props.id} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical-box-shadow'>
-        <h2 className='text-center mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
       </Col>
-      <Row xs={1} md={2} xl={3} className='frame-data-backdrop rounded justify-content-center pt-2 pb-2'>
+      <Row xs={2} xl={3} className='frame-data-backdrop rounded justify-content-center p-1'>
         <StatsData id={props.id} />
       </Row>
     </Container>
