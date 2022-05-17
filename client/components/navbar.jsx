@@ -14,7 +14,7 @@ export default function Navbar(props) {
 
   return (
     <Container fluid className='bg-dark navbar-top'>
-      <Row className='header-layout justify-content-end'>
+      <Row className='header-layout justify-content-end align-items-center'>
         <div className='text-start w-25'>
           <i onClick={handleViewChange} className={`fa-solid fa-house-chimney house-icon ${toggleIcon('characterList')}`}></i>
         </div>
