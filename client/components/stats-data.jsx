@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function StatsData(props) {
   const [stats, setStats] = useState([]);
   useEffect(() => {
-    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighterId=${props.id}`, {
+    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighterId=${props.currentId}`, {
       method: 'GET',
       headers: {
         accept: 'application/json'
@@ -16,7 +16,7 @@ export default function StatsData(props) {
         setStats(json);
       })
       .catch(err => console.error('fetch failed!', err));
-  }, [props.id]);
+  }, [props.currentId]);
 
   const allStats = stats.map(stat => {
     return (

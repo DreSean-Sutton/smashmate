@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function MovementData(props) {
   const [movements, setMovements] = useState([]);
   useEffect(() => {
-    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.id}`, {
+    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.currentId}`, {
       method: 'GET',
       headers: {
         accept: 'application/json'
@@ -16,7 +16,7 @@ export default function MovementData(props) {
         setMovements(json);
       })
       .catch(err => console.error('fetch failed!', err));
-  }, [props.id]);
+  }, [props.currentId]);
 
   const allMovements = movements.map(movement => {
     return (

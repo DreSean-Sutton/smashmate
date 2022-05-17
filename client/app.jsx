@@ -7,16 +7,23 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'characterDetails',
+      currentView: 'characterList',
       orderByRosterId: false,
-      currentId: 24
+      currentId: null
     };
     this.handleViewChange = this.handleViewChange.bind(this);
+    this.handleCurrentId = this.handleCurrentId.bind(this);
   }
 
   handleViewChange(newView) {
     this.setState({
       currentView: newView
+    });
+  }
+
+  handleCurrentId(id) {
+    this.setState({
+      currentId: id
     });
   }
 
@@ -26,7 +33,7 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-          <FighterList viewChange={this.handleViewChange} />;
+          <FighterList viewChange={this.handleViewChange} currentId={this.handleCurrentId} order={this.orderByRosterId} />;
         </>;
     } else if (this.state.currentView === 'favoritesList') {
       return;
@@ -34,7 +41,7 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-          <FighterDetails id={ this.state.currentId } />
+          <FighterDetails currentId={ this.state.currentId } />
         </>;
     }
     return (

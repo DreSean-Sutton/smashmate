@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 export default function ThrowsData(props) {
   const [throws, setThrows] = useState([]);
   useEffect(() => {
-    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.id}`, {
+    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.currentId}`, {
       method: 'GET',
       headers: {
         accept: 'application/json'
@@ -16,7 +16,7 @@ export default function ThrowsData(props) {
         setThrows(json);
       })
       .catch(err => console.error('fetch failed!', err));
-  }, [props.id]);
+  }, [props.currentId]);
 
   function checkNull(data) {
     return data === null

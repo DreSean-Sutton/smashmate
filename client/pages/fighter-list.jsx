@@ -11,22 +11,43 @@ export default class FighterList extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
-      method: 'GET',
-      headers: {
-        accept: 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          fighterArray: json
-        });
+
+    if (this.props.order) {
+      return fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
+        method: 'GET',
+        headers: {
+          accept: 'application/json'
+        }
       })
-      .catch(err => console.error('Fetch failed!', err));
+        .then(res => res.json())
+        .then(json => {
+          this.setState({
+            fighterArray: json
+          });
+        })
+        .catch(err => console.error('Fetch failed!', err));
+
+    } else {
+      return fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
+        method: 'GET',
+        headers: {
+          accept: 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(json => {
+          this.setState({
+            fighterArray: json
+          });
+        })
+        .catch(err => console.error('Fetch failed!', err));
+    }
   }
 
-  handleShowDetails() {
+  handleShowDetails(event) {
+    const characterCard = event.target.closest('#character-card');
+    console.log(characterCard.dataset.cardId);
+    this.props.currentId(characterCard.dataset.cardId);
     this.props.viewChange('characterDetails');
   }
 
@@ -37,13 +58,11 @@ export default class FighterList extends React.Component {
   }
 
   render() {
-    let cardCounter = 0;
     const allCards = this.state.fighterArray.map(card => {
-      cardCounter++;
       return (
         <React.Fragment key={card.fighterId}>
-          <Row className='card-column w-auto' data-card-id={cardCounter} data-card-name={card.fighter}>
-            <div onClick={this.handleShowDetails} className='row character-card p-0'>
+          <Row className='card-column w-auto'>
+            <div onClick={this.handleShowDetails} data-card-id={card.fighterId} data-card-name={card.fighter} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
               <div className=''>
                 <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
                 <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>

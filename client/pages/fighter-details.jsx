@@ -21,25 +21,25 @@ export default function FighterDetails(props) {
         <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
       </Col>
       <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-        <MovesData id={props.id} />
+        <MovesData currentId={props.currentId} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical'>
         <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Throws</h2>
       </Col>
       <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-        <ThrowsData id={props.id} />
+        <ThrowsData currentId={props.currentId} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical'>
         <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Movements</h2>
       </Col>
       <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-        <MovementData id={props.id} />
+        <MovementData currentId={props.currentId} />
       </Row>
       <Col xs={6} md={4} className='m-auto typical'>
         <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
       </Col>
       <Row xs={2} xl={3} className='rounded justify-content-center p-1'>
-        <StatsData id={props.id} />
+        <StatsData currentId={props.currentId} />
       </Row>
     </Container>
   );
