@@ -45,9 +45,13 @@ export default class FighterList extends React.Component {
   }
 
   handleShowDetails(event) {
-    const characterCard = event.target.closest('#character-card');
-    console.log(characterCard.dataset.cardId);
-    this.props.currentId(characterCard.dataset.cardId);
+    const characterCard = event.target.closest('#character-card').dataset;
+    this.props.focusedFighter({
+      fighter: characterCard.cardName,
+      fighterId: characterCard.cardFighterId,
+      rosterId: characterCard.cardRosterId,
+      displayName: characterCard.cardDisplayName
+    });
     this.props.viewChange('characterDetails');
   }
 
@@ -62,7 +66,7 @@ export default class FighterList extends React.Component {
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
-            <div onClick={this.handleShowDetails} data-card-id={card.fighterId} data-card-name={card.fighter} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
+            <div onClick={this.handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
               <div className=''>
                 <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
                 <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
