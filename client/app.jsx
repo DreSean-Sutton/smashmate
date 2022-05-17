@@ -9,10 +9,10 @@ export default class App extends React.Component {
     this.state = {
       currentView: 'characterList',
       orderByRosterId: false,
-      currentId: null
+      focusedFighter: {}
     };
     this.handleViewChange = this.handleViewChange.bind(this);
-    this.handleCurrentId = this.handleCurrentId.bind(this);
+    this.handleCurrentFighter = this.handleCurrentFighter.bind(this);
   }
 
   handleViewChange(newView) {
@@ -21,9 +21,18 @@ export default class App extends React.Component {
     });
   }
 
-  handleCurrentId(id) {
+  handleCurrentFighter(obj) {
+    if (obj === null) {
+      return this.setState({});
+    }
+
     this.setState({
-      currentId: id
+      focusedFighter: {
+        fighter: obj.fighter,
+        fighterId: obj.fighterId,
+        rosterId: obj.rosterId,
+        displayName: obj.displayName
+      }
     });
   }
 
@@ -33,7 +42,7 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-          <FighterList viewChange={this.handleViewChange} currentId={this.handleCurrentId} order={this.orderByRosterId} />;
+        <FighterList viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
         </>;
     } else if (this.state.currentView === 'favoritesList') {
       return;
@@ -41,7 +50,7 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-          <FighterDetails currentId={ this.state.currentId } />
+          <FighterDetails focusedFighter={ this.state.focusedFighter } />
         </>;
     }
     return (
