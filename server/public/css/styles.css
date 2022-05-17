@@ -4,6 +4,7 @@
   --card-color: rgba(255 255 255 / 0.93);
   --character-name-border: #c4c4c4;
   --heart-color: rgb(245, 76, 104);
+  --typical-box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* BASE CSS SELECTORS */
@@ -125,6 +126,7 @@ i {
   left: 0;
   min-width: 85vh;
   height: 100vh;
+  z-index: -1;
 }
 
 .character-card {
@@ -201,8 +203,16 @@ i {
 
 .fighter-details {
   border-radius: 4px;
-  background-color: rgb(3, 3, 3);
-  z-index: 40;
+  z-index: 1;
+}
+
+.fighter-details-img {
+  background-color: rgb(225, 225, 225);
+  box-shadow: var(--character-name-border);
+}
+
+.frame-data-backdrop {
+  background-color: #00000042;
 }
 
 .heart-icon-details {
@@ -479,4 +489,10 @@ i {
   .error-message-list {
     font-size: 1.5rem;
   }
+}
+
+/* UTILITY CLASSES */
+
+.typical-box-shadow {
+  box-shadow: var(--typical-box-shadow);
 }
