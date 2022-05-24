@@ -43,10 +43,14 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-        <Home viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+        <Home view={this.state.currentView} viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
         </>;
     } else if (this.state.currentView === 'favoritesList') {
-      <FavoritesList viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+      view =
+        <>
+          <BackgroundCarousel />
+          <FavoritesList view={this.state.currentView} viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+        </>;
     } else {
       view =
         <>

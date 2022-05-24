@@ -7,6 +7,7 @@ export default function Home(props) {
       viewChange={props.viewChange}
       focusedFighter={props.focusedFighter}
       order={props.order}
+      view={props.view}
       />
   );
 }

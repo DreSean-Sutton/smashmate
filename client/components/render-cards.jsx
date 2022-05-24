@@ -2,6 +2,7 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 
 export default class RenderCards extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,7 @@ export default class RenderCards extends React.Component {
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleShowDetails = this.handleShowDetails.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
+    this.checkView = this.checkView.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +87,12 @@ export default class RenderCards extends React.Component {
     heart.classList.add('card-heart-favorited');
   }
 
+  checkView() {
+    return this.props.view === 'characterList'
+      ? this.state.fighterArray
+      : this.state.favorites;
+  }
+
   noOneDigitNums(num) {
     return num < 10
       ? `0${num}`
@@ -92,14 +100,16 @@ export default class RenderCards extends React.Component {
   }
 
   render() {
-    const allCards = this.state.fighterArray.map(card => {
+    const selectList = this.checkView();
+
+    const allCards = selectList.map(card => {
 
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
             <div onClick={this.handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
               <div className=''>
-                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
                 <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
                 <i onClick={this.handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
                 <h3 className='character-card-name'>{card.displayName}</h3>
@@ -109,7 +119,6 @@ export default class RenderCards extends React.Component {
         </React.Fragment>
       );
     });
-    console.log(this.state.favorites);
     return (
       <div className="row content-layout" data-view='character-list'>
         {allCards}
