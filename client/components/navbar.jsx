@@ -19,7 +19,7 @@ export default function Navbar(props) {
           <i onClick={handleViewChange} className={`fa-solid fa-house-chimney house-icon ${toggleIcon('characterList')}`}></i>
         </div>
         <div className='w-50 text-center'>
-          <h1>smash ultimate fighter list</h1>
+          <h1>SmashMate</h1>
         </div>
         <div className='text-end w-25'>
           <i className={`fa-solid fa-heart heart-icon-list ${toggleIcon('characterDetails')}`}></i>

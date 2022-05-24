@@ -1,6 +1,7 @@
 import React from 'react';
-import FighterList from './pages/fighter-list';
+import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
+import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
 export default class App extends React.Component {
@@ -42,10 +43,10 @@ export default class App extends React.Component {
       view =
         <>
           <BackgroundCarousel />
-        <FighterList viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+        <Home viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
         </>;
     } else if (this.state.currentView === 'favoritesList') {
-      return;
+      <FavoritesList viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
     } else {
       view =
         <>

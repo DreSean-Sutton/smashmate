@@ -85,8 +85,6 @@ i {
 }
 
 .house-icon {
-  position: relative;
-  right: 10%;
   transition: transform 200ms, color 200ms;
 }
 
@@ -140,7 +138,7 @@ i {
 
 .character-card:hover,
 .character-card:active {
-  transform: translateY(5%);
+  transform: translateY(2%);
   background-color: rgba(255 255 255 / 100%);
 }
 
@@ -161,6 +159,29 @@ i {
   font-size: 0.8rem;
   text-align: center;
   font-weight: bold;
+}
+
+.card-heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: grey;
+  transition: 200ms ease-in transform;
+}
+
+.card-heart:hover,
+.card-heart:active {
+  transform: scale(1.2);
+}
+
+.card-heart-favorited {
+  color: var(--heart-color);
+  transform: scale(1.2);
+}
+
+.card-heart-favorited:hover {
+  opacity: 0.85;
 }
 
 .no-favorites {
@@ -212,26 +233,7 @@ i {
 }
 
 .frame-data-backdrop {
-  background-color: #00000042;
-}
-
-.heart-icon-details {
-  font-size: 1.3rem;
-  color: grey;
-}
-
-.heart-icon-details:hover,
-.heart-icon-details:active {
-  opacity: 0.8;
-}
-
-.favorited-heart {
-  color: var(--heart-color);
-  transform: scale(1.4);
-}
-
-.favorited-heart:hover {
-  opacity: 0.85;
+  background-color: #0000000b;
 }
 
 .error-message-data {
