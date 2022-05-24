@@ -61,16 +61,26 @@ export default class RenderCards extends React.Component {
 
   handleFavoriting(event) {
     const heart = event.target;
-    const fighterId = Number(heart.closest('#character-card').dataset.cardFighterId);
+    const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.state.favorites.length; i++) {
-      if (this.state.favorites[i] === fighterId) {
-        this.state.favorites.splice(i, 1);
+      if (this.state.favorites[i].fighterId === Number(currentCard.cardFighterId)) {
+        const data = this.state.favorites;
+        data.splice(i, 1);
+        this.setState({
+          favorites: data
+        });
         heart.classList.remove('card-heart-favorited');
         return;
       }
     }
     this.setState({
-      favorites: [...this.state.favorites, fighterId].sort((a, b) => a - b)
+      favorites: [...this.state.favorites, {
+        fighter: currentCard.cardName,
+        fighterId: Number(currentCard.cardFighterId),
+        displayName: currentCard.cardDisplayName,
+        rosterId: currentCard.cardRosterId
+      }
+      ].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1)
     });
     heart.classList.add('card-heart-favorited');
   }
@@ -82,7 +92,6 @@ export default class RenderCards extends React.Component {
   }
 
   render() {
-    console.log(this.state.favorites);
     const allCards = this.state.fighterArray.map(card => {
 
       return (
@@ -90,7 +99,7 @@ export default class RenderCards extends React.Component {
           <Row className='card-column w-auto'>
             <div onClick={this.handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
               <div className=''>
-                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
                 <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
                 <i onClick={this.handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
                 <h3 className='character-card-name'>{card.displayName}</h3>
@@ -100,6 +109,7 @@ export default class RenderCards extends React.Component {
         </React.Fragment>
       );
     });
+    console.log(this.state.favorites);
     return (
       <div className="row content-layout" data-view='character-list'>
         {allCards}
