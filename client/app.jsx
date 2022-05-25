@@ -1,72 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentView: 'characterList',
-      orderByRosterId: false,
-      focusedFighter: {}
-    };
-    this.handleViewChange = this.handleViewChange.bind(this);
-    this.handleCurrentFighter = this.handleCurrentFighter.bind(this);
+export default function App(props) {
+
+  const [currentView, setCurrentView] = useState('characterList');
+  const [orderByRosterId, setOrderByRosterId] = useState(false);
+  const [focusedFighter, setFocusedFighter] = useState({});
+
+  function handleViewChange(newView) {
+    setCurrentView(newView);
   }
 
-  handleViewChange(newView) {
-    this.setState({
-      currentView: newView
-    });
-  }
-
-  handleCurrentFighter(obj) {
+  function handleCurrentFighter(obj) {
     if (obj === null) {
-      return this.setState({});
+      return setFocusedFighter({});
     }
 
-    this.setState({
-      focusedFighter: {
-        fighter: obj.fighter,
-        fighterId: obj.fighterId,
-        rosterId: obj.rosterId,
-        displayName: obj.displayName
-      }
+    setFocusedFighter({
+      fighter: obj.fighter,
+      fighterId: obj.fighterId,
+      rosterId: obj.rosterId,
+      displayName: obj.displayName
     });
   }
 
-  render() {
-    let view = null;
-    if (this.state.currentView === 'characterList') {
-      view =
+  let view = null;
+  if (currentView === 'characterList') {
+    view =
         <>
           <BackgroundCarousel />
-        <Home view={this.state.currentView} viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+        <Home view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
         </>;
-    } else if (this.state.currentView === 'favoritesList') {
-      view =
+  } else if (currentView === 'favoritesList') {
+    view =
         <>
           <BackgroundCarousel />
-          <FavoritesList view={this.state.currentView} viewChange={this.handleViewChange} focusedFighter={this.handleCurrentFighter} order={this.orderByRosterId} />;
+          <FavoritesList view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
         </>;
-    } else {
-      view =
+  } else {
+    view =
         <>
           <BackgroundCarousel />
-          <FighterDetails focusedFighter={ this.state.focusedFighter } />
+          <FighterDetails focusedFighter={focusedFighter} />
         </>;
-    }
-    return (
-      <>
-        <header>
-          <Navbar viewChange={this.handleViewChange} view={this.state.currentView} />
-        </header>
-        <main>
-          { view }
-        </main>
-      </>
-    );
   }
+  return (
+    <>
+      <header>
+        <Navbar viewChange={handleViewChange} view={currentView} />
+      </header>
+      <main>
+        { view }
+      </main>
+    </>
+  );
 }
