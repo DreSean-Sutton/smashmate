@@ -9,6 +9,7 @@ export default function App(props) {
   const [currentView, setCurrentView] = useState('characterList');
   const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
+  const [favorites, setFavorites] = useState([]);
 
   function handleViewChange(newView) {
     setCurrentView(newView);
@@ -27,6 +28,10 @@ export default function App(props) {
     });
   }
 
+  function handleFavoritesList(fav) {
+    setFavorites([...favorites, fav]);
+  }
+
   let view = null;
   if (currentView === 'characterList') {
     view =
@@ -38,7 +43,7 @@ export default function App(props) {
     view =
         <>
           <BackgroundCarousel />
-          <FavoritesList view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
+          <FavoritesList favorites={favorites} favoritesList={handleFavoritesList} view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
         </>;
   } else {
     view =

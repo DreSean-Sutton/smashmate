@@ -33,7 +33,7 @@ export default function RenderCards(props) {
         })
         .catch(err => console.error('Fetch failed!', err));
     }
-  }, [fighterArray, props.order]);
+  }, [props.order]);
 
   function handleShowDetails(event) {
     if (event.target.matches('.fa-heart')) return;
@@ -59,13 +59,12 @@ export default function RenderCards(props) {
         return;
       }
     }
-    setFavorites([...favorites, {
+    props.favoritesList([...props.favorites, {
       fighter: currentCard.cardName,
       fighterId: Number(currentCard.cardFighterId),
       displayName: currentCard.cardDisplayName,
       rosterId: currentCard.cardRosterId
     }].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1));
-
     heart.classList.add('card-heart-favorited');
   }
 
@@ -81,26 +80,27 @@ export default function RenderCards(props) {
       : num;
   }
   const selectList = checkView();
+
   const allCards = selectList.map(card => {
 
     return (
-      <React.Fragment key={card.fighterId}>
-        <Row className='card-column w-auto'>
-          <div onClick={handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
-            <div className=''>
-              <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
-              <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
-              <i onClick={handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
-              <h3 className='character-card-name'>{card.displayName}</h3>
+        <React.Fragment key={card.fighterId}>
+          <Row className='card-column w-auto'>
+            <div onClick={handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
+              <div className=''>
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
+                <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
+                <i onClick={handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
+                <h3 className='character-card-name'>{card.displayName}</h3>
+              </div>
             </div>
-          </div>
-        </Row>
-      </React.Fragment>
+          </Row>
+        </React.Fragment>
     );
   });
   return (
-    <div className="row content-layout" data-view='character-list'>
-      {allCards}
-    </div>
+      <div className="row content-layout" data-view='character-list'>
+        {allCards}
+      </div>
   );
 }

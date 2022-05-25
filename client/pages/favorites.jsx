@@ -8,6 +8,8 @@ export default function FavoritesList(props) {
       focusedFighter={props.focusedFighter}
       order={props.order}
       view={props.view}
+      favorites={props.favorites}
+      favoritesList={props.favoritesList}
       />
   );
 }
