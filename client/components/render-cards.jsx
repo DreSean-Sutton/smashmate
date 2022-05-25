@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 export default function RenderCards(props) {
 
   const [fighterArray, setFighterArray] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  // const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     if (props.order) {
@@ -38,40 +38,46 @@ export default function RenderCards(props) {
   function handleShowDetails(event) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    props.focusedFighter({
+    console.log(characterCard);
+    const currentFighter = {
       fighter: characterCard.cardName,
       fighterId: characterCard.cardFighterId,
       rosterId: characterCard.cardRosterId,
       displayName: characterCard.cardDisplayName
-    });
+    };
+    props.focusedFighter(currentFighter);
     props.viewChange('characterDetails');
   }
 
   function handleFavoriting(event) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
-    for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].fighterId === Number(currentCard.cardFighterId)) {
-        const data = favorites;
+    console.log(props);
+    for (let i = 0; i < props.favorites.length; i++) {
+      if (props.favorites[i].fighterId === Number(currentCard.cardFighterId)) {
+        const data = props.favorites;
         data.splice(i, 1);
-        setFavorites(data);
+        props.deleteFavorites(data);
         heart.classList.remove('card-heart-favorited');
         return;
       }
     }
-    props.favoritesList([...props.favorites, {
+    const fav = {
       fighter: currentCard.cardName,
       fighterId: Number(currentCard.cardFighterId),
       displayName: currentCard.cardDisplayName,
       rosterId: currentCard.cardRosterId
-    }].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1));
+    };
+    props.addFavorites(fav);
     heart.classList.add('card-heart-favorited');
   }
 
   function checkView() {
-    return props.view === 'characterList'
-      ? fighterArray
-      : favorites;
+    if (props.view === 'characterList' ||
+    props.view === 'characterDetails') {
+      return fighterArray;
+    }
+    return props.favorites;
   }
 
   function noOneDigitNums(num) {
@@ -84,18 +90,18 @@ export default function RenderCards(props) {
   const allCards = selectList.map(card => {
 
     return (
-        <React.Fragment key={card.fighterId}>
-          <Row className='card-column w-auto'>
-            <div onClick={handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
-              <div className=''>
-                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
-                <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
-                <i onClick={handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
-                <h3 className='character-card-name'>{card.displayName}</h3>
-              </div>
+      <React.Fragment key={card.fighterId}>
+        <Row className='card-column w-auto'>
+          <div onClick={handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
+            <div className=''>
+              <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.fighter} />
+              <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
+              <i onClick={handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
+              <h3 className='character-card-name'>{card.displayName}</h3>
             </div>
-          </Row>
-        </React.Fragment>
+          </div>
+        </Row>
+      </React.Fragment>
     );
   });
   return (

@@ -17,19 +17,22 @@ export default function App(props) {
 
   function handleCurrentFighter(obj) {
     if (obj === null) {
-      return setFocusedFighter({});
+      setFocusedFighter({});
+      return;
     }
-
-    setFocusedFighter({
-      fighter: obj.fighter,
-      fighterId: obj.fighterId,
-      rosterId: obj.rosterId,
-      displayName: obj.displayName
-    });
+    setFocusedFighter(obj);
   }
 
-  function handleFavoritesList(fav) {
-    setFavorites([...favorites, fav]);
+  function handleAddFavorites(fav) {
+    setFavorites([...favorites, fav].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1));
+  }
+
+  function handleDeleteFavorites(fav) {
+    if (fav.length === 0) {
+      setFavorites([]);
+      return;
+    }
+    setFavorites(fav);
   }
 
   let view = null;
@@ -37,15 +40,31 @@ export default function App(props) {
     view =
         <>
           <BackgroundCarousel />
-        <Home view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
+          <Home
+            view={currentView}
+            viewChange={handleViewChange}
+            focusedFighter={handleCurrentFighter}
+            order={orderByRosterId}
+            favorites={favorites}
+            addFavorites={handleAddFavorites}
+            deleteFavorites={handleDeleteFavorites}
+          />;
         </>;
   } else if (currentView === 'favoritesList') {
     view =
         <>
           <BackgroundCarousel />
-          <FavoritesList favorites={favorites} favoritesList={handleFavoritesList} view={currentView} viewChange={handleViewChange} focusedFighter={handleCurrentFighter} order={orderByRosterId} />;
+          <FavoritesList
+            favorites={favorites}
+            addFavorites={handleAddFavorites}
+            deleteFavorites={handleDeleteFavorites}
+            view={currentView}
+            viewChange={handleViewChange}
+            focusedFighter={handleCurrentFighter}
+            order={orderByRosterId}
+          />;
         </>;
-  } else {
+  } else if (currentView === 'characterDetails') {
     view =
         <>
           <BackgroundCarousel />

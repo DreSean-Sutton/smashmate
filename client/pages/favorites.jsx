@@ -9,7 +9,8 @@ export default function FavoritesList(props) {
       order={props.order}
       view={props.view}
       favorites={props.favorites}
-      favoritesList={props.favoritesList}
+      addFavorites={props.addFavorites}
+      deleteFavorites={props.deleteFavorites}
       />
   );
 }

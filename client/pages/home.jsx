@@ -8,6 +8,9 @@ export default function Home(props) {
       focusedFighter={props.focusedFighter}
       order={props.order}
       view={props.view}
+      favorites={props.favorites}
+      addFavorites={props.addFavorites}
+      deleteFavorites={props.deleteFavorites}
       />
   );
 }
