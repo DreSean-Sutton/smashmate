@@ -55,13 +55,13 @@ export default function App(props) {
         <>
           <BackgroundCarousel />
           <FavoritesList
-            favorites={favorites}
-            addFavorites={handleAddFavorites}
-            deleteFavorites={handleDeleteFavorites}
             view={currentView}
             viewChange={handleViewChange}
             focusedFighter={handleCurrentFighter}
             order={orderByRosterId}
+            favorites={favorites}
+            addFavorites={handleAddFavorites}
+            deleteFavorites={handleDeleteFavorites}
           />;
         </>;
   } else if (currentView === 'characterDetails') {
