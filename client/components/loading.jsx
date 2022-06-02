@@ -7,7 +7,7 @@ export default function Loading(props) {
   return (
     <Container>
       <Row className='justify-content-center align-items-center spinner-layout'>
-        <Spinner animation='border' role='status' varient='danger' />
+        <Spinner animation='border' role='status' variant='warning' />
         <span className='visually-hidden'>Loading...</span>
       </Row>
     </Container>
