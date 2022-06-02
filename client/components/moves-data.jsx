@@ -11,7 +11,7 @@ export default function MovesData(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/move?fighterId=${props.focusedFighter.fighterId}`, {
+    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`, {
       method: 'GET',
       headers: {
         accept: 'application/json'

@@ -51,7 +51,6 @@ export default function App(props) {
           addFavorites={handleAddFavorites}
           deleteFavorites={handleDeleteFavorites}
         />;
-        {/* <Loading /> */}
       </>;
   } else if (currentView === 'favoritesList') {
     view =
