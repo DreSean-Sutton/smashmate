@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Loading from './loading';
 
 export default function ThrowsData(props) {
   const [throws, setThrows] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
       method: 'GET',
       headers: {
@@ -14,6 +18,7 @@ export default function ThrowsData(props) {
       .then(res => res.json())
       .then(json => {
         setThrows(json);
+        setIsLoading(false);
       })
       .catch(err => console.error('fetch failed!', err));
   }, [props.focusedFighter.fighterId]);
@@ -24,6 +29,11 @@ export default function ThrowsData(props) {
       : data;
   }
 
+  if (isLoading) {
+    return (
+      <Loading />
+    );
+  }
   const allThrows = throws.map(grapple => {
     return (
       <React.Fragment key={grapple.throwId}>

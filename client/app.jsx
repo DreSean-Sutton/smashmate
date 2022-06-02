@@ -4,9 +4,11 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
+
 export default function App(props) {
 
   const [currentView, setCurrentView] = useState('characterList');
+  // eslint-disable-next-line no-unused-vars
   const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);
@@ -38,18 +40,19 @@ export default function App(props) {
   let view = null;
   if (currentView === 'characterList') {
     view =
-        <>
-          <BackgroundCarousel />
-          <Home
-            view={currentView}
-            viewChange={handleViewChange}
-            focusedFighter={handleCurrentFighter}
-            order={orderByRosterId}
-            favorites={favorites}
-            addFavorites={handleAddFavorites}
-            deleteFavorites={handleDeleteFavorites}
-          />;
-        </>;
+      <>
+        <BackgroundCarousel />
+         <Home
+          view={currentView}
+          viewChange={handleViewChange}
+          focusedFighter={handleCurrentFighter}
+          order={orderByRosterId}
+          favorites={favorites}
+          addFavorites={handleAddFavorites}
+          deleteFavorites={handleDeleteFavorites}
+        />;
+        {/* <Loading /> */}
+      </>;
   } else if (currentView === 'favoritesList') {
     view =
         <>

@@ -1,11 +1,12 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-
+import Loading from './loading';
 export default class RenderCards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fighterArray: []
+      fighterArray: [],
+      isLoading: false
     };
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleShowDetails = this.handleShowDetails.bind(this);
@@ -13,7 +14,9 @@ export default class RenderCards extends React.Component {
   }
 
   componentDidMount() {
-
+    this.setState({
+      isLoading: true
+    });
     if (this.props.order) {
       return fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
         method: 'GET',
@@ -24,7 +27,8 @@ export default class RenderCards extends React.Component {
         .then(res => res.json())
         .then(json => {
           this.setState({
-            fighterArray: json
+            fighterArray: json,
+            isLoading: false
           });
         })
         .catch(err => console.error('Fetch failed!', err));
@@ -39,7 +43,8 @@ export default class RenderCards extends React.Component {
         .then(res => res.json())
         .then(json => {
           this.setState({
-            fighterArray: json
+            fighterArray: json,
+            isLoading: false
           });
         })
         .catch(err => console.error('Fetch failed!', err));
@@ -95,6 +100,11 @@ export default class RenderCards extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <Loading />
+      );
+    }
     const selectList = this.checkView();
     const allCards = selectList.map(card => {
 
@@ -113,7 +123,6 @@ export default class RenderCards extends React.Component {
         </React.Fragment>
       );
     });
-    console.log(this.state.favorites);
     return (
       <div className="row content-layout" data-view='character-list'>
         {allCards}
