@@ -17,6 +17,7 @@ Come test it out here: https://dresean-sutton.github.io/smashmate/
 - HTML
 - Vanilla CSS
 - Vanilla JavaScript
+- AJAX
 
 ## Features
 
