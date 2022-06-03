@@ -11,6 +11,7 @@ export default class RenderCards extends React.Component {
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleShowDetails = this.handleShowDetails.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
+    this.handleHearts = this.handleHearts.bind(this);
   }
 
   componentDidMount() {
@@ -71,7 +72,7 @@ export default class RenderCards extends React.Component {
         const data = this.props.favorites;
         data.splice(i, 1);
         this.props.deleteFavorites(data);
-        heart.classList.remove('card-heart-favorited');
+        // heart.classList.remove('card-heart-favorited');
         return;
       }
     }
@@ -82,7 +83,16 @@ export default class RenderCards extends React.Component {
       rosterId: currentCard.cardRosterId
     };
     this.props.addFavorites(fav);
-    heart.classList.add('card-heart-favorited');
+    // heart.classList.add('card-heart-favorited');
+  }
+
+  handleHearts(id) {
+    for (const element of this.props.favorites) {
+      if (id === element.fighterId) {
+        return 'card-heart-favorited';
+      }
+    }
+    return '';
   }
 
   checkView() {
@@ -115,7 +125,7 @@ export default class RenderCards extends React.Component {
               <div className=''>
                 <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
                 <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
-                <i onClick={this.handleFavoriting} className={'fa-solid fa-heart card-heart'}></i>
+                <i onClick={this.handleFavoriting} className={`fa-solid fa-heart card-heart ${this.handleHearts(card.fighterId)}`}></i>
                 <h3 className='character-card-name'>{card.displayName}</h3>
               </div>
             </div>
