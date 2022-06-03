@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
@@ -12,6 +12,17 @@ export default function App(props) {
   const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    if (favorites) {
+      setFavorites(favorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   function handleViewChange(newView) {
     setCurrentView(newView);
