@@ -6,14 +6,6 @@
   visibility: hidden !important;
 }
 
-.column-full {
-  width: 100%;
-}
-
-.column-nine-tenth {
-  width: 90%;
-}
-
 .card-column {
   margin: 1rem auto;
 }

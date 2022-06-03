@@ -23,13 +23,6 @@ img {
   max-width: 100%;
 }
 
-table {
-  display: block;
-  height: 200px;
-  margin: 0 auto 0.5rem;
-  max-width: fit-content;
-}
-
 /* HEADER SECTION */
 
 .header-layout {
@@ -65,90 +58,9 @@ table {
   object-fit: contain;
 }
 
-.no-favorites {
-  padding: 2rem;
-  max-width: min(80%, 500px);
-}
-
 .home-anchor {
   margin-top: 2rem;
   padding: 0.5rem 1rem;
-}
-
-.error-message-list {
-  width: 80%;
-  margin: auto;
-  padding: 1rem;
-}
-
-/* CHARACTER DETAILS MODAL */
-
-.modal-layout {
-  max-width: 300px;
-  min-height: 50vh;
-  margin: auto;
-  padding: 0.5rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.img-div-details {
-  text-align: center;
-  margin: auto;
-  width: 60%;
-}
-
-.character-img {
-  width: 160px;
-  height: 160px;
-  object-fit: contain;
-}
-
-.name-border-length {
-  width: 70%;
-  margin: 0 auto;
-}
-
-.character-name-details {
-  margin: 0;
-}
-
-.error-message-data {
-  flex-direction: column;
-  justify-content: space-between;
-  height: 200px;
-  padding: 1rem;
-}
-
-.reload-button {
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 1.25rem;
-}
-
-/* LOADING SPINNER */
-
-.lds-spinner-div {
-  margin: auto;
-  justify-content: center;
-  align-items: center;
-}
-
-/* UTILITY CLASSES */
-
-.justify-center {
-  justify-content: center;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.align-center {
-  align-items: center;
-}
-
-.text-center {
-  text-align: center;
 }
 
 .margin-auto {
@@ -164,22 +76,9 @@ table {
     padding: 0.5rem 1.5rem;
   }
 
-  .error-message-list {
-    max-width: 300px;
-  }
-
-  .modal-layout {
-    max-width: 400px;
-    padding: 0.5rem 1rem;
-  }
-
   .character-img {
     width: 240px;
     height: 240px;
-  }
-
-  .no-favorites {
-    padding: 3rem 2rem;
   }
 
   .home-anchor {
@@ -192,10 +91,6 @@ table {
     margin: 0 auto 6.5rem;
   }
 
-  .error-message-list {
-    max-width: 400px;
-  }
-
   .character-card {
     height: 280px;
   }
@@ -203,10 +98,6 @@ table {
   .character-card-img {
     width: 200px;
     height: 200px;
-  }
-
-  .modal-layout {
-    max-width: 450px;
   }
 
   .home-anchor {
@@ -217,14 +108,6 @@ table {
 @media screen and (min-width: 768px) {
   .content-layout {
     width: 95%;
-  }
-
-  .error-message-list {
-    max-width: 450px;
-  }
-
-  .no-favorites {
-    padding: 4rem 2rem;
   }
 
   .home-anchor {

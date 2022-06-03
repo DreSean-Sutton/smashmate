@@ -1,8 +1,8 @@
 {
-  "name": "ajax-project",
-  "version": "1.0.0",
+  "name": "smashmate",
+  "version": "2.0.0",
   "private": true,
-  "description": "A dynamic HTML, CSS, and JavaScript solo project.",
+  "description": "A web application for Smash Ultimate nerds interested in seeing the raw data of the fighters.",
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
@@ -28,8 +28,6 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.3",
     "markuplint": "^1.11.4",
-    "node-fetch": "^3.2.4",
-    "nodemon": "^2.0.16",
     "stylelint": "^14.3.0",
     "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "^24.0.0",
@@ -40,7 +38,6 @@
   "dependencies": {
     "acorn-import-assertions": "^1.8.0",
     "bootstrap": "^5.1.3",
-    "express": "^4.18.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0"
