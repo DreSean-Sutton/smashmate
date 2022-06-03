@@ -6,22 +6,6 @@
   visibility: hidden !important;
 }
 
-.container {
-  margin: auto;
-}
-
-.row {
-  display: flex;
-}
-
-.column-full {
-  width: 100%;
-}
-
-.column-nine-tenth {
-  width: 90%;
-}
-
 .card-column {
   margin: 1rem auto;
 }

@@ -1,4 +1,7 @@
+server/public/main.js*
+client/js/
 node_modules
 .DS_Store
 .vscode
 *.log
+.test*

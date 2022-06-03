@@ -1,23 +1,26 @@
 {
   "root": true,
   "env": {
-    "node": false,
+    "node": true,
     "browser": true
   },
-  "parserOptions": {
-    "sourceType": "script"
-  },
   "extends": [
+    "plugin:react/recommended",
     "eslint:recommended",
-    "standard"
+    "standard",
+    "plugin:react-hooks/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "no-var": "off",
     "semi": [
       "error",
       "always"
     ],
-    "padded-blocks": "off",
+    "padded-blocks": 0,
     "arrow-parens": [
       "error",
       "as-needed"
@@ -47,11 +50,19 @@
   "overrides": [
     {
       "files": [
-        "js/main.js"
+        "**/*.jsx"
       ],
-      "globals": {
-        "data": "readonly"
+      "rules": {
+        "react/prop-types": 0
       }
+    },
+    {
+      "files": [
+        "**/*.html"
+      ],
+      "plugins": [
+        "eslint-plugin-html"
+      ]
     }
   ]
 }
