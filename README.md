@@ -10,14 +10,15 @@ SW-1341-5835-0230 (Beware, I'm an Inkling main)
 
 ## Live Demo
 
-Come test it out here: https://dresean-sutton.github.io/smashmate/
+Come test it out here: https://smashmate.netlify.app/ 
 
 ## Technologies Used
 
-- HTML
+- React
+- React Hooks
+- React Bootstrap
 - Vanilla CSS
-- Vanilla JavaScript
-- AJAX
+- Fetch
 
 ## Features
 
@@ -31,21 +32,14 @@ Come test it out here: https://dresean-sutton.github.io/smashmate/
 
 ### Functions in Action
 
-![smashmate-readme-1](https://user-images.githubusercontent.com/90172283/166292914-bf947d6f-64d2-4e3d-8504-cd377bd5b523.gif)
+![smashmate-readme-1](https://user-images.githubusercontent.com/90172283/171958384-4c846a43-c988-4d84-9c49-cbb35439205b.gif)
 
 </br>
 </br>
 
-![smashmate-readme-2](https://user-images.githubusercontent.com/90172283/166292940-26501919-c146-4452-8168-2317d9249020.gif)
-
-</br>
-</br>
-
-![smashmate-readme-3](https://user-images.githubusercontent.com/90172283/166293062-30f93883-105b-4e05-8dfa-3f48cbb65c17.gif)
-
+![smashmate-readme-2](https://user-images.githubusercontent.com/90172283/171958406-7d227305-c6f5-4d23-be03-2db26ce79557.gif)
 
 ## Upcoming Features
 
 - User will be able to filter Fighters by their Fighter type
-- User will be able to swap betweeen neighboring Fighters using arrows while viewing a Fighter's data
 - User can search for characters by utilizing a search bar
