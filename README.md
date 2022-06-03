@@ -14,11 +14,10 @@ Come test it out here: https://smashmate.netlify.app/
 
 ## Technologies Used
 
-- HTML
-- Vanilla CSS
 - React
 - React Hooks
 - React Bootstrap
+- Vanilla CSS
 - Fetch
 
 ## Features
