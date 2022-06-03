@@ -1,5 +1,4 @@
-server/public/main.js*
-client/js/
+dist/*js
 node_modules
 .DS_Store
 .vscode
