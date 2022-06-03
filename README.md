@@ -42,5 +42,4 @@ Come test it out here: https://smashmate.netlify.app/
 ## Upcoming Features
 
 - User will be able to filter Fighters by their Fighter type
-- User will be able to swap betweeen neighboring Fighters using arrows while viewing a Fighter's data
 - User can search for characters by utilizing a search bar
