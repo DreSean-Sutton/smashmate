@@ -181,7 +181,7 @@ i {
 }
 
 .card-heart-favorited:hover {
-  opacity: 0.85;
+  opacity: 0.75;
 }
 
 .no-favorites {

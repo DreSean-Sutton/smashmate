@@ -27,7 +27,7 @@ export default function Navbar(props) {
           <h1>SmashMate</h1>
         </div>
         <div className='text-end w-25'>
-          <i onClick={handleShowFavorites} className={`fa-solid fa-heart heart-icon-list ${toggleIcon('characterDetails')}`}></i>
+          <i onClick={handleShowFavorites} className={`fa-solid fa-heart heart-icon-list ${toggleIcon('favoritesList')}`}></i>
         </div>
       </Row>
     </Container>

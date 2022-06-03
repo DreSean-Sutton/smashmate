@@ -69,10 +69,7 @@ export default class RenderCards extends React.Component {
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {
       if (this.props.favorites[i].fighterId === Number(currentCard.cardFighterId)) {
-        const data = this.props.favorites;
-        data.splice(i, 1);
-        this.props.deleteFavorites(data);
-        // heart.classList.remove('card-heart-favorited');
+        this.props.deleteFavorites(this.props.favorites[i].fighterId);
         return;
       }
     }
@@ -83,7 +80,6 @@ export default class RenderCards extends React.Component {
       rosterId: currentCard.cardRosterId
     };
     this.props.addFavorites(fav);
-    // heart.classList.add('card-heart-favorited');
   }
 
   handleHearts(id) {

@@ -29,12 +29,12 @@ export default function App(props) {
     setFavorites([...favorites, fav].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
 
-  function handleDeleteFavorites(fav) {
-    if (fav.length === 0) {
+  function handleDeleteFavorites(id) {
+    if (favorites.length === 1) {
       setFavorites([]);
       return;
     }
-    setFavorites(fav);
+    setFavorites(favorites.filter(fav => fav.fighterId !== id));
   }
 
   let view = null;
