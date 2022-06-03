@@ -10,14 +10,16 @@ SW-1341-5835-0230 (Beware, I'm an Inkling main)
 
 ## Live Demo
 
-Come test it out here: https://dresean-sutton.github.io/smashmate/
+Come test it out here: https://smashmate.netlify.app/ 
 
 ## Technologies Used
 
 - HTML
 - Vanilla CSS
-- Vanilla JavaScript
-- AJAX
+- React
+- React Hooks
+- React Bootstrap
+- Fetch
 
 ## Features
 
