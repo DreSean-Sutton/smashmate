@@ -11,23 +11,23 @@ export default function ThrowsData(props) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json'
-      }
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw Error(res.status);
+    async function fetchData() {
+
+      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
+        method: 'GET',
+        headers: {
+          accept: 'application/json'
         }
-      })
-      .then(json => {
+      });
+      if (res.ok) {
+        const json = await res.json();
         setThrows(json);
         setIsLoading(false);
-      })
+      } else {
+        throw Error(res.status);
+      }
+    }
+    fetchData()
       .catch(err => {
         setFetchFailed(true);
         setIsLoading(false);

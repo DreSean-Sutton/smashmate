@@ -15,41 +15,56 @@ export default class RenderCards extends React.Component {
     this.handleHearts = this.handleHearts.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
       isLoading: true
     });
     if (this.props.order) {
-      return fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
+
+      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
         method: 'GET',
         headers: {
           accept: 'application/json'
         }
-      })
-        .then(res => res.json())
-        .then(json => {
-          this.setState({
-            fighterArray: json,
-            isLoading: false
+      });
+      if (res.ok) {
+        const json = await res.json();
+        this.setState({
+          fighterArray: json,
+          isLoading: false
+        });
+      } else {
+        throw Error(res.statusText)
+          .catch(err => {
+            this.setState({
+              isLoading: false
+            });
+            console.error('Fetch failed!', err);
           });
-        })
-        .catch(err => console.error('Fetch failed!', err));
+      }
 
     } else {
-      return fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
+      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
         method: 'GET',
         headers: {
           accept: 'application/json'
         }
-      })
-        .then(res => res.json())
-        .then(json => {
-          this.setState({
-            fighterArray: json,
-            isLoading: false
+      });
+      if (res.ok) {
+        const json = await res.json();
+        this.setState({
+          fighterArray: json,
+          isLoading: false
+        });
+      } else {
+        throw Error(res.statusText)
+          .catch(err => {
+            this.setState({
+              isLoading: false
+            });
+            console.error('Fetch failed!', err);
           });
-        })
-        .catch(err => console.error('Fetch failed!', err));
+      }
     }
   }
 
