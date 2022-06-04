@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
 export default class RenderCards extends React.Component {
@@ -130,9 +131,9 @@ export default class RenderCards extends React.Component {
       );
     });
     return (
-      <div className="row content-layout" data-view='character-list'>
+      <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
         {allCards}
-      </div>
+      </Container>
     );
   }
 }

@@ -38,13 +38,12 @@ img {
 
 .content-layout {
   margin: auto;
-  width: 90%;
 }
 
 .character-card {
   margin: auto;
   align-items: center;
-  height: 240px;
+  height: 160px;
 }
 
 .character-card-name {
@@ -52,8 +51,8 @@ img {
 }
 
 .character-card-img {
-  width: 160px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
   padding-top: 0.5rem;
   object-fit: contain;
 }
@@ -81,6 +80,15 @@ img {
     height: 240px;
   }
 
+  .character-card {
+    height: 180px;
+  }
+
+  .character-card-img {
+    width: 115px;
+    height: 115px;
+  }
+
   .home-anchor {
     margin-top: 2.5rem;
   }
@@ -92,12 +100,12 @@ img {
   }
 
   .character-card {
-    height: 280px;
+    height: 270px;
   }
 
   .character-card-img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
   .home-anchor {
@@ -106,10 +114,6 @@ img {
 }
 
 @media screen and (min-width: 768px) {
-  .content-layout {
-    width: 95%;
-  }
-
   .home-anchor {
     margin-top: 3.5rem;
   }

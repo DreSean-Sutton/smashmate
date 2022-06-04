@@ -95,7 +95,7 @@ i {
 }
 
 .character-card-number {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   position: absolute;
   top: 0;
@@ -108,16 +108,16 @@ i {
 }
 
 .character-card-name {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
   font-weight: bold;
 }
 
 .card-heart {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.5rem;
+  top: 5px;
+  right: 5px;
+  font-size: 1.25rem;
   color: grey;
   transition: 200ms ease-in transform;
 }
@@ -183,6 +183,10 @@ i {
   .house-icon {
     font-size: 1.3rem;
   }
+
+  .character-card-name {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (min-width: 575px) {
@@ -206,6 +210,12 @@ i {
     font-size: 1.5rem;
   }
 
+  .card-heart {
+    top: 8px;
+    right: 8px;
+    font-size: 1.5rem;
+  }
+
   .character-card-name {
     font-size: 1rem;
   }
@@ -222,6 +232,10 @@ i {
 
   .house-icon {
     font-size: 2rem;
+  }
+
+  .card-heart {
+    font-size: 1.8rem;
   }
 }
 
