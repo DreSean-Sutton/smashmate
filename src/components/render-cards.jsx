@@ -20,50 +20,50 @@ export default class RenderCards extends React.Component {
       isLoading: true
     });
     if (this.props.order) {
-
-      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          this.setState({
+            fighterArray: json,
+            isLoading: false
+          });
+        } else {
+          throw Error(res.statusText);
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
+      } catch (e) {
         this.setState({
-          fighterArray: json,
           isLoading: false
         });
-      } else {
-        throw Error(res.statusText)
-          .catch(err => {
-            this.setState({
-              isLoading: false
-            });
-            console.error('Fetch failed!', err);
-          });
+        console.error('Fetch failed!', e);
       }
-
     } else {
-      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          this.setState({
+            fighterArray: json,
+            isLoading: false
+          });
+        } else {
+          throw Error(res.statusText);
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
+      } catch (e) {
         this.setState({
-          fighterArray: json,
           isLoading: false
         });
-      } else {
-        throw Error(res.statusText)
-          .catch(err => {
-            this.setState({
-              isLoading: false
-            });
-            console.error('Fetch failed!', err);
-          });
+        console.error('Fetch failed!', e);
       }
     }
   }

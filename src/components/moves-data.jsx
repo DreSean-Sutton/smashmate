@@ -12,26 +12,27 @@ export default function MovesData(props) {
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          setMoves(json);
+          setIsLoading(false);
+        } else {
+          throw Error(res.status);
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        setMoves(json);
-        setIsLoading(false);
-      } else {
-        throw Error(res.status);
-      }
-    }
-    fetchData()
-      .catch(err => {
+      } catch (e) {
         setFetchFailed(true);
         setIsLoading(false);
-        console.error('fetch failed!', err);
-      });
+        console.error('fetch failed!', e);
+      }
+    }
+    fetchData();
   }, [props.focusedFighter.fighterId]);
 
   function checkNull(data) {

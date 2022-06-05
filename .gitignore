@@ -1,4 +1,4 @@
-dist/*js
+dist/main*
 node_modules
 .DS_Store
 .vscode
