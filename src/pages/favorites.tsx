@@ -1,7 +1,7 @@
 import React from 'react';
 import RenderCards from '../components/render-cards';
 
-export default function Home(props) {
+export default function FavoritesList(props:any) {
   return (
     <RenderCards
       viewChange={props.viewChange}

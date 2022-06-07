@@ -1,24 +1,26 @@
+const path = require('path');
+
 module.exports = {
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
+  devtool: 'inline-source-map',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [
-              '@babel/plugin-transform-react-jsx'
-            ]
-          }
-        }
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
-  stats: 'summary',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  resolve: {
+    extensions: ['.tsx', '.js', '.jsx']
+  },
   performance: {
     hints: false
   }
+  // stats: 'summary'
 };
