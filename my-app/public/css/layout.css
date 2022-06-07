@@ -1,0 +1,24 @@
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden !important;
+}
+
+.card-column {
+  margin: 1rem auto;
+  padding: 0 0.25rem;
+}
+
+@media screen and (min-width: 375px) {
+  .card-column {
+    padding: 0 0.75rem;
+  }
+}
+
+@media screen and (min-width: 1220px) {
+  .card-column {
+    margin: 1.5rem auto;
+  }
+}
