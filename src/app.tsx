@@ -7,8 +7,6 @@ import BackgroundCarousel from './components/background-carousel';
 export default function App() {
 
   const [currentView, setCurrentView] = useState('characterList');
-  // eslint-disable-next-line
-  const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);
 
@@ -61,7 +59,6 @@ export default function App() {
           view={currentView}
           viewChange={handleViewChange}
           focusedFighter={handleCurrentFighter}
-          order={orderByRosterId}
           favorites={favorites}
           addFavorites={handleAddFavorites}
           deleteFavorites={handleDeleteFavorites}
@@ -75,7 +72,6 @@ export default function App() {
             view={currentView}
             viewChange={handleViewChange}
             focusedFighter={handleCurrentFighter}
-            order={orderByRosterId}
             favorites={favorites}
             addFavorites={handleAddFavorites}
             deleteFavorites={handleDeleteFavorites}

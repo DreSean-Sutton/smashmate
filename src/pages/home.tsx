@@ -6,7 +6,6 @@ export default function Home(props: any) {
     <RenderCards
       viewChange={props.viewChange}
       focusedFighter={props.focusedFighter}
-      order={props.order}
       view={props.view}
       favorites={props.favorites}
       addFavorites={props.addFavorites}

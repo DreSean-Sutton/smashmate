@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
 
-type myProps = { order: boolean,
+type myProps = {
   addFavorites: any,
   deleteFavorites: any,
   favorites: Array<any>,
@@ -31,52 +31,27 @@ export default class RenderCards extends React.Component<myProps, myState> {
     this.setState({
       isLoading: true
     });
-    if (this.props.order) {
-      try {
-        const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
-          method: 'GET',
-          headers: {
-            accept: 'application/json'
-          }
-        });
-        if (res.ok) {
-          const json = await res.json();
-          this.setState({
-            fighterArray: json,
-            isLoading: false
-          });
-        } else {
-          throw Error(res.statusText);
+    try {
+      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
+        method: 'GET',
+        headers: {
+          accept: 'application/json'
         }
-      } catch (e) {
+      });
+      if (res.ok) {
+        const json = await res.json();
         this.setState({
+          fighterArray: json,
           isLoading: false
         });
-        console.error('Fetch failed!', e);
+      } else {
+        throw Error(res.statusText);
       }
-    } else {
-      try {
-        const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
-          method: 'GET',
-          headers: {
-            accept: 'application/json'
-          }
-        });
-        if (res.ok) {
-          const json = await res.json();
-          this.setState({
-            fighterArray: json,
-            isLoading: false
-          });
-        } else {
-          throw Error(res.statusText);
-        }
-      } catch (e) {
-        this.setState({
-          isLoading: false
-        });
-        console.error('Fetch failed!', e);
-      }
+    } catch (e) {
+      this.setState({
+        isLoading: false
+      });
+      console.error('Fetch failed!', e);
     }
   }
 
