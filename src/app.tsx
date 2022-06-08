@@ -5,7 +5,6 @@ import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
 export default function App() {
-
   const [currentView, setCurrentView] = useState('characterList');
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);
