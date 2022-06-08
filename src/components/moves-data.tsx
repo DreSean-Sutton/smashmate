@@ -69,7 +69,7 @@ export default function MovesData(props:any) {
     const allMoves = moves.map(renderMoves);
     return (
       <>
-        allMoves
+        { allMoves }
       </>
     )
   }

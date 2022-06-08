@@ -22,8 +22,9 @@ export default function BackgroundCarousel() {
     );
   });
   return (
-      <Carousel fade controls={false} pause={false} className='background-img-layout'>
-      {allThings}
+    <Carousel fade controls={false} pause={false} className='background-img-layout'>
+      { allThings }
     </Carousel>
+    // <h1>It worked! 😲</h1>
   );
 }

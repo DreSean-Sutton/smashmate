@@ -92,9 +92,9 @@ export default class RenderCards extends React.Component<myProps, myState> {
   }
 
   handleFavoriting(event:any) {
-    interface favorites {
-      fighterId: any
-    }
+    // interface favorites {
+    //   fighterId: any
+    // }
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {

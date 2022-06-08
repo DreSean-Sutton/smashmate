@@ -4,11 +4,11 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
-
+// import Test from './components/test'
 export default function App() {
 
   const [currentView, setCurrentView] = useState('characterList');
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line
   const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);

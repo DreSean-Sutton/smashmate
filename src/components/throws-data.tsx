@@ -68,7 +68,7 @@ export default function ThrowsData(props:any) {
     const allThrows = throws.map(renderThrows);
     return(
       <>
-        allThrows
+        { allThrows }
       </>
     )
   }

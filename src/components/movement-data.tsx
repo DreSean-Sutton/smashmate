@@ -49,7 +49,7 @@ export default function MovementData(props:any) {
 
     const renderMovements = (movement:any) => {
       return (
-        <React.Fragment key={movement.throwId}>
+        <React.Fragment key={movement.movementId}>
           <Col className='p-3'>
             <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
               <Card.Title className='text-center fw-bold'>{movement.name}</Card.Title>
@@ -63,7 +63,7 @@ export default function MovementData(props:any) {
     const allMovements = movements.map(renderMovements);
     return (
       <>
-        allMovements;
+        { allMovements }
       </>
     )
   }

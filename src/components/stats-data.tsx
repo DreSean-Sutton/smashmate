@@ -47,7 +47,7 @@ export default function StatsData(props:any) {
   } else {
     const renderStats = (stat:any) => {
       return (
-        <React.Fragment key={stat.throwId}>
+        <React.Fragment key={stat.statId}>
           <Col className='p-3 text-center'>
             <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
               <Card.Title className='fw-bold'>{stat.name}</Card.Title>
@@ -60,7 +60,7 @@ export default function StatsData(props:any) {
     const allStats = stats.map(renderStats);
     return (
       <>
-        allStats;
+        { allStats };
       </>
     )
   }
