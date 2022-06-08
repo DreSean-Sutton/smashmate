@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovesData(props:any) {
+export default function MovesData(props: any) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -35,7 +35,7 @@ export default function MovesData(props:any) {
     fetchData();
   }, [props.focusedFighter.fighterId]);
 
-  function checkNull(data:any) {
+  function checkNull(data: any) {
     return data === null
       ? '--'
       : data;
@@ -50,7 +50,7 @@ export default function MovesData(props:any) {
       <FetchDataFail data='Moves'/>
     );
   } else {
-    const renderMoves = (move:any): JSX.Element => {
+    const renderMoves = (move: any): JSX.Element => {
       return (
         <React.Fragment key={move.moveId}>
           <Col className='p-3'>

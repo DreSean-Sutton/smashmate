@@ -25,6 +25,5 @@ export default function BackgroundCarousel() {
     <Carousel fade controls={false} pause={false} className='background-img-layout'>
       { allThings }
     </Carousel>
-    // <h1>It worked! 😲</h1>
   );
 }

@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovementData(props:any) {
+export default function MovementData(props: any) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -47,7 +47,7 @@ export default function MovementData(props:any) {
     );
   } else {
 
-    const renderMovements = (movement:any) => {
+    const renderMovements = (movement: any) => {
       return (
         <React.Fragment key={movement.movementId}>
           <Col className='p-3'>

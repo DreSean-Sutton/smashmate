@@ -4,13 +4,13 @@ A web application for Smash Ultimate nerds interested in seeing the raw data beh
 
 ### Why build this?
 
-Smash Ultimate is my favorite game to play, whether alone or with friends, and has brought me hundreds of hours of enjoyment. My desire is to create an app others and I can use as a reference and give back to the Smash Community! 
+Smash Ultimate is my favorite game to play, whether alone or with friends, and has brought me hundreds of hours of enjoyment. My desire is to create an app others and I can use as a reference and give back to the Smash Community!
 
 SW-1341-5835-0230 (Beware, I'm an Inkling main)
 
 ## Live Demo
 
-Come test it out here: https://smashmate.netlify.app/ 
+Come test it out here: https://smashmate.netlify.app/
 
 ## Technologies Used
 
@@ -18,6 +18,8 @@ Come test it out here: https://smashmate.netlify.app/
 - React Hooks
 - React Bootstrap
 - Vanilla CSS
+- Typescript
+- create-react-app
 - Fetch
 
 ## Features

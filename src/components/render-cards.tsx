@@ -13,8 +13,9 @@ type myProps = { order: boolean,
 }
 
 type myState = { fighterArray: object[], isLoading: boolean }
+
 export default class RenderCards extends React.Component<myProps, myState> {
-  constructor(props:any) {
+  constructor(props: any) {
     super(props);
     this.state = {
       fighterArray: [],
@@ -79,7 +80,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     }
   }
 
-  handleShowDetails(event:any) {
+  handleShowDetails(event: any) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
     this.props.focusedFighter({
@@ -91,10 +92,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     this.props.viewChange('characterDetails');
   }
 
-  handleFavoriting(event:any) {
-    // interface favorites {
-    //   fighterId: any
-    // }
+  handleFavoriting(event: any) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {
@@ -112,7 +110,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     this.props.addFavorites(fav);
   }
 
-  handleHearts(id: number) {
+  handleHearts(id: number): string {
     for (const element of this.props.favorites) {
       const fighterId = element.fighterId
       if (id === fighterId) {
@@ -122,7 +120,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     return '';
   }
 
-  checkView() {
+  checkView(): any[] {
     if (this.props.view === 'characterList' ||
     this.props.view === 'characterDetails') {
       return this.state.fighterArray;
@@ -130,7 +128,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     return this.props.favorites;
   }
 
-  noOneDigitNums(num:number) {
+  noOneDigitNums(num: number) {
     return num < 10
       ? `0${num}`
       : num;
@@ -143,7 +141,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
       );
     }
     const selectList = this.checkView();
-    const renderCards = (card:any) => {
+    const renderCards = (card: any) => {
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
@@ -162,7 +160,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     const allCards = selectList.map(renderCards);
     return (
       <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
-        {allCards}
+        { allCards }
       </Container>
     );
   }

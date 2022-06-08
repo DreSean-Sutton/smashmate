@@ -8,7 +8,7 @@ import ThrowsData from './throws-data';
 import MovementData from './movement-data';
 import StatsData from './stats-data';
 
-export default function FrameData(props:any) {
+export default function FrameData(props: any) {
 
   useEffect(() => {
     window.scrollTo(0, 0);

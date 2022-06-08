@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function ThrowsData(props:any) {
+export default function ThrowsData(props: any) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -51,7 +51,7 @@ export default function ThrowsData(props:any) {
       <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const renderThrows = (grapple:any) => {
+    const renderThrows = (grapple: any) => {
       return (
         <React.Fragment key={grapple.throwId}>
           <Col className='p-3'>

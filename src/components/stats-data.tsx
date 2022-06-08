@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function StatsData(props:any) {
+export default function StatsData(props: any) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -45,7 +45,7 @@ export default function StatsData(props:any) {
       <FetchDataFail data={'Stats'} />
     );
   } else {
-    const renderStats = (stat:any) => {
+    const renderStats = (stat: any) => {
       return (
         <React.Fragment key={stat.statId}>
           <Col className='p-3 text-center'>
