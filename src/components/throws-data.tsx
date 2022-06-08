@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function ThrowsData(props) {
+export default function ThrowsData(props: any) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -12,30 +12,30 @@ export default function ThrowsData(props) {
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-
-      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          setThrows(json);
+          setIsLoading(false);
+        } else {
+          throw Error();
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        setThrows(json);
-        setIsLoading(false);
-      } else {
-        throw Error(res.status);
-      }
-    }
-    fetchData()
-      .catch(err => {
+      } catch (e) {
         setFetchFailed(true);
         setIsLoading(false);
-        console.error('fetch failed!', err);
-      });
+        console.error('fetch failed!', e);
+      }
+    }
+    fetchData();
   }, [props.focusedFighter.fighterId]);
 
-  function checkNull(data) {
+  function checkNull(data:any) {
     return data === null
       ? '--'
       : data;
@@ -51,7 +51,7 @@ export default function ThrowsData(props) {
       <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const allThrows = throws.map(grapple => {
+    const renderThrows = (grapple: any) => {
       return (
         <React.Fragment key={grapple.throwId}>
           <Col className='p-3'>
@@ -64,7 +64,12 @@ export default function ThrowsData(props) {
           </Col>
         </React.Fragment>
       );
-    });
-    return allThrows;
+    }
+    const allThrows = throws.map(renderThrows);
+    return(
+      <>
+        { allThrows }
+      </>
+    )
   }
 }

@@ -2,8 +2,20 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
-export default class RenderCards extends React.Component {
-  constructor(props) {
+
+type myProps = {
+  addFavorites: any,
+  deleteFavorites: any,
+  favorites: Array<any>,
+  focusedFighter: any,
+  view: string,
+  viewChange: any
+}
+
+type myState = { fighterArray: object[], isLoading: boolean }
+
+export default class RenderCards extends React.Component<myProps, myState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       fighterArray: [],
@@ -19,31 +31,7 @@ export default class RenderCards extends React.Component {
     this.setState({
       isLoading: true
     });
-    if (this.props.order) {
-
-      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters?orderByRosterId', {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
-        }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        this.setState({
-          fighterArray: json,
-          isLoading: false
-        });
-      } else {
-        throw Error(res.statusText)
-          .catch(err => {
-            this.setState({
-              isLoading: false
-            });
-            console.error('Fetch failed!', err);
-          });
-      }
-
-    } else {
+    try {
       const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
         method: 'GET',
         headers: {
@@ -57,18 +45,17 @@ export default class RenderCards extends React.Component {
           isLoading: false
         });
       } else {
-        throw Error(res.statusText)
-          .catch(err => {
-            this.setState({
-              isLoading: false
-            });
-            console.error('Fetch failed!', err);
-          });
+        throw Error(res.statusText);
       }
+    } catch (e) {
+      this.setState({
+        isLoading: false
+      });
+      console.error('Fetch failed!', e);
     }
   }
 
-  handleShowDetails(event) {
+  handleShowDetails(event: any) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
     this.props.focusedFighter({
@@ -80,7 +67,7 @@ export default class RenderCards extends React.Component {
     this.props.viewChange('characterDetails');
   }
 
-  handleFavoriting(event) {
+  handleFavoriting(event: any) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {
@@ -98,16 +85,17 @@ export default class RenderCards extends React.Component {
     this.props.addFavorites(fav);
   }
 
-  handleHearts(id) {
+  handleHearts(id: number): string {
     for (const element of this.props.favorites) {
-      if (id === element.fighterId) {
+      const fighterId = element.fighterId
+      if (id === fighterId) {
         return 'card-heart-favorited';
       }
     }
     return '';
   }
 
-  checkView() {
+  checkView(): any[] {
     if (this.props.view === 'characterList' ||
     this.props.view === 'characterDetails') {
       return this.state.fighterArray;
@@ -115,7 +103,7 @@ export default class RenderCards extends React.Component {
     return this.props.favorites;
   }
 
-  noOneDigitNums(num) {
+  noOneDigitNums(num: number) {
     return num < 10
       ? `0${num}`
       : num;
@@ -128,8 +116,7 @@ export default class RenderCards extends React.Component {
       );
     }
     const selectList = this.checkView();
-    const allCards = selectList.map(card => {
-
+    const renderCards = (card: any) => {
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
@@ -144,10 +131,11 @@ export default class RenderCards extends React.Component {
           </Row>
         </React.Fragment>
       );
-    });
+    }
+    const allCards = selectList.map(renderCards);
     return (
       <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
-        {allCards}
+        { allCards }
       </Container>
     );
   }

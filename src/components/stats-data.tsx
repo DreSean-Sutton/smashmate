@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function StatsData(props) {
+export default function StatsData(props: any) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -12,27 +12,27 @@ export default function StatsData(props) {
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighterId=${props.focusedFighter.fighterId}`, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighterId=${props.focusedFighter.fighterId}`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          setStats(json);
+          setIsLoading(false);
+        } else {
+          throw Error();
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        setStats(json);
-        setIsLoading(false);
-      } else {
-        throw Error(res.status);
-      }
-
-    }
-    fetchData()
-      .catch(err => {
+      } catch (e) {
         setFetchFailed(true);
         setIsLoading(false);
-        console.error('fetch failed!', err);
-      });
+        console.error('fetch failed!', e);
+      }
+    }
+    fetchData();
   }, [props.focusedFighter.fighterId]);
 
   if (isLoading) {
@@ -45,9 +45,9 @@ export default function StatsData(props) {
       <FetchDataFail data={'Stats'} />
     );
   } else {
-    const allStats = stats.map(stat => {
+    const renderStats = (stat: any) => {
       return (
-        <React.Fragment key={stat.throwId}>
+        <React.Fragment key={stat.statId}>
           <Col className='p-3 text-center'>
             <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
               <Card.Title className='fw-bold'>{stat.name}</Card.Title>
@@ -56,7 +56,12 @@ export default function StatsData(props) {
           </Col>
         </React.Fragment>
       );
-    });
-    return allStats;
+    }
+    const allStats = stats.map(renderStats);
+    return (
+      <>
+        { allStats };
+      </>
+    )
   }
 }

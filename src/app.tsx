@@ -4,17 +4,14 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
-
-export default function App(props) {
-
+export default function App() {
   const [currentView, setCurrentView] = useState('characterList');
-  // eslint-disable-next-line no-unused-vars
-  const [orderByRosterId, setOrderByRosterId] = useState(false);
   const [focusedFighter, setFocusedFighter] = useState({});
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites'));
+    const itemName: any = localStorage.getItem('favorites')
+    const favorites: any = JSON.parse(itemName);
     if (favorites) {
       setFavorites(favorites);
     }
@@ -24,11 +21,11 @@ export default function App(props) {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  function handleViewChange(newView) {
+  function handleViewChange(newView: string) {
     setCurrentView(newView);
   }
 
-  function handleCurrentFighter(obj) {
+  function handleCurrentFighter(obj: any) {
     if (obj === null) {
       setFocusedFighter({});
       return;
@@ -36,16 +33,20 @@ export default function App(props) {
     setFocusedFighter(obj);
   }
 
-  function handleAddFavorites(fav) {
-    setFavorites([...favorites, fav].sort((a, b) => (a.fighterId > b.fighterId) ? 1 : -1));
+  function handleAddFavorites(fav: object | undefined) {
+    const newFavorites: any = [...favorites, fav]
+    setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
 
-  function handleDeleteFavorites(id) {
+  function handleDeleteFavorites(id: [] | object[]) {
     if (favorites.length === 1) {
       setFavorites([]);
       return;
     }
-    setFavorites(favorites.filter(fav => fav.fighterId !== id));
+    function filter(fav: any) {
+      return fav.fighterId !== id
+    }
+    setFavorites(favorites.filter(filter));
   }
 
   let view = null;
@@ -57,7 +58,6 @@ export default function App(props) {
           view={currentView}
           viewChange={handleViewChange}
           focusedFighter={handleCurrentFighter}
-          order={orderByRosterId}
           favorites={favorites}
           addFavorites={handleAddFavorites}
           deleteFavorites={handleDeleteFavorites}
@@ -71,7 +71,6 @@ export default function App(props) {
             view={currentView}
             viewChange={handleViewChange}
             focusedFighter={handleCurrentFighter}
-            order={orderByRosterId}
             favorites={favorites}
             addFavorites={handleAddFavorites}
             deleteFavorites={handleDeleteFavorites}

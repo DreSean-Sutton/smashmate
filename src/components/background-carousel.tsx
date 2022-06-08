@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-export default function BackgroundCarousel(props) {
+export default function BackgroundCarousel() {
 
   const imageArray = [
     { name: 'Smash Ultimate Characters', id: 1, url: './images/smash-ultimate-background/smashmate-background-1.jpg' },
@@ -22,8 +22,8 @@ export default function BackgroundCarousel(props) {
     );
   });
   return (
-      <Carousel fade controls={false} pause={false} className='background-img-layout'>
-      {allThings}
+    <Carousel fade controls={false} pause={false} className='background-img-layout'>
+      { allThings }
     </Carousel>
   );
 }

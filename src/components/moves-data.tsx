@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovesData(props) {
+export default function MovesData(props: any) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -12,29 +12,30 @@ export default function MovesData(props) {
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          setMoves(json);
+          setIsLoading(false);
+        } else {
+          throw Error();
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        setMoves(json);
-        setIsLoading(false);
-      } else {
-        throw Error(res.status);
-      }
-    }
-    fetchData()
-      .catch(err => {
+      } catch (e) {
         setFetchFailed(true);
         setIsLoading(false);
-        console.error('fetch failed!', err);
-      });
+        console.error('fetch failed!', e);
+      }
+    }
+    fetchData();
   }, [props.focusedFighter.fighterId]);
 
-  function checkNull(data) {
+  function checkNull(data: any) {
     return data === null
       ? '--'
       : data;
@@ -49,7 +50,7 @@ export default function MovesData(props) {
       <FetchDataFail data='Moves'/>
     );
   } else {
-    const allMoves = moves.map(move => {
+    const renderMoves = (move: any): JSX.Element => {
       return (
         <React.Fragment key={move.moveId}>
           <Col className='p-3'>
@@ -64,7 +65,12 @@ export default function MovesData(props) {
           </Col>
         </React.Fragment>
       );
-    });
-    return allMoves;
+    }
+    const allMoves = moves.map(renderMoves);
+    return (
+      <>
+        { allMoves }
+      </>
+    )
   }
 }

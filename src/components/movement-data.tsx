@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovementData(props) {
+export default function MovementData(props: any) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -12,26 +12,28 @@ export default function MovementData(props) {
   useEffect(() => {
     setIsLoading(true);
     async function fetchData() {
-      const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.focusedFighter.fighterId}`, {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
+      try {
+
+        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.focusedFighter.fighterId}`, {
+          method: 'GET',
+          headers: {
+            accept: 'application/json'
+          }
+        });
+        if (res.ok) {
+          const json = await res.json();
+          setMovements(json);
+          setIsLoading(false);
+        } else {
+          throw Error();
         }
-      });
-      if (res.ok) {
-        const json = await res.json();
-        setMovements(json);
-        setIsLoading(false);
-      } else {
-        throw Error(res.status);
-      }
-    }
-    fetchData()
-      .catch(err => {
+      } catch (e) {
         setFetchFailed(true);
         setIsLoading(false);
-        console.error('fetch failed!', err);
-      });
+        console.error('fetch failed!', e);
+      }
+    }
+    fetchData();
   }, [props.focusedFighter.fighterId]);
 
   if (isLoading) {
@@ -45,9 +47,9 @@ export default function MovementData(props) {
     );
   } else {
 
-    const allMovements = movements.map(movement => {
+    const renderMovements = (movement: any) => {
       return (
-        <React.Fragment key={movement.throwId}>
+        <React.Fragment key={movement.movementId}>
           <Col className='p-3'>
             <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
               <Card.Title className='text-center fw-bold'>{movement.name}</Card.Title>
@@ -57,7 +59,12 @@ export default function MovementData(props) {
           </Col>
         </React.Fragment>
       );
-    });
-    return allMovements;
+    }
+    const allMovements = movements.map(renderMovements);
+    return (
+      <>
+        { allMovements }
+      </>
+    )
   }
 }
