@@ -15,11 +15,11 @@ export default function Navbar(props: NavbarProps) {
   }
 
   function handleShowList() {
-    props.viewChange('characterList');
+    return props.viewChange('characterList');
   }
 
   function handleShowFavorites() {
-    props.viewChange('favoritesList');
+    return props.viewChange('favoritesList');
   }
 
   return (

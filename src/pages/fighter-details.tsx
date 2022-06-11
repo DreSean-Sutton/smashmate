@@ -2,7 +2,13 @@ import React from 'react';
 import FrameData from '../components/render-frame-data';
 
 interface FighterDetailsProps {
-  focusedFighter: object
+  focusedFighter: FocusedFighterProps
+};
+interface FocusedFighterProps {
+  fighter: string,
+  fighterId: number,
+  displayName: string,
+  rosterId: number
 };
 export default function FighterDetails(props: FighterDetailsProps) {
   return (

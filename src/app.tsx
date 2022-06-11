@@ -4,9 +4,10 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
+
 export default function App() {
-  const [currentView, setCurrentView] = useState('characterList');
-  const [focusedFighter, setFocusedFighter] = useState({});
+  const [currentView, setCurrentView]: any[] = useState('characterList');
+  const [focusedFighter, setFocusedFighter]: any[] = useState({});
   const [favorites, setFavorites]: any[] = useState([]);
 
   useEffect(() => {
@@ -37,7 +38,6 @@ export default function App() {
     const newFavorites: any[] = [...favorites, fav]
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
-  // Find out why the below function is working in the future
   function handleDeleteFavorites(id: number): void {
     interface Fav {
       fighterId: number
@@ -46,7 +46,7 @@ export default function App() {
       setFavorites([]);
     }
     function filterFav(fav: Fav): number | undefined {
-      if(fav.fighterId !== id) {
+      if (fav.fighterId !== id) {
         return fav.fighterId
       }
     }

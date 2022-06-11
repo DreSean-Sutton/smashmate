@@ -8,7 +8,16 @@ import ThrowsData from './throws-data';
 import MovementData from './movement-data';
 import StatsData from './stats-data';
 
-export default function FrameData(props: any) {
+interface FrameDataProps {
+  focusedFighter: FocusedFighterProps
+}
+interface FocusedFighterProps {
+  fighter: string,
+  fighterId: number,
+  displayName: string,
+  rosterId: number
+};
+export default function FrameData(props: FrameDataProps) {
 
   useEffect(() => {
     window.scrollTo(0, 0);

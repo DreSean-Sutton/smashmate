@@ -3,19 +3,32 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
 
-type myProps = {
-  addFavorites: any,
-  deleteFavorites: any,
-  favorites: Array<any>,
-  focusedFighter: any,
+interface MyProps {
+  addFavorites: (param1: object) => void,
+  deleteFavorites: (param1: number) => void,
+  favorites: any[],
+  focusedFighter: (param1: object) => void,
   view: string,
-  viewChange: any
+  viewChange: (param1: string) => void
 }
 
-type myState = { fighterArray: object[], isLoading: boolean }
+interface MyStates {
+  fighterArray: object[],
+  isLoading: boolean
+}
 
-export default class RenderCards extends React.Component<myProps, myState> {
-  constructor(props: any) {
+interface FavoriteFighterProps {
+  fighter: string,
+  fighterId: number,
+  displayName: string,
+  rosterId: number
+};
+interface EventProps {
+  target?: any,
+  matches?: any
+}
+export default class RenderCards extends React.Component<MyProps, MyStates> {
+  constructor(props: MyProps) {
     super(props);
     this.state = {
       fighterArray: [],
@@ -27,7 +40,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     this.handleHearts = this.handleHearts.bind(this);
   }
 
-  async componentDidMount() {
+  async componentDidMount(): Promise<void> {
     this.setState({
       isLoading: true
     });
@@ -55,19 +68,19 @@ export default class RenderCards extends React.Component<myProps, myState> {
     }
   }
 
-  handleShowDetails(event: any) {
+  handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
     this.props.focusedFighter({
       fighter: characterCard.cardName,
-      fighterId: characterCard.cardFighterId,
-      rosterId: characterCard.cardRosterId,
+      fighterId: Number(characterCard.cardFighterId),
+      rosterId: Number(characterCard.cardRosterId),
       displayName: characterCard.cardDisplayName
     });
     this.props.viewChange('characterDetails');
   }
 
-  handleFavoriting(event: any) {
+  handleFavoriting(event: EventProps) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {
@@ -75,11 +88,11 @@ export default class RenderCards extends React.Component<myProps, myState> {
         return this.props.deleteFavorites(this.props.favorites[i].fighterId);
       }
     }
-    const fav = {
+    const fav: FavoriteFighterProps = {
       fighter: currentCard.cardName,
       fighterId: Number(currentCard.cardFighterId),
       displayName: currentCard.cardDisplayName,
-      rosterId: currentCard.cardRosterId
+      rosterId: Number(currentCard.cardRosterId)
     };
     this.props.addFavorites(fav);
   }
@@ -94,7 +107,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     return '';
   }
 
-  checkView(): any[] {
+  checkView(): object[] {
     if (this.props.view === 'characterList' ||
     this.props.view === 'characterDetails') {
       return this.state.fighterArray;
