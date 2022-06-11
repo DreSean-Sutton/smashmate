@@ -22,14 +22,14 @@ export default function ThrowsData(props: any) {
         if (res.ok) {
           const json = await res.json();
           setThrows(json);
-          setIsLoading(false);
         } else {
           throw Error();
         }
       } catch (e) {
         setFetchFailed(true);
-        setIsLoading(false);
         console.error('fetch failed!', e);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchData();

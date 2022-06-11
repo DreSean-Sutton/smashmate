@@ -41,17 +41,17 @@ export default class RenderCards extends React.Component<myProps, myState> {
       if (res.ok) {
         const json = await res.json();
         this.setState({
-          fighterArray: json,
-          isLoading: false
+          fighterArray: json
         });
       } else {
         throw Error(res.statusText);
       }
     } catch (e) {
+      console.error('Fetch failed!', e);
+    } finally {
       this.setState({
         isLoading: false
       });
-      console.error('Fetch failed!', e);
     }
   }
 
