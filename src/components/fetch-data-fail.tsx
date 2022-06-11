@@ -2,7 +2,10 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
-export default function FetchDataFail(props: any) {
+interface FetchProps {
+  data: string
+}
+export default function FetchDataFail(props: FetchProps) {
   return (
     <Col className='p-3'>
       <Card className='p-2 bg-light text-dark typical-box-shadow text-center'>

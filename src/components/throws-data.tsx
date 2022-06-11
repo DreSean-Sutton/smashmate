@@ -4,7 +4,13 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function ThrowsData(props: any) {
+interface ThrowsDataProps {
+  focusedFighter: FocusedFighter
+}
+interface FocusedFighter {
+  fighterId: number
+}
+export default function ThrowsData(props: ThrowsDataProps) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -22,14 +28,14 @@ export default function ThrowsData(props: any) {
         if (res.ok) {
           const json = await res.json();
           setThrows(json);
-          setIsLoading(false);
         } else {
           throw Error();
         }
       } catch (e) {
         setFetchFailed(true);
-        setIsLoading(false);
         console.error('fetch failed!', e);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetchData();

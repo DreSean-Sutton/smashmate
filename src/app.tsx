@@ -4,16 +4,17 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
+
 export default function App() {
-  const [currentView, setCurrentView] = useState('characterList');
-  const [focusedFighter, setFocusedFighter] = useState({});
-  const [favorites, setFavorites] = useState([]);
+  const [currentView, setCurrentView]: any[] = useState('characterList');
+  const [focusedFighter, setFocusedFighter]: any[] = useState({});
+  const [favorites, setFavorites]: any[] = useState([]);
 
   useEffect(() => {
-    const itemName: any = localStorage.getItem('favorites')
-    const favorites: any = JSON.parse(itemName);
-    if (favorites) {
-      setFavorites(favorites);
+    const itemName: string | null = localStorage.getItem('favorites');
+    if (itemName) {
+      const favorites: any = JSON.parse(itemName);
+        setFavorites(favorites);
     }
   }, []);
 
@@ -21,7 +22,7 @@ export default function App() {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  function handleViewChange(newView: string) {
+  function handleViewChange(newView: string): void {
     setCurrentView(newView);
   }
 
@@ -34,19 +35,22 @@ export default function App() {
   }
 
   function handleAddFavorites(fav: object | undefined) {
-    const newFavorites: any = [...favorites, fav]
+    const newFavorites: any[] = [...favorites, fav]
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
-
-  function handleDeleteFavorites(id: [] | object[]) {
+  function handleDeleteFavorites(id: number): void {
+    interface Fav {
+      fighterId: number
+    }
     if (favorites.length === 1) {
       setFavorites([]);
-      return;
     }
-    function filter(fav: any) {
-      return fav.fighterId !== id
+    function filterFav(fav: Fav): number | undefined {
+      if (fav.fighterId !== id) {
+        return fav.fighterId
+      }
     }
-    setFavorites(favorites.filter(filter));
+    setFavorites(favorites.filter(filterFav));
   }
 
   let view = null;
