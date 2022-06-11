@@ -4,7 +4,13 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovesData(props: any) {
+interface MovesDataProps {
+  focusedFighter: FocusedFighter
+}
+interface FocusedFighter {
+  fighterId: number
+}
+export default function MovesData(props: MovesDataProps) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

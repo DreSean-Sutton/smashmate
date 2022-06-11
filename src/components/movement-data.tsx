@@ -4,7 +4,13 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function MovementData(props: any) {
+interface MovementDataProps {
+  focusedFighter: FocusedFighter
+}
+interface FocusedFighter {
+  fighterId: number
+}
+export default function MovementData(props: MovementDataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

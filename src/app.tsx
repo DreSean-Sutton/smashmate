@@ -7,13 +7,13 @@ import BackgroundCarousel from './components/background-carousel';
 export default function App() {
   const [currentView, setCurrentView] = useState('characterList');
   const [focusedFighter, setFocusedFighter] = useState({});
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites]: any[] = useState([]);
 
   useEffect(() => {
-    const itemName: any = localStorage.getItem('favorites')
-    const favorites: any = JSON.parse(itemName);
-    if (favorites) {
-      setFavorites(favorites);
+    const itemName: string | null = localStorage.getItem('favorites');
+    if (itemName) {
+      const favorites: any = JSON.parse(itemName);
+        setFavorites(favorites);
     }
   }, []);
 
@@ -34,19 +34,23 @@ export default function App() {
   }
 
   function handleAddFavorites(fav: object | undefined) {
-    const newFavorites: any = [...favorites, fav]
+    const newFavorites: any[] = [...favorites, fav]
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
-
-  function handleDeleteFavorites(id: [] | object[]) {
+  // Find out why the below function is working in the future
+  function handleDeleteFavorites(id: number) {
+    interface Fav {
+      fighterId: number
+    }
     if (favorites.length === 1) {
-      setFavorites([]);
-      return;
+      return setFavorites([]);
     }
-    function filter(fav: any) {
-      return fav.fighterId !== id
+    function filterFav(fav: Fav) {
+      if(fav.fighterId !== id) {
+        return fav.fighterId
+      }
     }
-    setFavorites(favorites.filter(filter));
+    setFavorites(favorites.filter(filterFav));
   }
 
   let view = null;

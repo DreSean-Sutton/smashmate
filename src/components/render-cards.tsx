@@ -72,8 +72,7 @@ export default class RenderCards extends React.Component<myProps, myState> {
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < this.props.favorites.length; i++) {
       if (this.props.favorites[i].fighterId === Number(currentCard.cardFighterId)) {
-        this.props.deleteFavorites(this.props.favorites[i].fighterId);
-        return;
+        return this.props.deleteFavorites(this.props.favorites[i].fighterId);
       }
     }
     const fav = {

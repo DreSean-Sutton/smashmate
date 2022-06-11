@@ -4,7 +4,13 @@ import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
 
-export default function StatsData(props: any) {
+interface StatsDataProps {
+  focusedFighter: FocusedFighter
+}
+interface FocusedFighter {
+  fighterId: number
+}
+export default function StatsData(props: StatsDataProps) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
