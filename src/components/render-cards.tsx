@@ -40,7 +40,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     this.handleHearts = this.handleHearts.bind(this);
   }
 
-  async componentDidMount(): Promise<void> {
+  async componentDidMount() {
     this.setState({
       isLoading: true
     });

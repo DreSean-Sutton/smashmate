@@ -41,7 +41,7 @@ export default function MovesData(props: MovesDataProps) {
     fetchData();
   }, [props.focusedFighter.fighterId]);
 
-  function checkNull(data: any) {
+  function checkNull(data: string | null) {
     return data === null
       ? '--'
       : data;
@@ -56,7 +56,16 @@ export default function MovesData(props: MovesDataProps) {
       <FetchDataFail data='Moves'/>
     );
   } else {
-    const renderMoves = (move: any): JSX.Element => {
+    interface MoveProps {
+      name: string,
+      damage: string,
+      firstFrame: string,
+      moveType: string,
+      moveId: number,
+      activeFrames: string,
+      totalFrames: string
+    }
+    const renderMoves = (move: MoveProps): JSX.Element => {
       return (
         <React.Fragment key={move.moveId}>
           <Col className='p-3'>
