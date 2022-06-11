@@ -1,7 +1,12 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-export default function Navbar(props: any) {
+
+interface NavbarProps {
+  view: string,
+  viewChange: (param1: string) => void
+}
+export default function Navbar(props: NavbarProps) {
 
   function toggleIcon(icon: string) {
     return props.view !== icon

@@ -21,7 +21,7 @@ export default function App() {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
-  function handleViewChange(newView: string) {
+  function handleViewChange(newView: string): void {
     setCurrentView(newView);
   }
 
@@ -38,14 +38,14 @@ export default function App() {
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
   // Find out why the below function is working in the future
-  function handleDeleteFavorites(id: number) {
+  function handleDeleteFavorites(id: number): void {
     interface Fav {
       fighterId: number
     }
     if (favorites.length === 1) {
-      return setFavorites([]);
+      setFavorites([]);
     }
-    function filterFav(fav: Fav) {
+    function filterFav(fav: Fav): number | undefined {
       if(fav.fighterId !== id) {
         return fav.fighterId
       }
