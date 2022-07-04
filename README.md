@@ -20,7 +20,7 @@ Come test it out here: https://smashmate.netlify.app/
 - Vanilla CSS
 - Typescript
 - create-react-app
-- Fetch
+- Axios
 
 ## Features
 
