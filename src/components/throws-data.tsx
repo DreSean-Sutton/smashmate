@@ -3,6 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
+import axios from 'axios';
 
 interface ThrowsDataProps {
   focusedFighter: FocusedFighter
@@ -19,15 +20,9 @@ export default function ThrowsData(props: ThrowsDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`, {
-          method: 'GET',
-          headers: {
-            accept: 'application/json'
-          }
-        });
-        if (res.ok) {
-          const json = await res.json();
-          setThrows(json);
+        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`)
+        if (res.status === 200) {
+          setThrows(res.data);
         } else {
           throw Error();
         }
