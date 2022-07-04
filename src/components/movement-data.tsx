@@ -3,6 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
+import axios from 'axios';
 
 interface MovementDataProps {
   focusedFighter: FocusedFighter
@@ -19,16 +20,9 @@ export default function MovementData(props: MovementDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-
-        const res = await fetch(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.focusedFighter.fighterId}`, {
-          method: 'GET',
-          headers: {
-            accept: 'application/json'
-          }
-        });
-        if (res.ok) {
-          const json = await res.json();
-          setMovements(json);
+        const res = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.focusedFighter.fighterId}`)
+        if (res.status === 200) {
+          setMovements(res.data);
         } else {
           throw Error();
         }

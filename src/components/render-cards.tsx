@@ -2,6 +2,7 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
+import axios from 'axios';
 
 interface MyProps {
   addFavorites: (param1: object) => void,
@@ -45,16 +46,10 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
       isLoading: true
     });
     try {
-      const res = await fetch('https://the-ultimate-api.herokuapp.com/api/fighters', {
-        method: 'GET',
-        headers: {
-          accept: 'application/json'
-        }
-      });
-      if (res.ok) {
-        const json = await res.json();
+      const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
+      if (res.status === 200) {
         this.setState({
-          fighterArray: json
+          fighterArray: res.data
         });
       } else {
         throw Error(res.statusText);
