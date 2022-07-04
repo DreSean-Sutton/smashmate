@@ -47,7 +47,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     });
     try {
       const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
-      if (res.status) {
+      if (res.status === 200) {
         this.setState({
           fighterArray: res.data
         });
