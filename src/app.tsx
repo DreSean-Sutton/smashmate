@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
@@ -52,6 +58,17 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
+  <Routes>
+    <Route path="/" element={
+         <Home
+          view={currentView}
+          viewChange={handleViewChange}
+          focusedFighter={handleCurrentFighter}
+          favorites={favorites}
+          addFavorites={handleAddFavorites}
+          deleteFavorites={handleDeleteFavorites}
+        /> } />
+  </Routes>
 
   let view = null;
   if (currentView === 'characterList') {
@@ -92,9 +109,12 @@ export default function App() {
       <header>
         <Navbar viewChange={handleViewChange} view={currentView} />
       </header>
-      <main>
-        { view }
-      </main>
+      <Router>
+        <main>
+          <BackgroundCarousel />
+          { view }
+        </main>
+      </Router>
     </>
   );
 }
