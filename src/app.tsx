@@ -85,7 +85,7 @@ export default function App() {
               addFavorites={handleAddFavorites}
               deleteFavorites={handleDeleteFavorites}
               /> } />
-            <Route path="/character-details" element={
+            <Route path={`/character-details${focusedFighter.fighter}`} element={
               <FighterDetails focusedFighter={focusedFighter} />
             } />
           </Routes>
