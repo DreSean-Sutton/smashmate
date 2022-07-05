@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
@@ -58,6 +57,7 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
+  console.log(focusedFighter)
   return (
     <>
       <header>
@@ -85,7 +85,7 @@ export default function App() {
               addFavorites={handleAddFavorites}
               deleteFavorites={handleDeleteFavorites}
               /> } />
-            <Route path={`/character-details${focusedFighter.fighter}`} element={
+            <Route path={`/character-details/${focusedFighter.fighter}`} element={
               <FighterDetails focusedFighter={focusedFighter} />
             } />
           </Routes>
