@@ -15,7 +15,7 @@
     "start": "node server/index.js",
     "dev:server": "nodemon build/index.js",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "tsc:watch": "tsc --watch"
+    "tsc:watch": "tsc -w"
   },
   "keywords": [],
   "author": "",

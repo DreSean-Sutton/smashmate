@@ -8,6 +8,8 @@ app.get('/*', function (req: any, res: any) {
 });
 
 console.log(__dirname);
+console.log(__dirname);
+console.log(__dirname);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

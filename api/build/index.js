@@ -11,6 +11,8 @@ app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 console.log(__dirname);
+console.log(__dirname);
+console.log(__dirname);
 app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`express server listening on port ${port}`);
