@@ -30,6 +30,15 @@ h4 {
   font-size: 0.9rem;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+}
+
 i {
   cursor: pointer;
 }

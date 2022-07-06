@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {
+  HashRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
@@ -14,7 +19,7 @@ export default function App() {
     const itemName: string | null = localStorage.getItem('favorites');
     if (itemName) {
       const favorites: any = JSON.parse(itemName);
-        setFavorites(favorites);
+      setFavorites(favorites);
     }
   }, []);
 
@@ -52,49 +57,38 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-
-  let view = null;
-  if (currentView === 'characterList') {
-    view =
-      <>
-        <BackgroundCarousel />
-         <Home
-          view={currentView}
-          viewChange={handleViewChange}
-          focusedFighter={handleCurrentFighter}
-          favorites={favorites}
-          addFavorites={handleAddFavorites}
-          deleteFavorites={handleDeleteFavorites}
-        />;
-      </>;
-  } else if (currentView === 'favoritesList') {
-    view =
-        <>
-          <BackgroundCarousel />
-          <FavoritesList
-            view={currentView}
-            viewChange={handleViewChange}
-            focusedFighter={handleCurrentFighter}
-            favorites={favorites}
-            addFavorites={handleAddFavorites}
-            deleteFavorites={handleDeleteFavorites}
-          />;
-        </>;
-  } else if (currentView === 'characterDetails') {
-    view =
-        <>
-          <BackgroundCarousel />
-          <FighterDetails focusedFighter={focusedFighter} />
-        </>;
-  }
+  // console.log(focusedFighter)
   return (
-    <>
+    <Router>
       <header>
         <Navbar viewChange={handleViewChange} view={currentView} />
       </header>
       <main>
-        { view }
+        <BackgroundCarousel />
+        <Routes>
+          <Route path="/" element={
+            <Home
+              view={currentView}
+              viewChange={handleViewChange}
+              focusedFighter={handleCurrentFighter}
+              favorites={favorites}
+              addFavorites={handleAddFavorites}
+              deleteFavorites={handleDeleteFavorites}
+            />} />
+          <Route path="/favorites" element={
+            <FavoritesList
+              view={currentView}
+              viewChange={handleViewChange}
+              focusedFighter={handleCurrentFighter}
+              favorites={favorites}
+              addFavorites={handleAddFavorites}
+              deleteFavorites={handleDeleteFavorites}
+            />} />
+          <Route path={`/character-details/${focusedFighter.fighter}`} element={
+            <FighterDetails focusedFighter={focusedFighter} />
+          } />
+        </Routes>
       </main>
-    </>
+    </Router>
   );
 }
