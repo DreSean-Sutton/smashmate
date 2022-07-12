@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,7 +9,8 @@ interface MyProps {
   addFavorites: (param1: object) => void,
   deleteFavorites: (param1: number) => void,
   favorites: any[],
-  focusedFighter: (param1: object) => void,
+  addFocusedFighter: (param1: object) => void,
+  focusedFighter: FighterProps,
   view: string,
   viewChange: (param1: string) => void
 }
@@ -21,7 +21,7 @@ interface MyStates {
   modalIsOpen: boolean
 }
 
-interface FavoriteFighterProps {
+interface FighterProps {
   fighter: string,
   fighterId: number,
   displayName: string,
@@ -72,7 +72,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
   handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    this.props.focusedFighter({
+    this.props.addFocusedFighter({
       fighter: characterCard.cardName,
       fighterId: Number(characterCard.cardFighterId),
       rosterId: Number(characterCard.cardRosterId),
@@ -83,6 +83,13 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
 
   handleShowModal(event: any) {
     if (event.target.matches('.fa-heart')) return;
+    const characterCard = event.target.closest('#character-card').dataset;
+    this.props.addFocusedFighter({
+      fighter: characterCard.cardName,
+      fighterId: Number(characterCard.cardFighterId),
+      rosterId: Number(characterCard.cardRosterId),
+      displayName: characterCard.cardDisplayName
+    });
     this.setState({ modalIsOpen: true })
   }
 
@@ -100,7 +107,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
         return this.props.deleteFavorites(this.props.favorites[i].fighterId);
       }
     }
-    const fav: FavoriteFighterProps = {
+    const fav: FighterProps = {
       fighter: currentCard.cardName,
       fighterId: Number(currentCard.cardFighterId),
       displayName: currentCard.cardDisplayName,
@@ -159,7 +166,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     const allCards = selectList.map(renderCards);
     return (
       <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
-        <CardSelectModal modal={this.state.modalIsOpen} />
+        <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.props.focusedFighter} />
         {allCards}
       </Container>
     );
