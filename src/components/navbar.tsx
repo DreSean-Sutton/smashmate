@@ -25,11 +25,6 @@ export default function Navbar(props: NavbarProps) {
   return (
     <Container fluid className='bg-dark navbar-top'>
       <Row className='header-layout justify-content-end align-items-center'>
-        <div className='text-start w-25'>
-          <Link to='/'>
-            <i onClick={handleShowList} className={`fa-solid fa-house-chimney house-icon text-light ${toggleIcon('characterList')}`}></i>
-          </Link>
-        </div>
         <div className='w-50 text-center '>
           <Link to='/'>
             <h1 onClick={handleShowList} className='d-inline text-light'>SmashMate</h1>

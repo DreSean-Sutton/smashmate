@@ -40,7 +40,6 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
       modalIsOpen: false
     };
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
-    this.handleShowDetails = this.handleShowDetails.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
     this.handleHearts = this.handleHearts.bind(this);
     this.handleShowModal = this.handleShowModal.bind(this);
@@ -67,18 +66,6 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
         isLoading: false
       });
     }
-  }
-
-  handleShowDetails(event: EventProps) {
-    if (event.target.matches('.fa-heart')) return;
-    const characterCard = event.target.closest('#character-card').dataset;
-    this.props.addFocusedFighter({
-      fighter: characterCard.cardName,
-      fighterId: Number(characterCard.cardFighterId),
-      rosterId: Number(characterCard.cardRosterId),
-      displayName: characterCard.cardDisplayName
-    });
-    this.props.viewChange('characterDetails');
   }
 
   handleShowModal(event: any) {
