@@ -30,7 +30,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
             <Image rounded={true} src={`./images/smash-ultimate-sprites/${props.focusedFighter.fighter}.png`} />
           </Col>
         </Row>
-        <Col xs={6} md={4} className='m-auto typical'>
+        <Col id='moves' xs={6} md={4} className='m-auto typical'>
           <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
         </Col>
         <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>

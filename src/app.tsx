@@ -70,7 +70,8 @@ export default function App() {
             <Home
               view={currentView}
               viewChange={handleViewChange}
-              focusedFighter={handleCurrentFighter}
+              addFocusedFighter={handleCurrentFighter}
+              focusedFighter = {focusedFighter}
               favorites={favorites}
               addFavorites={handleAddFavorites}
               deleteFavorites={handleDeleteFavorites}
@@ -79,7 +80,8 @@ export default function App() {
             <FavoritesList
               view={currentView}
               viewChange={handleViewChange}
-              focusedFighter={handleCurrentFighter}
+              addFocusedFighter={handleCurrentFighter}
+              focusedFighter = {focusedFighter}
               favorites={favorites}
               addFavorites={handleAddFavorites}
               deleteFavorites={handleDeleteFavorites}

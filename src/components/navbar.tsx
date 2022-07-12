@@ -8,12 +8,6 @@ interface NavbarProps {
 }
 export default function Navbar(props: NavbarProps) {
 
-  function toggleIcon(icon: string) {
-    return props.view !== icon
-      ? ''
-      : 'hidden';
-  }
-
   function handleShowList() {
     return props.viewChange('characterList');
   }
@@ -27,7 +21,7 @@ export default function Navbar(props: NavbarProps) {
       <Row className='header-layout justify-content-end align-items-center'>
         <div className='text-start w-25'>
           <Link to='/'>
-            <i onClick={handleShowList} className={`fa-solid fa-house-chimney house-icon text-light ${toggleIcon('characterList')}`}></i>
+            <i onClick={handleShowList} className={'fa-solid fa-house-chimney house-icon text-light'}></i>
           </Link>
         </div>
         <div className='w-50 text-center '>
@@ -37,7 +31,7 @@ export default function Navbar(props: NavbarProps) {
         </div>
         <div className='text-end w-25'>
           <Link to='/favorites'>
-            <i onClick={handleShowFavorites} className={`fa-solid fa-heart heart-icon-list ${toggleIcon('favoritesList')}`}></i>
+            <i onClick={handleShowFavorites} className={'fa-solid fa-heart heart-icon-list'}></i>
           </Link>
         </div>
       </Row>
