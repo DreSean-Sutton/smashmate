@@ -103,6 +103,11 @@ i {
   background-color: rgba(255 255 255 / 100%);
 }
 
+.character-card-modal {
+  align-items: center;
+  /* width: 100%; */
+}
+
 .character-card-number {
   font-size: 1.1rem;
   font-weight: bold;

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Loading from './loading';
+import CardSelectModal from './card-select-modal';
 
 interface MyProps {
   addFavorites: (param1: object) => void,
@@ -16,7 +17,8 @@ interface MyProps {
 
 interface MyStates {
   fighterArray: object[],
-  isLoading: boolean
+  isLoading: boolean,
+  modalIsOpen: boolean
 }
 
 interface FavoriteFighterProps {
@@ -34,12 +36,15 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     super(props);
     this.state = {
       fighterArray: [],
-      isLoading: false
+      isLoading: false,
+      modalIsOpen: false
     };
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleShowDetails = this.handleShowDetails.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
     this.handleHearts = this.handleHearts.bind(this);
+    this.handleShowModal = this.handleShowModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   async componentDidMount() {
@@ -76,6 +81,17 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     this.props.viewChange('characterDetails');
   }
 
+  handleShowModal(event: any) {
+    if (event.target.matches('.fa-heart')) return;
+    this.setState({ modalIsOpen: true })
+  }
+
+  handleCloseModal(event: any) {
+    console.log(event.target.classList)
+    if(event.target.matches('.character-card-modal')) {
+      this.setState({ modalIsOpen: false });
+    }
+  }
   handleFavoriting(event: EventProps) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
@@ -128,23 +144,22 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
-            <Link to={`/character-details/${card.fighter}`} >
-              <div onClick={this.handleShowDetails} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card' className='row character-card p-0'>
-                <div className=''>
-                  <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
-                  <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
-                  <i onClick={this.handleFavoriting} className={`fa-solid fa-heart card-heart ${this.handleHearts(card.fighterId)}`}></i>
-                  <h3 className='character-card-name'>{card.displayName}</h3>
-                </div>
+            <div onClick={this.handleShowModal} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
+              <div className=''>
+                <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
+                <span className='character-card-number'>{this.noOneDigitNums(card.fighterId)}</span>
+                <i onClick={this.handleFavoriting} className={`fa-solid fa-heart card-heart ${this.handleHearts(card.fighterId)}`}></i>
+                <h3 className='character-card-name'>{card.displayName}</h3>
               </div>
-            </Link>
+            </div>
           </Row>
         </React.Fragment>
       );
     }
     const allCards = selectList.map(renderCards);
     return (
-      <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
+      <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
+        <CardSelectModal modal={this.state.modalIsOpen} />
         {allCards}
       </Container>
     );
