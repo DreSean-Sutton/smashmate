@@ -154,7 +154,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     return (
       <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
         <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.props.focusedFighter} />
-        {allCards}
+        { allCards }
       </Container>
     );
   }
