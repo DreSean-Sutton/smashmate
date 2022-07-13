@@ -9,6 +9,7 @@ import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
+import axios from 'axios';
 
 export default function App() {
   const [currentView, setCurrentView]: any[] = useState('characterList');
@@ -23,6 +24,22 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await axios('/api')
+        if(res.status === 200) {
+          console.log(res.data);
+        } else {
+          throw Error()
+        }
+      } catch (e) {
+        console.error('fetch failed!', e);
+      }
+
+    }
+    fetchData();
+  })
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
@@ -57,7 +74,6 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-  // console.log(focusedFighter)
   return (
     <Router>
       <header>

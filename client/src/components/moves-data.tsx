@@ -20,7 +20,7 @@ export default function MovesData(props: MovesDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-        const res = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`)
+        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`)
         if (res.status === 200) {
           setMoves(res.data);
         } else {
