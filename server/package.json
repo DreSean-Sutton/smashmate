@@ -1,12 +1,11 @@
 {
   "name": "smashmate",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js",
-    "build": "cd client && npm i -D && npm run build"
+    "watch": "nodemon server.js"
   },
   "repository": {
     "type": "git",
