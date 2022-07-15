@@ -16,13 +16,25 @@ export default function App() {
   const [focusedFighter, setFocusedFighter]: any[] = useState({});
   const [favorites, setFavorites]: any[] = useState([]);
 
+
   useEffect(() => {
-    const itemName: string | null = localStorage.getItem('favorites');
-    if (itemName) {
-      const favorites: any = JSON.parse(itemName);
+    const favoriteItem: string | null = localStorage.getItem('favorites');
+    if (favoriteItem) {
+      const favorites: any = JSON.parse(favoriteItem);
+      console.log({favorites});
       setFavorites(favorites);
     }
+    const focusedFighterItem: any = localStorage.getItem('focusedFighter');
+    if (focusedFighterItem) {
+      const focusedFighter: any = JSON.parse(focusedFighterItem);
+      setFocusedFighter(focusedFighter);
+    }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    localStorage.setItem('focusedFighter', JSON.stringify(focusedFighter));
+  }, [favorites, focusedFighter]);
 
   useEffect(() => {
     async function fetchData() {
@@ -39,10 +51,7 @@ export default function App() {
 
     }
     fetchData();
-  })
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+  }, [])
 
   function handleViewChange(newView: string): void {
     setCurrentView(newView);
