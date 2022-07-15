@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
@@ -11,8 +12,6 @@ interface MyProps {
   favorites: any[],
   addFocusedFighter: (param1: object) => void,
   focusedFighter: FighterProps,
-  view: string,
-  viewChange: (param1: string) => void
 }
 
 interface MyStates {
@@ -81,7 +80,6 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
   }
 
   handleCloseModal(event: any) {
-    console.log(event.target.classList)
     if(event.target.matches('.character-card-modal')) {
       this.setState({ modalIsOpen: false });
     }
@@ -113,28 +111,27 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     return '';
   }
 
-  checkView(): object[] {
-    if (this.props.view === 'characterList' ||
-      this.props.view === 'characterDetails') {
-      return this.state.fighterArray;
-    }
-    return this.props.favorites;
-  }
-
   noOneDigitNums(num: number) {
     return num < 10
       ? `0${num}`
       : num;
   }
+  homeOrFavorites() {
 
+    const favRegex = new RegExp('favorites', 'g');
+    if(favRegex.test(location.href)) {
+      return this.props.favorites;
+    } else {
+      return this.state.fighterArray;
+    }
+  }
   render() {
     if (this.state.isLoading) {
       return (
         <Loading />
       );
     }
-    const selectList = this.checkView();
-    const renderCards = (card: any) => {
+    const allCards = this.homeOrFavorites().map((card: any) => {
       return (
         <React.Fragment key={card.fighterId}>
           <Row className='card-column w-auto'>
@@ -149,8 +146,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
           </Row>
         </React.Fragment>
       );
-    }
-    const allCards = selectList.map(renderCards);
+    });
     return (
       <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
         <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.props.focusedFighter} />

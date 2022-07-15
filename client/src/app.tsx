@@ -12,10 +12,8 @@ import BackgroundCarousel from './components/background-carousel';
 import axios from 'axios';
 
 export default function App() {
-  const [currentView, setCurrentView]: any[] = useState('characterList');
   const [focusedFighter, setFocusedFighter]: any[] = useState({});
   const [favorites, setFavorites]: any[] = useState([]);
-
 
   useEffect(() => {
     const favoriteItem: string | null = localStorage.getItem('favorites');
@@ -53,10 +51,6 @@ export default function App() {
     fetchData();
   }, [])
 
-  function handleViewChange(newView: string): void {
-    setCurrentView(newView);
-  }
-
   function handleCurrentFighter(obj: any) {
     if (obj === null) {
       setFocusedFighter({});
@@ -86,15 +80,13 @@ export default function App() {
   return (
     <Router>
       <header>
-        <Navbar viewChange={handleViewChange} view={currentView} />
+        <Navbar />
       </header>
       <main>
         <BackgroundCarousel />
         <Routes>
           <Route path="/" element={
             <Home
-              view={currentView}
-              viewChange={handleViewChange}
               addFocusedFighter={handleCurrentFighter}
               focusedFighter = {focusedFighter}
               favorites={favorites}
@@ -103,8 +95,6 @@ export default function App() {
             />} />
           <Route path="/favorites" element={
             <FavoritesList
-              view={currentView}
-              viewChange={handleViewChange}
               addFocusedFighter={handleCurrentFighter}
               focusedFighter = {focusedFighter}
               favorites={favorites}
