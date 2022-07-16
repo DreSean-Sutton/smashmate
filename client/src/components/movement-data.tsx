@@ -6,10 +6,7 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface MovementDataProps {
-  focusedFighter: FocusedFighter
-}
-interface FocusedFighter {
-  fighterId: number
+  currentFighter: string
 }
 export default function MovementData(props: MovementDataProps) {
   const [movements, setMovements] = useState([]);
@@ -20,7 +17,7 @@ export default function MovementData(props: MovementDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighterId=${props.focusedFighter.fighterId}`)
+        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighter=${props.currentFighter}`)
         if (res.status === 200) {
           setMovements(res.data);
         } else {
@@ -34,7 +31,7 @@ export default function MovementData(props: MovementDataProps) {
       }
     }
     fetchData();
-  }, [props.focusedFighter.fighterId]);
+  }, [props.currentFighter]);
 
   if (isLoading) {
     return (

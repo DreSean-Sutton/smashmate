@@ -6,11 +6,9 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface MovesDataProps {
-  focusedFighter: FocusedFighter
+  currentFighter: string;
 }
-interface FocusedFighter {
-  fighterId: number
-}
+
 export default function MovesData(props: MovesDataProps) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +18,7 @@ export default function MovesData(props: MovesDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighterId=${props.focusedFighter.fighterId}`)
+        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${props.currentFighter}`)
         if (res.status === 200) {
           setMoves(res.data);
         } else {
@@ -34,7 +32,7 @@ export default function MovesData(props: MovesDataProps) {
       }
     }
     fetchData();
-  }, [props.focusedFighter.fighterId]);
+  }, [props.currentFighter]);
 
   function checkNull(data: string | null) {
     return data === null

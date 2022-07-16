@@ -9,8 +9,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-app.get('/api', (req, res) => {
-  res.json({ express: 'It worked!' });
-});
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
