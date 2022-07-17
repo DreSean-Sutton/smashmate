@@ -6,7 +6,7 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface StatsDataProps {
-  currentFighter: string
+  currentFighter: string | undefined
 }
 export default function StatsData(props: StatsDataProps) {
   const [stats, setStats] = useState([]);

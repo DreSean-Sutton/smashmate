@@ -6,7 +6,7 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface MovesDataProps {
-  currentFighter: string;
+  currentFighter: string | undefined
 }
 
 export default function MovesData(props: MovesDataProps) {

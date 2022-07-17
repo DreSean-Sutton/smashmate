@@ -14,17 +14,13 @@ import Loading from './components/loading';
 import axios from 'axios';
 
 export default function App() {
+  // refactor usage of focusFighter
+  // refactor requirement for fighterArray to rerender when location changes
   const [focusedFighter, setFocusedFighter]: any[] = useState({});
   const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
-  const [currentFighter, setCurrentFighter]: any = useState('');
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    console.log("I'm here")
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
 
   useEffect(() => {
     const favoriteItem: string | null = localStorage.getItem('favorites');
@@ -33,26 +29,20 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
-    fetchFighters();
-    if(location.pathname === '/' ||
-    location.pathname === '/favorites') {
-    }
-  }, [location])
-
-
-  useEffect(() => {
-    if(/character-details/gi.test(location.pathname)) {
-      for(let i = 0; i < fighterArray.length; i++) {
-        const testFighter = new RegExp(fighterArray[i].fighter, 'g');
-        if(testFighter.test(location.pathname)) {
-          setCurrentFighter(fighterArray[i].fighter)
-          return
-        }
+    if(fighterArray.length === 0) {
+      if(location.pathname === '/' ||
+      location.pathname === '/favorites') {
+        fetchFighters();
       }
     }
-  }, [location, fighterArray]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location])
+
 
   async function fetchFighters() {
     setIsLoading(true);
@@ -96,8 +86,8 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-  console.log({currentFighter});
-  console.log({location});
+  // console.log({currentFighter});
+  // console.log({location});
   if(loading) {
     return (
       <Loading />
@@ -129,11 +119,11 @@ export default function App() {
               addFavorites = {handleAddFavorites}
               deleteFavorites = {handleDeleteFavorites}
             />} />
-          <Route path={`/character-details/${currentFighter}`} element={
-            <FighterDetails
-              currentFighter={currentFighter}
-               />
-          } />
+          <Route path='/character-details'>
+            <Route path={':fighter'} element={
+              <FighterDetails />
+            } />
+          </Route>
         </Routes>
       </main>
     </>

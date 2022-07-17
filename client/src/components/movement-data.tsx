@@ -6,7 +6,7 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface MovementDataProps {
-  currentFighter: string
+  currentFighter: string | undefined
 }
 export default function MovementData(props: MovementDataProps) {
   const [movements, setMovements] = useState([]);
