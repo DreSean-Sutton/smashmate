@@ -3,8 +3,10 @@
   "version": "3.0.0",
   "description": "A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.",
   "scripts": {
+    "start": "cd server && npm run start",
     "build": "cd client && npm i -D && npm run build",
-    "dev:client": "cd client && npm run start"
+    "dev:client": "cd client && npm run start",
+    "dev:server": "cd server && npm run watch"
   },
   "repository": {
     "type": "git",
