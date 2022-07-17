@@ -1,30 +1,27 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Loading from './loading';
 import CardSelectModal from './card-select-modal';
 
 interface MyProps {
-  addFavorites: (param1: object) => void,
-  deleteFavorites: (param1: number) => void,
-  favorites: any[],
-  addFocusedFighter: (param1: object) => void,
-  focusedFighter: FighterProps,
+  addFavorites: (param1: object) => void
+  deleteFavorites: (param1: number) => void
+  fighterArray: any[]
+  favorites: any[]
 }
 
 interface MyStates {
-  fighterArray: object[],
   isLoading: boolean,
-  modalIsOpen: boolean
+  modalIsOpen: boolean,
+  focusedFighter: FighterProps
 }
 
 interface FighterProps {
   fighter: string,
-  fighterId: number,
+  fighterId: number | null,
   displayName: string,
-  rosterId: number
+  rosterId: number | null
 };
 interface EventProps {
   target?: any,
@@ -34,9 +31,14 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
   constructor(props: MyProps) {
     super(props);
     this.state = {
-      fighterArray: [],
       isLoading: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      focusedFighter: {
+        fighter: '',
+        fighterId: null,
+        displayName: '',
+        rosterId: null
+      }
     };
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
@@ -45,36 +47,16 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  async componentDidMount() {
-    this.setState({
-      isLoading: true
-    });
-    try {
-      const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
-      if (res.status === 200) {
-        this.setState({
-          fighterArray: res.data
-        });
-      } else {
-        throw Error(res.statusText);
-      }
-    } catch (e) {
-      console.error('Fetch failed!', e);
-    } finally {
-      this.setState({
-        isLoading: false
-      });
-    }
-  }
-
   handleShowModal(event: any) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    this.props.addFocusedFighter({
-      fighter: characterCard.cardName,
-      fighterId: Number(characterCard.cardFighterId),
-      rosterId: Number(characterCard.cardRosterId),
-      displayName: characterCard.cardDisplayName
+    this.setState({
+      focusedFighter: {
+        fighter: characterCard.cardName,
+        fighterId: Number(characterCard.cardFighterId),
+        rosterId: Number(characterCard.cardRosterId),
+        displayName: characterCard.cardDisplayName
+      }
     });
     this.setState({ modalIsOpen: true })
   }
@@ -122,15 +104,10 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     if(favRegex.test(location.href)) {
       return this.props.favorites;
     } else {
-      return this.state.fighterArray;
+      return this.props.fighterArray;
     }
   }
   render() {
-    if (this.state.isLoading) {
-      return (
-        <Loading />
-      );
-    }
     const allCards = this.homeOrFavorites().map((card: any) => {
       return (
         <React.Fragment key={card.fighterId}>
@@ -149,7 +126,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     });
     return (
       <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
-        <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.props.focusedFighter} />
+        <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.state.focusedFighter} />
         { allCards }
       </Container>
     );

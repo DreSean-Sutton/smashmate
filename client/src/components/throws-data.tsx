@@ -6,11 +6,9 @@ import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
 interface ThrowsDataProps {
-  focusedFighter: FocusedFighter
+  currentFighter: string | undefined
 }
-interface FocusedFighter {
-  fighterId: number
-}
+
 export default function ThrowsData(props: ThrowsDataProps) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +18,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
     setIsLoading(true);
     async function fetchData() {
       try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighterId=${props.focusedFighter.fighterId}`)
+        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${props.currentFighter}`)
         if (res.status === 200) {
           setThrows(res.data);
         } else {
@@ -34,7 +32,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
       }
     }
     fetchData();
-  }, [props.focusedFighter.fighterId]);
+  }, [props.currentFighter]);
 
   function checkNull(data:any) {
     return data === null

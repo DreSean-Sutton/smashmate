@@ -1,62 +1,60 @@
+/* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from 'react';
 import {
-  HashRouter as Router,
   Routes,
-  Route
+  Route,
+  useLocation
 } from "react-router-dom";
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
+import Loading from './components/loading';
 import axios from 'axios';
 
 export default function App() {
-  const [focusedFighter, setFocusedFighter]: any[] = useState({});
+  const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
+  const [loading, setIsLoading]: any[] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const favoriteItem: string | null = localStorage.getItem('favorites');
     if (favoriteItem) {
-      const favorites: any = JSON.parse(favoriteItem);
-      console.log({favorites});
-      setFavorites(favorites);
-    }
-    const focusedFighterItem: any = localStorage.getItem('focusedFighter');
-    if (focusedFighterItem) {
-      const focusedFighter: any = JSON.parse(focusedFighterItem);
-      setFocusedFighter(focusedFighter);
+      setFavorites(JSON.parse(favoriteItem));
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
-    localStorage.setItem('focusedFighter', JSON.stringify(focusedFighter));
-  }, [favorites, focusedFighter]);
+  }, [favorites]);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await axios('/api')
-        if(res.status === 200) {
-          console.log(res.data);
-        } else {
-          throw Error()
-        }
-      } catch (e) {
-        console.error('fetch failed!', e);
+    if(fighterArray.length === 0) {
+      if(location.pathname === '/' ||
+      location.pathname === '/favorites') {
+        fetchFighters();
       }
-
     }
-    fetchData();
-  }, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location])
 
-  function handleCurrentFighter(obj: any) {
-    if (obj === null) {
-      setFocusedFighter({});
-      return;
+
+  async function fetchFighters() {
+    setIsLoading(true);
+    try {
+      const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
+      if (res.status === 200) {
+        setfighterArray(res.data);
+      } else {
+        throw Error(res.statusText);
+      }
+    } catch (e) {
+      console.error('Fetch failed!', e);
+    } finally {
+      setIsLoading(false);
     }
-    setFocusedFighter(obj);
   }
 
   function handleAddFavorites(fav: object | undefined) {
@@ -77,8 +75,15 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
+  // console.log({currentFighter});
+  // console.log({location});
+  if(loading) {
+    return (
+      <Loading />
+    );
+  }
   return (
-    <Router>
+    <>
       <header>
         <Navbar />
       </header>
@@ -87,25 +92,25 @@ export default function App() {
         <Routes>
           <Route path="/" element={
             <Home
-              addFocusedFighter={handleCurrentFighter}
-              focusedFighter = {focusedFighter}
-              favorites={favorites}
-              addFavorites={handleAddFavorites}
-              deleteFavorites={handleDeleteFavorites}
+              fighterArray = {fighterArray}
+              favorites = {favorites}
+              addFavorites = {handleAddFavorites}
+              deleteFavorites = {handleDeleteFavorites}
             />} />
           <Route path="/favorites" element={
             <FavoritesList
-              addFocusedFighter={handleCurrentFighter}
-              focusedFighter = {focusedFighter}
-              favorites={favorites}
-              addFavorites={handleAddFavorites}
-              deleteFavorites={handleDeleteFavorites}
+              fighterArray = {fighterArray}
+              favorites = {favorites}
+              addFavorites = {handleAddFavorites}
+              deleteFavorites = {handleDeleteFavorites}
             />} />
-          <Route path={`/character-details/${focusedFighter.fighter}`} element={
-            <FighterDetails focusedFighter={focusedFighter} />
-          } />
+          <Route path='/character-details'>
+            <Route path={':fighter'} element={
+              <FighterDetails />
+            } />
+          </Route>
         </Routes>
       </main>
-    </Router>
+    </>
   );
 }
