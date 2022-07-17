@@ -37,9 +37,8 @@ export default function App() {
         fetchFighters();
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
-
 
   async function fetchFighters() {
     setIsLoading(true);
