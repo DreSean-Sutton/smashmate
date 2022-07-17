@@ -9,20 +9,19 @@ interface MyProps {
   deleteFavorites: (param1: number) => void
   fighterArray: any[]
   favorites: any[]
-  addFocusedFighter: (param1: object) => void
-  focusedFighter: FighterProps
 }
 
 interface MyStates {
   isLoading: boolean,
-  modalIsOpen: boolean
+  modalIsOpen: boolean,
+  focusedFighter: FighterProps
 }
 
 interface FighterProps {
   fighter: string,
-  fighterId: number,
+  fighterId: number | null,
   displayName: string,
-  rosterId: number
+  rosterId: number | null
 };
 interface EventProps {
   target?: any,
@@ -33,7 +32,13 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     super(props);
     this.state = {
       isLoading: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      focusedFighter: {
+        fighter: '',
+        fighterId: null,
+        displayName: '',
+        rosterId: null
+      }
     };
     this.noOneDigitNums = this.noOneDigitNums.bind(this);
     this.handleFavoriting = this.handleFavoriting.bind(this);
@@ -45,11 +50,13 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
   handleShowModal(event: any) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    this.props.addFocusedFighter({
-      fighter: characterCard.cardName,
-      fighterId: Number(characterCard.cardFighterId),
-      rosterId: Number(characterCard.cardRosterId),
-      displayName: characterCard.cardDisplayName
+    this.setState({
+      focusedFighter: {
+        fighter: characterCard.cardName,
+        fighterId: Number(characterCard.cardFighterId),
+        rosterId: Number(characterCard.cardRosterId),
+        displayName: characterCard.cardDisplayName
+      }
     });
     this.setState({ modalIsOpen: true })
   }
@@ -119,7 +126,7 @@ export default class RenderCards extends React.Component<MyProps, MyStates> {
     });
     return (
       <Container fluid={'lg'} onClick={this.handleCloseModal} className="row content-layout" data-view='character-list'>
-        <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.props.focusedFighter} />
+        <CardSelectModal modal={this.state.modalIsOpen} focusedFighter={this.state.focusedFighter} />
         { allCards }
       </Container>
     );

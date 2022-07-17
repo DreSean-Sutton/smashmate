@@ -14,9 +14,6 @@ import Loading from './components/loading';
 import axios from 'axios';
 
 export default function App() {
-  // refactor usage of focusFighter
-  // refactor requirement for fighterArray to rerender when location changes
-  const [focusedFighter, setFocusedFighter]: any[] = useState({});
   const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
@@ -60,14 +57,6 @@ export default function App() {
     }
   }
 
-  function handleCurrentFighter(obj: any) {
-    if (obj === null) {
-      setFocusedFighter({});
-      return;
-    }
-    setFocusedFighter(obj);
-  }
-
   function handleAddFavorites(fav: object | undefined) {
     const newFavorites: any[] = [...favorites, fav]
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
@@ -103,8 +92,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={
             <Home
-              addFocusedFighter={handleCurrentFighter}
-              focusedFighter = {focusedFighter}
               fighterArray = {fighterArray}
               favorites = {favorites}
               addFavorites = {handleAddFavorites}
@@ -112,8 +99,6 @@ export default function App() {
             />} />
           <Route path="/favorites" element={
             <FavoritesList
-              addFocusedFighter = {handleCurrentFighter}
-              focusedFighter = {focusedFighter}
               fighterArray = {fighterArray}
               favorites = {favorites}
               addFavorites = {handleAddFavorites}
