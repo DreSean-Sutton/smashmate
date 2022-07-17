@@ -15,7 +15,7 @@ Come test it out here: https://smashmate.netlify.app/
 ## Technologies Used
 
 - React
-- React Hooks
+- React Router
 - React Bootstrap
 - Vanilla CSS
 - Typescript
