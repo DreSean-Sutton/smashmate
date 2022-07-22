@@ -3,6 +3,7 @@ import Loading from './loading';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
+import { fetchDetailsData } from '../lib/fetch-details-data';
 import axios from 'axios';
 
 interface MovesDataProps {
@@ -15,6 +16,8 @@ export default function MovesData(props: MovesDataProps) {
   const [fetchFailed, setFetchFailed] = useState(false);
 
   useEffect(() => {
+    const something = fetchDetailsData(props.currentFighter);
+    console.log('value in component: ', something);
     setIsLoading(true);
     async function fetchData() {
       try {

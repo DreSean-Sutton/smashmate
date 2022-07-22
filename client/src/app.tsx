@@ -74,8 +74,6 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-  // console.log({currentFighter});
-  // console.log({location});
   if(loading) {
     return (
       <Loading />
