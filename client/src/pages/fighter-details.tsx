@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -9,12 +9,43 @@ import ThrowsData from '../components/throws-data';
 import MovementData from '../components/movement-data';
 import StatsData from '../components/stats-data';
 
-export default function FighterDetails() {
-  let { fighter } = useParams();
+interface FighterDetailsProps {
+  fighterArray: any[]
+}
+export default function FighterDetails(props: FighterDetailsProps) {
+
+  let { fighter }: any = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
+  console.log(props.fighterArray)
+
+  const test = binarySearcher(props.fighterArray, fighter);
+
+  function binarySearcher(array: any, key: any) {
+    let start = 0;
+    let end = array.length - 1;
+
+    while (start <= end) {
+      let middle = Math.floor((start + end) / 2);
+
+      if (array[middle].fighter === key) {
+        return array[middle].fighter;
+      } else if (array[middle].fighter < key) {
+        start = middle + 1;
+      } else {
+        end = middle - 1;
+      }
+    }
+    return -1;
+  }
+
+  function previousFighter () {
+  }
+
+  function nextFighter () {
+  }
   return (
     <>
       <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
