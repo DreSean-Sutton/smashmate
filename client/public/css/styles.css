@@ -56,12 +56,13 @@ i {
 }
 
 .house-icon {
+  color: white;
   transition: transform 200ms, color 200ms;
 }
 
 .house-icon:hover {
   transform: scale(1.3);
-  color: rgb(180, 180, 180);
+  color: rgb(45, 96, 198);
 }
 
 .heart-icon-list {
@@ -160,11 +161,20 @@ i {
   transform: scale(1.2);
 }
 
-/* CHARACTER DETAILS MODAL */
+/* CHARACTER DETAILS PAGE */
 
 .fighter-details {
   border-radius: 4px;
   z-index: 1;
+}
+
+.fighter-details-icons {
+  font-size: 2rem;
+}
+
+.fighter-details-icons:hover,
+.fighter-details-icons:active {
+  opacity: 0.85;
 }
 
 .fighter-details-img {
@@ -230,6 +240,9 @@ i {
   .character-card-name {
     font-size: 1rem;
   }
+  .fighter-details-icons {
+    font-size: 2.5rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -248,8 +261,17 @@ i {
   .card-heart {
     font-size: 1.8rem;
   }
+
+  .fighter-details-icons {
+    font-size: 3rem;
+  }
 }
 
+@media screen and (min-width: 1200px) {
+  .fighter-details-icons {
+      font-size: 4rem;
+    }
+}
 /* UTILITY CLASSES */
 
 .typical-box-shadow {

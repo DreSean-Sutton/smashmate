@@ -9,7 +9,7 @@ export default function Navbar(props: any) {
       <Row className='header-layout justify-content-end align-items-center'>
         <div className='text-start w-25'>
           <Link to='/'>
-            <i className={'fa-solid fa-house-chimney house-icon text-light'}></i>
+            <i className={'fa-solid fa-house-chimney house-icon'}></i>
           </Link>
         </div>
         <div className='w-50 text-center '>

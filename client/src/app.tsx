@@ -32,10 +32,7 @@ export default function App() {
 
   useEffect(() => {
     if(fighterArray.length === 0) {
-      if(location.pathname === '/' ||
-      location.pathname === '/favorites') {
-        fetchFighters();
-      }
+      fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
@@ -103,7 +100,9 @@ export default function App() {
             />} />
           <Route path='/character-details'>
             <Route path={':fighter'} element={
-              <FighterDetails />
+              <FighterDetails
+                fighterArray={fighterArray}
+              />
             } />
           </Route>
         </Routes>
