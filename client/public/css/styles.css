@@ -166,7 +166,9 @@ i {
   border-radius: 4px;
   z-index: 1;
 }
-
+.fighter-details-icons-div {
+  width: 10%;
+}
 .fighter-details-icons {
   font-size: 2.5rem;
 }

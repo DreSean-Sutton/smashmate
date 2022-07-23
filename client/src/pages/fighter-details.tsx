@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import MovesData from '../components/moves-data';
 import ThrowsData from '../components/throws-data';
 import MovementData from '../components/movement-data';
 import StatsData from '../components/stats-data';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 interface FighterDetailsProps {
   fighterArray: any[]
 }
@@ -19,7 +21,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
   useEffect(() => {
     console.log({ fighter })
     window.scrollTo(0, 0);
-  });
+  }, []);
 
   const binarySearcher = (array: any, key: any) => {
     let start = 0;
@@ -38,30 +40,52 @@ export default function FighterDetails(props: FighterDetailsProps) {
     }
     return -1;
   }
-  let test = binarySearcher(props.fighterArray, fighter);
+  let fighterIndex = binarySearcher(props.fighterArray, fighter);
 
-  function previousFighter () {
-    if(test === 0) {
-      test = props.fighterArray.length;
+  function handlePreviousFighter () {
+    if(fighterIndex === 0) {
+      fighterIndex = props.fighterArray.length;
     }
-    navigate(`/character-details/${props.fighterArray[test - 1].fighter}`);
+    navigate(`/character-details/${props.fighterArray[fighterIndex - 1].fighter}`);
   }
 
-  function nextFighter () {
-    if (test === props.fighterArray.length - 1) {
-      test = -1;
+  function handleNextFighter () {
+    if (fighterIndex === props.fighterArray.length - 1) {
+      fighterIndex = -1;
     }
-    navigate(`/character-details/${props.fighterArray[test + 1].fighter}`);
+    navigate(`/character-details/${props.fighterArray[fighterIndex + 1].fighter}`);
   }
+  function handleCheckTitle() {
+    if(props.fighterArray.length !== 0) {
+      return props.fighterArray[fighterIndex].displayName
+    } else {
+      console.log('fetch hit');
+      fetchTitle().then(res => res)
+    }
+  }
+  async function fetchTitle() {
+    try {
+      const res = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters?fighter=${fighter}`);
+      return await res.data.displayName;
+    } catch (e) {
+      console.error('fetch failed', e);
+    }
+  }
+  // console.log(props.fighterArray)
   return (
     <>
       <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
-        <Row>
-          <Col>
-            <i onClick={previousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
+        <Row className='align-items-center'>
+          <Col className='pr-0 fighter-details-icons-div'>
+            <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
           </Col>
-          <Col className='text-end'>
-            <i onClick={nextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
+          <Col className=''>
+            <Card className='w-100 text-center mb-2 p-1'>
+              <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
+            </Card>
+          </Col>
+          <Col className='text-end pl-0 fighter-details-icons-div'>
+            <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
           </Col>
         </Row>
         <Row className='justify-content-center align-items-center mb-5'>
