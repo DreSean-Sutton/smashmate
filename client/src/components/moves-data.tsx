@@ -16,25 +16,15 @@ export default function MovesData(props: MovesDataProps) {
   const [fetchFailed, setFetchFailed] = useState(false);
 
   useEffect(() => {
-    const something = fetchDetailsData(props.currentFighter);
-    console.log('value in component: ', something);
     setIsLoading(true);
-    async function fetchData() {
-      try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${props.currentFighter}`)
-        if (res.status === 200) {
-          setMoves(res.data);
-        } else {
-          throw Error();
-        }
-      } catch (e) {
+    fetchDetailsData(props.currentFighter).then(res => {
+      if(res.status === 200) {
+        setMoves(res.data);
+      } else {
         setFetchFailed(true);
-        console.error('fetch failed!', e);
-      } finally {
-        setIsLoading(false);
       }
-    }
-    fetchData();
+      setIsLoading(false);
+    });
   }, [props.currentFighter]);
 
   function checkNull(data: string | null) {
