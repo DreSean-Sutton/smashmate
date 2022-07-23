@@ -1,4 +1,3 @@
-import React from 'react';
 import RenderCards from '../components/render-cards';
 
 interface HomeProps {

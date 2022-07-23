@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -74,8 +74,6 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-  // console.log({currentFighter});
-  // console.log({location});
   if(loading) {
     return (
       <Loading />
