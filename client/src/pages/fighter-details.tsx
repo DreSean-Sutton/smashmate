@@ -8,22 +8,19 @@ import MovesData from '../components/moves-data';
 import ThrowsData from '../components/throws-data';
 import MovementData from '../components/movement-data';
 import StatsData from '../components/stats-data';
-
+import { useNavigate } from 'react-router-dom';
 interface FighterDetailsProps {
   fighterArray: any[]
 }
 export default function FighterDetails(props: FighterDetailsProps) {
-
+  let navigate = useNavigate();
   let { fighter }: any = useParams();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   });
 
-  console.log(props.fighterArray)
-
-  const test = binarySearcher(props.fighterArray, fighter);
-
-  function binarySearcher(array: any, key: any) {
+  const binarySearcher = (array: any, key: any) => {
     let start = 0;
     let end = array.length - 1;
 
@@ -31,7 +28,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
       let middle = Math.floor((start + end) / 2);
 
       if (array[middle].fighter === key) {
-        return array[middle].fighter;
+        return middle;
       } else if (array[middle].fighter < key) {
         start = middle + 1;
       } else {
@@ -40,18 +37,27 @@ export default function FighterDetails(props: FighterDetailsProps) {
     }
     return -1;
   }
+  let test = binarySearcher(props.fighterArray, fighter);
 
   function previousFighter () {
+    if(test === 0) {
+      test = props.fighterArray.length;
+    }
+    navigate(`/character-details/${props.fighterArray[test - 1].fighter}`);
   }
 
   function nextFighter () {
+    if (test === props.fighterArray.length - 1) {
+      test = -1;
+    }
+    navigate(`/character-details/${props.fighterArray[test + 1].fighter}`);
   }
   return (
     <>
       <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
         <Row className='justify-content-center'>
           <Col xs={8} md={6} xl={5} className='fighter-details-img mb-5 p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
-            <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
+            <Image onClick={nextFighter} rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
           </Col>
         </Row>
         <Col id='moves' xs={6} md={4} className='m-auto typical'>
