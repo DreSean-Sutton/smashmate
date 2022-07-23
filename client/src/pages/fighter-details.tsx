@@ -17,6 +17,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
   let { fighter }: any = useParams();
 
   useEffect(() => {
+    console.log({ fighter })
     window.scrollTo(0, 0);
   });
 
