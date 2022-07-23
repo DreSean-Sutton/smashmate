@@ -3,7 +3,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Loading from './loading';
 import FetchDataFail from './fetch-data-fail';
-import axios from 'axios';
+import { fetchDetailsData } from '../lib/fetch-details-data';
 
 interface ThrowsDataProps {
   currentFighter: string | undefined
@@ -16,22 +16,14 @@ export default function ThrowsData(props: ThrowsDataProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    async function fetchData() {
-      try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${props.currentFighter}`)
-        if (res.status === 200) {
-          setThrows(res.data);
-        } else {
-          throw Error();
-        }
-      } catch (e) {
+    fetchDetailsData(props.currentFighter, 'throws').then(res => {
+      if (res.status === 200) {
+        setThrows(res.data);
+      } else {
         setFetchFailed(true);
-        console.error('fetch failed!', e);
-      } finally {
-        setIsLoading(false);
       }
-    }
-    fetchData();
+      setIsLoading(false);
+    });
   }, [props.currentFighter]);
 
   function checkNull(data:any) {

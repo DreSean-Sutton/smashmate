@@ -3,7 +3,7 @@ import Loading from './loading';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
-import axios from 'axios';
+import { fetchDetailsData } from '../lib/fetch-details-data';
 
 interface MovesDataProps {
   currentFighter: string | undefined
@@ -16,22 +16,14 @@ export default function MovesData(props: MovesDataProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    async function fetchData() {
-      try {
-        const res = await axios(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${props.currentFighter}`)
-        if (res.status === 200) {
-          setMoves(res.data);
-        } else {
-          throw Error();
-        }
-      } catch (e) {
+    fetchDetailsData(props.currentFighter, 'moves').then(res => {
+      if(res.status === 200) {
+        setMoves(res.data);
+      } else {
         setFetchFailed(true);
-        console.error('fetch failed!', e);
-      } finally {
-        setIsLoading(false);
       }
-    }
-    fetchData();
+      setIsLoading(false);
+    });
   }, [props.currentFighter]);
 
   function checkNull(data: string | null) {
