@@ -18,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/DreSean-Sutton/smashmate/issues"
   },
-  "homepage": "https://github.com/DreSean-Sutton/smashmate#readme"
+  "homepage": "https://github.com/DreSean-Sutton/smashmate#readme",
+  "devDependencies": {}
 }

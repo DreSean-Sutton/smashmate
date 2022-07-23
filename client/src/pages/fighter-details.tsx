@@ -55,9 +55,17 @@ export default function FighterDetails(props: FighterDetailsProps) {
   return (
     <>
       <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
-        <Row className='justify-content-center'>
-          <Col xs={8} md={6} xl={5} className='fighter-details-img mb-5 p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
-            <Image onClick={nextFighter} rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
+        <Row>
+          <Col>
+            <i onClick={previousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
+          </Col>
+          <Col className='text-end'>
+            <i onClick={nextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
+          </Col>
+        </Row>
+        <Row className='justify-content-center align-items-center mb-5'>
+          <Col xs={8} md={6} xl={5} className='fighter-details-img p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
+            <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
           </Col>
         </Row>
         <Col id='moves' xs={6} md={4} className='m-auto typical'>

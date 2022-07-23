@@ -160,11 +160,15 @@ i {
   transform: scale(1.2);
 }
 
-/* CHARACTER DETAILS MODAL */
+/* CHARACTER DETAILS PAGE */
 
 .fighter-details {
   border-radius: 4px;
   z-index: 1;
+}
+
+.fighter-details-icons {
+  font-size: 2.5rem;
 }
 
 .fighter-details-img {
