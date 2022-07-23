@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 import { fetchDetailsData } from '../lib/fetch-details-data';
-import axios from 'axios';
 
 interface MovesDataProps {
   currentFighter: string | undefined
@@ -17,7 +16,7 @@ export default function MovesData(props: MovesDataProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchDetailsData(props.currentFighter).then(res => {
+    fetchDetailsData(props.currentFighter, 'moves').then(res => {
       if(res.status === 200) {
         setMoves(res.data);
       } else {

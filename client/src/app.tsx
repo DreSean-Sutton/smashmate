@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
