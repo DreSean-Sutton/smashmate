@@ -11,6 +11,7 @@ import MovementData from '../components/movement-data';
 import StatsData from '../components/stats-data';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 interface FighterDetailsProps {
   fighterArray: any[]
 }
@@ -19,7 +20,6 @@ export default function FighterDetails(props: FighterDetailsProps) {
   let { fighter }: any = useParams();
 
   useEffect(() => {
-    console.log({ fighter })
     window.scrollTo(0, 0);
   }, []);
 
@@ -59,7 +59,6 @@ export default function FighterDetails(props: FighterDetailsProps) {
     if(props.fighterArray.length !== 0) {
       return props.fighterArray[fighterIndex].displayName
     } else {
-      console.log('fetch hit');
       fetchTitle().then(res => res)
     }
   }
@@ -71,20 +70,19 @@ export default function FighterDetails(props: FighterDetailsProps) {
       console.error('fetch failed', e);
     }
   }
-  // console.log(props.fighterArray)
   return (
     <>
       <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
-        <Row className='align-items-center'>
-          <Col className='pr-0 fighter-details-icons-div'>
+        <Row className='justify-content-between align-items-center'>
+          <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
             <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
           </Col>
-          <Col className=''>
+          <Col xs={6} md={4} xl={3}>
             <Card className='w-100 text-center mb-2 p-1'>
               <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
             </Card>
           </Col>
-          <Col className='text-end pl-0 fighter-details-icons-div'>
+          <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
             <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
           </Col>
         </Row>
