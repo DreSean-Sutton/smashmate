@@ -1,49 +1,72 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import nock from 'nock'
 import axios from 'axios';
-import FighterDetails from '../pages/fighter-details';
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
-interface FighterProps {
-  fighter: string,
-  fighterId: number | null,
-  displayName: string,
-  rosterId: number | null
-};
-
+axios.defaults.adapter = require('axios/lib/adapters/http')
 
 describe('Testing moves data fetch', () => {
   afterAll(nock.restore);
   afterEach(nock.cleanAll);
 
-  const scope = nock('https://the-ultimate-api.herokuapp.com').persist()
-  .get('/api/fighters/data/moves')
-  .query({ fighter: 'inkling' })
-  .reply(200, {
-    fighter: 'inkling',
-    fighterId: 25,
-    displayName: 'Inkling',
-    rosterId: 75
-  },
-    { 'Access-Control-Allow-Origin': '*' })
+
   it('Correctly sends data on 200 status', async () => {
     const fetchData = async (currentFighter: string) => {
       const result = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${currentFighter}`);
       return result.data
     }
-      // const controller = new AbortController()
-      const result = await fetchData('inkling')
-      expect(result).toEqual(
-        expect.objectContaining({
-          fighter: expect.any(String),
-          fighterId: expect.any(Number),
-          displayName: expect.any(String),
-          rosterId: expect.any(Number)
-        })
-      )
+    nock('https://the-ultimate-api.herokuapp.com')
+      .get('/api/fighters/data/moves?fighter=inkling')
+      .reply(200, {
+        fighter: 'inkling',
+        fighterId: 25,
+        displayName: 'Inkling',
+        rosterId: 75
+      },
+      { 'Access-Control-Allow-Origin': '*' })
+    const result = await fetchData('inkling');
+    expect(result.fighter).toBe('inkling');
+    expect(result).toEqual(
+      expect.objectContaining({
+        fighter: expect.any(String),
+        fighterId: expect.any(Number),
+        displayName: expect.any(String),
+        rosterId: expect.any(Number)
       })
+    )
+  })
+    it('Correctly returns error', async () => {
+      const fetchData = async (currentFighter: string) => {
+        try {
+          const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${currentFighter}`);
+          if(status !== 200) throw new Error()
+          return data;
+        } catch(e: any) {
+          return e.response.data
+        }
+      }
+      const scope = nock('https://the-ultimate-api.herokuapp.com')
+        .persist()
+        .get('/api/fighters/data/moves?fighter=inkling')
+        .reply(400, {
+          error: 'fetch failed!'
+        },
+        { 'Access-Control-Allow-Origin': '*' })
+      const result: any = await fetchData('inkling');
+      expect(result.error).toBe('fetch failed!');
     })
+  it.skip('testing', async () => {
+    nock('http://www.google.com')
+      .persist()
+      .get('/cat-poems')
+      .reply(404, {error: 'fetch failed!'})
+    async function fetchData() {
+      try {
+        const { status, data } = await axios.get('http://www.google.com/cat-poems')
+        if(status !== 200) throw new Error('Fetch failed!')
+        expect(data).toBeTruthy()
+      } catch(e: any) {
+        return e.response.data
+      }
+    }
+    const result = await fetchData()
+    expect(result.error).toBe('fetch failed!')
+  })
+})
