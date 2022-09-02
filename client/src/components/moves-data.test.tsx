@@ -6,7 +6,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 
 // Note to self: console.log increases test response delay
 
-describe.only('Testing moves data fetch', () => {
+describe('Testing moves data fetch', () => {
   afterEach(nock.cleanAll);
 
   const controller = new AbortController()
@@ -16,7 +16,7 @@ describe.only('Testing moves data fetch', () => {
       validateStatus: () => true
     });
     if (status !== 200) {
-      return { error: 'inklingsssss doesn\'t exist' }
+      return { error: `${currentFighter} doesn't exist` }
     }
     return data
   }
@@ -26,23 +26,37 @@ describe.only('Testing moves data fetch', () => {
       .persist()
       .get('/api/fighters/data/moves?fighter=inkling')
       .reply(200, {
-        "activeFrames": null,
+        "activeFrames": "3-4",
         "category": "ground",
         "damage": "2.0%",
         "displayName": "Inkling",
         "fighter": "inkling",
         "fighterId": 25,
+        "firstFrame": "3",
         "moveId": 561,
         "moveType": "single",
         "name": "jab 1",
         "rosterId": 70,
-        "firstFrame": "3",
         "totalFrames": "19",
         "type": "move"
       })
       // { 'Access-Control-Allow-Origin': '*' })
     const result: any = await fetchData('inkling');
-
+    expect(result).toContainAllKeys([
+      'activeFrames',
+      'category',
+      'damage',
+      'displayName',
+      'fighter',
+      'fighterId',
+      'firstFrame',
+      'moveId',
+      'moveType',
+      'name',
+      'rosterId',
+      'totalFrames',
+      'type'
+    ])
     expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
     expect(result.category).toBeString();
     expect(result.damage).toBeOneOf([null, expect.any(String)]);
