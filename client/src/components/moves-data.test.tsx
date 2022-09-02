@@ -1,11 +1,10 @@
-import nock from 'nock'
+import nock from 'nock';
 import axios from 'axios';
-axios.defaults.adapter = require('axios/lib/adapters/http')
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 // Note to self: console.log increases test response delay
 
-describe('Testing moves data fetch', () => {
-  // afterAll(nock.restore);
+describe.only('Testing moves data fetch', () => {
   afterEach(nock.cleanAll);
 
   const controller = new AbortController()
@@ -15,7 +14,7 @@ describe('Testing moves data fetch', () => {
       validateStatus: () => true
     });
     if (status !== 200) {
-      return { error: 'fetch failed!' }
+      return { error: 'inklingsssss doesn\'t exist' }
     }
     return data
   }
@@ -25,20 +24,37 @@ describe('Testing moves data fetch', () => {
       .persist()
       .get('/api/fighters/data/moves?fighter=inkling')
       .reply(200, {
-        fighter: 'inkling',
-        fighterId: 25,
-        displayName: 'Inkling',
-        rosterId: 75
+        "activeFrames": "3-4",
+        "category": "ground",
+        "damage": "2.0%",
+        "displayName": "Inkling",
+        "fighter": "inkling",
+        "fighterId": 25,
+        "moveId": 561,
+        "moveType": "single",
+        "name": "jab 1",
+        "rosterId": 70,
+        "firstFrame": "3",
+        "totalFrames": "19",
+        "type": "move"
       })
       // { 'Access-Control-Allow-Origin': '*' })
     const result: any = await fetchData('inkling');
-    expect(result.fighter).toBe('inkling');
     expect(result).toEqual(
       expect.objectContaining({
-        fighter: expect.any(String),
-        fighterId: expect.any(Number),
-        displayName: expect.any(String),
-        rosterId: expect.any(Number)
+          activeFrames: expect.any(String),
+          category: expect.any(String),
+          damage: expect.any(String),
+          displayName: expect.any(String),
+          fighter: expect.any(String),
+          fighterId: expect.any(Number),
+          moveId: expect.any(Number),
+          moveType: expect.any(String),
+          name: expect.any(String),
+          rosterId: expect.any(Number),
+          firstFrame: expect.any(String),
+          totalFrames: expect.any(String),
+          type: expect.stringMatching('move')
       })
     )
   })
@@ -46,11 +62,8 @@ describe('Testing moves data fetch', () => {
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/moves?fighter=inklingsssss')
-      .reply(400, {
-        error: 'fetch failed!'
-      })
-      // { 'Access-Control-Allow-Origin': '*' })
+      .reply(400)
     const result: any = await fetchData('inklingsssss');
-    expect(result.error).toBe('fetch failed!');
+    expect(result.error).toBe('inklingsssss doesn\'t exist');
   })
 })
