@@ -1,5 +1,7 @@
 import nock from 'nock';
 import axios from 'axios';
+const matchers = require('jest-extended')
+expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
 // Note to self: console.log increases test response delay
@@ -20,6 +22,22 @@ describe.only('Testing moves data fetch', () => {
   }
 
   it('Correctly sends data on 200 status', async () => {
+    expect.extend({
+      toBeStringOrNull(received: any, argument: any) {
+        const pass: any = expect(received).toEqual(expect.any(argument));
+        if (pass || received === null) {
+        return {
+          message: () => `expected ${received} to be ${argument} type or null`,
+          pass: true
+        };
+      } else {
+        return {
+          message: () => `expected ${received} to be ${argument} type or null`,
+          pass: false
+        };
+      }
+    }
+  })
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/moves?fighter=inkling')
@@ -40,11 +58,16 @@ describe.only('Testing moves data fetch', () => {
       })
       // { 'Access-Control-Allow-Origin': '*' })
     const result: any = await fetchData('inkling');
+
+    expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
+    expect(result.damage).toBeOneOf([null, expect.any(String)]);
+    expect(result.firstFrame).toBeOneOf([null, expect.any(String)]);
+    expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
     expect(result).toEqual(
       expect.objectContaining({
-          activeFrames: expect.any(String),
+          activeFrames: expect(result.activeFrames).toBeStringOrNull(String),
           category: expect.any(String),
-          damage: expect.any(String),
+          damage: expect.anything(),
           displayName: expect.any(String),
           fighter: expect.any(String),
           fighterId: expect.any(Number),
@@ -52,8 +75,8 @@ describe.only('Testing moves data fetch', () => {
           moveType: expect.any(String),
           name: expect.any(String),
           rosterId: expect.any(Number),
-          firstFrame: expect.any(String),
-          totalFrames: expect.any(String),
+          firstFrame: expect.anything(),
+          totalFrames: expect.anything(),
           type: expect.stringMatching('move')
       })
     )
