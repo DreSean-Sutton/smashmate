@@ -22,6 +22,7 @@ describe('Testing moves data fetch', () => {
   }
 
   it('sends move data on 200 status code', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/moves?fighter=inkling')
@@ -89,6 +90,7 @@ describe('Testing moves data fetch', () => {
     // )
   })
   it('Correctly returns error', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/moves?fighter=inklingsssss')

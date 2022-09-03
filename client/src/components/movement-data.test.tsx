@@ -18,6 +18,7 @@ describe('Testing movement data fetching', () => {
   }
 
   it('sends movement data on 200 status code', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/movements?fighter=inkling')
@@ -55,6 +56,7 @@ describe('Testing movement data fetching', () => {
     expect(result.type).toMatch('movement');
   })
   it('sends error message on 400 status', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/movements?fighter=inklingsssss')

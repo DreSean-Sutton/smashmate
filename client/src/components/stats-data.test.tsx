@@ -4,10 +4,10 @@ const matchers = require('jest-extended')
 expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
-describe('Testing throw data fetching', () => {
+describe('Testing stats data fetching', () => {
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -17,52 +17,46 @@ describe('Testing throw data fetching', () => {
     return data
   }
 
-  it('sends throw data on 200 status code', async () => {
+  it('sends stat data on 200 status code', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inkling')
+      .get('/api/fighters/data/stats?fighter=inkling')
       .reply(200, {
-        "activeFrames": "8-9",
-        "damage": null,
         "displayName": "Inkling",
         "fighter": "inkling",
         "fighterId": 25,
-        "name": "grab",
+        "name": "weight",
         "rosterId": 70,
-        "totalFrames": "34",
-        "throwId": 196,
-        "type": "throw"
+        "statId": 315,
+        "statValue": "94",
+        "type": "stat"
       })
     const result: any = await fetchData('inkling');
     expect(result).toContainAllKeys([
-      'activeFrames',
-      'damage',
       'displayName',
       'fighter',
       'fighterId',
       'name',
       'rosterId',
-      'totalFrames',
-      'throwId',
+      'statId',
+      'statValue',
       'type'
     ])
-    expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.damage).toBeOneOf([null, expect.any(String)]);
     expect(result.displayName).toBeString();
     expect(result.fighter).toBeString();
     expect(result.fighterId).toBeNumber();
     expect(result.name).toBeString();
     expect(result.rosterId).toBeNumber();
-    expect(result.throwId).toBeNumber();
-    expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.type).toMatch('throw');
+    expect(result.statId).toBeNumber();
+    expect(result.statValue).toBeString();
+    expect(result.type).toMatch('stat');
   })
-  it('sends error message on 400 status', async() => {
+  it('sends error message on 400 status', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inklingsssss')
+      .get('/api/fighters/data/stats?fighter=inklingsssss')
       .reply(400)
   })
 })
