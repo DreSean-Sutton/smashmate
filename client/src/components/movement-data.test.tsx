@@ -4,10 +4,10 @@ const matchers = require('jest-extended')
 expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
-describe('Testing throw data fetching', () => {
+describe('Testing movement data fetching', () => {
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -17,50 +17,47 @@ describe('Testing throw data fetching', () => {
     return data
   }
 
-  it('sends throw data on 200 status code', async () => {
+  it('sends movement data on 200 status code', async () => {
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inkling')
+      .get('/api/fighters/data/movements?fighter=inkling')
       .reply(200, {
-        "activeFrames": "8-9",
-        "damage": null,
+        "activeFrames": "3-17",
         "displayName": "Inkling",
         "fighter": "inkling",
         "fighterId": 25,
-        "name": "grab",
+        "movementId": 218,
+        "name": "spot dodge",
         "rosterId": 70,
-        "totalFrames": "34",
-        "throwId": 196,
-        "type": "throw"
+        "totalFrames": "20/25",
+        "type": "movement"
       })
     const result: any = await fetchData('inkling');
     expect(result).toContainAllKeys([
       'activeFrames',
-      'damage',
       'displayName',
       'fighter',
       'fighterId',
+      'movementId',
       'name',
       'rosterId',
       'totalFrames',
-      'throwId',
       'type'
     ])
     expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.damage).toBeOneOf([null, expect.any(String)]);
     expect(result.displayName).toBeString();
     expect(result.fighter).toBeString();
     expect(result.fighterId).toBeNumber();
+    expect(result.movementId).toBeNumber();
     expect(result.name).toBeString();
     expect(result.rosterId).toBeNumber();
-    expect(result.throwId).toBeNumber();
     expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.type).toMatch('throw');
+    expect(result.type).toMatch('movement');
   })
-  it('sends error message on 400 status', async() => {
+  it('sends error message on 400 status', async () => {
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inklingsssss')
+      .get('/api/fighters/data/movements?fighter=inklingsssss')
       .reply(400)
   })
 })

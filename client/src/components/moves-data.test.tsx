@@ -21,7 +21,7 @@ describe('Testing moves data fetch', () => {
     return data
   }
 
-  it('Correctly sends data on 200 status', async () => {
+  it('sends move data on 200 status code', async () => {
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
       .get('/api/fighters/data/moves?fighter=inkling')
