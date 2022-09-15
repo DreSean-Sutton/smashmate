@@ -1,4 +1,4 @@
-import nock from 'nock'
+import nock from 'nock';
 import axios from 'axios';
 const matchers = require('jest-extended')
 expect.extend(matchers);
