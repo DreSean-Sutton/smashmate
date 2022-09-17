@@ -19,5 +19,7 @@
     "url": "https://github.com/DreSean-Sutton/smashmate/issues"
   },
   "homepage": "https://github.com/DreSean-Sutton/smashmate#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv": "^16.0.2"
+  }
 }
