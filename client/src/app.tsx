@@ -8,6 +8,7 @@ import {
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
+import Registration from './pages/registration';
 import Navbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
 import Loading from './components/loading';
@@ -105,6 +106,10 @@ export default function App() {
               />
             } />
           </Route>
+          <Route path="/registration" element={
+            <Registration />
+
+          } />
         </Routes>
       </main>
     </>

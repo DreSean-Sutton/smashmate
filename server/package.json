@@ -1,14 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node build/server.js",
     "dev:server": "nodemon build/server.js",
     "tsc": "./node_modules/typescript/bin/tsc",
     "postinstalls": "tsc",
-    "tsc:watch": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc:watch": "tsc -w"
   },
   "keywords": [],
   "author": "",
