@@ -106,9 +106,8 @@ export default function App() {
               />
             } />
           </Route>
-          <Route path="/registration" element={
+          <Route path="/registration/create-account" element={
             <Registration />
-
           } />
         </Routes>
       </main>
