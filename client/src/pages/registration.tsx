@@ -13,7 +13,6 @@ export default function Registration() {
             <Card.Title className='text-center mb-3'>
               Create an Account
             </Card.Title>
-            {/* Later change Card.Body into its own component */}
             <Card.Body className='p-1'>
               <CreateAccount />
             </Card.Body>
