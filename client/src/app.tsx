@@ -18,6 +18,7 @@ export default function App() {
   const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
+  const [user, setUser] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -58,6 +59,7 @@ export default function App() {
     const newFavorites: any[] = [...favorites, fav]
     setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
   }
+
   function handleDeleteFavorites(id: number): void {
     interface Fav {
       fighterId: number
@@ -65,6 +67,7 @@ export default function App() {
     if (favorites.length === 1) {
       setFavorites([]);
     }
+
     function filterFav(fav: Fav): number | undefined {
       if (fav.fighterId !== id) {
         return fav.fighterId
@@ -72,6 +75,11 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
+
+  function handleSetUser(user: any) {
+
+  }
+
   if(loading) {
     return (
       <Loading />
@@ -107,7 +115,9 @@ export default function App() {
             } />
           </Route>
           <Route path="/registration/create-account" element={
-            <Registration />
+            <Registration
+              setUser={setUser}
+            />
           } />
         </Routes>
       </main>

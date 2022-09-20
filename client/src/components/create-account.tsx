@@ -1,28 +1,48 @@
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
+interface Profile {
+  username: string,
+  email: string,
+  password: string
+}
 export default function CreateAccount(props: any) {
 
   const [validated, setValidated] = useState(false);
 
   function submitForm(event: any) {
-    const password: any = document.querySelector('#password');
-    const confirmPassword: any = document.querySelector('#confirmPassword');
+    setValidated(false);
+    event.preventDefault();
+    const form: any = event.currentTarget;
+    console.log(form.password.value)
+
+    const password: any = form.password;
+    const confirmPassword: any = form.confirmPassword;
     if(password && password.value !== confirmPassword.value) {
-      confirmPassword.setCustomValidity('Password confirmation must be the same as password.')
+      confirmPassword.setCustomValidity('Passwords must be the same.')
     } else {
       confirmPassword.setCustomValidity('');
     }
-    const form = event.currentTarget;
     if (form.reportValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+    } else {
+      const profile: Profile = {
+        username: form.username.value,
+        email: form.email.value,
+        password: form.password.value
+      }
+      handleUploadProfile(profile);
+      form.reset();
     }
 
     setValidated(true);
   }
 
+  function handleUploadProfile(profile: Profile) {
+
+  }
   return (
     <Form noValidate validated={validated} onSubmit={submitForm}>
       <Form.Group className='mb-3' controlId='username'>

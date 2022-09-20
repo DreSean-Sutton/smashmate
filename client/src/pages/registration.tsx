@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-export default function Registration() {
+export default function Registration(props: any) {
   return (
     <Container>
       <Row className='justify-content-center'>
@@ -14,7 +14,9 @@ export default function Registration() {
               Create an Account
             </Card.Title>
             <Card.Body className='p-1'>
-              <CreateAccount />
+              <CreateAccount
+                setUser={props.handleSetUser}
+              />
             </Card.Body>
           </Card>
         </Col>
