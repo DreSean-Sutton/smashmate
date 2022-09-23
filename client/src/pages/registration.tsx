@@ -1,4 +1,4 @@
-import CreateAccount from '../components/create-account';
+import CreateAccount from '../components/registration/create-account';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,7 +15,7 @@ export default function Registration(props: any) {
             </Card.Title>
             <Card.Body className='p-1'>
               <CreateAccount
-                setUser={props.handleSetUser}
+                // setUser={props.handleSetUser}
               />
             </Card.Body>
           </Card>
