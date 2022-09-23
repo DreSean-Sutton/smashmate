@@ -5,6 +5,8 @@ expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
 describe('Testing stats data fetching', () => {
+  afterEach(nock.cleanAll);
+
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
     const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighter=${currentFighter}`, {
