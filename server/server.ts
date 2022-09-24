@@ -8,6 +8,8 @@ var dbo = require('./db/conn');
 const app = express();
 app.use(express.json());
 app.use(cors());
+const registrationRoute = require('./routes/registration');
+app.use('/registration', registrationRoute)
 
 // const tetrisRoutes = require('./routes/tetris');
 // app.use('/leaderboards', tetrisRoutes);
