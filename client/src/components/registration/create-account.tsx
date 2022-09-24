@@ -12,6 +12,21 @@ export default function CreateAccount(props: any) {
 
   const [validated, setValidated] = useState(false);
 
+  async function handleUploadProfile(profile: Profile) {
+    const url = 'http://localhost:5000/registration/add/account';
+    try {
+      const controller = new AbortController()
+      const result = await axios.post(url, profile, {
+        signal: controller.signal,
+        validateStatus: () => true
+      });
+      if (result.status !== 200) throw new Error('Account creation failed!')
+      return result.data;
+    } catch (e: any) {
+      return { error: e.message }
+    }
+  }
+
   function submitForm(event: any) {
     setValidated(false);
     event.preventDefault();
@@ -40,9 +55,6 @@ export default function CreateAccount(props: any) {
     setValidated(true);
   }
 
-  function handleUploadProfile(profile: Profile) {
-
-  }
   return (
     <Form noValidate validated={validated} onSubmit={submitForm}>
       <Form.Group className='mb-3' controlId='username'>
