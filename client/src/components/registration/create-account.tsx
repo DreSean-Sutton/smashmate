@@ -16,42 +16,51 @@ export default function CreateAccount(props: any) {
     const url = 'http://localhost:5000/registration/add/account';
     try {
       const controller = new AbortController()
-      const result = await axios.post(url, profile, {
+      const { status, data } = await axios.post(url, profile, {
         signal: controller.signal,
         validateStatus: () => true
       });
-      if (result.status !== 200) throw new Error('Account creation failed!')
-      return result.data;
+      if (status !== 200) throw new Error('Account creation failed!')
+      return data;
     } catch (e: any) {
       return { error: e.message }
     }
   }
 
-  function submitForm(event: any) {
+  async function submitForm(event: any) {
     setValidated(false);
     event.preventDefault();
     const form: any = event.currentTarget;
     console.log(form.password.value)
-
-    const password: any = form.password;
-    const confirmPassword: any = form.confirmPassword;
+    const { username, email, password, confirmPassword } = form;
+    username.setCustomValidity('');
+    email.setCustomValidity('');
     if(password && password.value !== confirmPassword.value) {
       confirmPassword.setCustomValidity('Passwords must be the same.')
     } else {
       confirmPassword.setCustomValidity('');
     }
-    if (form.reportValidity() === false) {
+    if(!form.reportValidity()) {
       event.stopPropagation();
     } else {
       const profile: Profile = {
-        username: form.username.value,
-        email: form.email.value,
-        password: form.password.value
+        username: username.value,
+        email: email.value,
+        password: password.value
       }
-      handleUploadProfile(profile);
-      form.reset();
+      const result = await handleUploadProfile(profile);
+      console.log('username result: ', username)
+      if(result.username) {
+        username.setCustomValidity('Username must be unique');
+      } else if(result.email) {
+        email.setCustomValidity('This email has already been registered');
+      }
+      if(!form.reportValidity()) {
+        event.stopPropagation();
+      } else {
+        form.reset();
+      }
     }
-
     setValidated(true);
   }
 

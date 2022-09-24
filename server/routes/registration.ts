@@ -23,7 +23,7 @@ registration
         console.log('findOne1 value: ', res);
         if(err) throw err;
         if(res) {
-          response.json(res.username);
+          response.json({ username: res.username });
         } else {
           console.log('This worked!');
           db_connect
@@ -32,7 +32,7 @@ registration
               console.log('findOne2 value: ', res);
               if(err) throw err;
               if(res) {
-                response.json(res.username);
+                response.json({ email: res.email });
               } else {
                 console.log('This worked, too!');
                 db_connect
