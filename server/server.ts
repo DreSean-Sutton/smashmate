@@ -1,5 +1,6 @@
 import { type } from "os";
-
+import ClientError from "./client-error";
+import errorMiddleware from "./error-middleware";
 var express = require('express');
 const cors = require('cors');
 require('dotenv').config({ path: '../.env' });
@@ -8,11 +9,11 @@ var dbo = require('./db/conn');
 const app = express();
 app.use(express.json());
 app.use(cors());
-const registrationRoute = require('./routes/registration');
-app.use('/registration', registrationRoute)
 
-// const tetrisRoutes = require('./routes/tetris');
-// app.use('/leaderboards', tetrisRoutes);
+const registrationRoute = require('./routes/registration');
+app.use('/registration', registrationRoute);
+
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   dbo.connectToServer(function (err: any) {

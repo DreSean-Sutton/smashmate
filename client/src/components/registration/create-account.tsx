@@ -16,7 +16,7 @@ export default function CreateAccount(props: any) {
   const [validated, setValidated] = useState(false);
 
   async function handleUploadProfile(profile: Profile) {
-    const url = 'http://localhost:5000/registration/add/account';
+    const url = 'http://localhost:5000/registration/account/add';
     try {
       const controller = new AbortController()
       const { status, data } = await axios.post(url, profile, {
@@ -52,7 +52,6 @@ export default function CreateAccount(props: any) {
         password: password.value
       }
       const result = await handleUploadProfile(profile);
-      console.log('username result: ', username)
       if(result.username) {
         username.setCustomValidity('Username must be unique');
       } else if(result.email) {

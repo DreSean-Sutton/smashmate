@@ -1,16 +1,17 @@
 import nock from 'nock';
 import axios from 'axios';
-import { profile } from 'console';
 const matchers = require('jest-extended')
 expect.extend(matchers);
-axios.defaults.adapter = require('axios/lib/adapters/http')
+axios.defaults.adapter = require('axios/lib/adapters/http');
+
 describe('All registration routes', () => {
   afterEach(nock.cleanAll);
 
-  describe.only('Registration creation route', () => {
+  // ACCOUNT CREATION TESTS
+  describe('Registration creation route', () => {
     afterEach(nock.cleanAll);
 
-    const url = 'http://localhost:5000/registration/add/account';
+    const url = 'http://localhost:5000/registration/account/add';
     const myProfile = {
       username: 'Dre Sean',
       email: 'dreseansutton@gmail.com',
@@ -36,7 +37,7 @@ describe('All registration routes', () => {
     it('responds with inserted data if correctly inserted', async () => {
       nock('http://localhost:5000')
         .persist()
-        .post('/registration/add/account')
+        .post('/registration/account/add')
         .reply(200, {
           acknowledged: true,
           insertedId: 'sdfisal2904'
@@ -52,7 +53,7 @@ describe('All registration routes', () => {
     it('responds with a username if found before insert', async () => {
       nock('http://localhost:5000')
         .persist()
-        .post('/registration/add/account')
+        .post('/registration/account/add')
         .reply(200, {
           username: myProfile.username
         });
@@ -64,7 +65,7 @@ describe('All registration routes', () => {
     it('responds with an email if found before insert', async () => {
       nock('http://localhost:5000')
         .persist()
-        .post('/registration/add/account')
+        .post('/registration/account/add')
         .reply(200, {
           email: myProfile.email
         });
@@ -76,13 +77,45 @@ describe('All registration routes', () => {
     it('responds with error message on 404 status code', async () => {
       nock('http://localhost:5000')
         .persist()
-        .post('/registration/add/account')
+        .post('/registration/account/add')
         .reply(400, {
           error: 'Account creation failed!'
         });
 
       const result = await sendAccountDetails();
       expect(result.error).not.toBeUndefined();
+    })
+  })
+
+  describe.only('Registration sign in routes', () => {
+    afterEach(nock.cleanAll);
+
+    const myQuery = {
+      email: 'testemail@gmail.com',
+      password: 'test password'
+    }
+    const url = `http://localhost:5000/registration/account/sign-in?email=${myQuery.email}&&password=${myQuery.password}`;
+
+    async function collectProfile() {
+      try {
+        const controller = new AbortController();
+        const { status, data }: any = await axios.get(url, {
+          signal: controller.signal,
+          validateStatus: () => true
+        });
+        console.log(status, data);
+        if(status === 404) throw data.error;
+        return data;
+      } catch(e) {
+        console.log('e value: ', e)
+        return { error: e };
+      }
+    }
+    it('responds with profile obj when queried', async () => {
+      const result = await collectProfile();
+      console.log('collectProfile result: ', result);
+      // expect(result.email).toBeTruthy();
+      expect(result.error).toBeTruthy();
     })
   })
 })
