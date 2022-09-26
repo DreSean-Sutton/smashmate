@@ -114,11 +114,19 @@ export default function App() {
               />
             } />
           </Route>
-          <Route path="/registration/create-account" element={
-            <Registration
-              // setUser={handleSetUser}
-            />
-          } />
+          <Route path='/registration'>
+            <Route path="create-account" element={
+              <Registration
+                // setUser={handleSetUser}
+              />
+            } />
+            <Route path="sign-in" element={
+              <Registration
+                // setUser={handleSetUser}
+              />
+            } />
+
+          </Route>
         </Routes>
       </main>
     </>

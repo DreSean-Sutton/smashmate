@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 interface Profile {
@@ -95,11 +98,16 @@ export default function CreateAccount(props: any) {
         <Form.Control type='password' placeholder='Password' required />
       </Form.Group>
 
-      <div className='text-end'>
-        <Button id='submit' variant='primary' type='submit'>
-          Create
-        </Button>
-      </div>
+      <Row className='justify-content-between align-items-center'>
+        <Col>
+          <Link className='link-primary' to={'/registration/sign-in'}>Sign In</Link>
+        </Col>
+        <Col className='text-end'>
+          <Button id='submit' variant='primary' type='submit'>
+            Create
+          </Button>
+        </Col>
+      </Row>
     </Form>
   )
 }
