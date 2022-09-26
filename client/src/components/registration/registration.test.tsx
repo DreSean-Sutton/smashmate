@@ -4,7 +4,7 @@ const matchers = require('jest-extended')
 expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-describe('All registration routes', () => {
+describe.only('All registration routes', () => {
   afterEach(nock.cleanAll);
 
   // ACCOUNT CREATION TESTS
@@ -24,9 +24,9 @@ describe('All registration routes', () => {
           signal: controller.signal,
           validateStatus: () => true
         });
-        if (status !== 200) throw new Error('Account creation failed!')
         if(data.username) return data;
         if(data.email) return data;
+        if (status !== 201) throw new Error('Account creation failed!')
         return data;
       } catch(e: any) {
         return { error: e.message }
@@ -38,7 +38,7 @@ describe('All registration routes', () => {
       nock('http://localhost:5000')
         .persist()
         .post('/registration/account/add')
-        .reply(200, {
+        .reply(201, {
           acknowledged: true,
           insertedId: 'sdfisal2904'
         });
@@ -54,7 +54,7 @@ describe('All registration routes', () => {
       nock('http://localhost:5000')
         .persist()
         .post('/registration/account/add')
-        .reply(200, {
+        .reply(400, {
           username: myProfile.username
         });
       const result = await sendAccountDetails();
@@ -66,7 +66,7 @@ describe('All registration routes', () => {
       nock('http://localhost:5000')
         .persist()
         .post('/registration/account/add')
-        .reply(200, {
+        .reply(400, {
           email: myProfile.email
         });
       const result = await sendAccountDetails();
@@ -74,12 +74,12 @@ describe('All registration routes', () => {
     })
 
     // ERROR TEST
-    it('responds with error message on 404 status code', async () => {
+    it('responds with error message on 500 status code', async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/registration/account/add')
-        .reply(400, {
-          error: 'Account creation failed!'
+        .reply(500, {
+          error: 'An unexpected error occurred!'
         });
 
       const result = await sendAccountDetails();
@@ -87,7 +87,7 @@ describe('All registration routes', () => {
     })
   })
 
-  describe.only('Registration sign in routes', () => {
+  describe('Registration sign in routes', () => {
     afterEach(nock.cleanAll);
 
     const myQuery = {
@@ -104,7 +104,7 @@ describe('All registration routes', () => {
           validateStatus: () => true
         });
         console.log(status, data);
-        if(status === 404) throw data.error;
+        if(status !== 200) throw data.error;
         return data;
       } catch(e) {
         console.log('e value: ', e)
@@ -114,8 +114,7 @@ describe('All registration routes', () => {
     it('responds with profile obj when queried', async () => {
       const result = await collectProfile();
       console.log('collectProfile result: ', result);
-      // expect(result.email).toBeTruthy();
-      expect(result.error).toBeTruthy();
+      expect(result.email).toBeTruthy();
     })
   })
 })

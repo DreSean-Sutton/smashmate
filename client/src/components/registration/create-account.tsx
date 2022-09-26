@@ -23,7 +23,7 @@ export default function CreateAccount(props: any) {
         signal: controller.signal,
         validateStatus: () => true
       });
-      if (status !== 200) throw new Error('Account creation failed!')
+      if (status !== 201) throw new Error('Account creation failed!')
       return data;
     } catch (e: any) {
       return { error: e.message }

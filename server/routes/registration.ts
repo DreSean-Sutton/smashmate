@@ -1,6 +1,5 @@
 import { profile } from "console";
 import ClientError from "../client-error";
-import errorMiddleware from "../error-middleware";
 
 var express = require('express');
 const registrationRoute = express.Router()
