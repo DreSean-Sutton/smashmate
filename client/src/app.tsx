@@ -40,6 +40,10 @@ export default function App() {
   }, [location])
 
   async function fetchFighters() {
+    if(!window.location.pathname.includes('favorites') &&
+      window.location.pathname !== '/') {
+      return;
+    }
     setIsLoading(true);
     try {
       const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
