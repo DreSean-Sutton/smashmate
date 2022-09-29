@@ -34,7 +34,6 @@ export default function CreateAccount(props: any) {
     setValidated(false);
     event.preventDefault();
     const form: any = event.currentTarget;
-    console.log(form.password.value)
     const { username, email, password, confirmPassword } = form;
     username.setCustomValidity('');
     email.setCustomValidity('');

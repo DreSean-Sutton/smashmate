@@ -18,7 +18,7 @@ export default function App() {
   const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -80,9 +80,9 @@ export default function App() {
     setFavorites(favorites.filter(filterFav));
   }
 
-  // function handleSetUser(user: any) {
-  //   setUser(user);
-  // }
+  function handleSetUser(user: any) {
+    setUser(user);
+  }
 
   if(loading) {
     return (
@@ -120,13 +120,11 @@ export default function App() {
           </Route>
           <Route path='/registration'>
             <Route path="create-account" element={
-              <Registration
-                // setUser={handleSetUser}
-              />
+              <Registration />
             } />
             <Route path="sign-in" element={
               <Registration
-                // setUser={handleSetUser}
+                setUser={handleSetUser}
               />
             } />
 

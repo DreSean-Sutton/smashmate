@@ -6,15 +6,67 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+interface QueryResult {
+  error?: string,
+  token?: string,
+  payload?: {
+    id: string
+    username: string,
+    email: string,
+  }
+}
+
 export default function SignIn (props: any) {
 
   const [validated, setValidated] = useState(false);
 
-  function submitForm(event: any) {
-    event.preventDefault()
-    const form = event.currentTarget;
-    form.reset()
+  const url = `http://localhost:5000/registration/account/sign-in`;
+
+  async function handleFetchProfile(query: any) {
+    try {
+      const controller = new AbortController();
+      const { status, data }: any = await axios.post(url, query, {
+        signal: controller.signal,
+        validateStatus: () => true
+      });
+      if (status !== 200) throw data.error;
+      return data;
+    } catch (e) {
+      return { error: e };
+    }
   }
+
+  async function submitForm(event: any) {
+
+    setValidated(false);
+    event.preventDefault();
+    const form = event.currentTarget;
+    const { email, password } = form;
+    email.setCustomValidity('');
+    password.setCustomValidity('');
+    const myQuery = {
+      email: email.value,
+      password: password.value
+    }
+    const result: QueryResult = await handleFetchProfile(myQuery);
+    if(result.error) {
+      if(result.error === 'Invalid email') {
+        email.setCustomValidity(result.error);
+      } else if(result.error === 'Invalid password') {
+        password.setCustomValidity(result.error);
+      } else {
+        // Need to add a page for 500 responses
+      }
+    }
+    if (!form.reportValidity()) {
+      event.stopPropagation();
+    } else {
+      props.setUser(result);
+      form.reset();
+    }
+    setValidated(true);
+  }
+
   return (
     <Form noValidate validated={validated} onSubmit={submitForm}>
       <Form.Group className='mb-3' controlId='email'>

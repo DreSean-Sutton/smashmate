@@ -34,8 +34,7 @@ describe.only('Registration sign in routes', () => {
     }
 
     const result = await collectProfile(query200);
-    expect(result.user).toBeTruthy();
-    expect(result.token).toBeTruthy();
+    expect(result.error).toBeFalsy();
     expect(result).toEqual(
       expect.objectContaining({
         token: expect.any(String),
@@ -45,7 +44,7 @@ describe.only('Registration sign in routes', () => {
           email: expect.any(String)
         })
       })
-    )
+    );
   })
 
   // EMAIL ERROR TESTS

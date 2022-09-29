@@ -10,7 +10,7 @@ export default function Registration(props: any) {
 
   let title, currentView;
   if(window.location.pathname.includes('sign-in')) {
-    currentView = <SignIn />;
+    currentView = <SignIn setUser={props.setUser} />;
     title = 'Sign In';
   } else {
     currentView = <CreateAccount />;
