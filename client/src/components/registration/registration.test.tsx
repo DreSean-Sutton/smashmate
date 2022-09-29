@@ -90,16 +90,12 @@ describe.only('All registration routes', () => {
   describe.only('Registration sign in routes', () => {
     afterEach(nock.cleanAll);
 
-    const myQuery = {
-      email: 'testemail@gmail.com',
-      password: 'test password'
-    }
     const url = `http://localhost:5000/registration/account/sign-in`;
 
-    async function collectProfile() {
+    async function collectProfile(query: any) {
       try {
         const controller = new AbortController();
-        const { status, data }: any = await axios.post(url, myQuery, {
+        const { status, data }: any = await axios.post(url, query, {
           signal: controller.signal,
           validateStatus: () => true
         });
@@ -111,10 +107,68 @@ describe.only('All registration routes', () => {
         return { error: e };
       }
     }
-    it('responds with profile obj when queried', async () => {
-      const result = await collectProfile();
-      console.log('collectProfile result: ', result);
-      expect(result.email).toBeTruthy();
+    it('responds with token and user object when queried', async () => {
+
+      const query200 = {
+        email: 'testemail@gmail.com',
+        password: 'test password'
+      }
+
+      const result = await collectProfile(query200);
+      expect(result.user).toBeTruthy();
+      expect(result.token).toBeTruthy();
+      expect(result).toEqual(
+        expect.objectContaining({
+          token: expect.any(String),
+          user: expect.objectContaining({
+            id: expect.any(String),
+            username: expect.any(String),
+            email: expect.any(String)
+          })
+        })
+      )
+    })
+    it('responds with error messages if email isn\'t found', async () => {
+      const queryEmail401 = {
+        email: 'failedQuery@gmail.com',
+        password: 'failed password'
+      }
+      const result = await collectProfile(queryEmail401);
+      expect(result.email).toBeUndefined();
+      expect(result.password).toBeUndefined();
+      expect(result).toEqual(
+        expect.objectContaining({
+          error: expect.stringMatching(/email/i)
+        })
+      );
+    })
+    it('responds with error message if password isn\'t found', async () => {
+      const queryPassword401 = {
+        email: 'testemail@gmail.com',
+        password: 'failed password'
+      }
+      const result = await collectProfile(queryPassword401);
+      expect(result.email).toBeUndefined();
+      expect(result.password).toBeUndefined();
+      expect(result).toEqual(
+        expect.objectContaining({
+          error: expect.stringMatching(/password/i)
+        })
+      );
+    })
+    it.skip('tells the client if a server error occurs', async () => {
+      const query500Error = {
+        email: 'testemail@gmail.com',
+        password: 'test password'
+      }
+      const result = await collectProfile(query500Error);
+      expect(result.email).toBeUndefined();
+      expect(result.password).toBeUndefined();
+      expect(result).toEqual(
+        expect.objectContaining({
+          error: expect.stringMatching(/unexpected error/i)
+        })
+      );
     })
   })
 })

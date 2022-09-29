@@ -11,6 +11,7 @@ module.exports = {
   connectToServer: function (callback: any) {
     client.connect(function (err: any, db: any) {
       if (db) {
+        // comment out below code to test server errors
         _db = db.db('smashmate');
         console.log('Successfully connected to MongoDB');
       }
