@@ -1,4 +1,5 @@
 import { profile } from "console";
+import { verify } from "crypto";
 import ClientError from "../client-error";
 
 var express = require('express');
@@ -6,6 +7,7 @@ const registrationRoute = express.Router()
 const dbo = require('../db/conn');
 const { ObjectId } = require('mongodb');
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 
 // ADD ACCOUNTS
 registrationRoute
@@ -48,18 +50,30 @@ registrationRoute
 
 registrationRoute
   .route('/account/sign-in')
-  .get(function (req: any, response: any, next: any) {
+  .post(function (req: any, response: any, next: any) {
     let db_connect = dbo.getDb();
-    const { email, password } = req.query;
+    const { email, password } = req.body;
     db_connect
     .collection('profiles')
-    .findOne({ email: email }, function (err: any, res: any) {
+    .findOne({ email: email }, async function (err: any, res: any) {
       try {
         if (err) throw err;
         if (!res) {
           throw new ClientError(400, 'Email not found');
         }
-        response.status(200).json(res);
+        const checkPassword = await argon2.verify(res.password, password)
+        if(!checkPassword) throw new ClientError(401, 'invalid login');
+        const payload = {
+          id: res._id,
+          username: res.username,
+          email: res.email
+        }
+        console.log(payload);
+        const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+        response.status(200).json({
+          token: token,
+          user: payload
+        });
       } catch(e) {
         next(e);
       }

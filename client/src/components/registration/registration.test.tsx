@@ -87,19 +87,19 @@ describe.only('All registration routes', () => {
     })
   })
 
-  describe('Registration sign in routes', () => {
+  describe.only('Registration sign in routes', () => {
     afterEach(nock.cleanAll);
 
     const myQuery = {
       email: 'testemail@gmail.com',
       password: 'test password'
     }
-    const url = `http://localhost:5000/registration/account/sign-in?email=${myQuery.email}&&password=${myQuery.password}`;
+    const url = `http://localhost:5000/registration/account/sign-in`;
 
     async function collectProfile() {
       try {
         const controller = new AbortController();
-        const { status, data }: any = await axios.get(url, {
+        const { status, data }: any = await axios.post(url, myQuery, {
           signal: controller.signal,
           validateStatus: () => true
         });
