@@ -4,7 +4,7 @@ const matchers = require('jest-extended')
 expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-describe.only('Registration sign in routes', () => {
+describe('Registration sign in routes', () => {
   afterEach(nock.cleanAll);
 
   const url = `http://localhost:5000/registration/account/sign-in`;
@@ -28,34 +28,54 @@ describe.only('Registration sign in routes', () => {
   // 200 STATUS CODE TEST
   it('responds with token and user object when queried', async () => {
 
+    nock('http://localhost:5000')
+      .persist()
+      .post('/registration/account/sign-in')
+      .reply(200, {
+        token: 'teststringofrandomcharacters',
+        user: {
+          email: 'testemail@gmail.com',
+          id: '2138948205',
+          username: 'test username'
+        }
+      })
     const query200 = {
       email: 'testemail@gmail.com',
       password: 'test password'
     }
 
     const result = await collectProfile(query200);
-    expect(result.error).toBeFalsy();
+    expect(result).not.toHaveProperty('error');
     expect(result).toEqual(
       expect.objectContaining({
         token: expect.any(String),
         user: expect.objectContaining({
+          email: expect.any(String),
           id: expect.any(String),
-          username: expect.any(String),
-          email: expect.any(String)
+          username: expect.any(String)
         })
       })
-    );
+    )
   })
 
   // EMAIL ERROR TESTS
   it('responds with error messages if email isn\'t found', async () => {
+
+    nock('http://localhost:5000')
+      .persist()
+      .post('/registration/account/sign-in')
+      .reply(401, {
+        error: 'Invalid email'
+      })
+
     const queryEmail401 = {
       email: 'failedQuery@gmail.com',
       password: 'failed password'
     }
+
     const result = await collectProfile(queryEmail401);
-    expect(result.email).toBeUndefined();
-    expect(result.password).toBeUndefined();
+    expect(result).not.toHaveProperty('email');
+    expect(result).not.toHaveProperty('password');
     expect(result).toEqual(
       expect.objectContaining({
         error: expect.stringMatching(/email/i)
@@ -65,13 +85,21 @@ describe.only('Registration sign in routes', () => {
 
   // PASSWORD ERROR TESTS
   it('responds with error message if password isn\'t found', async () => {
+
+    nock('http://localhost:5000')
+      .persist()
+      .post('/registration/account/sign-in')
+      .reply(401, {
+        error: 'Invalid password'
+      })
+
     const queryPassword401 = {
       email: 'testemail@gmail.com',
       password: 'failed password'
     }
     const result = await collectProfile(queryPassword401);
-    expect(result.email).toBeUndefined();
-    expect(result.password).toBeUndefined();
+    expect(result).not.toHaveProperty('email');
+    expect(result).not.toHaveProperty('password');
     expect(result).toEqual(
       expect.objectContaining({
         error: expect.stringMatching(/password/i)
@@ -80,14 +108,22 @@ describe.only('Registration sign in routes', () => {
   })
 
   // SERVER ERROR TESTS
-  it.skip('tells the client if a server error occurs', async () => {
+  it('tells the client if a server error occurs', async () => {
+
+    nock('http://localhost:5000')
+      .persist()
+      .post('/registration/account/sign-in')
+      .reply(401, {
+        error: 'An unexpected error occurred'
+      })
+
     const query500Error = {
       email: 'testemail@gmail.com',
       password: 'test password'
     }
     const result = await collectProfile(query500Error);
-    expect(result.email).toBeUndefined();
-    expect(result.password).toBeUndefined();
+    expect(result).not.toHaveProperty('email');
+    expect(result).not.toHaveProperty('password');
     expect(result).toEqual(
       expect.objectContaining({
         error: expect.stringMatching(/unexpected error/i)

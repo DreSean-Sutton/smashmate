@@ -9,9 +9,9 @@ describe('Registration creation route', () => {
 
   const url = 'http://localhost:5000/registration/account/add';
   const myProfile = {
-    username: 'Dre Sean',
     email: 'dreseansutton@gmail.com',
-    password: 'test password'
+    password: 'test password',
+    username: 'Dre Sean'
   }
   async function sendAccountDetails() {
     try {
