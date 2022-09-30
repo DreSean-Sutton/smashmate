@@ -9,7 +9,7 @@ import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Registration from './pages/registration';
-import Navbar from './components/navbar';
+import SiteNavbar from './components/navbar';
 import BackgroundCarousel from './components/background-carousel';
 import Loading from './components/loading';
 import axios from 'axios';
@@ -92,7 +92,9 @@ export default function App() {
   return (
     <>
       <header>
-        <Navbar />
+        <SiteNavbar
+          user={user}
+        />
       </header>
       <main>
         <BackgroundCarousel />

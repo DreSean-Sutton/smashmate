@@ -4,9 +4,11 @@
   "description": "A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.",
   "scripts": {
     "start": "cd client && npm run start",
+    "test": "cd client && npm run test",
     "build": "cd client && npm i -D && npm run build",
     "dev:client": "cd client && npm run start",
-    "dev:server": "cd server && npm run watch"
+    "tsc:watch": "cd server && npm run tsc:watch",
+    "dev:server": "cd server && npm run dev:server"
   },
   "repository": {
     "type": "git",

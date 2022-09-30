@@ -16,11 +16,9 @@ describe('Registration sign in routes', () => {
         signal: controller.signal,
         validateStatus: () => true
       });
-      console.log(status, data);
       if(status !== 200) throw data.error;
       return data;
     } catch(e) {
-      console.log('e value: ', e)
       return { error: e };
     }
   }
@@ -39,6 +37,7 @@ describe('Registration sign in routes', () => {
           username: 'test username'
         }
       })
+
     const query200 = {
       email: 'testemail@gmail.com',
       password: 'test password'

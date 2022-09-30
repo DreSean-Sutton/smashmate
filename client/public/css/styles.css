@@ -4,6 +4,7 @@
   --card-color: rgba(255 255 255 / 0.93);
   --character-name-border: #c4c4c4;
   --heart-color: rgb(245, 76, 104);
+  --profile-color: rgb(0, 0, 0);
   --typical-box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -65,15 +66,14 @@ i {
   color: rgb(45, 96, 198);
 }
 
-.heart-icon-list {
-  font-size: 1.3rem;
-  color: white;
+.profile-icon {
+  font-size: 1.5rem;
+  color: black;
   transition: transform 400ms, color 500ms;
 }
 
-.heart-icon-list:hover {
-  transform: scale(1.5);
-  color: var(--heart-color);
+.profile-icon:hover {
+  transform: scale(1.2);
 }
 
 /* MAIN SECTION */
