@@ -5,12 +5,13 @@ import {
   Route,
   useLocation
 } from "react-router-dom";
+import BackgroundCarousel from './components/background-carousel';
+import SiteNavbar from './components/navbar';
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Registration from './pages/registration';
-import SiteNavbar from './components/navbar';
-import BackgroundCarousel from './components/background-carousel';
+import Profile from './pages/profile';
 import Loading from './components/loading';
 import axios from 'axios';
 
@@ -86,7 +87,17 @@ export default function App() {
 
   if(loading) {
     return (
-      <Loading />
+      <>
+        <header>
+          <SiteNavbar
+            user={user}
+            setUser={handleSetUser}
+          />
+        </header>
+        <main>
+          <Loading />
+        </main>
+      </>
     );
   }
   return (
@@ -94,6 +105,7 @@ export default function App() {
       <header>
         <SiteNavbar
           user={user}
+          setUser={handleSetUser}
         />
       </header>
       <main>
@@ -140,6 +152,9 @@ export default function App() {
               />
             } />
           </Route>
+          <Route path='/profile' element={
+            <Profile />
+          } />
         </Routes>
       </main>
     </>

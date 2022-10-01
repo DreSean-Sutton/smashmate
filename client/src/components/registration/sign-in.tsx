@@ -63,6 +63,7 @@ export default function SignIn (props: any) {
     } else {
       props.setUser(result);
       form.reset();
+      window.location.pathname = '/';
     }
     setValidated(true);
   }

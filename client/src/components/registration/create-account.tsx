@@ -60,6 +60,7 @@ export default function CreateAccount(props: any) {
         event.stopPropagation();
       } else {
         form.reset();
+        window.location.pathname='registration/sign-in';
       }
     }
     setValidated(true);
