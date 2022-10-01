@@ -12,7 +12,7 @@ module.exports = {
     client.connect(function (err: any, db: any) {
       if (db) {
         // comment out below code to test server errors
-        _db = db.db('smashmate');
+        _db = db.db('smashmateDB');
         console.log('Successfully connected to MongoDB');
       }
       return callback(err);

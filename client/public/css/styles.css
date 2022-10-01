@@ -66,16 +66,6 @@ i {
   color: rgb(45, 96, 198);
 }
 
-.profile-icon {
-  font-size: 1.5rem;
-  color: black;
-  transition: transform 400ms, color 500ms;
-}
-
-.profile-icon:hover {
-  transform: scale(1.2);
-}
-
 /* MAIN SECTION */
 
 .background-img-layout {
@@ -88,6 +78,12 @@ i {
   height: 100vh;
   z-index: -1;
 }
+
+/* .background-registration-layout {
+  position: fixed;
+  height: 100vh;
+  z-index: -1;
+} */
 
 .character-card {
   position: relative;

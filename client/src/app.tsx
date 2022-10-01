@@ -97,27 +97,37 @@ export default function App() {
         />
       </header>
       <main>
-        <BackgroundCarousel />
         <Routes>
           <Route path="/" element={
-            <Home
-              fighterArray = {fighterArray}
-              favorites = {favorites}
-              addFavorites = {handleAddFavorites}
-              deleteFavorites = {handleDeleteFavorites}
-            />} />
+            <>
+              <BackgroundCarousel />
+              <Home
+                fighterArray = {fighterArray}
+                favorites = {favorites}
+                addFavorites = {handleAddFavorites}
+                deleteFavorites = {handleDeleteFavorites}
+              />
+            </>
+          } />
           <Route path="/favorites" element={
-            <FavoritesList
-              fighterArray = {fighterArray}
-              favorites = {favorites}
-              addFavorites = {handleAddFavorites}
-              deleteFavorites = {handleDeleteFavorites}
-            />} />
+            <>
+              <BackgroundCarousel />
+              <FavoritesList
+                fighterArray = {fighterArray}
+                favorites = {favorites}
+                addFavorites = {handleAddFavorites}
+                deleteFavorites = {handleDeleteFavorites}
+              />
+            </>
+          } />
           <Route path='/character-details'>
             <Route path={':fighter'} element={
-              <FighterDetails
-                fighterArray={fighterArray}
-              />
+              <>
+                <BackgroundCarousel />
+                <FighterDetails
+                  fighterArray={fighterArray}
+                />
+              </>
             } />
           </Route>
           <Route path='/registration'>
@@ -129,7 +139,6 @@ export default function App() {
                 setUser={handleSetUser}
               />
             } />
-
           </Route>
         </Routes>
       </main>
