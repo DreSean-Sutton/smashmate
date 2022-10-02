@@ -88,13 +88,13 @@ export default function App() {
   if(loading) {
     return (
       <>
-        <header>
+        <header className='mb-0'>
           <SiteNavbar
             user={user}
             setUser={handleSetUser}
           />
         </header>
-        <main>
+        <main className='bg-dark min-vh-100' style={{ paddingTop: '6rem' }}>
           <Loading />
         </main>
       </>

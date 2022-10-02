@@ -19,10 +19,10 @@ export default function SiteNavbar(props: any) {
   }
 
   return (
-    <Navbar expand={false} className='bg-light navbar-top'>
+    <Navbar expand={false} className='bg-warning navbar-top'>
       <Container fluid>
         <Col>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar`} />
+          <Navbar.Toggle style={{ color: 'grey'}} aria-controls={`offcanvasNavbar`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}

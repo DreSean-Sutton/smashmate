@@ -7,15 +7,13 @@
 .profile-icon {
   font-size: 1.5rem;
   color: black;
+  background-color: white;
   transition: transform 400ms, color 500ms;
+  padding: 6px;
+  border-radius: 50rem;
+  border: 2.5px solid black;
 }
 
 .profile-icon:hover {
   transform: scale(1.2);
-}
-
-.profile-logged-in {
-  padding: 6px;
-  border-radius: 50rem;
-  border: 2.5px solid black;
 }
