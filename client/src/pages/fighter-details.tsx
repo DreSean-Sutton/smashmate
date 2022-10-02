@@ -78,7 +78,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
             <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
           </Col>
           <Col xs={6} md={4} xl={3}>
-            <Card className='w-100 text-center mb-2 p-1'>
+            <Card className='bg-warning w-100 text-center mb-2 p-1'>
               <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
             </Card>
           </Col>

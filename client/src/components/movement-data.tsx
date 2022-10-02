@@ -27,7 +27,7 @@ export default function MovementData(props: MovementDataProps) {
       setMovements(data)
     }
     fetchDetailsData(props.currentFighter)
-    return () => controller.abort()
+    return () => controller.abort();
   }, [props.currentFighter]);
 
   if (isLoading) {

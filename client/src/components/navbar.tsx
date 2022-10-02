@@ -9,7 +9,8 @@ import './css/navbar.css';
 export default function SiteNavbar(props: any) {
 
   const profileIcon = props.user ? 'fa-solid profile-logged-in' : 'fa-regular';
-  const menuName = props.user ? props.user.user.username : 'Guest'
+  const profileIconLink = props.user ? '#' : 'registration/sign-in';
+  const menuName = props.user ? props.user.user.username : 'Guest';
   const loggingIcon = props.user ? 'fa-arrow-right-from-bracket' : 'fa-arrow-right-to-bracket';
   const loggingTitle = props.user ? 'Logout' : 'Login';
 
@@ -61,7 +62,7 @@ export default function SiteNavbar(props: any) {
           </Link>
         </Col>
         <Col className='text-end'>
-          <Link className={`${profileIcon} fa-user profile-icon`} to='#'></Link>
+          <Link className={`${profileIcon} fa-user profile-icon`} to={profileIconLink}></Link>
         </Col>
       </Container>
     </Navbar>
