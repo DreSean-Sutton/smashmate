@@ -53,6 +53,7 @@ describe('Registration creation route', () => {
       .reply(400, {
         username: myProfile.username
       });
+
     const result = await sendAccountDetails();
     expect(result.username).not.toBeUndefined();
   })
@@ -65,6 +66,7 @@ describe('Registration creation route', () => {
       .reply(400, {
         email: myProfile.email
       });
+
     const result = await sendAccountDetails();
     expect(result.email).not.toBeUndefined();
   })
