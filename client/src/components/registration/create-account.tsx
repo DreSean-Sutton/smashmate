@@ -21,14 +21,16 @@ export default function CreateAccount(props: any) {
 
   const loadSpinner = isLoading ? <Loading /> : '';
 
+  const controller = new AbortController()
+  const headers = {
+    signal: controller.signal,
+    validateStatus: () => true
+  }
+
   async function handleUploadProfile(profile: Profile) {
     const url = 'http://localhost:5000/registration/account/add';
     try {
-      const controller = new AbortController()
-      const { status, data } = await axios.post(url, profile, {
-        signal: controller.signal,
-        validateStatus: () => true
-      });
+      const { status, data } = await axios.post(url, profile, headers);
       if(data.username) return data;
       if(data.email) return data;
       if (status !== 201) throw new Error('Account creation failed!')

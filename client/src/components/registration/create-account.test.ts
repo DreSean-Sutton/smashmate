@@ -13,13 +13,14 @@ describe('Registration creation route', () => {
     password: 'test password',
     username: 'Dre Sean'
   }
+  const controller = new AbortController()
+  const headers = {
+    signal: controller.signal,
+    validateStatus: () => true
+  }
   async function sendAccountDetails() {
     try {
-      const controller = new AbortController()
-      const { status, data }: any = await axios.post(url, myProfile, {
-        signal: controller.signal,
-        validateStatus: () => true
-      });
+      const { status, data }: any = await axios.post(url, myProfile, headers);
       if (data.username) return data;
       if (data.email) return data;
       if (status !== 201) throw new Error('Account creation failed!')
@@ -30,7 +31,7 @@ describe('Registration creation route', () => {
   }
 
   // COMPLETED INSERT TEST
-  it('responds with inserted data if correctly inserted', async () => {
+  it.only('responds with inserted data if correctly inserted', async () => {
     nock('http://localhost:5000')
       .persist()
       .post('/registration/account/add')

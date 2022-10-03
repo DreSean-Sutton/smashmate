@@ -2,14 +2,18 @@ import { type } from "os";
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
 var express = require('express');
-const cors = require('cors');
 require('dotenv').config({ path: '../.env' });
 const port = process.env.PORT || 5001;
 var dbo = require('./db/conn');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(function (req: any, res: any, next: any) {
+  // Required to bypass CORS
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const registrationRoute = require('./routes/registration');
 app.use('/registration', registrationRoute);

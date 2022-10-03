@@ -24,16 +24,17 @@ export default function SignIn (props: any) {
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const url = `http://localhost:5000/registration/account/sign-in`;
   const loadSpinner = isloading ? <Loading /> : '';
+  const url = `http://localhost:5000/registration/account/sign-in`;
+  const controller = new AbortController();
+  const headers = {
+    signal: controller.signal,
+    validateStatus: () => true
+  };
 
   async function handleFetchProfile(query: any) {
     try {
-      const controller = new AbortController();
-      const { status, data }: any = await axios.post(url, query, {
-        signal: controller.signal,
-        validateStatus: () => true
-      });
+      const { status, data }: any = await axios.post(url, query, headers);
       if (status !== 200) throw data.error;
       return data;
     } catch (e) {

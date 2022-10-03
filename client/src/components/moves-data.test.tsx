@@ -41,7 +41,6 @@ describe('Testing moves data fetch', () => {
         "totalFrames": "19",
         "type": "move"
       })
-      // { 'Access-Control-Allow-Origin': '*' })
     const result: any = await fetchData('inkling');
     expect(result).toContainAllKeys([
       'activeFrames',
