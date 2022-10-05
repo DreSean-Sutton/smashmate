@@ -18,7 +18,7 @@ export default function App() {
   const [fighterArray, setfighterArray]: any[] = useState([]);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser]: any = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -34,7 +34,11 @@ export default function App() {
 
   useEffect(() => {
     if(user) {
-
+      const uploadFavoritesQuery = {
+        email: user.user.email,
+        favorites: favorites
+      }
+      uploadFavorites(uploadFavoritesQuery);
     } else {
       localStorage.setItem('favorites', JSON.stringify(favorites));
     }
@@ -64,6 +68,22 @@ export default function App() {
       console.error('Fetch failed!', e);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function uploadFavorites(query: any) {
+    const url = 'http://localhost:5000/favoriting/character/upsert';
+    const controller = new AbortController()
+    const headers = {
+      signal: controller.signal,
+      validateStatus: () => true
+    }
+    try {
+      const { status, data }: any = await axios.post(url, query, headers);
+      if (status !== 201) throw new Error('favoriting failed!');
+      return data;
+    } catch (e: any) {
+      return { error: e.message }
     }
   }
 

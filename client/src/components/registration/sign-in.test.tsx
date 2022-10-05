@@ -88,9 +88,7 @@ describe('Registration sign in routes', () => {
     nock('http://localhost:5000')
       .persist()
       .post('/registration/account/sign-in')
-      .reply(401, {
-        error: 'Invalid password'
-      })
+      .replyWithError('Invalid password')
 
     const queryPassword401 = {
       email: 'testemail@gmail.com',
@@ -99,11 +97,7 @@ describe('Registration sign in routes', () => {
     const result = await collectProfile(queryPassword401);
     expect(result).not.toHaveProperty('email');
     expect(result).not.toHaveProperty('password');
-    expect(result).toEqual(
-      expect.objectContaining({
-        error: expect.stringMatching(/password/i)
-      })
-    );
+    expect(result).toHaveProperty('error');
   })
 
   // SERVER ERROR TESTS

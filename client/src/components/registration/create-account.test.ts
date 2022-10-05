@@ -77,11 +77,9 @@ describe('Registration creation route', () => {
     nock('http://localhost:5000')
       .persist()
       .post('/registration/account/add')
-      .reply(500, {
-        error: 'An unexpected error occurred!'
-      });
+      .replyWithError('An unexpected error occurred!')
 
     const result = await sendAccountDetails();
-    expect(result.error).not.toBeUndefined();
+    expect(result).toHaveProperty('error');
   })
 })

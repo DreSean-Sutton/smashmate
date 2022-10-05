@@ -16,7 +16,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Testing favoriting', () => {
   afterEach(nock.cleanAll);
 
-  const url = 'http://localhost:5000/favoriting/character/add';
+  const url = 'http://localhost:5000/favoriting/character/upsert';
   const myProfile = {
     email: 'dreseansutton@gmail.com',
     favorites: [
@@ -50,9 +50,19 @@ describe('Testing favoriting', () => {
   }
 
   it('responds with 201 status data if inserted correctly', async () => {
+
     const result = await addFavorites();
-    console.log('result value: ', result);
     expect(result).toBeTruthy();
     expect(result.lastErrorObject.updatedExisting).toBeTruthy();
+  })
+
+  it('returns an error message if insert fails', async () => {
+
+    nock('http://localhost:5000')
+      .persist()
+      .post('/favoriting/character/upsert')
+      .replyWithError('An unexpected error occurred!');
+    const result = await addFavorites();
+    expect(result).toHaveProperty('error');
   })
 })
