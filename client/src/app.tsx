@@ -11,7 +11,6 @@ import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';
 import Registration from './pages/registration';
-import Profile from './pages/profile';
 import Loading from './components/loading';
 import axios from 'axios';
 
@@ -23,15 +22,23 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const favoriteItem: string | null = localStorage.getItem('favorites');
-    if (favoriteItem) {
-      setFavorites(JSON.parse(favoriteItem));
+    if(user) {
+      // const favoriteItem =
+    } else {
+      const favoriteItem: string | null = localStorage.getItem('favorites');
+      if (favoriteItem) {
+        setFavorites(JSON.parse(favoriteItem));
+      }
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+    if(user) {
+
+    } else {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+  }, [favorites, user]);
 
   useEffect(() => {
     if (!window.location.pathname.includes('favorites') &&
@@ -152,9 +159,6 @@ export default function App() {
               />
             } />
           </Route>
-          <Route path='/profile' element={
-            <Profile />
-          } />
         </Routes>
       </main>
     </>

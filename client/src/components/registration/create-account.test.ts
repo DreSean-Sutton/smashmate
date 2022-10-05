@@ -31,7 +31,7 @@ describe('Registration creation route', () => {
   }
 
   // COMPLETED INSERT TEST
-  it.only('responds with inserted data if correctly inserted', async () => {
+  it('responds with 201 status data if correctly inserted', async () => {
     nock('http://localhost:5000')
       .persist()
       .post('/registration/account/add')

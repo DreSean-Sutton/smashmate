@@ -16,7 +16,9 @@ app.use(function (req: any, res: any, next: any) {
 });
 
 const registrationRoute = require('./routes/registration');
+const favoritingRoute = require('./routes/favoriting');
 app.use('/registration', registrationRoute);
+app.use('/favoriting', favoritingRoute);
 
 app.use(errorMiddleware);
 

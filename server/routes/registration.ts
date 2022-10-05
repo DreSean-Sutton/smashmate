@@ -11,10 +11,10 @@ const jwt = require('jsonwebtoken');
 
 // ADD ACCOUNTS
 registrationRoute
-.route('/account/add')
-.post(async function (req: any, response: any, next: Function) {
-  let db_connect = dbo.getDb();
-  const hashedPassword = await argon2.hash(req.body.password)
+  .route('/account/add')
+  .post(async function (req: any, response: any, next: Function) {
+    let db_connect = dbo.getDb();
+    const hashedPassword = await argon2.hash(req.body.password);
     let profileObj = {
       username: req.body.username,
       email: req.body.email,
@@ -43,9 +43,9 @@ registrationRoute
                 });
             })
         })
-      } catch (e) {
-        next(e);
-      }
+    } catch (e) {
+      next(e);
+    }
   });
 
 registrationRoute
