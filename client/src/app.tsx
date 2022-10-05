@@ -22,8 +22,13 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
+    async function fetchData(getFavoritesQuery: {email: string}) {
+      const result = await handleGetFavorites(getFavoritesQuery);
+      setFavorites(result.favorites);
+    }
     if(user) {
-      // const favoriteItem =
+      const getFavoritesQuery = { email: user.user.email };
+      fetchData(getFavoritesQuery)
     } else {
       const favoriteItem: string | null = localStorage.getItem('favorites');
       if (favoriteItem) {
@@ -38,9 +43,9 @@ export default function App() {
         email: user.user.email,
         favorites: favorites
       }
-      uploadFavorites(uploadFavoritesQuery);
+      handleUploadFavorites(uploadFavoritesQuery);
     } else {
-      localStorage.setItem('favorites', JSON.stringify(favorites));
+      // localStorage.setItem('favorites', JSON.stringify(favorites));
     }
   }, [favorites, user]);
 
@@ -71,8 +76,8 @@ export default function App() {
     }
   }
 
-  async function uploadFavorites(query: any) {
-    const url = 'http://localhost:5000/favoriting/character/upsert';
+  async function handleUploadFavorites(query: any) {
+    const url = 'http://localhost:5000/favoriting/characters/upsert';
     const controller = new AbortController()
     const headers = {
       signal: controller.signal,
@@ -82,6 +87,22 @@ export default function App() {
       const { status, data }: any = await axios.post(url, query, headers);
       if (status !== 201) throw new Error('favoriting failed!');
       return data;
+    } catch (e: any) {
+      return { error: e.message }
+    }
+  }
+
+  async function handleGetFavorites(queryEmail: {email: string}) {
+    const url = 'http://localhost:5000/favoriting/characters/get';
+    const controller = new AbortController()
+    const header = {
+      signal: controller.signal,
+      validateStatus: () => true
+    }
+    try {
+      const { status, data } = await axios.post(url, queryEmail, header);
+      if (status !== 200) throw new Error('Fetch failed!');
+      return data
     } catch (e: any) {
       return { error: e.message }
     }
