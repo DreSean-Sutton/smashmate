@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import {
   Routes,
   Route,
-  useLocation
+  useLocation,
+  Navigate
 } from "react-router-dom";
 import BackgroundCarousel from './components/background-carousel';
 import SiteNavbar from './components/navbar';
@@ -200,6 +201,7 @@ export default function App() {
               />
             } />
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
     </>

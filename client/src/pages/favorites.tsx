@@ -7,11 +7,11 @@ interface favoritesListProps {
   deleteFavorites: (param1: number) => void
 }
 export default function FavoritesList(props: favoritesListProps) {
-  if(props.favorites.length === 0) {
-    return(
-      <h1>This worked! 😲</h1>
-    )
-  }
+  // if(props.favorites.length === 0) {
+  //   return(
+  //     <h1>This worked! 😲</h1>
+  //   )
+  // }
   return (
     <RenderCards
       fighterArray={props.fighterArray}
