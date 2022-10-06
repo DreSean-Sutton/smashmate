@@ -45,7 +45,7 @@ export default function App() {
       }
       handleUploadFavorites(uploadFavoritesQuery);
     } else {
-      // localStorage.setItem('favorites', JSON.stringify(favorites));
+      localStorage.setItem('favorites', JSON.stringify(favorites));
     }
   }, [favorites, user]);
 

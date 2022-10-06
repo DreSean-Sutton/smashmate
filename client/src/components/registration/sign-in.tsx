@@ -106,6 +106,16 @@ export default function SignIn (props: any) {
             </Button>
           </Col>
         </Row>
+        <Row style={{
+          borderTop: '1.5px solid rgb(220, 220, 220)'
+        }}
+        className='justify-content-center mt-4 pt-3 ms-3 me-3'>
+          <Col xs={10} className='text-center guest-column'>
+            <p>
+              Or continue as <Link to={'/'} className='link-primary guest-button'>Guest</Link>
+            </p>
+          </Col>
+        </Row>
       </Form>
     </>
   )
