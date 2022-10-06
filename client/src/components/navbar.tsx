@@ -19,7 +19,7 @@ export default function SiteNavbar(props: any) {
   }
 
   return (
-    <Navbar expand={false} className='bg-warning navbar-top'>
+    <Navbar expand={'lg'} className='bg-warning navbar-top'>
       <Container fluid>
         <Col>
           <Navbar.Toggle style={{ color: 'grey'}} aria-controls={`offcanvasNavbar`} />
@@ -27,8 +27,8 @@ export default function SiteNavbar(props: any) {
             id={`offcanvasNavbar`}
             aria-labelledby={`offcanvasNavbarLabel-expand`}
             placement="start"
+            className='bg-warning offcanvas-navbar'
             style={{
-              maxWidth: '25%',
               maxHeight: '30%',
               borderRadius: '0 0 8px 0'
             }}
@@ -38,20 +38,28 @@ export default function SiteNavbar(props: any) {
                 { menuName }
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body>
+            <Offcanvas.Body className='pb-0 pt-0'>
               <Nav>
-                <Link to='/'>
-                  <i className={'fa-solid fa-house-chimney'}></i>
-                  <span>   Home</span>
-                </Link>
-                <Link className='mt-2' to='/favorites'>
-                  <i className={'fa-solid fa-heart'}></i>
-                  <span>   Favorites</span>
-                </Link>
-                <Link onClick={handleSignOut} className='mt-2' to='/registration/sign-in'>
-                  <i className={`fa-solid ${loggingIcon}`}></i>
-                  <span>   { loggingTitle }</span>
-                </Link>
+                <ul className='d-lg-flex offcanvas-ul'>
+                  <li className='offcanvas-li'>
+                    <Link className='offcanvas-link' to='/'>
+                      <i className={'fa-solid d-lg-none fa-house-chimney'}></i>
+                      <span className=''>Home</span>
+                    </Link>
+                  </li>
+                  <li className='offcanvas-li'>
+                    <Link className='offcanvas-link mt-2' to='/favorites'>
+                      <i className={'fa-solid d-lg-none fa-heart'}></i>
+                      <span className=''>Favorites</span>
+                    </Link>
+                  </li>
+                  <li className='offcanvas-li'>
+                    <Link onClick={handleSignOut} className='offcanvas-link mt-2' to='/registration/sign-in'>
+                      <i className={`fa-solid d-lg-none ${loggingIcon}`}></i>
+                      <span className=''>{loggingTitle}</span>
+                    </Link>
+                  </li>
+                </ul>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
