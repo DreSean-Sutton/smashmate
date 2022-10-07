@@ -12,7 +12,10 @@ export default function BackgroundCarousel() {
   const allThings = imageArray.map(image => {
     return (
         <Carousel.Item interval={10000} key={image.id}>
-          <img
+          <img style={{
+            objectFit: 'cover',
+            minHeight: '100vh'
+          }}
             className="background-images"
             src={image.url}
             alt={image.name}
@@ -21,7 +24,17 @@ export default function BackgroundCarousel() {
     );
   });
   return (
-    <Carousel fade controls={false} pause={false} className='background-img-layout'>
+    <Carousel style={{
+      position: 'fixed',
+      top: '5 %',
+      right: '0',
+      bottom: '0',
+      left: '0',
+      minWidth: '85vh',
+      height: '100vh',
+      zIndex: '-1'
+    }}
+      fade controls={false} pause={false}>
       { allThings }
     </Carousel>
   );

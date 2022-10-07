@@ -1,0 +1,40 @@
+.fighter-details {
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.fighter-details-icons {
+  font-size: 2rem;
+}
+
+.fighter-details-icons:hover,
+.fighter-details-icons:active {
+  opacity: 0.85;
+}
+
+.fighter-details-img {
+  background-color: rgb(225, 225, 225);
+  box-shadow: var(--character-name-border);
+}
+
+.frame-data-backdrop {
+  background-color: #0000000b;
+}
+
+@media screen and (min-width: 575px) {
+  .fighter-details-icons {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .fighter-details-icons {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .fighter-details-icons {
+    font-size: 4rem;
+  }
+}

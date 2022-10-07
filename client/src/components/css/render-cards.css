@@ -1,0 +1,130 @@
+.content-layout {
+  margin: auto;
+}
+
+.card-column {
+  margin: 1rem auto;
+  padding: 0 0.25rem;
+}
+
+.character-card {
+  position: relative;
+  margin: auto;
+  align-items: center;
+  height: 160px;
+  background-color: var(--card-color);
+  border-radius: 4px;
+  transition: transform 150ms, background-color 100ms;
+  cursor: pointer;
+}
+
+.character-card:hover,
+.character-card:active {
+  box-shadow:
+    0 2px 4px 4px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255 255 255 / 100%);
+}
+
+.character-card-number {
+  font-size: 1.1rem;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  left: 7px;
+  z-index: 3;
+}
+
+.character-card-img {
+  border-bottom: 1.5px solid var(--character-name-border);
+  width: 100px;
+  height: 100px;
+  padding-top: 0.5rem;
+  object-fit: contain;
+}
+
+.character-card-name {
+  margin-top: 1.5rem;
+  font-size: 0.7rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-heart {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.25rem;
+  color: grey;
+  transition: 200ms ease-in transform;
+}
+
+.card-heart:hover,
+.card-heart:active {
+  transform: scale(1.2);
+}
+
+.card-heart-favorited {
+  color: var(--heart-color);
+  transform: scale(1.2);
+}
+
+.card-heart-favorited:hover {
+  opacity: 0.75;
+}
+
+@media screen and (min-width: 375px) {
+  .card-column {
+    padding: 0 0.75rem;
+  }
+  .character-card {
+    height: 180px;
+  }
+
+  .character-card-img {
+    width: 115px;
+    height: 115px;
+  }
+
+  .character-card-name {
+    font-size: 0.8rem;
+  }
+
+}
+
+@media screen and (min-width: 575px) {
+  .character-card {
+    height: 270px;
+  }
+
+  .character-card-number {
+    font-size: 1.5rem;
+  }
+
+  .character-card-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .character-card-name {
+    font-size: 1rem;
+  }
+
+  .card-heart {
+    top: 8px;
+    right: 8px;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card-heart {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 1220px) {
+  .card-column {
+    margin: 1.5rem auto;
+  }
+
+}

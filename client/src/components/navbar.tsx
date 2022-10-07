@@ -44,19 +44,19 @@ export default function SiteNavbar(props: any) {
                   <li className='offcanvas-li'>
                     <Link className='offcanvas-link' to='/'>
                       <i className={'fa-solid d-lg-none fa-house-chimney'}></i>
-                      <span className=''>Home</span>
+                      <span>Home</span>
                     </Link>
                   </li>
                   <li className='offcanvas-li'>
                     <Link className='offcanvas-link mt-2' to='/favorites'>
                       <i className={'fa-solid d-lg-none fa-heart'}></i>
-                      <span className=''>Favorites</span>
+                      <span>Favorites</span>
                     </Link>
                   </li>
                   <li className='offcanvas-li'>
                     <Link onClick={handleSignOut} className='offcanvas-link mt-2' to='/registration/sign-in'>
                       <i className={`fa-solid d-lg-none ${loggingIcon}`}></i>
-                      <span className=''>{loggingTitle}</span>
+                      <span>{loggingTitle}</span>
                     </Link>
                   </li>
                 </ul>

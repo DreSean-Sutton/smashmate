@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import MovesData from '../components/moves-data';
+import ThrowsData from '../components/throws-data';
+import MovementData from '../components/movement-data';
+import StatsData from '../components/stats-data';
+import './css/fighter-details.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
-import MovesData from '../components/moves-data';
-import ThrowsData from '../components/throws-data';
-import MovementData from '../components/movement-data';
-import StatsData from '../components/stats-data';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 

@@ -3,6 +3,16 @@ li {
   list-style: none;
 }
 
+.navbar-top {
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 4;
+  box-shadow: 0 2px 2px 1px rgb(15, 15, 15, 0.5);
+}
+
 .offcanvas-navbar {
   max-width: 100%;
 }

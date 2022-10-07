@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
+import CardSelectModal from './card-select-modal';
+import './css/render-cards.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import CardSelectModal from './card-select-modal';
 
 interface MyProps {
   addFavorites: (param1: object) => void
