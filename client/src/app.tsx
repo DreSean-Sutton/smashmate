@@ -51,8 +51,7 @@ export default function App() {
   }, [favorites, user]);
 
   useEffect(() => {
-    if (!window.location.pathname.includes('favorites') &&
-      window.location.pathname !== '/') {
+    if (window.location.pathname.includes('registration')) {
       return;
     }
     if(fighterArray.length === 0) {

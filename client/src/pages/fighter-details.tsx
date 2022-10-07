@@ -16,6 +16,7 @@ import axios from 'axios';
 interface FighterDetailsProps {
   fighterArray: any[]
 }
+
 export default function FighterDetails(props: FighterDetailsProps) {
   let navigate = useNavigate();
   let { fighter }: any = useParams();
@@ -60,7 +61,11 @@ export default function FighterDetails(props: FighterDetailsProps) {
     if(props.fighterArray.length !== 0) {
       return props.fighterArray[fighterIndex].displayName
     } else {
-      fetchTitle().then(res => res)
+      fetchTitle().then(res => {
+        console.count('fetchTitle')
+        console.log(fighter);
+        return res;
+      })
     }
   }
   async function fetchTitle() {

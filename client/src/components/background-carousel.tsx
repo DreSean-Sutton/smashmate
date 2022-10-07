@@ -1,3 +1,4 @@
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
 export default function BackgroundCarousel() {
@@ -16,7 +17,6 @@ export default function BackgroundCarousel() {
             objectFit: 'cover',
             minHeight: '100vh'
           }}
-            className="background-images"
             src={image.url}
             alt={image.name}
             />
@@ -26,7 +26,7 @@ export default function BackgroundCarousel() {
   return (
     <Carousel style={{
       position: 'fixed',
-      top: '5 %',
+      top: '5%',
       right: '0',
       bottom: '0',
       left: '0',
@@ -34,7 +34,9 @@ export default function BackgroundCarousel() {
       height: '100vh',
       zIndex: '-1'
     }}
-      fade controls={false} pause={false}>
+      fade controls={false}
+      pause={false}
+      indicators={false}>
       { allThings }
     </Carousel>
   );
