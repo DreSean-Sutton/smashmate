@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
 import CardSelectModal from './card-select-modal';
-import './css/render-cards.css';
+import './render-cards.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 

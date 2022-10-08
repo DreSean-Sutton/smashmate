@@ -7,7 +7,7 @@ import {
   Navigate
 } from "react-router-dom";
 import BackgroundCarousel from './components/background-carousel';
-import SiteNavbar from './components/navbar';
+import SiteNavbar from './components/navbar/site-navbar';
 import Home from './pages/home';
 import FighterDetails from './pages/fighter-details';
 import FavoritesList from './pages/favorites';

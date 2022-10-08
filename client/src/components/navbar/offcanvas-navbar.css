@@ -3,16 +3,6 @@ li {
   list-style: none;
 }
 
-.navbar-top {
-  color: white;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 4;
-  box-shadow: 0 2px 2px 1px rgb(15, 15, 15, 0.5);
-}
-
 .offcanvas-navbar {
   max-width: 100%;
 }
@@ -22,7 +12,7 @@ li {
   padding: 0;
 }
 
-.offcanvas-li + .offcanvas-li {
+.offcanvas-li+.offcanvas-li {
   margin-top: 0.25rem;
 }
 
@@ -30,7 +20,7 @@ li {
   color: white;
 }
 
-.offcanvas-link > span {
+.offcanvas-link>span {
   margin-left: 10px;
 }
 
@@ -38,20 +28,6 @@ li {
 .fa-house-chimney {
   width: 16px;
   height: 16px;
-}
-
-.profile-icon {
-  font-size: 1.5rem;
-  color: black;
-  background-color: white;
-  transition: transform 400ms, color 500ms;
-  padding: 6px;
-  border-radius: 50rem;
-  border: 2.5px solid black;
-}
-
-.profile-icon:hover {
-  transform: scale(1.2);
 }
 
 @media screen and (min-width: 375px) {
@@ -66,16 +42,17 @@ li {
   }
 
 }
+
 @media screen and (min-width: 992px) {
   .offcanvas-ul {
     top: 0.5rem;
   }
 
-  .offcanvas-li > span {
+  .offcanvas-li>span {
     margin-left: 0;
   }
 
-  .offcanvas-li + .offcanvas-li {
+  .offcanvas-li+.offcanvas-li {
     margin-left: 1.5rem;
     margin-top: 0;
   }
