@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
+import showHideData from '../util/show-hide-data';
 
 interface ThrowsDataProps {
   currentFighter: string
@@ -31,6 +32,10 @@ export default function ThrowsData(props: ThrowsDataProps) {
     fetchDetailsData(props.currentFighter)
     return () => controller.abort()
   }, [props.currentFighter]);
+
+  function handleShowHideData() {
+    showHideData('throws');
+  }
 
   function checkNull(data:any) {
     return data === null
@@ -65,10 +70,10 @@ export default function ThrowsData(props: ThrowsDataProps) {
     const allThrows = throws.map(renderThrows);
     return(
       <>
-        <Col xs={6} md={4} className='m-auto'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Grabs/Throws</h2>
+        <Col style={{userSelect: 'none'}} onClick={handleShowHideData} role='button'  xs={6} md={4} className='m-auto'>
+          <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Grabs/Throws</h2>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+        <Row id='throws' xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allThrows }
         </Row>
       </>

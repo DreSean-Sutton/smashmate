@@ -5,10 +5,11 @@ import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
-
+import showHideData from '../util/show-hide-data';
 interface StatsDataProps {
   currentFighter: string
 }
+
 export default function StatsData(props: StatsDataProps) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +31,10 @@ export default function StatsData(props: StatsDataProps) {
     fetchDetailsData(props.currentFighter)
     return () => controller.abort()
   }, [props.currentFighter]);
+
+  function handleShowHideData() {
+    showHideData('stats');
+  }
 
   if (isLoading) {
     return (
@@ -56,10 +61,10 @@ export default function StatsData(props: StatsDataProps) {
     const allStats = stats.map(renderStats);
     return (
       <>
-        <Col xs={6} md={4} className='m-auto'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
+        <Col style={{ userSelect: 'none' }} onClick={handleShowHideData} role='button' xs={6} md={4} className='m-auto'>
+          <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Stats</h2>
         </Col>
-        <Row xs={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+        <Row id='stats' xs={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allStats };
         </Row>
       </>

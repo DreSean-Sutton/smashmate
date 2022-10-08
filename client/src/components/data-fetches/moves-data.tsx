@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
-
+import showHideData from '../util/show-hide-data';
 interface MovesDataProps {
   currentFighter: string
 }
@@ -31,6 +31,10 @@ export default function MovesData(props: MovesDataProps) {
     fetchDetailsData(props.currentFighter)
     return () => controller.abort()
   }, [props.currentFighter]);
+
+  function handleShowHideData() {
+    showHideData('moves');
+  }
 
   function checkNull(data: string | null) {
     return data === null
@@ -75,10 +79,10 @@ export default function MovesData(props: MovesDataProps) {
     const allMoves = moves.map(renderMoves);
     return (
       <>
-        <Col id='moves' xs={6} md={4} className='m-auto'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
+        <Col style={{ userSelect: 'none' }} onClick={handleShowHideData} role='button' xs={6} md={4} className='m-auto'>
+          <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Moves</h2>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+        <Row id='moves' xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allMoves }
         </Row>
       </>

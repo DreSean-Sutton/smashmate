@@ -5,10 +5,12 @@ import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
+import showHideData from '../util/show-hide-data';
 
 interface MovementDataProps {
   currentFighter: string
 }
+
 export default function MovementData(props: MovementDataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,20 +18,24 @@ export default function MovementData(props: MovementDataProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    const controller = new AbortController()
+    const controller = new AbortController();
     async function fetchDetailsData(currentFighter: string) {
       setIsLoading(true)
       const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighter=${currentFighter}`, {
         signal: controller.signal,
         validateStatus: () => true
       });
-      if (status !== 200) return setFetchFailed(true)
-      setIsLoading(false)
-      setMovements(data)
+      if (status !== 200) return setFetchFailed(true);
+      setIsLoading(false);
+      setMovements(data);
     }
     fetchDetailsData(props.currentFighter)
     return () => controller.abort();
   }, [props.currentFighter]);
+
+  function handleShowHideData() {
+    showHideData('movements');
+  }
 
   if (isLoading) {
     return (
@@ -58,10 +64,10 @@ export default function MovementData(props: MovementDataProps) {
     const allMovements = movements.map(renderMovements);
     return (
       <>
-        <Col xs={6} md={4} className='m-auto'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Dodges/Rolls</h2>
+        <Col style={{ userSelect: 'none' }} onClick={handleShowHideData} role='button' xs={6} md={4} className='m-auto'>
+          <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Dodges/Rolls</h2>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+        <Row id='movements' xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allMovements }
         </Row>
       </>

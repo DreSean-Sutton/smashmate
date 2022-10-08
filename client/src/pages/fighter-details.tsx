@@ -63,7 +63,6 @@ export default function FighterDetails(props: FighterDetailsProps) {
     } else {
       fetchTitle().then(res => {
         console.count('fetchTitle')
-        console.log(fighter);
         return res;
       })
     }
