@@ -6,6 +6,7 @@ import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 import showHideData from '../util/show-hide-data';
+import './data-fetch.css';
 
 interface ThrowsDataProps {
   currentFighter: string
@@ -70,7 +71,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
     const allThrows = throws.map(renderThrows);
     return(
       <>
-        <Col style={{userSelect: 'none'}} onClick={handleShowHideData} role='button'  xs={6} md={4} className='m-auto'>
+        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title'>
           <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Grabs/Throws</h2>
         </Col>
         <Row id='throws' xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
