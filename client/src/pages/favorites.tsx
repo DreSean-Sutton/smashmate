@@ -8,7 +8,7 @@ interface favoritesListProps {
   deleteFavorites: (param1: number) => void
 }
 export default function FavoritesList(props: favoritesListProps) {
-  if(props.favorites) {
+  if(props.favorites.length === 0) {
     return (
       <NoFavorites />
     )
