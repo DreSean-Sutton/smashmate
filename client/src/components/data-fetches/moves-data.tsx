@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Loading from '../loading';
+import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
@@ -74,7 +75,12 @@ export default function MovesData(props: MovesDataProps) {
     const allMoves = moves.map(renderMoves);
     return (
       <>
-        { allMoves }
+        <Col id='moves' xs={6} md={4} className='m-auto'>
+          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
+        </Col>
+        <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
+          { allMoves }
+        </Row>
       </>
     )
   }

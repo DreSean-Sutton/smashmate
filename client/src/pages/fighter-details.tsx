@@ -77,51 +77,40 @@ export default function FighterDetails(props: FighterDetailsProps) {
     }
   }
   return (
-    <>
-      <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
-        <Row className='justify-content-between align-items-center'>
-          <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
-            <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
-          </Col>
-          <Col xs={6} md={4} xl={3}>
-            <Card className='bg-warning w-100 text-center mb-2 p-1'>
-              <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
-            </Card>
-          </Col>
-          <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
-            <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
-          </Col>
-        </Row>
-        <Row className='justify-content-center align-items-center mb-5'>
-          <Col xs={8} md={6} xl={5} className='fighter-details-img p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
-            <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
-          </Col>
-        </Row>
-        <Col id='moves' xs={6} md={4} className='m-auto typical'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Moves</h2>
+    <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
+      <Row className='justify-content-between align-items-center'>
+        <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
+          <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-          <MovesData currentFighter={fighter} />
-        </Row>
-        <Col xs={6} md={4} className='m-auto typical'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Grabs/Throws</h2>
+        <Col xs={6} md={4} xl={3}>
+          <Card className='bg-warning w-100 text-center mb-2 p-1'>
+            <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
+          </Card>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-          <ThrowsData currentFighter={fighter} />
-        </Row>
-        <Col xs={6} md={4} className='m-auto typical'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Dodges/Rolls</h2>
+        <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
+          <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-          <MovementData currentFighter={fighter} />
-        </Row>
-        <Col xs={6} md={4} className='m-auto typical'>
-          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
+      </Row>
+      <Row className='justify-content-center align-items-center mb-5'>
+        <Col xs={8} md={6} xl={5} className='fighter-details-img p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
+          <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
         </Col>
-        <Row xs={2} xl={3} className='rounded justify-content-center p-1'>
-          <StatsData currentFighter={fighter} />
-        </Row>
-      </Container>
-    </>
+      </Row>
+        <MovesData currentFighter={fighter} />
+
+        <ThrowsData currentFighter={fighter} />
+      <Col xs={6} md={4} className='m-auto'>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Dodges/Rolls</h2>
+      </Col>
+      <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
+        <MovementData currentFighter={fighter} />
+      </Row>
+      <Col xs={6} md={4} className='m-auto'>
+        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
+      </Col>
+      <Row xs={2} xl={3} className='rounded justify-content-center p-1'>
+        <StatsData currentFighter={fighter} />
+      </Row>
+    </Container>
   );
 }
