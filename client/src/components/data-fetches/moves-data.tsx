@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Loading from './loading';
+import Loading from '../loading';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import MovesData from '../components/moves-data';
-import ThrowsData from '../components/throws-data';
-import MovementData from '../components/movement-data';
-import StatsData from '../components/stats-data';
+import MovesData from '../components/data-fetches/moves-data';
+import ThrowsData from '../components/data-fetches/throws-data';
+import MovementData from '../components/data-fetches/movement-data';
+import StatsData from '../components/data-fetches/stats-data';
 import './css/fighter-details.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';

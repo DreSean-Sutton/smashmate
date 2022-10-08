@@ -29,7 +29,7 @@ export default function SiteNavbar(props: any) {
             placement="start"
             className='bg-warning offcanvas-navbar'
             style={{
-              maxHeight: '30%',
+              maxHeight: '25%',
               borderRadius: '0 0 8px 0'
             }}
           >

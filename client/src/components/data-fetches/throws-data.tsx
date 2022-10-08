@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import Loading from './loading';
+import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
 
-interface StatsDataProps {
+interface ThrowsDataProps {
   currentFighter: string
 }
-export default function StatsData(props: StatsDataProps) {
-  const [stats, setStats] = useState([]);
+
+export default function ThrowsData(props: ThrowsDataProps) {
+  const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
@@ -18,17 +19,23 @@ export default function StatsData(props: StatsDataProps) {
     const controller = new AbortController()
     async function fetchDetailsData(currentFighter: string) {
       setIsLoading(true)
-      const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/stats?fighter=${currentFighter}`, {
+      const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${currentFighter}`, {
         signal: controller.signal,
         validateStatus: () => true
       });
       if (status !== 200) return setFetchFailed(true)
       setIsLoading(false)
-      setStats(data)
+      setThrows(data)
     }
     fetchDetailsData(props.currentFighter)
     return () => controller.abort()
   }, [props.currentFighter]);
+
+  function checkNull(data:any) {
+    return data === null
+      ? '--'
+      : data;
+  }
 
   if (isLoading) {
     return (
@@ -37,25 +44,27 @@ export default function StatsData(props: StatsDataProps) {
   }
   if (fetchFailed) {
     return (
-      <FetchDataFail data={'Stats'} />
+      <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const renderStats = (stat: any) => {
+    const renderThrows = (grapple: any) => {
       return (
-        <React.Fragment key={stat.statId}>
-          <Col className='p-3 text-center'>
+        <React.Fragment key={grapple.throwId}>
+          <Col className='p-3'>
             <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
-              <Card.Title className='fw-bold'>{stat.name}</Card.Title>
-              <p className='mb-0 pt-1 border-top'>{stat.statValue}</p>
+              <Card.Title className='text-center fw-bold'>{grapple.name}</Card.Title>
+              <p className='mb-0 pt-1 border-top'>Damage: {checkNull(grapple.damage)}</p>
+              <p className='mb-0 pt-1 border-top'>Active Frames: {grapple.activeFrames}</p>
+              <p className='mb-0 pt-1 border-top'>Total Frames: {grapple.totalFrames}</p>
             </Card>
           </Col>
         </React.Fragment>
       );
     }
-    const allStats = stats.map(renderStats);
-    return (
+    const allThrows = throws.map(renderThrows);
+    return(
       <>
-        { allStats };
+        { allThrows }
       </>
     )
   }
