@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
@@ -57,7 +58,12 @@ export default function MovementData(props: MovementDataProps) {
     const allMovements = movements.map(renderMovements);
     return (
       <>
-        { allMovements }
+        <Col xs={6} md={4} className='m-auto'>
+          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Dodges/Rolls</h2>
+        </Col>
+        <Row xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+          { allMovements }
+        </Row>
       </>
     )
   }

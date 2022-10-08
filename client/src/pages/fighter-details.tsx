@@ -96,21 +96,10 @@ export default function FighterDetails(props: FighterDetailsProps) {
           <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
         </Col>
       </Row>
-        <MovesData currentFighter={fighter} />
-
-        <ThrowsData currentFighter={fighter} />
-      <Col xs={6} md={4} className='m-auto'>
-        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Dodges/Rolls</h2>
-      </Col>
-      <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
-        <MovementData currentFighter={fighter} />
-      </Row>
-      <Col xs={6} md={4} className='m-auto'>
-        <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
-      </Col>
-      <Row xs={2} xl={3} className='rounded justify-content-center p-1'>
-        <StatsData currentFighter={fighter} />
-      </Row>
+      <MovesData currentFighter={fighter} />
+      <ThrowsData currentFighter={fighter} />
+      <MovementData currentFighter={fighter} />
+      <StatsData currentFighter={fighter} />
     </Container>
   );
 }

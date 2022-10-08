@@ -68,7 +68,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
         <Col xs={6} md={4} className='m-auto'>
           <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Grabs/Throws</h2>
         </Col>
-        <Row xs={1} md={2} xl={3} className='rounded justify-content-center p-1'>
+        <Row xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allThrows }
         </Row>
       </>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
@@ -55,7 +56,12 @@ export default function StatsData(props: StatsDataProps) {
     const allStats = stats.map(renderStats);
     return (
       <>
-        { allStats };
+        <Col xs={6} md={4} className='m-auto'>
+          <h2 className='text-center fs-2 mt-3 mb-3 p-2 bg-warning text-dark rounded'>Stats</h2>
+        </Col>
+        <Row xs={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+          { allStats };
+        </Row>
       </>
     )
   }
