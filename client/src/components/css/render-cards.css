@@ -53,7 +53,7 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: grey;
   transition: 200ms ease-in transform;
 }
@@ -112,13 +112,13 @@
   .card-heart {
     top: 8px;
     right: 8px;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 }
 
 @media screen and (min-width: 768px) {
   .card-heart {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 }
 

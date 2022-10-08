@@ -1,4 +1,5 @@
 import RenderCards from '../components/render-cards';
+import NoFavorites from '../components/no-favorites';
 
 interface favoritesListProps {
   fighterArray: any[]
@@ -7,11 +8,11 @@ interface favoritesListProps {
   deleteFavorites: (param1: number) => void
 }
 export default function FavoritesList(props: favoritesListProps) {
-  // if(props.favorites.length === 0) {
-  //   return(
-  //     <h1>This worked! 😲</h1>
-  //   )
-  // }
+  if(props.favorites) {
+    return (
+      <NoFavorites />
+    )
+  }
   return (
     <RenderCards
       fighterArray={props.fighterArray}
