@@ -20,9 +20,8 @@
 
 .character-card:hover,
 .character-card:active {
-  box-shadow:
-    0 2px 4px 4px rgba(0, 0, 0, 0.4);
-  background-color: var(--primary-theme);
+  box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.4);
+  background-color: white;
 }
 
 .character-card-number {

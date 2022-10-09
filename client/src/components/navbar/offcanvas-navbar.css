@@ -1,6 +1,3 @@
-/* :root {
-  --secondary-theme:
-} */
 li {
   text-decoration: none;
   list-style: none;
@@ -8,6 +5,7 @@ li {
 
 .offcanvas-navbar {
   max-width: 100%;
+  background-color: var(--primary-theme);
 }
 
 .offcanvas-ul {

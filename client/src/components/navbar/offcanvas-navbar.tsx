@@ -20,13 +20,13 @@ return (
       id={`offcanvasNavbar`}
       aria-labelledby={`offcanvasNavbarLabel-expand`}
       placement="start"
-      className='offcanvas-navbar primary-theme-bg'
+      className='offcanvas-navbar'
       style={{
-        maxHeight: '25%',
+        maxHeight: '23%',
         borderRadius: '0 0 8px 0'
       }} >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
+        <Offcanvas.Title id={`offcanvasNavbarLabel-expand`} className='secondary-theme-color'>
           { menuName }
         </Offcanvas.Title>
       </Offcanvas.Header>
