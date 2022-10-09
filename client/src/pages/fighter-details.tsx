@@ -4,7 +4,6 @@ import MovesData from '../components/data-fetches/moves-data';
 import ThrowsData from '../components/data-fetches/throws-data';
 import MovementData from '../components/data-fetches/movement-data';
 import StatsData from '../components/data-fetches/stats-data';
-import './css/fighter-details.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,6 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './css/fighter-details.css';
 
 interface FighterDetailsProps {
   fighterArray: any[]
@@ -57,6 +57,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
     }
     navigate(`/character-details/${props.fighterArray[fighterIndex + 1].fighter}`);
   }
+
   function handleCheckTitle() {
     if(props.fighterArray.length !== 0) {
       return props.fighterArray[fighterIndex].displayName
@@ -77,16 +78,16 @@ export default function FighterDetails(props: FighterDetailsProps) {
   return (
     <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
       <Row className='justify-content-between align-items-center'>
-        <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
-          <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left fighter-details-icons text-warning"></i>
+        <Col xs={2} md={3} xl={3} className='arrow-columns pr-0 text-center'>
+          <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
         </Col>
         <Col xs={6} md={4} xl={3}>
-          <Card className='bg-warning w-100 text-center mb-2 p-1'>
-            <Card.Title className='mb-0 pt-2 pb-2 fw-bold'>{handleCheckTitle()}</Card.Title>
+          <Card className='secondary-theme-bg w-100 text-center mb-2 p-1'>
+            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
           </Card>
         </Col>
-        <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
-          <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right fighter-details-icons text-warning"></i>
+        <Col xs={2} md={3} xl={3} className='arrow-columns pl-0 text-center'>
+          <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
         </Col>
       </Row>
       <Row className='justify-content-center align-items-center mb-5'>

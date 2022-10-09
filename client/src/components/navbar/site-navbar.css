@@ -18,7 +18,8 @@
   border: 2.5px solid black;
 }
 
-.profile-icon:hover {
+.profile-icon:hover,
+.profile-icon:active {
   color: var(--tertiary-theme);
   transform: scale(1.2);
 }

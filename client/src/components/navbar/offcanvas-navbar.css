@@ -23,7 +23,8 @@ li {
   color: white;
 }
 
-.offcanvas-link:hover {
+.offcanvas-link:hover,
+.offcanvas-link:active {
   color: var(--tertiary-theme);
 }
 

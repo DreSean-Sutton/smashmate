@@ -3,6 +3,7 @@
   cursor: pointer;
 }
 
-.data-title:hover {
+.data-title:hover,
+.data-title:active {
   opacity: 90%;
 }

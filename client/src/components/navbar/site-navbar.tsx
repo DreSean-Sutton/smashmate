@@ -18,7 +18,7 @@ export default function SiteNavbar(props: any) {
         </Col>
         <Col className='text-center'>
           <Link to='/'>
-            <h1 className='d-inline text-dark'>SmashMate</h1>
+            <h1 className='d-inline text-light'>SmashMate</h1>
           </Link>
         </Col>
         <Col className='text-end'>

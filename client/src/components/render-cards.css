@@ -54,7 +54,6 @@
   top: 5px;
   right: 5px;
   font-size: 1.5rem;
-  /* color: grey; */
   color: rgba(75, 75, 75, 0.90);
   transition: 200ms ease-in transform;
 }
@@ -69,7 +68,8 @@
   transform: scale(1.2);
 }
 
-.card-heart-favorited:hover {
+.card-heart-favorited:hover,
+.card-heart-favorited:active {
   transform: scale(0.8);
 }
 

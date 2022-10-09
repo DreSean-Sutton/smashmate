@@ -1,10 +1,10 @@
 import CreateAccount from '../components/registration/create-account';
 import SignIn from '../components/registration/sign-in';
-import './css/registration.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import './css/registration.css';
 
 export default function Registration(props: any) {
 

@@ -17,6 +17,5 @@ export default function NoFavorites() {
         </Col>
       </Row>
     </Container>
-    // <h1>This worked 😲</h1>
   )
 }

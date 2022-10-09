@@ -63,8 +63,8 @@ export default function StatsData(props: StatsDataProps) {
     const allStats = stats.map(renderStats);
     return (
       <>
-        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title'>
-          <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Stats</h2>
+        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title secondary-theme-bg'>
+          <h2 className='text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Stats</h2>
         </Col>
         <Row id='stats' xs={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allStats };

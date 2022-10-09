@@ -3,12 +3,23 @@
   z-index: 1;
 }
 
-.fighter-details-icons {
+.arrow-icons {
   font-size: 2rem;
 }
 
-.fighter-details-icons:hover,
-.fighter-details-icons:active {
+.arrow-icon-left {
+  position: fixed;
+  top: 17.5%;
+  left: 10%;
+}
+
+.arrow-icon-right {
+  position: fixed;
+  top: 17.5%;
+  right: 10%;
+}
+.arrow-icons:hover,
+.arrow-icons:active {
   opacity: 0.85;
 }
 
@@ -22,19 +33,19 @@
 }
 
 @media screen and (min-width: 575px) {
-  .fighter-details-icons {
+  .arrow-icons {
     font-size: 2.5rem;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .fighter-details-icons {
+  .arrow-icons {
     font-size: 3rem;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .fighter-details-icons {
+  .arrow-icons {
     font-size: 4rem;
   }
 }
