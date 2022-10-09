@@ -62,7 +62,6 @@ export default function FighterDetails(props: FighterDetailsProps) {
       return props.fighterArray[fighterIndex].displayName
     } else {
       fetchTitle().then(res => {
-        console.count('fetchTitle')
         return res;
       })
     }

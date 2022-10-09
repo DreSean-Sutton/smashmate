@@ -1,3 +1,6 @@
+/* :root {
+  --secondary-theme:
+} */
 li {
   text-decoration: none;
   list-style: none;
@@ -16,8 +19,12 @@ li {
   margin-top: 0.25rem;
 }
 
-.offcanvas-link:hover {
+.offcanvas-link {
   color: white;
+}
+
+.offcanvas-link:hover {
+  color: var(--tertiary-theme);
 }
 
 .offcanvas-link>span {

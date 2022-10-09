@@ -22,7 +22,7 @@
 .character-card:active {
   box-shadow:
     0 2px 4px 4px rgba(0, 0, 0, 0.4);
-  background-color: rgba(255 255 255 / 100%);
+  background-color: var(--primary-theme);
 }
 
 .character-card-number {
@@ -54,7 +54,8 @@
   top: 5px;
   right: 5px;
   font-size: 1.5rem;
-  color: grey;
+  /* color: grey; */
+  color: rgba(75, 75, 75, 0.90);
   transition: 200ms ease-in transform;
 }
 
@@ -64,12 +65,12 @@
 }
 
 .card-heart-favorited {
-  color: var(--heart-color);
+  color: var(--secondary-theme);
   transform: scale(1.2);
 }
 
 .card-heart-favorited:hover {
-  opacity: 0.75;
+  transform: scale(0.8);
 }
 
 @media screen and (min-width: 375px) {

@@ -74,7 +74,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
         <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title'>
           <h2 className='bg-warning text-dark text-center fs-2 mt-3 mb-3 p-2 rounded'>Grabs/Throws</h2>
         </Col>
-        <Row id='throws' xs={1} md={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+        <Row id='throws' xs={1} sm={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
           { allThrows }
         </Row>
       </>

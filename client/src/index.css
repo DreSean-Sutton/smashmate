@@ -4,6 +4,9 @@
   --heart-color: rgb(245, 76, 104);
   --profile-color: rgb(0, 0, 0);
   --typical-box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.4);
+  --primary-theme: rgb(39, 78, 255);
+  --secondary-theme: rgba(255, 0, 0, 0.996);
+  --tertiary-theme: rgb(240, 240, 0);
 }
 
 *,
@@ -58,12 +61,32 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: black;
-}
-
 i {
   cursor: pointer;
+}
+
+.primary-theme-bg {
+  background-color: var(--primary-theme) !important;
+}
+
+.primary-theme-color {
+  color: var(--primary-theme) !important;
+}
+
+.secondary-theme-bg {
+  background-color: var(--secondary-theme) !important;
+}
+
+.secondary-theme-color {
+  color: var(--secondary-theme) !important;
+}
+
+.tertiary-theme-bg {
+  background-color: var(--tertiary-theme) !important;
+}
+
+.tertiary-theme-color {
+  color: var(--tertiary-theme) !important;
 }
 
 /* MEDIA QUERIES */

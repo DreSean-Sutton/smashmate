@@ -19,5 +19,6 @@
 }
 
 .profile-icon:hover {
+  color: var(--tertiary-theme);
   transform: scale(1.2);
 }

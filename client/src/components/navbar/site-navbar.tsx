@@ -11,7 +11,7 @@ export default function SiteNavbar(props: any) {
   const profileIconLink = props.user ? '#' : 'registration/sign-in';
 
   return (
-    <Navbar expand={'lg'} className='bg-warning navbar-top'>
+    <Navbar expand={'lg'} className='primary-theme-bg navbar-top'>
       <Container fluid>
         <Col>
           <OffcanvasNavbar />
