@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Loading from '../loading';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
-import showHideData from '../util/show-hide-data';
+import showHideData from '../../util/show-hide-data';
 import './data-fetch.css';
 
 interface ThrowsDataProps {

@@ -3,24 +3,31 @@
   z-index: 1;
 }
 
-.arrow-icons {
-  font-size: 2rem;
-}
-
 .arrow-icon-left {
   position: fixed;
   top: 17.5%;
   left: 10%;
+  z-index: 3;
 }
 
 .arrow-icon-right {
   position: fixed;
   top: 17.5%;
   right: 10%;
+  z-index: 3;
 }
+
+.arrow-icons {
+  font-size: 2rem;
+}
+
 .arrow-icons:hover,
 .arrow-icons:active {
   opacity: 0.85;
+}
+
+.arrow-icon-scrolling {
+  opacity: 0.3;
 }
 
 .fighter-details-img {

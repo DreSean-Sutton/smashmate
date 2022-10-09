@@ -20,7 +20,7 @@ return (
       id={`offcanvasNavbar`}
       aria-labelledby={`offcanvasNavbarLabel-expand`}
       placement="start"
-      className='offcanvas-navbar'
+      className='offcanvas-navbar primary-theme-bg'
       style={{
         maxHeight: '25%',
         borderRadius: '0 0 8px 0'

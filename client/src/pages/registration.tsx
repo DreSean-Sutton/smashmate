@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import './css/registration.css';
+import './registration.css';
 
 export default function Registration(props: any) {
 
@@ -19,10 +19,12 @@ export default function Registration(props: any) {
   return (
     <>
       <div className="background-registration-layout"></div>
-      <Container>
-        <Row className='justify-content-center'>
+      <Container style={{
+        marginTop: '10rem'
+      }}>
+        <Row className='justify-content-center align-items-center'>
           <Col sm={8} md={6} lg={4}>
-            <Card className='bg-white p-3 mb-5'>
+            <Card className='bg-white p-3'>
               <Card.Title className='text-center mb-3'>
                 { title }
               </Card.Title>

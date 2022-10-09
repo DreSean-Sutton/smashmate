@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import MovesData from '../components/data-fetches/moves-data';
 import ThrowsData from '../components/data-fetches/throws-data';
 import MovementData from '../components/data-fetches/movement-data';
@@ -9,9 +9,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './css/fighter-details.css';
+import './fighter-details.css';
 
 interface FighterDetailsProps {
   fighterArray: any[]
@@ -21,9 +20,22 @@ export default function FighterDetails(props: FighterDetailsProps) {
   let navigate = useNavigate();
   let { fighter }: any = useParams();
 
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+
+    const onScroll = () => setOffset(window.pageYOffset);
+    // This cleans up code
+    window.removeEventListener('scroll', onScroll);
+    handleArrowDimming();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offset]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [fighter]);
 
   const binarySearcher = (array: any, key: any) => {
     let start = 0;
@@ -75,11 +87,24 @@ export default function FighterDetails(props: FighterDetailsProps) {
       console.error('fetch failed', e);
     }
   }
+
+  const handleArrowDimming = () => {
+    const leftArrow: any = document.querySelector('#left-arrow');
+    const rightArrow: any = document.querySelector('#right-arrow');
+    if(offset !== 0) {
+      leftArrow.classList.add('arrow-icon-scrolling');
+      rightArrow.classList.add('arrow-icon-scrolling');
+    } else {
+      leftArrow.classList.remove('arrow-icon-scrolling');
+      rightArrow.classList.remove('arrow-icon-scrolling');
+    }
+  }
+
   return (
     <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
       <Row className='justify-content-between align-items-center'>
         <Col xs={2} md={3} xl={3} className='arrow-columns pr-0 text-center'>
-          <i onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
+          <i id='left-arrow' onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
         </Col>
         <Col xs={6} md={4} xl={3}>
           <Card className='secondary-theme-bg w-100 text-center mb-2 p-1'>
@@ -87,7 +112,7 @@ export default function FighterDetails(props: FighterDetailsProps) {
           </Card>
         </Col>
         <Col xs={2} md={3} xl={3} className='arrow-columns pl-0 text-center'>
-          <i onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
+          <i id='right-arrow' onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
         </Col>
       </Row>
       <Row className='justify-content-center align-items-center mb-5'>

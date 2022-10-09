@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import FetchDataFail from './fetch-data-fail';
 import axios from 'axios';
-import showHideData from '../util/show-hide-data';
+import showHideData from '../../util/show-hide-data';
 import './data-fetch.css';
 
 interface MovesDataProps {
