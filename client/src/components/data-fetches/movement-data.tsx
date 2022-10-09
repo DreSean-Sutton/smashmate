@@ -53,7 +53,7 @@ export default function MovementData(props: MovementDataProps) {
       return (
         <React.Fragment key={movement.movementId}>
           <Col className='p-3'>
-            <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
               <Card.Title className='text-center fw-bold'>{movement.name}</Card.Title>
               <p className='mb-0 pt-1 border-top'>Active Frames: {movement.activeFrames}</p>
               <p className='mb-0 pt-1 border-top'>Total Frames: {movement.totalFrames}</p>

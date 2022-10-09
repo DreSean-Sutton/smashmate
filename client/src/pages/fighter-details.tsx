@@ -19,7 +19,6 @@ interface FighterDetailsProps {
 export default function FighterDetails(props: FighterDetailsProps) {
   let navigate = useNavigate();
   let { fighter }: any = useParams();
-
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {

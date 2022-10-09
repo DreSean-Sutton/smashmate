@@ -26,9 +26,9 @@ export default function MovesData(props: MovesDataProps) {
         signal: controller.signal,
         validateStatus: () => true
       });
-      if (status !== 200) return setFetchFailed(true)
-      setIsLoading(false)
-      setMoves(data)
+      if (status !== 200) return setFetchFailed(true);
+      setIsLoading(false);
+      setMoves(data);
     }
     fetchDetailsData(props.currentFighter)
     return () => controller.abort()

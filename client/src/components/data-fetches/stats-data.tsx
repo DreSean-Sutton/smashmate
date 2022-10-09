@@ -52,7 +52,7 @@ export default function StatsData(props: StatsDataProps) {
       return (
         <React.Fragment key={stat.statId}>
           <Col className='p-3 text-center'>
-            <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
               <Card.Title className='fw-bold'>{stat.name}</Card.Title>
               <p className='mb-0 pt-1 border-top'>{stat.statValue}</p>
             </Card>

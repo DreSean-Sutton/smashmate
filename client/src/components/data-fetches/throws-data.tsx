@@ -58,7 +58,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
       return (
         <React.Fragment key={grapple.throwId}>
           <Col className='p-3'>
-            <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
+            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
               <Card.Title className='text-center fw-bold'>{grapple.name}</Card.Title>
               <p className='mb-0 pt-1 border-top'>Damage: {checkNull(grapple.damage)}</p>
               <p className='mb-0 pt-1 border-top'>Active Frames: {grapple.activeFrames}</p>
