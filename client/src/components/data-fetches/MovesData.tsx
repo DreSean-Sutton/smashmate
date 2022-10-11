@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Loading from '../loading';
-import Row from 'react-bootstrap/esm/Row';
+import Loading from '../Loading';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import FetchDataFail from './fetch-data-fail';
+import FetchDataFail from './FetchDataFail';
 import axios from 'axios';
 import showHideData from '../../util/show-hide-data';
-import './data-fetch.css';
+import './DataFetch.css';
 
 interface MovesDataProps {
   currentFighter: string

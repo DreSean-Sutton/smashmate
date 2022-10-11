@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import MovesData from '../components/data-fetches/moves-data';
-import ThrowsData from '../components/data-fetches/throws-data';
-import MovementData from '../components/data-fetches/movement-data';
-import StatsData from '../components/data-fetches/stats-data';
+import MovesData from '../components/data-fetches/MovesData';
+import ThrowsData from '../components/data-fetches/ThrowsData';
+import MovementData from '../components/data-fetches/MovementData';
+import StatsData from '../components/data-fetches/StatsData';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import axios from 'axios';
-import './fighter-details.css';
+import './FighterDetails.css';
 
 interface FighterDetailsProps {
   fighterArray: any[]

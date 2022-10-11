@@ -2,7 +2,8 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
-import './card-select-modal.css';
+import './CardSelectModal.css';
+
 export default function CardSelectModal(props: any) {
   return (
     <Modal size='sm' centered show={props.modal} className='character-card-modal text-center'>

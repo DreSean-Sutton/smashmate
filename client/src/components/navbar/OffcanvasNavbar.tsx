@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
-import './offcanvas-navbar.css';
+import './OffcanvasNavbar.css';
 
 export default function OffcanvasNavbar(props: any) {
   const menuName = props.user ? props.user.user.username : 'Guest';

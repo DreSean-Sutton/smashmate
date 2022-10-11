@@ -1,9 +1,9 @@
-import OffcanvasNavbar from './offcanvas-navbar'
+import OffcanvasNavbar from './OffcanvasNavbar'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import './site-navbar.css';
+import './SiteNavbar.css';
 
 export default function SiteNavbar(props: any) {
 
