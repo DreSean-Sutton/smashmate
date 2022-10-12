@@ -7,7 +7,7 @@ import { useAppSelector } from '../../app/hook';
 import { selectUser } from '../../features/account/userSlice';
 import './SiteNavbar.css';
 
-export default function SiteNavbar(props: any) {
+export default function SiteNavbar() {
 
   const user = useAppSelector(selectUser);
   const profileIcon = user ? 'fa-solid profile-logged-in' : 'fa-regular';

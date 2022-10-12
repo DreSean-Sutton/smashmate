@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 import './OffcanvasNavbar.css';
 
-export default function OffcanvasNavbar(props: any) {
+export default function OffcanvasNavbar() {
 
   const user = useAppSelector(selectUser);
   const menuName = user ? user.user.username : 'Guest';

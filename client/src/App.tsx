@@ -16,6 +16,7 @@ import FavoritesList from './pages/Favorites';
 import Registration from './pages/Registration';
 import Loading from './components/Loading';
 import axios from 'axios';
+
 export default function App() {
 
   const user = useAppSelector(selectUser);

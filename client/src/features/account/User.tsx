@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-export default function User(props: any) {
+export default function User() {
 
   let title, currentView;
   if (window.location.pathname.includes('sign-in')) {

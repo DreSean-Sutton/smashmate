@@ -21,7 +21,7 @@ interface QueryResult {
   }
 }
 
-export default function SignIn (props: any) {
+export default function SignIn () {
   const dispatch = useAppDispatch()
 
   const [validated, setValidated] = useState(false);

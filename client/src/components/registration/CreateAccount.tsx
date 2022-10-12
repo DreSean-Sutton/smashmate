@@ -13,7 +13,7 @@ interface Profile {
   email: string,
   password: string
 }
-export default function CreateAccount(props: any) {
+export default function CreateAccount() {
 
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
