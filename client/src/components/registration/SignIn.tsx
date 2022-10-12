@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hook';
+import { setUser } from '../../features/account/userSlice';
+
 import Loading from '../Loading';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
@@ -19,6 +22,7 @@ interface QueryResult {
 }
 
 export default function SignIn (props: any) {
+  const dispatch = useAppDispatch()
 
   const [validated, setValidated] = useState(false);
   const [isloading, setIsLoading] = useState(false);
@@ -69,7 +73,7 @@ export default function SignIn (props: any) {
     if (!form.reportValidity()) {
       event.stopPropagation();
     } else {
-      props.setUser(result);
+      dispatch(setUser(result));
       navigate('/');
       form.reset();
     }

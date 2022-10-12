@@ -1,3 +1,5 @@
+import { useAppSelector, useAppDispatch } from '../../app/hook';
+import { setUser, selectUser } from '../../features/account/userSlice';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
@@ -5,12 +7,15 @@ import { Link } from 'react-router-dom';
 import './OffcanvasNavbar.css';
 
 export default function OffcanvasNavbar(props: any) {
-  const menuName = props.user ? props.user.user.username : 'Guest';
-  const loggingIcon = props.user ? 'fa-arrow-right-from-bracket' : 'fa-arrow-right-to-bracket';
-  const loggingTitle = props.user ? 'Logout' : 'Login';
+
+  const user = useAppSelector(selectUser);
+  const menuName = user ? user.user.username : 'Guest';
+  const loggingIcon = user ? 'fa-arrow-right-from-bracket' : 'fa-arrow-right-to-bracket';
+  const loggingTitle = user ? 'Logout' : 'Login';
+  const dispatch = useAppDispatch();
 
   function handleSignOut() {
-    if (props.user) props.setUser(null);
+    if (user) dispatch(setUser(null));
   }
 
 return (

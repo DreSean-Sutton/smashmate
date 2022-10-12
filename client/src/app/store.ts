@@ -5,7 +5,7 @@ import userReducer from '../features/account/userSlice';
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    currentUser: userReducer,
   }
 });
 
