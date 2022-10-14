@@ -6,13 +6,10 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import axios from 'axios';
 import showHideData from '../../util/show-hide-data';
+import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-interface StatsDataProps {
-  currentFighter: string
-}
-
-export default function StatsData(props: StatsDataProps) {
+export default function StatsData(props: DataProps) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

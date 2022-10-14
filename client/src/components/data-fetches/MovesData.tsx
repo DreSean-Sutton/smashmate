@@ -6,13 +6,10 @@ import Card from 'react-bootstrap/Card';
 import FetchDataFail from './FetchDataFail';
 import axios from 'axios';
 import showHideData from '../../util/show-hide-data';
+import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-interface MovesDataProps {
-  currentFighter: string
-}
-
-export default function MovesData(props: MovesDataProps) {
+export default function MovesData(props: DataProps) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

@@ -114,21 +114,6 @@ export default function App() {
     }
   }
 
-  function handleDeleteFavorites(id: number): void {
-    interface Fav {
-      fighterId: number
-    }
-    if (favorites.length === 1) {
-      dispatch(setFavorites([]));
-    }
-
-    function filterFav(fav: Fav): number | undefined {
-      if (fav.fighterId !== id) {
-        return fav.fighterId
-      }
-    }
-    dispatch(setFavorites(favorites.filter(filterFav)));
-  }
   if(loading) {
     return (
       <>
@@ -151,17 +136,13 @@ export default function App() {
           <Route path="/" element={
             <>
               <BackgroundCarousel />
-              <Home
-                deleteFavorites = {handleDeleteFavorites}
-              />
+              <Home />
             </>
           } />
           <Route path="/favorites" element={
             <>
               <BackgroundCarousel />
-              <Favorites
-                deleteFavorites = {handleDeleteFavorites}
-              />
+              <Favorites />
             </>
           } />
           <Route path='/character-details'>

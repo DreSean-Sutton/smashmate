@@ -6,13 +6,10 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import axios from 'axios';
 import showHideData from '../../util/show-hide-data';
+import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-interface MovementDataProps {
-  currentFighter: string
-}
-
-export default function MovementData(props: MovementDataProps) {
+export default function MovementData(props: DataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

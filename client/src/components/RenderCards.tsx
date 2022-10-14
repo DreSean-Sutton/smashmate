@@ -3,27 +3,18 @@ import React from 'react';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
-import { selectFavorites, addFavorites } from '../features/favorites/favoritingSlice';
+import { selectFavorites, addFavorites, deleteFavorites } from '../features/favorites/favoritingSlice';
+import { FighterProps } from '../util/types';
 import CardSelectModal from './CardSelectModal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import './RenderCards.css';
 
-interface MyProps {
-  deleteFavorites: (param1: number) => void
-}
-
-interface FighterProps {
-  fighter: string,
-  fighterId: number | null,
-  displayName: string,
-  rosterId: number | null
-};
 interface EventProps {
   target?: any,
   matches?: any
 }
-export default function RenderCards(props: MyProps) {
+export default function RenderCards() {
 
   const focusedFighterInitialState: FighterProps = {
     fighter: '',
@@ -60,7 +51,7 @@ export default function RenderCards(props: MyProps) {
     const currentCard = heart.closest('#character-card').dataset;
     for (let i = 0; i < favorites.length; i++) {
       if (favorites[i].fighterId === Number(currentCard.cardFighterId)) {
-        return props.deleteFavorites(favorites[i].fighterId);
+        return dispatch(deleteFavorites(favorites[i].fighterId));
       }
     }
     const fav: FighterProps = {
