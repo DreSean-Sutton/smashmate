@@ -6,8 +6,9 @@ import {
   useLocation,
   Navigate
 } from "react-router-dom";
-import { useAppSelector } from './app/hook';
+import { useAppSelector, useAppDispatch } from './app/hook';
 import { selectUser } from './features/account/userSlice';
+import { setFighters, selectFighters } from './features/fighters/fightersSlice';
 import BackgroundCarousel from './components/BackgroundCarousel';
 import SiteNavbar from './components/navbar/SiteNavbar';
 import Home from './pages/Home';
@@ -20,10 +21,11 @@ import axios from 'axios';
 export default function App() {
 
   const user = useAppSelector(selectUser);
-  const [fighterArray, setfighterArray]: any[] = useState([]);
+  const fighters = useAppSelector(selectFighters);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
@@ -57,7 +59,7 @@ export default function App() {
     if (window.location.pathname.includes('registration')) {
       return;
     }
-    if(fighterArray.length === 0) {
+    if(fighters.length === 0) {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,7 +70,7 @@ export default function App() {
     try {
       const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
       if (res.status === 200) {
-        setfighterArray(res.data);
+        dispatch(setFighters(res.data));
       } else {
         throw Error(res.statusText);
       }
@@ -155,7 +157,7 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <Home
-                fighterArray = {fighterArray}
+                fighterArray = {fighters}
                 favorites = {favorites}
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
@@ -166,7 +168,7 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <FavoritesList
-                fighterArray = {fighterArray}
+                fighterArray = {fighters}
                 favorites = {favorites}
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
@@ -178,7 +180,7 @@ export default function App() {
               <>
                 <BackgroundCarousel />
                 <FighterDetails
-                  fighterArray={fighterArray}
+                  fighterArray={fighters}
                 />
               </>
             } />

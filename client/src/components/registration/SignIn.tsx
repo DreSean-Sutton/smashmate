@@ -22,7 +22,7 @@ interface QueryResult {
 }
 
 export default function SignIn () {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const [validated, setValidated] = useState(false);
   const [isloading, setIsLoading] = useState(false);
