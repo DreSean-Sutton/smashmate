@@ -114,11 +114,6 @@ export default function App() {
     }
   }
 
-  function handleAddFavorites(fav: object | undefined) {
-    const newFavorites: any[] = [...favorites, fav]
-    dispatch(setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1)));
-  }
-
   function handleDeleteFavorites(id: number): void {
     interface Fav {
       fighterId: number
@@ -157,7 +152,6 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <Home
-                addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
               />
             </>
@@ -166,7 +160,6 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <Favorites
-                addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
               />
             </>

@@ -1,16 +1,15 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useState } from 'react';
-import { useAppSelector } from '../app/hook';
+import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
-import { selectFavorites } from '../features/favorites/favoritingSlice';
+import { selectFavorites, addFavorites } from '../features/favorites/favoritingSlice';
 import CardSelectModal from './CardSelectModal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import './RenderCards.css';
 
 interface MyProps {
-  addFavorites: (param1: object) => void
   deleteFavorites: (param1: number) => void
 }
 
@@ -37,6 +36,7 @@ export default function RenderCards(props: MyProps) {
   const favorites = useAppSelector(selectFavorites);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [focusedFighter, setFocusedFighter]: any = useState(focusedFighterInitialState);
+  const dispatch = useAppDispatch();
 
   function handleShowModal(event: any) {
     if (event.target.matches('.fa-heart')) return;
@@ -69,7 +69,7 @@ export default function RenderCards(props: MyProps) {
       displayName: currentCard.cardDisplayName,
       rosterId: Number(currentCard.cardRosterId)
     };
-    props.addFavorites(fav);
+    dispatch(addFavorites(fav));
   }
 
   function handleHearts(id: number): string {

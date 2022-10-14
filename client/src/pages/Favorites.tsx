@@ -3,7 +3,6 @@ import NoFavorites from '../components/NoFavorites';
 import { useAppSelector } from '../app/hook';
 import { selectFavorites } from '../features/favorites/favoritingSlice';
 interface favoritesListProps {
-  addFavorites: (param1: object | undefined) => void
   deleteFavorites: (param1: number) => void
 }
 export default function FavoritesList(props: favoritesListProps) {
@@ -17,7 +16,6 @@ export default function FavoritesList(props: favoritesListProps) {
   }
   return (
     <RenderCards
-      addFavorites={props.addFavorites}
       deleteFavorites={props.deleteFavorites}
       />
   );
