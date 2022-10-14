@@ -9,11 +9,12 @@ import {
 import { useAppSelector, useAppDispatch } from './app/hook';
 import { selectUser } from './features/account/userSlice';
 import { setFighterArray, selectFighterArray } from './features/fighters/fightersArraySlice';
+import { setFavorites, selectFavorites } from './features/favorites/favoritingSlice';
 import BackgroundCarousel from './components/BackgroundCarousel';
 import SiteNavbar from './components/navbar/SiteNavbar';
 import Home from './pages/Home';
 import FighterDetails from './pages/FighterDetails';
-import FavoritesList from './pages/Favorites';
+import Favorites from './pages/Favorites';
 import Registration from './pages/Registration';
 import Loading from './components/Loading';
 import axios from 'axios';
@@ -22,7 +23,7 @@ export default function App() {
 
   const user = useAppSelector(selectUser);
   const fighterArray = useAppSelector(selectFighterArray);
-  const [favorites, setFavorites]: any[] = useState([]);
+  const favorites = useAppSelector(selectFavorites);
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ export default function App() {
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
       const result = await handleGetFavorites(getFavoritesQuery);
-      setFavorites(result.favorites);
+      dispatch(setFavorites(result.favorites));
     }
     if(user) {
       const getFavoritesQuery = { email: user.user.email };
@@ -38,10 +39,10 @@ export default function App() {
     } else {
       const favoriteItem: string | null = localStorage.getItem('favorites');
       if (favoriteItem) {
-        setFavorites(JSON.parse(favoriteItem));
+        dispatch(setFavorites(JSON.parse(favoriteItem)));
       }
     }
-  }, [user]);
+  }, [user, dispatch]);
 
   useEffect(() => {
     if(user) {
@@ -115,7 +116,7 @@ export default function App() {
 
   function handleAddFavorites(fav: object | undefined) {
     const newFavorites: any[] = [...favorites, fav]
-    setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1));
+    dispatch(setFavorites(newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1)));
   }
 
   function handleDeleteFavorites(id: number): void {
@@ -123,7 +124,7 @@ export default function App() {
       fighterId: number
     }
     if (favorites.length === 1) {
-      setFavorites([]);
+      dispatch(setFavorites([]));
     }
 
     function filterFav(fav: Fav): number | undefined {
@@ -131,9 +132,8 @@ export default function App() {
         return fav.fighterId
       }
     }
-    setFavorites(favorites.filter(filterFav));
+    dispatch(setFavorites(favorites.filter(filterFav)));
   }
-  console.log(fighterArray);
   if(loading) {
     return (
       <>
@@ -157,7 +157,6 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <Home
-                favorites = {favorites}
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
               />
@@ -166,8 +165,7 @@ export default function App() {
           <Route path="/favorites" element={
             <>
               <BackgroundCarousel />
-              <FavoritesList
-                favorites = {favorites}
+              <Favorites
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
               />
@@ -177,8 +175,7 @@ export default function App() {
             <Route path={':fighter'} element={
               <>
                 <BackgroundCarousel />
-                <FighterDetails
-                />
+                <FighterDetails />
               </>
             } />
           </Route>

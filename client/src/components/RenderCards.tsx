@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
+import { selectFavorites } from '../features/favorites/favoritingSlice';
 import CardSelectModal from './CardSelectModal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,7 +12,6 @@ import './RenderCards.css';
 interface MyProps {
   addFavorites: (param1: object) => void
   deleteFavorites: (param1: number) => void
-  favorites: any[]
 }
 
 interface FighterProps {
@@ -34,6 +34,7 @@ export default function RenderCards(props: MyProps) {
   }
 
   const fighterArray = useAppSelector(selectFighterArray);
+  const favorites = useAppSelector(selectFavorites);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [focusedFighter, setFocusedFighter]: any = useState(focusedFighterInitialState);
 
@@ -57,9 +58,9 @@ export default function RenderCards(props: MyProps) {
   function handleFavoriting(event: EventProps) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
-    for (let i = 0; i < props.favorites.length; i++) {
-      if (props.favorites[i].fighterId === Number(currentCard.cardFighterId)) {
-        return props.deleteFavorites(props.favorites[i].fighterId);
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].fighterId === Number(currentCard.cardFighterId)) {
+        return props.deleteFavorites(favorites[i].fighterId);
       }
     }
     const fav: FighterProps = {
@@ -72,7 +73,7 @@ export default function RenderCards(props: MyProps) {
   }
 
   function handleHearts(id: number): string {
-    for (const element of props.favorites) {
+    for (const element of favorites) {
       const fighterId = element.fighterId
       if (id === fighterId) {
         return 'card-heart-favorited';
@@ -90,7 +91,7 @@ export default function RenderCards(props: MyProps) {
 
     const favRegex = new RegExp('favorites', 'g');
     if(favRegex.test(location.href)) {
-      return props.favorites;
+      return favorites;
     } else {
       return fighterArray;
     }

@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-export interface FighterArrayState {array: any[]}
-const initialState: FighterArrayState = { array: [] };
+const initialState: { array: any[] } = { array: [] };
 
 const fighterArraySlice = createSlice({
   name: 'fighterArray',
