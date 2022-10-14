@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '../app/hook';
-import { selectFighters } from '../features/fighters/fightersSlice';
+import { selectFighterArray } from '../features/fighters/fightersArraySlice';
 import CardSelectModal from './CardSelectModal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,7 +11,6 @@ import './RenderCards.css';
 interface MyProps {
   addFavorites: (param1: object) => void
   deleteFavorites: (param1: number) => void
-  fighterArray: any[]
   favorites: any[]
 }
 
@@ -34,7 +33,7 @@ export default function RenderCards(props: MyProps) {
     rosterId: null
   }
 
-  const fighters = useAppSelector(selectFighters);
+  const fighterArray = useAppSelector(selectFighterArray);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [focusedFighter, setFocusedFighter]: any = useState(focusedFighterInitialState);
 
@@ -93,7 +92,7 @@ export default function RenderCards(props: MyProps) {
     if(favRegex.test(location.href)) {
       return props.favorites;
     } else {
-      return fighters;
+      return fighterArray;
     }
   }
   const allCards = homeOrFavorites().map((card: any) => {

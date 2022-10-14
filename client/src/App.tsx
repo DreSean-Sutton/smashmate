@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from './app/hook';
 import { selectUser } from './features/account/userSlice';
-import { setFighters, selectFighters } from './features/fighters/fightersSlice';
+import { setFighterArray, selectFighterArray } from './features/fighters/fightersArraySlice';
 import BackgroundCarousel from './components/BackgroundCarousel';
 import SiteNavbar from './components/navbar/SiteNavbar';
 import Home from './pages/Home';
@@ -21,7 +21,7 @@ import axios from 'axios';
 export default function App() {
 
   const user = useAppSelector(selectUser);
-  const fighters = useAppSelector(selectFighters);
+  const fighterArray = useAppSelector(selectFighterArray);
   const [favorites, setFavorites]: any[] = useState([]);
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
@@ -59,7 +59,7 @@ export default function App() {
     if (window.location.pathname.includes('registration')) {
       return;
     }
-    if(fighters.length === 0) {
+    if(fighterArray.length === 0) {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +70,7 @@ export default function App() {
     try {
       const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/fighters')
       if (res.status === 200) {
-        dispatch(setFighters(res.data));
+        dispatch(setFighterArray(res.data));
       } else {
         throw Error(res.statusText);
       }
@@ -133,7 +133,7 @@ export default function App() {
     }
     setFavorites(favorites.filter(filterFav));
   }
-
+  console.log(fighterArray);
   if(loading) {
     return (
       <>
@@ -157,7 +157,6 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <Home
-                fighterArray = {fighters}
                 favorites = {favorites}
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
@@ -168,7 +167,6 @@ export default function App() {
             <>
               <BackgroundCarousel />
               <FavoritesList
-                fighterArray = {fighters}
                 favorites = {favorites}
                 addFavorites = {handleAddFavorites}
                 deleteFavorites = {handleDeleteFavorites}
@@ -180,7 +178,6 @@ export default function App() {
               <>
                 <BackgroundCarousel />
                 <FighterDetails
-                  fighterArray={fighters}
                 />
               </>
             } />

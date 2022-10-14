@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../app/hook';
+import { selectFighterArray } from '../features/fighters/fightersArraySlice';
 import MovesData from '../components/data-fetches/MovesData';
 import ThrowsData from '../components/data-fetches/ThrowsData';
 import MovementData from '../components/data-fetches/MovementData';
@@ -12,11 +14,8 @@ import Image from 'react-bootstrap/Image';
 import axios from 'axios';
 import './FighterDetails.css';
 
-interface FighterDetailsProps {
-  fighterArray: any[]
-}
-
-export default function FighterDetails(props: FighterDetailsProps) {
+export default function FighterDetails() {
+  const fighterArray = useAppSelector(selectFighterArray);
   let navigate = useNavigate();
   let { fighter }: any = useParams();
   const [offset, setOffset] = useState(0);
@@ -53,25 +52,25 @@ export default function FighterDetails(props: FighterDetailsProps) {
     }
     return -1;
   }
-  let fighterIndex = binarySearcher(props.fighterArray, fighter);
+  let fighterIndex = binarySearcher(fighterArray, fighter);
 
   function handlePreviousFighter () {
     if(fighterIndex === 0) {
-      fighterIndex = props.fighterArray.length;
+      fighterIndex = fighterArray.length;
     }
-    navigate(`/character-details/${props.fighterArray[fighterIndex - 1].fighter}`);
+    navigate(`/character-details/${fighterArray[fighterIndex - 1].fighter}`);
   }
 
   function handleNextFighter () {
-    if (fighterIndex === props.fighterArray.length - 1) {
+    if (fighterIndex === fighterArray.length - 1) {
       fighterIndex = -1;
     }
-    navigate(`/character-details/${props.fighterArray[fighterIndex + 1].fighter}`);
+    navigate(`/character-details/${fighterArray[fighterIndex + 1].fighter}`);
   }
 
   function handleCheckTitle() {
-    if(props.fighterArray.length !== 0) {
-      return props.fighterArray[fighterIndex].displayName
+    if(fighterArray.length !== 0) {
+      return fighterArray[fighterIndex].displayName
     } else {
       fetchTitle().then(res => {
         return res;
