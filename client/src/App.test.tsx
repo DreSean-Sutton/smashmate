@@ -17,7 +17,7 @@ describe('Testing /favoriting/characters/upsert', () => {
   afterEach(nock.cleanAll);
 
   describe('Testing add/remove favorites', () => {
-    const url = 'http://localhost:5000/favoriting/characters/upsert';
+    const url = '/favoriting/characters/upsert';
     const myProfile = {
       email: 'testemail@gmail.com',
       favorites: [
@@ -59,7 +59,7 @@ describe('Testing /favoriting/characters/upsert', () => {
 
     it('returns an error message if insert fails', async () => {
 
-      nock('http://localhost:5000')
+      nock('/')
         .persist()
         .post('/favoriting/characters/upsert')
         .replyWithError('An unexpected error occurred!');
@@ -70,7 +70,7 @@ describe('Testing /favoriting/characters/upsert', () => {
 
   describe.only('Testing /favoriting/characters/get', () => {
 
-    const url = 'http://localhost:5000/favoriting/characters/get';
+    const url = '/favoriting/characters/get';
     const queryEmail = {email:'testemail@gmail.com'};
     const controller = new AbortController()
     const header = {

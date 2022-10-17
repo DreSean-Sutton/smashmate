@@ -83,7 +83,7 @@ export default function App() {
   }
 
   async function handleUploadFavorites(query: any) {
-    const url = 'http://localhost:5000/favoriting/characters/upsert';
+    const url = '/favoriting/characters/upsert';
     const controller = new AbortController()
     const headers = {
       signal: controller.signal,
@@ -99,7 +99,7 @@ export default function App() {
   }
 
   async function handleGetFavorites(queryEmail: {email: string}) {
-    const url = 'http://localhost:5000/favoriting/characters/get';
+    const url = '/favoriting/characters/get';
     const controller = new AbortController()
     const header = {
       signal: controller.signal,

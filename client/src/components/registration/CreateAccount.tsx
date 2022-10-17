@@ -28,7 +28,7 @@ export default function CreateAccount() {
   }
 
   async function handleUploadProfile(profile: Profile) {
-    const url = 'http://localhost:5000/registration/account/add';
+    const url = '/registration/account/add';
     try {
       const { status, data } = await axios.post(url, profile, headers);
       if(data.username) return data;

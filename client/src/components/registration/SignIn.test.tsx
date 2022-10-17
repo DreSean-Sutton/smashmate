@@ -7,7 +7,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Registration sign in routes', () => {
   afterEach(nock.cleanAll);
 
-  const url = `http://localhost:5000/registration/account/sign-in`;
+  const url = `/registration/account/sign-in`;
   const controller = new AbortController();
   const headers = {
     signal: controller.signal,
@@ -26,7 +26,7 @@ describe('Registration sign in routes', () => {
   // 200 STATUS CODE TEST
   it('responds with token and user object when queried', async () => {
 
-    nock('http://localhost:5000')
+    nock('')
       .persist()
       .post('/registration/account/sign-in')
       .reply(200, {
@@ -60,7 +60,7 @@ describe('Registration sign in routes', () => {
   // EMAIL ERROR TESTS
   it('responds with error messages if email isn\'t found', async () => {
 
-    nock('http://localhost:5000')
+    nock('')
       .persist()
       .post('/registration/account/sign-in')
       .reply(401, {
@@ -85,7 +85,7 @@ describe('Registration sign in routes', () => {
   // PASSWORD ERROR TESTS
   it('responds with error message if password isn\'t found', async () => {
 
-    nock('http://localhost:5000')
+    nock('')
       .persist()
       .post('/registration/account/sign-in')
       .replyWithError('Invalid password')
@@ -103,7 +103,7 @@ describe('Registration sign in routes', () => {
   // SERVER ERROR TESTS
   it('tells the client if a server error occurs', async () => {
 
-    nock('http://localhost:5000')
+    nock('')
       .persist()
       .post('/registration/account/sign-in')
       .reply(401, {

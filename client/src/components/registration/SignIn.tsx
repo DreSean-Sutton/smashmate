@@ -29,7 +29,7 @@ export default function SignIn () {
   const navigate = useNavigate();
 
   const loadSpinner = isloading ? <Loading /> : '';
-  const url = `http://localhost:5000/registration/account/sign-in`;
+  const url = `/registration/account/sign-in`;
   const controller = new AbortController();
   const headers = {
     signal: controller.signal,
