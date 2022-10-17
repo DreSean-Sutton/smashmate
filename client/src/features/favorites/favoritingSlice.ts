@@ -11,7 +11,6 @@ const favoritingSlice = createSlice({
       state.favoritesArray = action.payload
     },
     addFavorites: (state, action: PayloadAction<any>) => {
-      console.log('favoritesArray :', state.favoritesArray)
       const newFavorites: any[] = [...state.favoritesArray, action.payload];
       state.favoritesArray = newFavorites.sort((a: any, b: any) => (a.fighterId > b.fighterId) ? 1 : -1);
     },
