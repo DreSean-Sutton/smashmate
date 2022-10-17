@@ -1,6 +1,6 @@
-import { type } from "os";
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
+const path = require('path');
 var express = require('express');
 require('dotenv').config({ path: '../.env' });
 const port = process.env.PORT || 5001;
@@ -20,6 +20,15 @@ const favoritingRoute = require('./routes/favoriting');
 app.use('/registration', registrationRoute);
 app.use('/favoriting', favoritingRoute);
 
+app.use('/api', (req: any, res: any) => {
+  res.status(404).json({ error: `cannot ${req.method} ${req.url}` })
+});
+
+app.use((req: any, res: any) => {
+  res.sendFile('/index.html', {
+    root: path.join(__dirname, 'public')
+  });
+});
 app.use(errorMiddleware);
 
 app.listen(port, () => {
