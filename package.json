@@ -26,9 +26,6 @@
     "dotenv": "^16.0.2"
   },
   "engines": {
-    "node": ">=18.0.0"
-  },
-  "dependencies": {
-    "react-scripts": "^5.0.1"
+    "node": "18.x"
   }
 }
