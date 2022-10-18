@@ -26,6 +26,10 @@
     "dotenv": "^16.0.2"
   },
   "engines": {
+    "npm": "8.x",
     "node": "18.x"
+  },
+  "dependencies": {
+    "react-scripts": "^5.0.1"
   }
 }
