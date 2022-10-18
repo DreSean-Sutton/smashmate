@@ -1,0 +1,24 @@
+.navbar-top {
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 4;
+  box-shadow: 0 2px 2px 1px rgb(15, 15, 15, 0.5);
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+  color: black;
+  background-color: white;
+  transition: transform 400ms, color 500ms;
+  padding: 6px;
+  border-radius: 50rem;
+  border: 2.5px solid black;
+}
+
+.profile-icon:hover,
+.profile-icon:active {
+  transform: scale(1.2);
+}

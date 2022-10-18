@@ -1,27 +1,131 @@
-body {
-  margin: 0;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --card-color: rgba(255 255 255 / 0.93);
+  --character-name-border: #c4c4c4;
+  --heart-color: rgb(245, 76, 104);
+  --typical-box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.4);
+  --primary-theme: rgb(39, 78, 255);
+  --secondary-theme: rgb(255, 0, 0);
+  --tertiary-theme: rgb(240, 240, 0);
 }
 
-code {
-  font-family:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Courier New",
-    monospace;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  margin: 0 auto 5rem;
+}
+
+main {
+  margin: auto;
+}
+
+
+h1 {
+  font-size: 1rem;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+
+h2,
+h3,
+h4 {
+  text-transform: capitalize;
+}
+
+h4 {
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+i {
+  cursor: pointer;
+}
+
+.primary-theme-bg {
+  background-color: var(--primary-theme) !important;
+}
+
+.primary-theme-color {
+  color: var(--primary-theme) !important;
+}
+
+.secondary-theme-bg {
+  background-color: var(--secondary-theme) !important;
+}
+
+.secondary-theme-color {
+  color: var(--secondary-theme) !important;
+}
+
+.tertiary-theme-bg {
+  background-color: var(--tertiary-theme) !important;
+}
+
+.tertiary-theme-color {
+  color: var(--tertiary-theme) !important;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 375px) {
+  header {
+    margin: 0 auto 6rem;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 575px) {
+  header {
+    margin: 0 auto 6.5rem;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  h4 {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* UTILITY CLASSES */
+
+.typical-box-shadow {
+  box-shadow: var(--typical-box-shadow);
 }

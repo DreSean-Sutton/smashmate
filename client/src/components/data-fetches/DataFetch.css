@@ -1,0 +1,9 @@
+.data-title {
+  user-select: none;
+  cursor: pointer;
+}
+
+.data-title:hover,
+.data-title:active {
+  opacity: 90%;
+}

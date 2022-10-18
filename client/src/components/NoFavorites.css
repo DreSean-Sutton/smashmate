@@ -1,0 +1,25 @@
+.no-favorites-row {
+  margin: auto;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.card {
+  position: relative;
+  top: 25%;
+}
+
+.no-favorites-link {
+  margin: auto;
+  padding: 5px 10px;
+  border-radius: 50rem;
+  background-color: var(--heart-color);
+  transition: 200ms ease-in transform,
+              100ms ease-in color;
+}
+
+.no-favorites-link:hover,
+.no-favorites-link:active {
+  color: white;
+  transform: scale(1.2);
+}

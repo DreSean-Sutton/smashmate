@@ -1,0 +1,65 @@
+li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.offcanvas-navbar {
+  max-width: 100%;
+  background-color: var(--primary-theme);
+}
+
+.offcanvas-ul {
+  position: relative;
+  padding: 0;
+}
+
+.offcanvas-li+.offcanvas-li {
+  margin-top: 0.25rem;
+}
+
+.offcanvas-link {
+  color: white;
+}
+
+.offcanvas-link:hover,
+.offcanvas-link:active {
+  color: var(--tertiary-theme);
+}
+
+.offcanvas-link>span {
+  margin-left: 10px;
+}
+
+
+.fa-house-chimney {
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (min-width: 375px) {
+  .offcanvas-navbar {
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 575px) {
+  .offcanvas-navbar {
+    max-width: 25%;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  .offcanvas-ul {
+    top: 0.5rem;
+  }
+
+  .offcanvas-li>span {
+    margin-left: 0;
+  }
+
+  .offcanvas-li+.offcanvas-li {
+    margin-left: 1.5rem;
+    margin-top: 0;
+  }
+}

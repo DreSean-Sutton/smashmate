@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
-import App from './app';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   // React.StrictMode makes useEffect render twice per render in dev mode, but not production mode
   <Router>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Router>
 );
 

@@ -1,0 +1,17 @@
+.character-card-modal {
+  background-color: var;
+}
+
+.character-card-header {
+
+}
+
+.card-modal-link {
+  background-color: var(--primary-theme);
+}
+
+.card-modal-link:hover,
+.card-modal-link:active {
+  background-color: var(--primary-theme);
+  opacity: 0.90;
+}
