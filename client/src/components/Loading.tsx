@@ -1,7 +1,7 @@
 import React from 'react';
-import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import { Spinner } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 export default function Loading(props: object) {
   return (
