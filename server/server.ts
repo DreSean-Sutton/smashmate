@@ -20,6 +20,10 @@ const favoritingRoute = require('./routes/favoriting');
 app.use('/registration', registrationRoute);
 app.use('/favoriting', favoritingRoute);
 
+if(process.env.NODE_ENV === 'production') {
+  // serve files from the client's build dir
+  app.use(express.static(__dirname, '../../client/build'));
+}
 app.use('/api', (req: any, res: any) => {
   res.status(404).json({ error: `cannot ${req.method} ${req.url}` })
 });
