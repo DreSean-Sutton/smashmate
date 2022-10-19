@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node build/server.js",
     "dev:server": "nodemon build/server.js",
+    "tsc": "./node_modules/typescript/bin/tsc",
     "tsc:watch": "tsc -w"
   },
   "keywords": [],
