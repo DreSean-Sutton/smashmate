@@ -1,7 +1,7 @@
-import OffcanvasNavbar from './OffcanvasNavbar'
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Navbar from 'react-bootstrap/Navbar';
+import OffcanvasNavbar from './OffcanvasNavbar';
+import { Container } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hook';
 import { selectUser } from '../../features/account/userSlice';

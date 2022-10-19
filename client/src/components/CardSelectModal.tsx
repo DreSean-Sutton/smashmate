@@ -1,6 +1,6 @@
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
+import { Modal } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './CardSelectModal.css';
 

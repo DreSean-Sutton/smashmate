@@ -1,9 +1,9 @@
 import CreateAccount from '../../components/registration/CreateAccount';
 import SignIn from '../../components/registration/SignIn';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export default function User() {
 

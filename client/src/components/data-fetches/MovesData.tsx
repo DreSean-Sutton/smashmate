@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Loading from '../Loading';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import FetchDataFail from './FetchDataFail';
 import axios from 'axios';
 import showHideData from '../../util/show-hide-data';

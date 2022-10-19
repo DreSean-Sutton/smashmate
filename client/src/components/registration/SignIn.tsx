@@ -4,10 +4,10 @@ import { useAppDispatch } from '../../app/hook';
 import { setUser } from '../../features/account/userSlice';
 
 import Loading from '../Loading';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 

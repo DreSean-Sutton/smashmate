@@ -6,8 +6,8 @@ import { selectFighterArray } from '../features/fighters/fightersArraySlice';
 import { selectFavorites, addFavorites, deleteFavorites } from '../features/favorites/favoritingSlice';
 import { FighterProps } from '../util/types';
 import CardSelectModal from './CardSelectModal';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import { Container } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import './RenderCards.css';
 
 interface EventProps {

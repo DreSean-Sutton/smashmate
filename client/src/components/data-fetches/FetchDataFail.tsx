@@ -1,5 +1,5 @@
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
+import { Card } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 interface FetchProps {
   data: string
