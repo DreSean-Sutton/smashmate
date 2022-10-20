@@ -1,6 +1,6 @@
 {
   "name": "smashmate",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.",
   "scripts": {
     "start": "npm run --prefix server start",
