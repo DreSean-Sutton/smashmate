@@ -1,5 +1,8 @@
 const { MongoClient } = require('mongodb');
 const Db = process.env.DATABASE_URL;
+const express = require('express');
+const app = express();
+app.use(express());
 const port = process.env.PORT || 5001;
 const client = new MongoClient(Db, {
   useNewUrlParser: true,
@@ -11,8 +14,7 @@ var _db: any;
 async function start() {
   await client.connect()
   console.log("Connected")
-  module.exports = client.db()
-  const app = require('./app')
+  module.exports = client.db();
   app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
   })
