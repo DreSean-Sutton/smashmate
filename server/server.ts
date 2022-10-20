@@ -1,7 +1,6 @@
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
 const path = require('path');
-const something = {path: 'string'}
 var express = require('express');
 require('dotenv').config({ path: '../.env' });
 const port = process.env.PORT || 5001;
