@@ -1,10 +1,11 @@
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
 const path = require('path');
+const something = {path: 'string'}
 var express = require('express');
 require('dotenv').config({ path: '../.env' });
-// const port = process.env.PORT || 5001;
-// var dbo = require('./db/conn');
+const port = process.env.PORT || 5001;
+var dbo = require('./db/conn');
 
 const app = express();
 app.use(express.json());
@@ -35,9 +36,9 @@ app.use((req: any, res: any) => {
 });
 app.use(errorMiddleware);
 
-// app.listen(port, () => {
-//   dbo.connectToServer(function (err: any) {
-//     if (err) console.error(err);
-//   });
-//   console.log(`Server is running on port: ${port}`);
-// });
+app.listen(port, () => {
+  dbo.connectToServer(function (err: any) {
+    if (err) console.error(err);
+  });
+  console.log(`Server is running on port: ${port}`);
+});

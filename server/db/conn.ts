@@ -11,29 +11,29 @@ const client = new MongoClient(Db, {
 
 var _db: any;
 
-async function start() {
-  await client.connect()
-  console.log("Connected")
-  module.exports = client.db();
-  app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-  })
-}
+// async function start() {
+//   await client.connect()
+//   console.log("Connected")
+//   module.exports = client.db();
+//   app.listen(port, () => {
+//     console.log(`Server is running on port: ${port}`);
+//   })
+// }
 
-start()
+// start()
 
-// module.exports = {
-//   connectToServer: function (callback: any) {
-//     client.connect(function (err: any, db: any) {
-//       if (db) {
-//         // comment out below code to test server errors
-//         _db = db.db('smashmateDB');
-//         console.log('Successfully connected to MongoDB');
-//       }
-//       return callback(err);
-//     });
-//   },
-//   getDb: function () {
-//     return _db;
-//   }
-// };
+module.exports = {
+  connectToServer: function (callback: any) {
+    client.connect(function (err: any, db: any) {
+      if (db) {
+        // comment out below code to test server errors
+        _db = db.db('smashmateDB');
+        console.log('Successfully connected to MongoDB');
+      }
+      return callback(err);
+    });
+  },
+  getDb: function () {
+    return _db;
+  }
+};
