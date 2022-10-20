@@ -1,9 +1,7 @@
-import path from 'path';
-import dotenv from 'dotenv';
 const { MongoClient } = require('mongodb');
 const express = require('express');
-dotenv.config({ path: '../../.env' });
-const Db = process.env.DATABASE_URL;
+require('dotenv').config({ path: '../../.env' });
+const Db = process.env.MONGO_URL;
 const app = express();
 app.use(express());
 const client = new MongoClient(Db, {

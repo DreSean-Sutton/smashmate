@@ -1,13 +1,9 @@
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
-import path from 'path';
-import dotenv from 'dotenv';
-// const path = require('path');
-var dbo = require('./db/conn');
+const path = require('path');
+require('dotenv').config({ path: '../.env' });
 var express = require('express');
-// const dotenv = require('dotenv');
-dotenv.config({ path: '../.env' });
-// require('dotenv').config({ path: '../.env' });
+var dbo = require('./db/conn');
 const port = process.env.PORT || 5001;
 
 const app = express();
