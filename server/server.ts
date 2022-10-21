@@ -30,7 +30,7 @@ app.use('/api', (req: any, res: any) => {
 
 app.use((req: any, res: any) => {
   res.sendFile('/index.html', {
-    root: path.join(__dirname, 'public')
+    root: '../../client/build'
   });
 });
 app.use(errorMiddleware);
