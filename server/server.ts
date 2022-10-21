@@ -5,7 +5,6 @@ require('dotenv').config({ path: '../../.env' });
 var express = require('express');
 var dbo = require('./db/conn');
 const port = process.env.PORT || 5001;
-console.log(__dirname);
 const app = express();
 app.use(express.json());
 app.use(function (req: any, res: any, next: any) {
@@ -20,10 +19,10 @@ const favoritingRoute = require('./routes/favoriting');
 app.use('/registration', registrationRoute);
 app.use('/favoriting', favoritingRoute);
 
-if(process.env.NODE_ENV === 'production') {
-  // serve files from the client's build dir
-  app.use(express.static(__dirname, '../../client/build'));
-}
+// if(process.env.NODE_ENV === 'production') {
+//   // serve files from the client's build dir
+//   app.use(express.static(__dirname, '../../client/build'));
+// }
 app.use('/api', (req: any, res: any) => {
   res.status(404).json({ error: `cannot ${req.method} ${req.url}` })
 });
