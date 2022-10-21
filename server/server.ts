@@ -1,11 +1,11 @@
 import ClientError from "./client-error";
 import errorMiddleware from "./error-middleware";
 const path = require('path');
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: '../../.env' });
 var express = require('express');
 var dbo = require('./db/conn');
 const port = process.env.PORT || 5001;
-
+console.log(__dirname);
 const app = express();
 app.use(express.json());
 app.use(function (req: any, res: any, next: any) {
