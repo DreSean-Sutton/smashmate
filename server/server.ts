@@ -21,7 +21,7 @@ app.use('/favoriting', favoritingRoute);
 
 if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir
-  app.use(express.static(__dirname, '../../client/build'));
+  app.use(express.static(path.join(__dirname, '../../client/build')));
 }
 
 app.use('/api', (req: any, res: any) => {
