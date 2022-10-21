@@ -7,12 +7,12 @@ var dbo = require('./db/conn');
 const port = process.env.PORT || 5001;
 const app = express();
 app.use(express.json());
-app.use(function (req: any, res: any, next: any) {
-  // Required to bypass CORS
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function (req: any, res: any, next: any) {
+//   // Required to bypass CORS
+//   res.header("Access-Control-Allow-Origin", '*');
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 const registrationRoute = require('./routes/registration');
 const favoritingRoute = require('./routes/favoriting');
