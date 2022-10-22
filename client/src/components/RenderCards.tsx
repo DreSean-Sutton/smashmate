@@ -23,8 +23,8 @@ export default function RenderCards() {
     rosterId: null
   }
 
-  const fighterArray = useAppSelector(selectFighterArray);
-  const favorites = useAppSelector(selectFavorites);
+  const fighterArray: any[] = useAppSelector(selectFighterArray);
+  const favorites: any[] = useAppSelector(selectFavorites);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [focusedFighter, setFocusedFighter]: any = useState(focusedFighterInitialState);
   const dispatch = useAppDispatch();

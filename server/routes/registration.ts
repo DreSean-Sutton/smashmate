@@ -19,6 +19,7 @@ registrationRoute
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      favorites: []
     };
     try {
       db_connect
