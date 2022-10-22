@@ -7,7 +7,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Registration sign in routes', () => {
   afterEach(nock.cleanAll);
 
-  const url = `/registration/account/sign-in`;
+  const url = `/api/registration/account/sign-in`;
   const controller = new AbortController();
   const headers = {
     signal: controller.signal,
@@ -28,7 +28,7 @@ describe('Registration sign in routes', () => {
 
     nock('')
       .persist()
-      .post('/registration/account/sign-in')
+      .post('/api/registration/account/sign-in')
       .reply(200, {
         token: 'teststringofrandomcharacters',
         user: {
@@ -62,7 +62,7 @@ describe('Registration sign in routes', () => {
 
     nock('')
       .persist()
-      .post('/registration/account/sign-in')
+      .post('/api/registration/account/sign-in')
       .reply(401, {
         error: 'Invalid email'
       })
@@ -87,7 +87,7 @@ describe('Registration sign in routes', () => {
 
     nock('')
       .persist()
-      .post('/registration/account/sign-in')
+      .post('/api/registration/account/sign-in')
       .replyWithError('Invalid password')
 
     const queryPassword401 = {
@@ -105,7 +105,7 @@ describe('Registration sign in routes', () => {
 
     nock('')
       .persist()
-      .post('/registration/account/sign-in')
+      .post('/api/registration/account/sign-in')
       .reply(401, {
         error: 'An unexpected error occurred'
       })

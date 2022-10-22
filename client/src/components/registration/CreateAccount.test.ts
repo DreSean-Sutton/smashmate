@@ -7,7 +7,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Registration creation route', () => {
   afterEach(nock.cleanAll);
 
-  const url = '/registration/account/add';
+  const url = '/api/registration/account/add';
   const myProfile = {
     email: 'dreseansutton@gmail.com',
     password: 'test password',
@@ -34,7 +34,7 @@ describe('Registration creation route', () => {
   it('responds with 201 status data if correctly inserted', async () => {
     nock('')
       .persist()
-      .post('/registration/account/add')
+      .post('/api/registration/account/add')
       .reply(201, {
         acknowledged: true,
         insertedId: 'sdfisal2904'
@@ -50,7 +50,7 @@ describe('Registration creation route', () => {
   it('responds with a username if found before insert', async () => {
     nock('')
       .persist()
-      .post('/registration/account/add')
+      .post('/api/registration/account/add')
       .reply(400, {
         username: myProfile.username
       });
@@ -63,7 +63,7 @@ describe('Registration creation route', () => {
   it('responds with an email if found before insert', async () => {
     nock('')
       .persist()
-      .post('/registration/account/add')
+      .post('/api/registration/account/add')
       .reply(400, {
         email: myProfile.email
       });
@@ -76,7 +76,7 @@ describe('Registration creation route', () => {
   it('responds with error message on 500 status code', async () => {
     nock('')
       .persist()
-      .post('/registration/account/add')
+      .post('/api/registration/account/add')
       .replyWithError('An unexpected error occurred!')
 
     const result = await sendAccountDetails();

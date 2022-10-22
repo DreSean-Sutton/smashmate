@@ -7,7 +7,8 @@ var dbo = require('./db/conn');
 const port = process.env.PORT || 5001;
 const app = express();
 app.use(express.json());
-if(process.env.NODE_ENV === 'development') {
+
+if(process.env.NODE_ENV !== 'production') {
   app.use(function (req: any, res: any, next: any) {
     // Required to bypass CORS during development
     res.header("Access-Control-Allow-Origin", '*');
@@ -18,8 +19,8 @@ if(process.env.NODE_ENV === 'development') {
 
 const registrationRoute = require('./routes/registration');
 const favoritingRoute = require('./routes/favoriting');
-app.use('/registration', registrationRoute);
-app.use('/favoriting', favoritingRoute);
+app.use('/api/registration', registrationRoute);
+app.use('/api/favoriting', favoritingRoute);
 
 if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir

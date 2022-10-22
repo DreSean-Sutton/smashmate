@@ -27,13 +27,16 @@ export default function App() {
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  console.log({favorites});
 
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
       const result = await handleGetFavorites(getFavoritesQuery);
+      console.log('fetchData result: ', result);
       dispatch(setFavorites(result.favorites));
     }
     if(user) {
+      console.log('This hit');
       const getFavoritesQuery = { email: user.user.email };
       fetchData(getFavoritesQuery)
     } else {
@@ -83,7 +86,7 @@ export default function App() {
   }
 
   async function handleUploadFavorites(query: any) {
-    const url = '/favoriting/characters/upsert';
+    const url = '/api/favoriting/characters/upsert';
     const controller = new AbortController()
     const headers = {
       signal: controller.signal,
@@ -99,7 +102,7 @@ export default function App() {
   }
 
   async function handleGetFavorites(queryEmail: {email: string}) {
-    const url = '/favoriting/characters/get';
+    const url = '/api/favoriting/characters/get';
     const controller = new AbortController()
     const header = {
       signal: controller.signal,

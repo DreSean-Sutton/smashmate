@@ -29,7 +29,7 @@ export default function SignIn () {
   const navigate = useNavigate();
 
   const loadSpinner = isloading ? <Loading /> : '';
-  const url = `/registration/account/sign-in`;
+  const url = `/api/registration/account/sign-in`;
   const controller = new AbortController();
   const headers = {
     signal: controller.signal,
@@ -60,6 +60,7 @@ export default function SignIn () {
     }
     setIsLoading(true);
     const result: QueryResult = await handleFetchProfile(myQuery);
+    console.log({ result });
     setIsLoading(false);
     if(result.error) {
       if(result.error === 'Invalid email') {

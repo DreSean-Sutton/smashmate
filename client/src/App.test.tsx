@@ -13,11 +13,11 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 //   expect(linkElement).toBeInTheDocument();
 // });
 
-describe('Testing /favoriting/characters/upsert', () => {
+describe('Testing /api/favoriting/characters/upsert', () => {
   afterEach(nock.cleanAll);
 
   describe('Testing add/remove favorites', () => {
-    const url = '/favoriting/characters/upsert';
+    const url = '/api/favoriting/characters/upsert';
     const myProfile = {
       email: 'testemail@gmail.com',
       favorites: [
@@ -68,9 +68,9 @@ describe('Testing /favoriting/characters/upsert', () => {
     })
   })
 
-  describe.only('Testing /favoriting/characters/get', () => {
+  describe.only('Testing /api/favoriting/characters/get', () => {
 
-    const url = '/favoriting/characters/get';
+    const url = '/api/favoriting/characters/get';
     const queryEmail = {email:'testemail@gmail.com'};
     const controller = new AbortController()
     const header = {
