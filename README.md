@@ -19,8 +19,19 @@ Come test it out here: https://smashmate.dreseansutton.com/
 - React Bootstrap
 - Vanilla CSS
 - Typescript
-- create-react-app
+- MongoDb
+- Redux
+- react-redux
+- redux-toolkit
+- AWS
+- Jest
+- express
+- dotenv
 - Axios
+- nock
+- JWT
+- argon2
+- create-react-app
 
 ## Features
 
