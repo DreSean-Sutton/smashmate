@@ -11,7 +11,7 @@ describe('Testing moves data fetch', () => {
 
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/moves?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/moves?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -23,7 +23,7 @@ describe('Testing moves data fetch', () => {
 
   it('sends move data on 200 status code', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scope = nock('https://the-ultimate-api.herokuapp.com')
+    const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/api/get/fighters/data/moves?fighter=inkling')
       .reply(200, {
@@ -90,7 +90,7 @@ describe('Testing moves data fetch', () => {
   })
   it('Correctly returns error', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scope = nock('https://the-ultimate-api.herokuapp.com')
+    const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/moves?fighter=inklingsssss')
       .reply(400)

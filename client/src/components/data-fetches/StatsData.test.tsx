@@ -9,7 +9,7 @@ describe('Testing stats data fetching', () => {
 
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/stats?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/stats?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -21,7 +21,7 @@ describe('Testing stats data fetching', () => {
 
   it('sends stat data on 200 status code', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scope = nock('https://the-ultimate-api.herokuapp.com')
+    const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inkling')
       .reply(200, {
@@ -56,7 +56,7 @@ describe('Testing stats data fetching', () => {
   })
   it('sends error message on 400 status', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const scope = nock('https://the-ultimate-api.herokuapp.com')
+    const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inklingsssss')
       .reply(400)

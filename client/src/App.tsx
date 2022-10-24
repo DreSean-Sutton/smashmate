@@ -27,7 +27,6 @@ export default function App() {
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
   const dispatch = useAppDispatch();
-  console.log({favorites});
 
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
@@ -72,7 +71,7 @@ export default function App() {
   async function fetchFighters() {
     setIsLoading(true);
     try {
-      const res = await axios.get('https://the-ultimate-api.herokuapp.com/api/get/fighters')
+      const res = await axios.get('https://the-ultimate-api.dreseansutton.com/api/get/fighters')
       if (res.status === 200) {
         dispatch(setFighterArray(res.data));
       } else {

@@ -19,7 +19,7 @@ export default function ThrowsData(props: DataProps) {
     const controller = new AbortController()
     async function fetchDetailsData(currentFighter: string) {
       setIsLoading(true)
-      const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/throws?fighter=${currentFighter}`, {
+      const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/throws?fighter=${currentFighter}`, {
         signal: controller.signal,
         validateStatus: () => true
       });
