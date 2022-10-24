@@ -8,14 +8,12 @@ const port = process.env.PORT || 5001;
 const app = express();
 app.use(express.json());
 
-if(process.env.NODE_ENV !== 'production') {
-  app.use(function (req: any, res: any, next: any) {
-    // Required to bypass CORS during development
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-}
+app.use(function (req: any, res: any, next: any) {
+  // Required to bypass CORS during development
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const registrationRoute = require('./routes/registration');
 const favoritingRoute = require('./routes/favoriting');

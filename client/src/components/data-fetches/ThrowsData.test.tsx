@@ -9,7 +9,7 @@ describe('Testing throw data fetching', () => {
 
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/throws?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/throws?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -23,7 +23,7 @@ describe('Testing throw data fetching', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inkling')
+      .get('/api/get/fighters/data/throws?fighter=inkling')
       .reply(200, {
         "activeFrames": "8-9",
         "damage": null,
@@ -64,7 +64,7 @@ describe('Testing throw data fetching', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/throws?fighter=inklingsssss')
+      .get('/api/get/fighters/data/throws?fighter=inklingsssss')
       .reply(400)
   })
 })

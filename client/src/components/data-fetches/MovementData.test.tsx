@@ -9,7 +9,7 @@ describe('Testing movement data fetching', () => {
 
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/movements?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -23,7 +23,7 @@ describe('Testing movement data fetching', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/movements?fighter=inkling')
+      .get('/api/get/fighters/data/movements?fighter=inkling')
       .reply(200, {
         "activeFrames": "3-17",
         "displayName": "Inkling",
@@ -61,7 +61,7 @@ describe('Testing movement data fetching', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/movements?fighter=inklingsssss')
+      .get('/api/get/fighters/data/movements?fighter=inklingsssss')
       .reply(400)
   })
 })

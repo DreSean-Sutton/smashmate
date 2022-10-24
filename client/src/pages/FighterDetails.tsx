@@ -79,7 +79,7 @@ export default function FighterDetails() {
   }
   async function fetchTitle() {
     try {
-      const res = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters?fighter=${fighter}`);
+      const res = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters?fighter=${fighter}`);
       return await res.data.displayName;
     } catch (e) {
       console.error('fetch failed', e);

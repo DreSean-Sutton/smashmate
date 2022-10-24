@@ -19,7 +19,7 @@ export default function MovementData(props: DataProps) {
     const controller = new AbortController();
     async function fetchDetailsData(currentFighter: string) {
       setIsLoading(true)
-      const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/movements?fighter=${currentFighter}`, {
+      const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/movements?fighter=${currentFighter}`, {
         signal: controller.signal,
         validateStatus: () => true
       });

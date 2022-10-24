@@ -11,7 +11,7 @@ describe('Testing moves data fetch', () => {
 
   const controller = new AbortController()
   async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/fighters/data/moves?fighter=${currentFighter}`, {
+    const { status, data } = await axios.get(`https://the-ultimate-api.herokuapp.com/api/get/fighters/data/moves?fighter=${currentFighter}`, {
       signal: controller.signal,
       validateStatus: () => true
     });
@@ -25,7 +25,7 @@ describe('Testing moves data fetch', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/moves?fighter=inkling')
+      .get('/api/api/get/fighters/data/moves?fighter=inkling')
       .reply(200, {
         "activeFrames": "3-4",
         "category": "ground",
@@ -92,7 +92,7 @@ describe('Testing moves data fetch', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.herokuapp.com')
       .persist()
-      .get('/api/fighters/data/moves?fighter=inklingsssss')
+      .get('/api/get/fighters/data/moves?fighter=inklingsssss')
       .reply(400)
     const result: any = await fetchData('inklingsssss');
     expect(result.error).toBe('inklingsssss doesn\'t exist');
