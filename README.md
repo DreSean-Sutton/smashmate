@@ -10,7 +10,7 @@ SW-1341-5835-0230 (Beware, I'm an Inkling main)
 
 ## Live Demo
 
-Come test it out here: https://smashmate.netlify.app/
+Come test it out here: https://smashmate.dreseansutton.com/
 
 ## Technologies Used
 
