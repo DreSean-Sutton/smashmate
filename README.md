@@ -1,6 +1,6 @@
 # Smashmate
 
-A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.
+A Full-Stack web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.
 
 ### Why build this?
 
@@ -10,7 +10,7 @@ SW-1341-5835-0230 (Beware, I'm an Inkling main)
 
 ## Live Demo
 
-Come test it out here: https://smashmate.netlify.app/
+Come test it out here: https://smashmate.dreseansutton.com/
 
 ## Technologies Used
 
@@ -19,18 +19,32 @@ Come test it out here: https://smashmate.netlify.app/
 - React Bootstrap
 - Vanilla CSS
 - Typescript
-- create-react-app
+- MongoDb
+- Redux
+- react-redux
+- redux-toolkit
+- AWS
+- Jest
+- express
+- dotenv
 - Axios
+- nock
+- JWT
+- argon2
+- create-react-app
 
 ## Features
 
 - User can see a list of all Fighters including their images and names
 - User can click on Fighters and scroll through their frame data which includes:
-  - Move name
-  - Active frames
-  - Total Frames
+  - Moves
+  - Throws
+  - Movements
+  - Stats
 - User can favorite characters and and see a list of only favorited Fighters (Yes, even Ness)
 - User can delete favorite Fighters from their list
+- User can log in allowing:
+  - Favorites to be saved across devices
 
 ### Functions in Action
 
@@ -44,4 +58,5 @@ Come test it out here: https://smashmate.netlify.app/
 ## Upcoming Features
 
 - User will be able to filter Fighters by their Fighter type
-- User can search for characters by utilizing a search bar
+- User can search for specific fighters by utilizing a search bar
+- User can add their own notes to fighters
