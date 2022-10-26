@@ -32,7 +32,8 @@ export default function BackgroundCarousel() {
       left: '0',
       minWidth: '85vh',
       height: '100vh',
-      zIndex: '-1'
+      zIndex: '-1',
+      userSelect: 'none'
     }}
       fade controls={false}
       pause={false}

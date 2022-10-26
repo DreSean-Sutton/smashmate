@@ -16,6 +16,7 @@
   border-radius: 4px;
   transition: transform 150ms, background-color 100ms;
   cursor: pointer;
+  user-select: none;
 }
 
 .character-card:hover,
@@ -57,8 +58,7 @@
   transition: 200ms ease-in transform;
 }
 
-.card-heart:hover,
-.card-heart:active {
+.card-heart:hover {
   transform: scale(1.2);
 }
 
@@ -67,8 +67,7 @@
   transform: scale(1.2);
 }
 
-.card-heart-favorited:hover,
-.card-heart-favorited:active {
+.card-heart-favorited:hover {
   transform: scale(0.8);
 }
 
