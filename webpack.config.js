@@ -1,10 +1,9 @@
 require('dotenv/config');
 const path = require('path');
 
-const client = path.join(__dirname, 'client');
 const clientPath = path.join(__dirname, 'client/src');
 const buildPath = path.join(__dirname, 'client/build/');
-const public = path.join(__dirname, 'client/public')
+const public = path.join(__dirname, 'client/build')
 
 module.exports = {
   resolve: {
@@ -21,15 +20,6 @@ module.exports = {
         exclude: /node_modules/,
         include: clientPath,
         use: 'ts-loader'
-        // use: {
-        //   loader: 'babel-loader',
-        //   options: {
-        //     plugins: [
-        //       '@babel/plugin-transform-react-jsx',
-        //       '@babel/plugin-transform-typescript'
-        //     ]
-        //   }
-        // }
       },
       {
         test: /\.css$/i,
@@ -52,7 +42,7 @@ module.exports = {
       watch: true
     },
     proxy: {
-      '/api': `http://localhost:${process.env.PORT}`
+      '/api': `http://localhost:${process.env.SERVER_PORT}`
     }
   },
   stats: 'errors-warnings',

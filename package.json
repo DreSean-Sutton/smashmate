@@ -47,7 +47,6 @@
     "npm": "8.x",
     "node": "18.x"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   }
