@@ -22,7 +22,7 @@ app.use('/api/favoriting', favoritingRoute);
 
 if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir
-  app.use(express.static(path.join(__dirname, '../../client/build')));
+  app.use(express.static(path.join(__dirname, '../../client/dist')));
 }
 
 app.use('/api', (req: any, res: any) => {
@@ -31,7 +31,7 @@ app.use('/api', (req: any, res: any) => {
 
 app.use((req: any, res: any) => {
   res.sendFile('/index.html', {
-    root: path.join(__dirname, '../../client/build')
+    root: path.join(__dirname, '../../client/dist')
   });
 });
 app.use(errorMiddleware);
