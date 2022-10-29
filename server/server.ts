@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config({ path: '../.env' });
 var express = require('express');
 var dbo = require('./db/conn');
-const port = process.env.PORT || 5001;
+const port = process.env.SERVER_PORT || 5001;
 const app = express();
 app.use(express.json());
 
@@ -22,7 +22,7 @@ app.use('/api/favoriting', favoritingRoute);
 
 if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir
-  app.use(express.static(path.join(__dirname, '../../client/build')));
+  app.use(express.static(path.join(__dirname, '../../client/dist')));
 }
 
 app.use('/api', (req: any, res: any) => {
@@ -31,7 +31,7 @@ app.use('/api', (req: any, res: any) => {
 
 app.use((req: any, res: any) => {
   res.sendFile('/index.html', {
-    root: path.join(__dirname, '../../client/build')
+    root: path.join(__dirname, '../../client/dist')
   });
 });
 app.use(errorMiddleware);

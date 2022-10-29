@@ -2,6 +2,11 @@
   "name": "smashmate",
   "version": "4.0.0",
   "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.16.4",
@@ -9,10 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.39",
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
     "axios": "^0.27.2",
-    "babel-jest": "^23.6.0",
     "bootstrap": "^5.1.3",
     "nock": "^13.2.9",
     "react": "^18.1.0",
@@ -20,15 +22,8 @@
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^4.7.3",
+
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -49,12 +44,14 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
+    "@vitejs/plugin-react": "^2.2.0",
     "jest-extended": "^3.1.0",
     "jest-watch-typeahead": "^0.6.5",
-    "jest-watcher": "^28.1.3"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "jest-watcher": "^28.1.3",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.0"
   },
   "proxy": "http://localhost:5000"
 }

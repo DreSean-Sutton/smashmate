@@ -4,14 +4,14 @@
   "description": "A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.",
   "scripts": {
     "start": "npm run --prefix server start",
-    "test": "cd client && npm run test",
+    "test": "npm run --prefix client test",
     "build": "npm-run-all --parallel build:*",
     "build:client": "npm run --prefix client build",
     "build:server": "npm run --prefix server tsc",
-    "tsc:watch": "npm run --prefix server tsc:watch",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:client": "npm run --prefix client start",
+    "dev:client": "npm run --prefix client dev",
     "dev:server": "npm run --prefix server dev:server",
+    "dev:tsc:watch": "npm run --prefix server tsc:watch",
     "postinstall": "npm-run-all --parallel install:*",
     "install:client": "npm --prefix client ci",
     "install:server": "npm --prefix server ci"
@@ -38,8 +38,8 @@
     "npm": "8.x",
     "node": "18.x"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
