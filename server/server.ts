@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config({ path: '../.env' });
 var express = require('express');
 var dbo = require('./db/conn');
-const port = 5000;
+const port = process.env.PORT;
 const app = express();
 app.use(express.json());
 
