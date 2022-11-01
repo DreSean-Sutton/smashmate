@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run --prefix server start",
     "test": "npm run --prefix client test",
-    "build": "npm-run-all --parallel build:*",
+    "build": "npm-run-all build:*",
     "build:client": "npm run --prefix client build",
     "build:server": "npm run --prefix server tsc",
     "dev": "npm-run-all --parallel dev:*",
