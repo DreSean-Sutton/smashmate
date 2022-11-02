@@ -21,7 +21,7 @@ export default function RenderCards() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleShowModal(event: EventProps) {
+  function handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
     const focusedFighter = {
@@ -78,7 +78,7 @@ export default function RenderCards() {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div onClick={handleShowModal} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
+          <div onClick={handleShowDetails} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
             <div className=''>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
