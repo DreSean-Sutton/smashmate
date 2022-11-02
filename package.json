@@ -14,7 +14,8 @@
     "dev:tsc:watch": "npm run --prefix server tsc:watch",
     "postinstall": "npm-run-all install:*",
     "install:client": "npm --prefix client ci",
-    "install:server": "npm --prefix server ci"
+    "install:server": "npm --prefix server ci",
+    "preview": "npm --prefix client preview"
   },
   "repository": {
     "type": "git",
