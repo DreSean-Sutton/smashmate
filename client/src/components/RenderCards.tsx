@@ -1,11 +1,10 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
 import { selectFavorites, addFavorites, deleteFavorites } from '../features/favorites/favoritingSlice';
 import { FighterProps } from '../util/types';
-import CardSelectModal from './CardSelectModal';
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import './RenderCards.css';
@@ -14,38 +13,26 @@ interface EventProps {
   target?: any,
   matches?: any
 }
-export default function RenderCards() {
 
-  const focusedFighterInitialState: FighterProps = {
-    fighter: '',
-    fighterId: null,
-    displayName: '',
-    rosterId: null
-  }
+export default function RenderCards() {
 
   const fighterArray: any[] = useAppSelector(selectFighterArray);
   const favorites: any[] = useAppSelector(selectFavorites);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [focusedFighter, setFocusedFighter]: any = useState(focusedFighterInitialState);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  function handleShowModal(event: any) {
+  function handleShowModal(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    setFocusedFighter({
+    const focusedFighter = {
       fighter: characterCard.cardName,
       fighterId: Number(characterCard.cardFighterId),
       rosterId: Number(characterCard.cardRosterId),
       displayName: characterCard.cardDisplayName
-    })
-    setModalIsOpen(true);
+    }
+    navigate(`/character-details/${focusedFighter.fighter}`);
   }
 
-  function handleCloseModal(event: any) {
-    if(event.target.matches('.character-card-modal')) {
-      setModalIsOpen(false);
-    }
-  }
   function handleFavoriting(event: EventProps) {
     const heart = event.target;
     const currentCard = heart.closest('#character-card').dataset;
@@ -104,8 +91,7 @@ export default function RenderCards() {
     );
   });
   return (
-    <Container fluid={'lg'} onClick={handleCloseModal} className="row content-layout" data-view='character-list'>
-      <CardSelectModal modal={modalIsOpen} focusedFighter={focusedFighter} />
+    <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
       { allCards }
     </Container>
   );
