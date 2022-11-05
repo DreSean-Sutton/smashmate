@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hook';
 import { setUser } from '../../features/account/userSlice';
-
 import Loading from '../Loading';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
@@ -10,6 +9,7 @@ import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import './signIn.css';
 
 interface QueryResult {
   error?: string,
@@ -46,6 +46,17 @@ export default function SignIn () {
     }
   }
 
+  async function handleDemo() {
+    const myQuery = {
+      email: 'demoaccount@gmail.com'
+    }
+    setIsLoading(true);
+    const result: QueryResult = await handleFetchProfile(myQuery);
+    dispatch(setUser(result));
+    navigate('/');
+    setIsLoading(false);
+  }
+
   async function submitForm(event: any) {
 
     setValidated(false);
@@ -55,12 +66,10 @@ export default function SignIn () {
     email.setCustomValidity('');
     password.setCustomValidity('');
     const myQuery = {
-      email: email.value,
-      password: password.value
+      email: email.value
     }
     setIsLoading(true);
     const result: QueryResult = await handleFetchProfile(myQuery);
-    console.log({ result });
     setIsLoading(false);
     if(result.error) {
       if(result.error === 'Invalid email') {
@@ -111,11 +120,13 @@ export default function SignIn () {
             </Button>
           </Col>
         </Row>
-        <Row style={{
-          borderTop: '1.5px solid rgb(220, 220, 220)'
-        }}
-        className='justify-content-center mt-4 pt-3 ms-3 me-3'>
+        <Row className='sign-in-divider justify-content-center mt-4 pt-3 ms-3 me-3'>
           <Col xs={10} className='text-center guest-column'>
+            <p>
+              <a onClick={handleDemo} className='text-primary demo-account'>Demo</a>
+            </p>
+          </Col>
+          <Col xs={10} className='text-center'>
             <p>
               Or continue as <Link to={'/'} className='link-primary guest-button'>Guest</Link>
             </p>

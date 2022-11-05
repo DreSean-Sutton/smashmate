@@ -1,0 +1,12 @@
+.sign-in-divider {
+  border-top: 1.5px solid rgb(220, 220, 220);
+}
+
+.demo-account {
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+.demo-account:hover {
+  color: #0a58ca;
+}

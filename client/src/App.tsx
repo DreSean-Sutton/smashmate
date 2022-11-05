@@ -31,11 +31,9 @@ export default function App() {
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
       const result = await handleGetFavorites(getFavoritesQuery);
-      console.log('fetchData result: ', result);
       dispatch(setFavorites(result.favorites));
     }
     if(user) {
-      console.log('This hit');
       const getFavoritesQuery = { email: user.user.email };
       fetchData(getFavoritesQuery)
     } else {

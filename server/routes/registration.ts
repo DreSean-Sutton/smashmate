@@ -1,11 +1,8 @@
-import { profile } from "console";
-import { verify } from "crypto";
 import ClientError from "../client-error";
 
 var express = require('express');
 const registrationRoute = express.Router();
 const dbo = require('../db/conn');
-const { ObjectId } = require('mongodb');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
@@ -53,7 +50,10 @@ registrationRoute
   .route('/account/sign-in')
   .post(function (req: any, response: any, next: Function) {
     let db_connect = dbo.getDb();
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    if (email === 'demoaccount@gmail.com' && !password) {
+      password = process.env.DEMO_ACCOUNT;
+    }
     db_connect
     .collection('profiles')
     .findOne({ email: email }, async function (err: any, res: any) {
@@ -64,7 +64,7 @@ registrationRoute
         if (!res) {
           throw new ClientError(401, 'Invalid email');
         }
-        const checkPassword = await argon2.verify(res.password, password)
+        const checkPassword = await argon2.verify(res.password, password);
         if(!checkPassword) throw new ClientError(401, 'Invalid password');
         const payload: { id: number, username: string, email: string } = {
           id: res._id,

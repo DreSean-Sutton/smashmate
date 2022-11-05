@@ -11,7 +11,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:client": "npm run --prefix client dev",
     "dev:server": "npm run --prefix server dev:server",
-    "dev:tsc:watch": "npm run --prefix server tsc:watch",
+    "tsc:watch": "npm run --prefix server tsc:watch",
     "postinstall": "npm-run-all install:*",
     "install:client": "npm --prefix client ci",
     "install:server": "npm --prefix server ci",
