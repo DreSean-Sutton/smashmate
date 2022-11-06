@@ -19,6 +19,7 @@
 
 .arrow-icons {
   font-size: 2rem;
+  transition: 200ms ease-in opacity;
 }
 
 .arrow-icons:hover,
@@ -39,6 +40,13 @@
   background-color: #0000000b;
 }
 
+.up-arrow {
+  padding: 1rem;
+  position: fixed;
+  bottom: 5%;
+  right: 1%;
+}
+
 @media screen and (min-width: 575px) {
   .arrow-icons {
     font-size: 2.5rem;
@@ -48,6 +56,9 @@
 @media screen and (min-width: 768px) {
   .arrow-icons {
     font-size: 3rem;
+  }
+  .up-arrow {
+    right: 0.25%;
   }
 }
 

@@ -68,6 +68,24 @@ export default function FighterDetails() {
     navigate(`/character-details/${fighterArray[fighterIndex + 1].fighter}`);
   }
 
+  const handleArrowDimming = () => {
+    const leftArrow: any = document.querySelector('#left-arrow');
+    const rightArrow: any = document.querySelector('#right-arrow');
+    const upArrow: any = document.querySelector('#up-arrow');
+    if (offset !== 0) {
+      leftArrow.classList.add('arrow-icon-scrolling');
+      rightArrow.classList.add('arrow-icon-scrolling');
+      upArrow.classList.remove('arrow-icon-scrolling');
+    } else {
+      leftArrow.classList.remove('arrow-icon-scrolling');
+      rightArrow.classList.remove('arrow-icon-scrolling');
+      upArrow.classList.add('arrow-icon-scrolling');
+    }
+  }
+
+  function handleScrollToTop() {
+    window.scrollTo(0, 0);
+  }
   function handleCheckTitle() {
     if(fighterArray.length !== 0) {
       return fighterArray[fighterIndex].displayName
@@ -86,22 +104,10 @@ export default function FighterDetails() {
     }
   }
 
-  const handleArrowDimming = () => {
-    const leftArrow: any = document.querySelector('#left-arrow');
-    const rightArrow: any = document.querySelector('#right-arrow');
-    if(offset !== 0) {
-      leftArrow.classList.add('arrow-icon-scrolling');
-      rightArrow.classList.add('arrow-icon-scrolling');
-    } else {
-      leftArrow.classList.remove('arrow-icon-scrolling');
-      rightArrow.classList.remove('arrow-icon-scrolling');
-    }
-  }
-
   return (
     <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
       <Row className='justify-content-between align-items-center'>
-        <Col xs={2} md={3} xl={3} className='arrow-columns pr-0 text-center'>
+        <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
           <i id='left-arrow' onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
         </Col>
         <Col xs={6} md={4} xl={3}>
@@ -109,7 +115,7 @@ export default function FighterDetails() {
             <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
           </Card>
         </Col>
-        <Col xs={2} md={3} xl={3} className='arrow-columns pl-0 text-center'>
+        <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
           <i id='right-arrow' onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
         </Col>
       </Row>
@@ -122,6 +128,9 @@ export default function FighterDetails() {
       <ThrowsData currentFighter={fighter} />
       <MovementData currentFighter={fighter} />
       <StatsData currentFighter={fighter} />
+      <div className='up-arrow-div'>
+        <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i>
+      </div>
     </Container>
   );
 }
