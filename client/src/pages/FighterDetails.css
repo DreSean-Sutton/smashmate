@@ -7,19 +7,18 @@
   position: fixed;
   top: 17.5%;
   left: 10%;
-  z-index: 3;
 }
 
 .arrow-icon-right {
   position: fixed;
   top: 17.5%;
   right: 10%;
-  z-index: 3;
 }
 
 .arrow-icons {
   font-size: 2rem;
   transition: 200ms ease-in opacity;
+  z-index: 3;
 }
 
 .arrow-icons:hover,

@@ -25,7 +25,7 @@ describe('Testing moves data fetch', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
-      .get('/api/api/get/fighters/data/moves?fighter=inkling')
+      .get('/api/get/fighters/data/moves?fighter=inkling')
       .reply(200, {
         "activeFrames": "3-4",
         "category": "ground",

@@ -1,6 +1,6 @@
 import nock from 'nock';
 import axios from 'axios';
-const matchers = require('jest-extended')
+const matchers = require('jest-extended');
 expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
@@ -17,7 +17,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
   afterEach(nock.cleanAll);
 
   describe('Testing add/remove favorites', () => {
-    const url = '/api/favoriting/characters/upsert';
+    const url = 'http://localhost:5000/api/favoriting/characters/upsert';
     const myProfile = {
       email: 'testemail@gmail.com',
       favorites: [
@@ -59,7 +59,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
 
     it('returns an error message if insert fails', async () => {
 
-      nock('/')
+      nock('http://localhost:5000')
         .persist()
         .post('/favoriting/characters/upsert')
         .replyWithError('An unexpected error occurred!');
@@ -68,9 +68,9 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     })
   })
 
-  describe.only('Testing /api/favoriting/characters/get', () => {
+  describe('Testing /api/favoriting/characters/get', () => {
 
-    const url = '/api/favoriting/characters/get';
+    const url = 'http://localhost:5000/api/favoriting/characters/get';
     const queryEmail = {email:'testemail@gmail.com'};
     const controller = new AbortController()
     const header = {
