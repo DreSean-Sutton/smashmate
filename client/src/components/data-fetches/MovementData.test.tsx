@@ -1,5 +1,7 @@
+import fetchDetailsData from '../../lib/fetch-details-data';
 import nock from 'nock';
 import axios from 'axios';
+import 'jest-extended'
 axios.defaults.adapter = require('axios/lib/adapters/http')
 
 describe('Testing movement data fetching', () => {
@@ -33,8 +35,9 @@ describe('Testing movement data fetching', () => {
         "totalFrames": "20/25",
         "type": "movement"
       })
-    const result: any = await fetchData('inkling');
-    expect(result).toContainAllKeys([
+    const {status, data } = await fetchDetailsData('movements', 'inkling');
+    expect(status).toBe(200);
+    expect(data).toContainAllKeys([
       'activeFrames',
       'displayName',
       'fighter',
@@ -45,15 +48,15 @@ describe('Testing movement data fetching', () => {
       'totalFrames',
       'type'
     ])
-    expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.displayName).toBeString();
-    expect(result.fighter).toBeString();
-    expect(result.fighterId).toBeNumber();
-    expect(result.movementId).toBeNumber();
-    expect(result.name).toBeString();
-    expect(result.rosterId).toBeNumber();
-    expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.type).toMatch('movement');
+    expect(data.activeFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.displayName).toBeString();
+    expect(data.fighter).toBeString();
+    expect(data.fighterId).toBeNumber();
+    expect(data.movementId).toBeNumber();
+    expect(data.name).toBeString();
+    expect(data.rosterId).toBeNumber();
+    expect(data.totalFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.type).toMatch('movement');
   })
   it('sends error message on 400 status', async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -61,5 +64,8 @@ describe('Testing movement data fetching', () => {
       .persist()
       .get('/api/get/fighters/data/movements?fighter=inklingsssss')
       .reply(400)
+      const { status, data } = await fetchDetailsData('movements', 'inklingsssss');
+      expect(status).toBe(400);
+      expect(data).not.toBeTruthy()
   })
 })
