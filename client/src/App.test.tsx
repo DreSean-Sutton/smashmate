@@ -1,17 +1,23 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'
+import { screen } from '@testing-library/react';
+import { renderWithProviders } from './util/test-utils';
+import { BrowserRouter as Router } from 'react-router-dom';
+import '@testing-library/jest-dom';
 import App from './App'
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
+import './util/matchMedia.mock';
 
 describe('Testing App.tsx UI', () => {
-  it('renders learn react link', () => {
-    const { getByText } = render( <App />);
-    expect(screen.getByText(/smashmate/i))
+  renderWithProviders(
+    <Router>
+      <App />
+    </Router>
+  )
+  it.only('renders smashmate title', () => {
+    expect(screen.getByText(/smashmate/i)).toBeInTheDocument()
   });
-
 })
 
 describe('Testing /api/favoriting/characters/upsert', () => {
