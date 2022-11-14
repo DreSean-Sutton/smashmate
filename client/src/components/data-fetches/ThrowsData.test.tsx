@@ -1,3 +1,4 @@
+import fetchDetailsData from '../../lib/fetch-details-data';
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http')
@@ -18,7 +19,6 @@ describe('Testing throw data fetching', () => {
   }
 
   it('sends throw data on 200 status code', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/throws?fighter=inkling')
@@ -34,8 +34,9 @@ describe('Testing throw data fetching', () => {
         "throwId": 196,
         "type": "throw"
       })
-    const result: any = await fetchData('inkling');
-    expect(result).toContainAllKeys([
+    const { status, data } = await fetchDetailsData('throws', 'inkling');
+    expect(status).toBe(200);
+    expect(data).toContainAllKeys([
       'activeFrames',
       'damage',
       'displayName',
@@ -47,22 +48,24 @@ describe('Testing throw data fetching', () => {
       'throwId',
       'type'
     ])
-    expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.damage).toBeOneOf([null, expect.any(String)]);
-    expect(result.displayName).toBeString();
-    expect(result.fighter).toBeString();
-    expect(result.fighterId).toBeNumber();
-    expect(result.name).toBeString();
-    expect(result.rosterId).toBeNumber();
-    expect(result.throwId).toBeNumber();
-    expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.type).toMatch('throw');
+    expect(data.activeFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.damage).toBeOneOf([null, expect.any(String)]);
+    expect(data.displayName).toBeString();
+    expect(data.fighter).toBeString();
+    expect(data.fighterId).toBeNumber();
+    expect(data.name).toBeString();
+    expect(data.rosterId).toBeNumber();
+    expect(data.throwId).toBeNumber();
+    expect(data.totalFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.type).toMatch('throw');
   })
   it('sends error message on 400 status', async() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/throws?fighter=inklingsssss')
-      .reply(400)
+      .reply(400, { error: 'inklingsssss doesn\'t exist' })
+    const { status, data } = await fetchDetailsData('throws', 'inklingsssss');
+    expect(status).toBe(400);
+    expect(data.error).toBe('inklingsssss doesn\'t exist');
   })
 })

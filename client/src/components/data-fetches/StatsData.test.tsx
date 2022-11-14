@@ -1,24 +1,12 @@
+import fetchDetailsData from '../../lib/fetch-details-data';
 import nock from 'nock';
 import axios from 'axios';
-axios.defaults.adapter = require('axios/lib/adapters/http')
+axios.defaults.adapter = require('axios/lib/adapters/http');
 
 describe('Testing stats data fetching', () => {
   afterEach(nock.cleanAll);
 
-  const controller = new AbortController()
-  async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/stats?fighter=${currentFighter}`, {
-      signal: controller.signal,
-      validateStatus: () => true
-    });
-    if (status !== 200) {
-      return { error: `${currentFighter} doesn't exist` }
-    }
-    return data
-  }
-
   it('sends stat data on 200 status code', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inkling')
@@ -32,8 +20,9 @@ describe('Testing stats data fetching', () => {
         "statValue": "94",
         "type": "stat"
       })
-    const result: any = await fetchData('inkling');
-    expect(result).toContainAllKeys([
+    const { status, data } = await fetchDetailsData('stats', 'inkling');
+    expect(status).toBe(200);
+    expect(data).toContainAllKeys([
       'displayName',
       'fighter',
       'fighterId',
@@ -42,21 +31,23 @@ describe('Testing stats data fetching', () => {
       'statId',
       'statValue',
       'type'
-    ])
-    expect(result.displayName).toBeString();
-    expect(result.fighter).toBeString();
-    expect(result.fighterId).toBeNumber();
-    expect(result.name).toBeString();
-    expect(result.rosterId).toBeNumber();
-    expect(result.statId).toBeNumber();
-    expect(result.statValue).toBeString();
-    expect(result.type).toMatch('stat');
-  })
+    ]);
+    expect(data.displayName).toBeString();
+    expect(data.fighter).toBeString();
+    expect(data.fighterId).toBeNumber();
+    expect(data.name).toBeString();
+    expect(data.rosterId).toBeNumber();
+    expect(data.statId).toBeNumber();
+    expect(data.statValue).toBeString();
+    expect(data.type).toMatch('stat');
+  });
   it('sends error message on 400 status', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inklingsssss')
-      .reply(400)
+      .reply(400, { error: 'inklingsssss doesn\'t exist' })
+      const { status, data } = await fetchDetailsData('stats', 'inklingsssss');
+      expect(status).toBe(400);
+      expect(data.error).toBe('inklingsssss doesn\'t exist');
   })
 })

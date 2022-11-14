@@ -1,3 +1,4 @@
+import fetchDetailsData from '../../lib/fetch-details-data';
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
@@ -7,20 +8,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Testing moves data fetch', () => {
   afterEach(nock.cleanAll);
 
-  const controller = new AbortController()
-  async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/moves?fighter=${currentFighter}`, {
-      signal: controller.signal,
-      validateStatus: () => true
-    });
-    if (status !== 200) {
-      return { error: `${currentFighter} doesn't exist` }
-    }
-    return data
-  }
-
   it('sends move data on 200 status code', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/moves?fighter=inkling')
@@ -39,8 +27,9 @@ describe('Testing moves data fetch', () => {
         "totalFrames": "19",
         "type": "move"
       })
-    const result: any = await fetchData('inkling');
-    expect(result).toContainAllKeys([
+    const { status, data } = await fetchDetailsData('moves', 'inkling');
+    expect(status).toBe(200);
+    expect(data).toContainAllKeys([
       'activeFrames',
       'category',
       'damage',
@@ -55,44 +44,27 @@ describe('Testing moves data fetch', () => {
       'totalFrames',
       'type'
     ])
-    expect(result.activeFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.category).toBeString();
-    expect(result.damage).toBeOneOf([null, expect.any(String)]);
-    expect(result.displayName).toBeString();
-    expect(result.fighter).toBeString();
-    expect(result.fighterId).toBeNumber();
-    expect(result.firstFrame).toBeOneOf([null, expect.any(String)]);
-    expect(result.moveId).toBeNumber();
-    expect(result.moveType).toBeString();
-    expect(result.name).toBeString();
-    expect(result.rosterId).toBeNumber();
-    expect(result.totalFrames).toBeOneOf([null, expect.any(String)]);
-    expect(result.type).toMatch('move');
-    // expect(result).toEqual(
-    //   expect.objectContaining({
-    //       activeFrames: expect(result.activeFrames).toBeOneOf([null, expect.anything()]),
-    //       category: expect.any(String),
-    //       damage: expect.anything(),
-    //       displayName: expect.any(String),
-    //       fighter: expect.any(String),
-    //       fighterId: expect.any(Number),
-    //       moveId: expect.any(Number),
-    //       moveType: expect.any(String),
-    //       name: expect.any(String),
-    //       rosterId: expect.any(Number),
-    //       firstFrame: expect.anything(),
-    //       totalFrames: expect.anything(),
-    //       type: expect.stringMatching('move')
-    //   })
-    // )
+    expect(data.activeFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.category).toBeString();
+    expect(data.damage).toBeOneOf([null, expect.any(String)]);
+    expect(data.displayName).toBeString();
+    expect(data.fighter).toBeString();
+    expect(data.fighterId).toBeNumber();
+    expect(data.firstFrame).toBeOneOf([null, expect.any(String)]);
+    expect(data.moveId).toBeNumber();
+    expect(data.moveType).toBeString();
+    expect(data.name).toBeString();
+    expect(data.rosterId).toBeNumber();
+    expect(data.totalFrames).toBeOneOf([null, expect.any(String)]);
+    expect(data.type).toMatch('move');
   })
   it('Correctly returns error', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const scope = nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/moves?fighter=inklingsssss')
-      .reply(400)
-    const result: any = await fetchData('inklingsssss');
-    expect(result.error).toBe('inklingsssss doesn\'t exist');
+      .reply(400, { error: 'inklingsssss doesn\'t exist' })
+    const { status, data } = await fetchDetailsData('moves', 'inklingsssss');
+    expect(status).toBe(400);
+    expect(data.error).toBe('inklingsssss doesn\'t exist');
   })
 })
