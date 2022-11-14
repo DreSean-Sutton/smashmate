@@ -1,17 +1,18 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'
+import App from './App'
 import nock from 'nock';
 import axios from 'axios';
-const matchers = require('jest-extended');
-expect.extend(matchers);
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-// import { render, screen } from '@testing-library/react';
-// import App from './app';
+describe('Testing App.tsx UI', () => {
+  it('renders learn react link', () => {
+    const { getByText } = render( <App />);
+    expect(screen.getByText(/smashmate/i))
+  });
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+})
 
 describe('Testing /api/favoriting/characters/upsert', () => {
   afterEach(nock.cleanAll);
