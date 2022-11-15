@@ -1,4 +1,5 @@
 import fetchDetailsData from '../../lib/fetch-details-data';
+import 'jest-extended';
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');

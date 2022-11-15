@@ -83,7 +83,7 @@ export default function CreateAccount() {
   return (
     <>
       { loadSpinner }
-      <Form noValidate validated={validated} onSubmit={submitForm}>
+      <Form id='create-account-form' noValidate validated={validated} onSubmit={submitForm}>
         <Form.Group className='mb-3' controlId='username'>
           <Form.Label>Username</Form.Label>
           <Form.Control type='text' placeholder='Username' required />

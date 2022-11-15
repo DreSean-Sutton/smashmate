@@ -19,6 +19,12 @@ import Registration from './pages/Registration';
 import Loading from './components/Loading';
 import axios from 'axios';
 
+export const LocationDisplay = () => {
+  const location = useLocation()
+
+  return <div data-testid="location-display">{location.pathname}</div>
+}
+
 export default function App() {
 
   const user = useAppSelector(selectUser);
@@ -27,6 +33,8 @@ export default function App() {
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
   const dispatch = useAppDispatch();
+
+
 
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
@@ -114,24 +122,25 @@ export default function App() {
     }
   }
 
-  if(loading) {
-    return (
-      <>
-        <header className='mb-0'>
-          <SiteNavbar />
-        </header>
-        <main className='bg-dark min-vh-100' style={{ paddingTop: '6rem' }}>
-          <Loading />
-        </main>
-      </>
-    );
-  }
+  // if(loading) {
+  //   return (
+  //     <>
+  //       <header className='mb-0'>
+  //         <SiteNavbar />
+  //       </header>
+  //       <main className='bg-dark min-vh-100' style={{ paddingTop: '6rem' }}>
+  //         <Loading />
+  //       </main>
+  //     </>
+  //   );
+  // }
   return (
     <>
       <header>
         <SiteNavbar />
       </header>
       <main>
+        {/* <LocationDisplay /> */}
         <Routes>
           <Route path="/" element={
             <>

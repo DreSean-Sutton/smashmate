@@ -17,7 +17,6 @@ export default function User() {
   }
   return (
     <>
-      <div className="background-registration-layout"></div>
       <Container style={{
         marginTop: '10rem'
       }}>
