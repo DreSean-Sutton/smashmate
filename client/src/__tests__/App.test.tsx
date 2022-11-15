@@ -1,11 +1,11 @@
-import App from './App';
-import { LocationDisplay } from './App';
+import App from '../App';
+import { LocationDisplay } from '../App';
 import React from 'react';
 import { BrowserRouter, MemoryRouter, } from 'react-router-dom';
 import { screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from './util/test-utils';
+import { renderWithProviders } from '../util/test-utils';
 import '@testing-library/jest-dom';
 import 'jest-extended';
 import nock from 'nock';
@@ -13,7 +13,6 @@ import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
 describe('Testing App.tsx UI/UX', () => {
-
 
   it('Renders Home on page load', async () => {
     renderWithProviders(
@@ -33,7 +32,7 @@ describe('Testing App.tsx UI/UX', () => {
       </BrowserRouter>
     );
     await act(() => user.click(screen.getByText(/Login/i)));
-    await waitFor(() => screen.findByTestId(/sign-in-form/i));
+    await screen.findByTestId(/sign-in-form/i);
   });
 
   it('Renders signIn component when Login icon is clicked', async () => {
@@ -44,7 +43,7 @@ describe('Testing App.tsx UI/UX', () => {
       </BrowserRouter>
     );
     await act(() => user.click(screen.getByTestId(/profile-icon/i)));
-    await waitFor(() => screen.findByTestId(/sign-in-form/i));
+    await screen.findByTestId(/sign-in-form/i);
   });
 
   it('Renders Favorites component when favorites nav is clicked', async () => {

@@ -41,6 +41,15 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./src/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 90
+      }
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/jest-setup.ts"
     ],
