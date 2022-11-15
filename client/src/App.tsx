@@ -122,18 +122,18 @@ export default function App() {
     }
   }
 
-  // if(loading) {
-  //   return (
-  //     <>
-  //       <header className='mb-0'>
-  //         <SiteNavbar />
-  //       </header>
-  //       <main className='bg-dark min-vh-100' style={{ paddingTop: '6rem' }}>
-  //         <Loading />
-  //       </main>
-  //     </>
-  //   );
-  // }
+  if(loading) {
+    return (
+      <>
+        <header className='mb-0'>
+          <SiteNavbar />
+        </header>
+        <main className='bg-dark min-vh-100' style={{ paddingTop: '6rem' }}>
+          <Loading />
+        </main>
+      </>
+    );
+  }
   return (
     <>
       <header>

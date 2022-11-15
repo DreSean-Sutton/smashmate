@@ -93,7 +93,7 @@ export default function SignIn () {
   return (
     <>
       { loadSpinner }
-      <Form id='sign-in-form' noValidate validated={validated} onSubmit={submitForm}>
+      <Form data-testid='sign-in-form' noValidate validated={validated} onSubmit={submitForm}>
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email</Form.Label>
           <Form.Control type='email' placeholder='Email' required />

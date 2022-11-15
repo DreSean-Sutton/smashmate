@@ -1,10 +1,8 @@
 import App from './App';
-import Home from './pages/Home';
-import BackgroundCarousel from './components/BackgroundCarousel';
 import { LocationDisplay } from './App';
 import React from 'react';
-import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom';
-import { screen, fireEvent, render, waitFor } from '@testing-library/react';
+import { BrowserRouter, MemoryRouter, } from 'react-router-dom';
+import { screen, fireEvent, waitFor, act } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from './util/test-utils';
@@ -15,30 +13,41 @@ import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 import './util/matchMedia.mock';
 
-describe.only('Testing App.tsx UI', () => {
-  it.only('Renders smashmate title', async () => {
+describe('Testing App.tsx UI', () => {
+
+  it('Renders smashmate title', async () => {
     renderWithProviders(
       <BrowserRouter>
         <App />
       </BrowserRouter>
     );
-    await (waitFor(() => (screen.findByText(/Bayonetta/i)), { timeout: 4000 }));
-    await (waitFor(() => screen.findByText(/Inkling/i), { timeout: 4000 }));
-  });
-  it('Renders sign-in page when Login is clicked', async () => {
+    await (waitFor(() => screen.findByText(/Bayonetta/i), { timeout: 3000 }));
+    await (waitFor(() => screen.findByText(/Inkling/i), { timeout: 3000 }));
+    });
+
+  it('Renders signIn component when Login is clicked', async () => {
     const user = userEvent.setup();
     renderWithProviders(
       <BrowserRouter>
         <App />
       </BrowserRouter>
     );
-    await user.click(screen.getByText(/Login/i));
-    expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
-    // const signInForm = screen.getByRole('form', {name: 'Sign In'});
-    // const signInForm = screen.getByText(/Sign In/i);
-    // expect
-  })
-  it('tests memory router', () => {
+    await act(() => user.click(screen.getByText(/Login/i)));
+    await waitFor(() => screen.findByTestId(/sign-in-form/i), { timeout: 3000 });
+  });
+
+  it('Renders signIn component when Login icon is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    await act(() => user.click(screen.getByTestId(/profile-icon/i)));
+    await waitFor(() => screen.findByTestId(/sign-in-form/i), { timeout: 3000 });
+  });
+
+  it.skip('tests memory router', () => {
     const user = userEvent.setup();
     const testRoute = '/registration/sign-in'
     renderWithProviders(
