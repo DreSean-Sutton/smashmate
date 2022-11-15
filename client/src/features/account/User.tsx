@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
+import './User.css';
 
 export default function User() {
 
@@ -17,6 +18,7 @@ export default function User() {
   }
   return (
     <>
+      <div className="background-registration-layout"></div>
       <Container style={{
         marginTop: '10rem'
       }}>

@@ -11,11 +11,11 @@ import 'jest-extended';
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
-import './util/matchMedia.mock';
 
-describe('Testing App.tsx UI', () => {
+describe('Testing App.tsx UI/UX', () => {
 
-  it('Renders smashmate title', async () => {
+
+  it('Renders Home on page load', async () => {
     renderWithProviders(
       <BrowserRouter>
         <App />
@@ -23,9 +23,9 @@ describe('Testing App.tsx UI', () => {
     );
     await (waitFor(() => screen.findByText(/Bayonetta/i), { timeout: 3000 }));
     await (waitFor(() => screen.findByText(/Inkling/i), { timeout: 3000 }));
-    });
+  });
 
-  it('Renders signIn component when Login is clicked', async () => {
+  it('Renders signIn component when Login nav is clicked', async () => {
     const user = userEvent.setup();
     renderWithProviders(
       <BrowserRouter>
@@ -33,7 +33,7 @@ describe('Testing App.tsx UI', () => {
       </BrowserRouter>
     );
     await act(() => user.click(screen.getByText(/Login/i)));
-    await waitFor(() => screen.findByTestId(/sign-in-form/i), { timeout: 3000 });
+    await waitFor(() => screen.findByTestId(/sign-in-form/i));
   });
 
   it('Renders signIn component when Login icon is clicked', async () => {
@@ -44,19 +44,57 @@ describe('Testing App.tsx UI', () => {
       </BrowserRouter>
     );
     await act(() => user.click(screen.getByTestId(/profile-icon/i)));
-    await waitFor(() => screen.findByTestId(/sign-in-form/i), { timeout: 3000 });
+    await waitFor(() => screen.findByTestId(/sign-in-form/i));
+  });
+
+  it('Renders Favorites component when favorites nav is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    await act(() => user.click(screen.getByText(/Favorites/i)));
+    await screen.findByText(/Favorites Are Empty/i)
+  })
+
+  it('Renders Home component when home nav is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    const home = screen.getByText(/Home/i);
+    await act(() => user.click(home));
+    await screen.findByText(/Joker/i);
+  })
+
+it('renders fighterDetails component when a fighter\'s card is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(
+      <MemoryRouter initialEntries={['/']}>
+        <App />
+      </MemoryRouter>
+    );
+    const joker = await waitFor(() => screen.findByTestId(/joker/i), { timeout: 2000 });
+    await act(() => user.click(joker));
+    await screen.findByText(/Moves/i);
+    await screen.findByText(/Grabs\/Throws/i);
+    await screen.findByText(/Dodges\/Rolls/i);
+    await screen.findByText(/Stats/i);
   });
 
   it.skip('tests memory router', () => {
     const user = userEvent.setup();
     const testRoute = '/registration/sign-in'
     renderWithProviders(
-      <MemoryRouter initialEntries={[testRoute]}>
+      <MemoryRouter initialEntries={['/']}>
         <App />
-      </MemoryRouter>,
+      </MemoryRouter>
     )
     expect(screen.getByText(/Sign In/i)).toBeInTheDocument();
-  })
+  });
 })
 
 describe('Testing /api/favoriting/characters/upsert', () => {
