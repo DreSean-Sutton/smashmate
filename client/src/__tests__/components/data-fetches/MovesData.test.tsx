@@ -1,4 +1,4 @@
-import fetchDetailsData from '../../lib/fetch-details-data';
+import fetchDetailsData from '../../../lib/fetch-details-data';
 import 'jest-extended';
 import nock from 'nock';
 import axios from 'axios';
