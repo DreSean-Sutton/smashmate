@@ -4,7 +4,7 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from '../util/test-utils';
+import { renderWithProviders } from './test-utils';
 import '@testing-library/jest-dom';
 import 'jest-extended';
 import nock from 'nock';
