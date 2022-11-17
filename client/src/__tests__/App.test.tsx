@@ -12,9 +12,10 @@ import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-describe.only('Testing App.tsx UI/UX', () => {
+describe('Testing App.tsx UI/UX', () => {
 
   describe('Testing Home page', () => {
+
     it('Renders Home on page after loading', async () => {
       renderWithProviders(
         <BrowserRouter>
@@ -177,7 +178,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
         }
       ]
     }
-    const controller = new AbortController()
+    const controller = new AbortController();
     const headers = {
       signal: controller.signal,
       validateStatus: () => true
@@ -193,8 +194,15 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     }
 
     it('responds with 201 status data if inserted correctly', async () => {
-
-      const result = await addFavorites();
+      nock('http://localhost:5000')
+        .persist()
+        .post('/api/favoriting/characters/upsert')
+        .reply(201, {
+            lastErrorObject: {
+              updatedExisting: true
+            }
+          })
+        const result = await addFavorites();
       expect(result).toBeTruthy();
       expect(result.lastErrorObject.updatedExisting).toBeTruthy();
     })
@@ -202,7 +210,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     it('returns an error message if insert fails', async () => {
       nock('http://localhost:5000')
         .persist()
-        .post('/favoriting/characters/upsert')
+        .post('/api/favoriting/characters/upsert')
         .replyWithError('An unexpected error occurred!');
       const result = await addFavorites();
       expect(result).toHaveProperty('error');
@@ -213,7 +221,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     afterEach(nock.cleanAll);
 
     const url = 'http://localhost:5000/api/favoriting/characters/get';
-    const queryEmail = {email:'testemail@gmail.com'};
+    const queryEmail = { email:'testemail@gmail.com' };
     const controller = new AbortController()
     const header = {
       signal: controller.signal,
@@ -230,9 +238,36 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     }
 
     it('Returns an array of favorites from database', async () => {
+      nock('http://localhost:5000')
+        .persist()
+        .post('/api/favoriting/characters/get')
+        .reply(200, [
+          {
+            displayName: 'Inkling',
+            fighter: 'inkling',
+            fighterId: 25,
+            rosterId: 70
+          },
+          {
+            displayName: "Bowser Jr",
+            fighter: "bowserJr",
+            fighterId: 4,
+            rosterId: 63
+          }
+        ])
       const result = await getFavorites();
       expect(result).toBeTruthy();
+      expect(result.length).toBe(2);
       expect(result).not.toHaveProperty('error');
     });
+
+    it('Returns an error when fetch fails', async () => {
+      nock('http://localhost:5000')
+        .persist()
+        .post('/api/favoriting/characters/get')
+        .replyWithError('An unexpected error occurred')
+      const result = await getFavorites();
+      expect(result).toHaveProperty('error')
+    })
   });
 });
