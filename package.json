@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run --prefix server start",
     "test": "npm run --prefix client test",
+    "coverage": "npm run --prefix client coverage",
     "build": "npm-run-all build:*",
     "build:client": "npm run --prefix client build",
     "build:server": "npm run --prefix server tsc",

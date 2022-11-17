@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import FetchDataFail from './FetchDataFail';
-import axios from 'axios';
+import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import { DataProps } from '../../util/types';
 import './DataFetch.css';
@@ -16,19 +16,13 @@ export default function MovesData(props: DataProps) {
 
   useEffect(() => {
     setIsLoading(true);
-    const controller = new AbortController()
-    async function fetchDetailsData(currentFighter: string) {
-      setIsLoading(true)
-      const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/moves?fighter=${currentFighter}`, {
-        signal: controller.signal,
-        validateStatus: () => true
-      });
+    async function fetchData() {
+      const { status, data } = await fetchDetailsData('moves', props.currentFighter);
       if (status !== 200) return setFetchFailed(true);
       setIsLoading(false);
       setMoves(data);
     }
-    fetchDetailsData(props.currentFighter)
-    return () => controller.abort()
+    fetchData();
   }, [props.currentFighter]);
 
   function handleShowHideData() {

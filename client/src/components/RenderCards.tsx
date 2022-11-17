@@ -65,8 +65,8 @@ export default function RenderCards() {
       ? `0${num}`
       : num;
   }
-  function homeOrFavorites() {
 
+  function homeOrFavorites() {
     const favRegex = new RegExp('favorites', 'g');
     if(favRegex.test(location.href)) {
       return favorites;
@@ -74,15 +74,16 @@ export default function RenderCards() {
       return fighterArray;
     }
   }
+
   const allCards = homeOrFavorites().map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div onClick={handleShowDetails} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
+          <div data-testid={card.fighter} onClick={handleShowDetails} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
             <div className=''>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
-              <i onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighterId)}`}></i>
+              <i data-testid={`${card.fighter}-heart`} onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighterId)}`}></i>
               <h3 className='character-card-name'>{card.displayName}</h3>
             </div>
           </div>

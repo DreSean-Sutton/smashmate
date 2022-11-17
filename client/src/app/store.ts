@@ -1,18 +1,24 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, PreloadedState, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import userReducer from '../features/account/userSlice';
 import fighterArrayReducer from '../features/fighters/fightersArraySlice';
 import favortingReducer from '../features/favorites/favoritingSlice';
 
-export const store = configureStore({
-  reducer: {
-    currentUser: userReducer,
-    fighterArray: fighterArrayReducer,
-    favoriting: favortingReducer,
-  }
-});
+const rootReducer = combineReducers({
+  currentUser: userReducer,
+  fighterArray: fighterArrayReducer,
+  favoriting: favortingReducer,
+})
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState
+  })
+}
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch'];
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,

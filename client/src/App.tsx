@@ -15,7 +15,7 @@ import SiteNavbar from './components/navbar/SiteNavbar';
 import Home from './pages/Home';
 import FighterDetails from './pages/FighterDetails';
 import Favorites from './pages/Favorites';
-import Registration from './pages/Registration';
+import User from './features/account/User';
 import Loading from './components/Loading';
 import axios from 'axios';
 
@@ -27,6 +27,8 @@ export default function App() {
   const [loading, setIsLoading]: any[] = useState(false);
   const location = useLocation();
   const dispatch = useAppDispatch();
+
+
 
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
@@ -155,10 +157,10 @@ export default function App() {
           </Route>
           <Route path='/registration'>
             <Route path="create-account" element={
-              <Registration />
+              <User />
             } />
             <Route path="sign-in" element={
-              <Registration />
+              <User />
             } />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />

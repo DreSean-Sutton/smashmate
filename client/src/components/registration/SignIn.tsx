@@ -66,7 +66,8 @@ export default function SignIn () {
     email.setCustomValidity('');
     password.setCustomValidity('');
     const myQuery = {
-      email: email.value
+      email: email.value,
+      password: password.value
     }
     setIsLoading(true);
     const result: QueryResult = await handleFetchProfile(myQuery);
@@ -74,7 +75,7 @@ export default function SignIn () {
     if(result.error) {
       if(result.error === 'Invalid email') {
         email.setCustomValidity(result.error);
-      } else if(result.error === 'Invalid password') {
+      } else if (/password/.test(result.error)) {
         password.setCustomValidity(result.error);
       } else {
         // Need to add a page for 500 responses
@@ -93,7 +94,7 @@ export default function SignIn () {
   return (
     <>
       { loadSpinner }
-      <Form noValidate validated={validated} onSubmit={submitForm}>
+      <Form data-testid='sign-in-form' id='sign-in-form' noValidate validated={validated} onSubmit={submitForm}>
         <Form.Group className='mb-3' controlId='email'>
           <Form.Label>Email</Form.Label>
           <Form.Control type='email' placeholder='Email' required />

@@ -25,7 +25,7 @@ export default function SiteNavbar() {
           </Link>
         </Col>
         <Col className='text-end'>
-          <Link className={`${profileIcon} fa-user profile-icon`} to={profileIconLink}></Link>
+          <Link data-testid='profile-icon' className={`${profileIcon} fa-user profile-icon`} to={profileIconLink}></Link>
         </Col>
       </Container>
     </Navbar>
