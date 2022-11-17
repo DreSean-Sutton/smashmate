@@ -66,7 +66,8 @@ export default function SignIn () {
     email.setCustomValidity('');
     password.setCustomValidity('');
     const myQuery = {
-      email: email.value
+      email: email.value,
+      password: password.value
     }
     setIsLoading(true);
     const result: QueryResult = await handleFetchProfile(myQuery);
@@ -74,7 +75,7 @@ export default function SignIn () {
     if(result.error) {
       if(result.error === 'Invalid email') {
         email.setCustomValidity(result.error);
-      } else if(result.error === 'Invalid password') {
+      } else if (/password/.test(result.error)) {
         password.setCustomValidity(result.error);
       } else {
         // Need to add a page for 500 responses

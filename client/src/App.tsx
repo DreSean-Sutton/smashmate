@@ -16,15 +16,8 @@ import Home from './pages/Home';
 import FighterDetails from './pages/FighterDetails';
 import Favorites from './pages/Favorites';
 import User from './features/account/User';
-// import Registration from './pages/Registration';
 import Loading from './components/Loading';
 import axios from 'axios';
-
-export const LocationDisplay = () => {
-  const location = useLocation()
-
-  return <div data-testid="location-display">{location.pathname}</div>
-}
 
 export default function App() {
 
@@ -141,7 +134,6 @@ export default function App() {
         <SiteNavbar />
       </header>
       <main>
-        {/* <LocationDisplay /> */}
         <Routes>
           <Route path="/" element={
             <>

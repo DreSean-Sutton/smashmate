@@ -1,5 +1,4 @@
 import App from '../App';
-import { LocationDisplay } from '../App';
 import React from 'react';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
