@@ -90,9 +90,7 @@ export default function FighterDetails() {
     if(fighterArray.length !== 0) {
       return fighterArray[fighterIndex].displayName
     } else {
-      fetchTitle().then(res => {
-        return res;
-      })
+      fetchTitle().then(res => res)
     }
   }
   async function fetchTitle() {

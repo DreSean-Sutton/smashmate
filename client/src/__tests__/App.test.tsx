@@ -4,12 +4,13 @@ import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from './test-utils';
 import '@testing-library/jest-dom';
 import 'jest-extended';
 import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
+import getFighters from '../lib/fetch-fighters';
+import { renderWithProviders } from './test-utils';
 
 describe('Testing App.tsx UI/UX', () => {
 
@@ -151,6 +152,22 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByText(/^Dodges\/Rolls$/i);
       await screen.findByText(/^Stats$/i);
     });
+  })
+});
+
+describe.only('testing /api/get/fighters route', () => {
+
+  it('Returns an array of fighters with 200 status code', async () => {
+    const fighterArray = new Map();
+    const result = await getFighters();
+    for(const obj of result) {
+      fighterArray.set(obj.fighter, obj);
+    }
+    expect(fighterArray.get('inkling')).toBeTruthy();
+    expect(fighterArray.get('inkling')).toHaveProperty('fighter');
+    expect(fighterArray.get('inkling')).toHaveProperty('displayName');
+    expect(fighterArray.get('inkling')).toHaveProperty('rosterId');
+    expect(fighterArray.get('inkling')).toHaveProperty('fighterId');
   })
 });
 
