@@ -14,24 +14,27 @@ Come test it out here: https://smashmate.dreseansutton.com/
 
 ## Technologies Used
 
-- React
-- React Router
-- React Bootstrap
+- [react](https://reactjs.org/)
+- [react-router](https://reactrouter.com/en/main)^6.x
+- [react-bootstrap](https://react-bootstrap.github.io/)
 - Vanilla CSS
-- Typescript
-- MongoDb
-- Redux
-- react-redux
-- redux-toolkit
-- AWS
-- Jest
-- express
-- dotenv
-- Axios
-- nock
-- JWT
-- argon2
-- create-react-app
+- [typescript](https://www.typescriptlang.org/)
+- [mongoDb](https://www.mongodb.com/)
+- [redux](https://redux.js.org/)
+- [react-redux](https://react-redux.js.org/)
+- [redux-toolkit](https://redux-toolkit.js.org/)
+- [AWS](https://aws.amazon.com/)
+- EC2
+- SSH
+- [jest](https://jestjs.io/)
+- [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+- [express](https://expressjs.com/)
+- [dotenv](https://github.com/motdotla/dotenv)
+- [axios](https://github.com/axios/axios)
+- [nock](https://github.com/nock/nock)
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- [argon2](https://github.com/ranisalt/node-argon2)
+- [create-react-app](https://create-react-app.dev/)
 
 ## Features
 
