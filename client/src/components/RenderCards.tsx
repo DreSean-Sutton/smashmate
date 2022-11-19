@@ -29,10 +29,9 @@ export default function RenderCards() {
   function handleFavoriting(event: EventProps): void {
     const heart = event.target;
     const currentFighter = heart.closest('#character-card').dataset.cardName;
-    console.log({currentFighter}, {fighterArray})
-    fighterArray.fighterData.hasOwnProperty(currentFighter)
+    favorites.fighterData.hasOwnProperty(currentFighter)
       ? dispatch(deleteFavorites(fighterArray.fighterData[currentFighter]))
-      : dispatch(addFavorites(currentFighter));
+      : dispatch(addFavorites(fighterArray.fighterData[currentFighter]));
   }
 
   function handleHearts(fighter: string): string {
@@ -56,7 +55,6 @@ export default function RenderCards() {
     }
   }
   const objValues = Object.values(homeOrFavorites())
-  console.log({objValues});
   const allCards = objValues.map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>

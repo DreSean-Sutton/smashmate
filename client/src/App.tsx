@@ -77,7 +77,6 @@ export default function App() {
       objResult.fighterData[elem.fighter] = elem;
       objResult.length += 1;
     })
-    console.log({objResult})
     dispatch(setFighterArray(objResult));
     setIsLoading(false);
   }
