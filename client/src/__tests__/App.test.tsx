@@ -14,7 +14,7 @@ import { renderWithProviders } from './test-utils';
 
 describe('Testing App.tsx UI/UX', () => {
 
-  describe('Testing Home page', () => {
+  describe.only('Testing Home page', () => {
 
     it('Renders Home on page after loading', async () => {
       renderWithProviders(
@@ -157,7 +157,7 @@ describe('Testing App.tsx UI/UX', () => {
 
 describe('testing /api/get/fighters route', () => {
 
-  it.only('Returns an array of fighters with 200 status code', async () => {
+  it('Returns an array of fighters with 200 status code', async () => {
     const fighterArray = {};
     const result = await getFighters();
     for(const obj of result) {
@@ -274,7 +274,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
         ])
       const result = await getFavorites();
       expect(result).toBeTruthy();
-      expect(result.size).toBe(2);
+      expect(result.length).toBe(2);
       expect(result).not.toHaveProperty('error');
     });
 

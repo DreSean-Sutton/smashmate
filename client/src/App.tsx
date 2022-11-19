@@ -72,11 +72,12 @@ export default function App() {
   async function fetchFighters() {
     setIsLoading(true);
     const result = await getFighters();
-    const objResult: any = {};
+    const objResult: any = { length: 0, fighterData: {} };
     result.map((elem: any) => {
-      objResult[elem.fighter] = elem;
-      objResult.length++;
+      objResult.fighterData[elem.fighter] = elem;
+      objResult.length += 1;
     })
+    console.log({objResult})
     dispatch(setFighterArray(objResult));
     setIsLoading(false);
   }

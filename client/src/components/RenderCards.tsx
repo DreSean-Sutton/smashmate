@@ -29,13 +29,14 @@ export default function RenderCards() {
   function handleFavoriting(event: EventProps): void {
     const heart = event.target;
     const currentFighter = heart.closest('#character-card').dataset.cardName;
-    fighterArray.hasOwnProperty(currentFighter)
-      ? dispatch(deleteFavorites(fighterArray[currentFighter]))
+    console.log({currentFighter}, {fighterArray})
+    fighterArray.fighterData.hasOwnProperty(currentFighter)
+      ? dispatch(deleteFavorites(fighterArray.fighterData[currentFighter]))
       : dispatch(addFavorites(currentFighter));
   }
 
   function handleHearts(fighter: string): string {
-    return favorites.hasOwnProperty(fighter)
+    return favorites.fighterData.hasOwnProperty(fighter)
       ? 'card-heart-favorited'
       : '';
   }
@@ -49,13 +50,14 @@ export default function RenderCards() {
   function homeOrFavorites() {
     const favRegex = new RegExp('favorites', 'g');
     if(favRegex.test(location.href)) {
-      return favorites;
+      return favorites.fighterData;
     } else {
-      return fighterArray;
+      return fighterArray.fighterData;
     }
   }
-
-  const allCards = Object.values(homeOrFavorites).map((card: any) => {
+  const objValues = Object.values(homeOrFavorites())
+  console.log({objValues});
+  const allCards = objValues.map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
