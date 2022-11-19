@@ -29,8 +29,7 @@ export default function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-
-
+  console.log(fighterArray)
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
       const result = await handleGetFavorites(getFavoritesQuery);
@@ -67,7 +66,7 @@ export default function App() {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [])
 
   async function fetchFighters() {
     setIsLoading(true);

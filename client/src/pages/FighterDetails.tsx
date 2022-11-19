@@ -11,7 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
-import axios from 'axios';
+import fetchAFighter from '../lib/fetch-a-fighter';
 import './FighterDetails.css';
 
 export default function FighterDetails() {
@@ -19,6 +19,8 @@ export default function FighterDetails() {
   let navigate = useNavigate();
   let { fighter }: any = useParams();
   const [offset, setOffset] = useState(0);
+  const fighterDataValues: any[] = Object.values(fighterArray.fighterData);
+  let fighterIndex: number = binarySearcher(Object.values(fighterDataValues), fighter);
 
   useEffect(() => {
 
@@ -35,7 +37,7 @@ export default function FighterDetails() {
     window.scrollTo(0, 0);
   }, [fighter]);
 
-  const binarySearcher = (array: any, key: any) => {
+  function binarySearcher (array: any, key: any) {
     let start = 0;
     let end = array.length - 1;
 
@@ -52,20 +54,19 @@ export default function FighterDetails() {
     }
     return -1;
   }
-  let fighterIndex = binarySearcher(Object.values(fighterArray), fighter);
 
   function handlePreviousFighter () {
     if(fighterIndex === 0) {
       fighterIndex = fighterArray.length;
     }
-    navigate(`/character-details/${fighterArray[fighterIndex - 1].fighter}`);
+    navigate(`/character-details/${fighterDataValues[fighterIndex - 1].fighter}`);
   }
 
   function handleNextFighter () {
     if (fighterIndex === fighterArray.length - 1) {
       fighterIndex = -1;
     }
-    navigate(`/character-details/${fighterArray[fighterIndex + 1].fighter}`);
+    navigate(`/character-details/${fighterDataValues[fighterIndex + 1].fighter}`);
   }
 
   const handleArrowDimming = () => {
@@ -83,6 +84,14 @@ export default function FighterDetails() {
     }
   }
 
+  function handleCheckTitle() {
+    if (fighterArray.length !== 0) {
+      return fighterDataValues[fighterIndex].displayName
+    } else {
+      fetchAFighter(fighter).then((res: any)=> res.displayName);
+  }
+}
+
   function handleScrollToTop() {
     window.scrollTo(0, 0);
   }
@@ -95,7 +104,7 @@ export default function FighterDetails() {
         </Col>
         <Col xs={6} md={4} xl={3}>
           <Card className='secondary-theme-bg w-100 text-center mb-2 p-1'>
-            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{fighterArray[fighter].fighter}</Card.Title>
+            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
           </Card>
         </Col>
         <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
