@@ -155,19 +155,20 @@ describe('Testing App.tsx UI/UX', () => {
   })
 });
 
-describe.only('testing /api/get/fighters route', () => {
+describe('testing /api/get/fighters route', () => {
 
-  it('Returns an array of fighters with 200 status code', async () => {
-    const fighterArray = new Map();
+  it.only('Returns an array of fighters with 200 status code', async () => {
+    const fighterArray = {};
     const result = await getFighters();
     for(const obj of result) {
-      fighterArray.set(obj.fighter, obj);
+      fighterArray[obj.fighter] = obj;
     }
-    expect(fighterArray.get('inkling')).toBeTruthy();
-    expect(fighterArray.get('inkling')).toHaveProperty('fighter');
-    expect(fighterArray.get('inkling')).toHaveProperty('displayName');
-    expect(fighterArray.get('inkling')).toHaveProperty('rosterId');
-    expect(fighterArray.get('inkling')).toHaveProperty('fighterId');
+    expect(fighterArray['inkling']).toBeTruthy();
+    expect(fighterArray['inkling']).toHaveProperty('fighter');
+    expect(fighterArray['inkling']).toHaveProperty('displayName');
+    expect(fighterArray['inkling']).toHaveProperty('rosterId');
+    expect(fighterArray['inkling']).toHaveProperty('fighterId');
+    expect(Object.keys(fighterArray)[5]).toBe('captainFalcon');
   })
 });
 
@@ -273,7 +274,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
         ])
       const result = await getFavorites();
       expect(result).toBeTruthy();
-      expect(result.length).toBe(2);
+      expect(result.size).toBe(2);
       expect(result).not.toHaveProperty('error');
     });
 

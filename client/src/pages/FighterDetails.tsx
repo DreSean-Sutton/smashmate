@@ -52,7 +52,7 @@ export default function FighterDetails() {
     }
     return -1;
   }
-  let fighterIndex = binarySearcher(fighterArray, fighter);
+  let fighterIndex = binarySearcher(Object.values(fighterArray), fighter);
 
   function handlePreviousFighter () {
     if(fighterIndex === 0) {
@@ -86,21 +86,6 @@ export default function FighterDetails() {
   function handleScrollToTop() {
     window.scrollTo(0, 0);
   }
-  function handleCheckTitle() {
-    if(fighterArray.length !== 0) {
-      return fighterArray[fighterIndex].displayName
-    } else {
-      fetchTitle().then(res => res)
-    }
-  }
-  async function fetchTitle() {
-    try {
-      const res = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters?fighter=${fighter}`);
-      return await res.data.displayName;
-    } catch (e) {
-      console.error('fetch failed', e);
-    }
-  }
 
   return (
     <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
@@ -110,7 +95,7 @@ export default function FighterDetails() {
         </Col>
         <Col xs={6} md={4} xl={3}>
           <Card className='secondary-theme-bg w-100 text-center mb-2 p-1'>
-            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
+            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{fighterArray[fighter].fighter}</Card.Title>
           </Card>
         </Col>
         <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
