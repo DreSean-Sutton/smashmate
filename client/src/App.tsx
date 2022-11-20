@@ -40,7 +40,7 @@ export default function App() {
         parsedItem = JSON.parse(favoriteItem);
       }
       if (!Array.isArray(parsedItem)) { // A failsafe for previous users to flush their local storage
-        dispatch(setFavorites(JSON.parse(parsedItem)));
+        dispatch(setFavorites(parsedItem));
       }
     }
     async function fetchData(getFavoritesQuery: {email: string}) {
