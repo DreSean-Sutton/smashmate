@@ -41,7 +41,6 @@ export default function App() {
     }
     async function fetchData(getFavoritesQuery: {email: string}) {
       const { favorites} = await handleGetFavorites(getFavoritesQuery);
-      console.log({favorites})
       if(typeof favorites !== 'object' || !favorites || Array.isArray(favorites)) return;
       if (favorites.hasOwnProperty('length')) {
         dispatch(setFavorites(favorites));
@@ -77,7 +76,7 @@ export default function App() {
     const objResult: any = { length: 0, fighterData: {} };
     result.map((elem: any) => {
       objResult.fighterData[elem.fighter] = elem;
-      objResult.length += 1;
+      objResult.length++;
     })
     dispatch(setFighterArray(objResult));
     setIsLoading(false);
@@ -92,7 +91,6 @@ export default function App() {
     }
     try {
       const { status, data }: any = await axios.post(url, query, headers);
-      console.log({data});
       if (status !== 201) throw new Error('favoriting failed!');
       return data;
     } catch (e: any) {
