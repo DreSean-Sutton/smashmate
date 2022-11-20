@@ -9,7 +9,7 @@ describe('Registration creation route', () => {
   const url = 'http://localhost:5000/api/registration/account/add';
   const myProfile = {
     email: 'dreseansutton@gmail.com',
-    password: 'test password',
+    password: '123456789',
     username: 'Dre Sean'
   }
   const controller = new AbortController()
@@ -31,13 +31,13 @@ describe('Registration creation route', () => {
 
   // COMPLETED INSERT TEST
   it('responds with 201 status data if correctly inserted', async () => {
-    nock('http://localhost:5000')
-      .persist()
-      .post('/api/registration/account/add')
-      .reply(201, {
-        acknowledged: true,
-        insertedId: 'sdfisal2904'
-      });
+    // nock('http://localhost:5000')
+    //   .persist()
+    //   .post('/api/registration/account/add')
+    //   .reply(201, {
+    //     acknowledged: true,
+    //     insertedId: 'sdfisal2904'
+    //   });
 
     const result = await sendAccountDetails();
     expect(result.acknowledged).toEqual(true);

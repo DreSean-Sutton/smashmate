@@ -8,6 +8,7 @@ const { ObjectId } = require('mongodb');
 favoritingRoute
 .route('/characters/upsert')
 .post(async (req: any, response: any, next: any) => {
+  console.log(req.body)
   let db_connect = dbo.getDb();
   try {
     db_connect

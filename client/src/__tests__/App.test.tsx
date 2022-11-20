@@ -10,11 +10,11 @@ import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 import getFighters from '../lib/fetch-fighters';
-import { renderWithProviders } from './test-utils';
+import { renderWithProviders } from '../util/test-utils';
 
 describe('Testing App.tsx UI/UX', () => {
 
-  describe.only('Testing Home page', () => {
+  describe('Testing Home page', () => {
 
     it('Renders Home on page after loading', async () => {
       renderWithProviders(
@@ -52,7 +52,6 @@ describe('Testing App.tsx UI/UX', () => {
     });
 
     it('Renders Home component when Home nav is clicked', async () => {
-      const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
           <App />
@@ -60,8 +59,8 @@ describe('Testing App.tsx UI/UX', () => {
       );
       const homeNav = screen.getByRole('link', { name: /^home$/i });
       expect(homeNav).toHaveAttribute('href', '/');
-      await user.click(homeNav);
-      await screen.findByText(/^Joker$/i);
+      await userEvent.click(homeNav);
+      await screen.findByTestId(/^joker$/i);
     });
 
     it('Renders Favorites component when Favorites nav is clicked', async () => {
@@ -90,14 +89,14 @@ describe('Testing App.tsx UI/UX', () => {
     });
 
     it('Renders Home when Smashmate title is clicked', async () => {
-      const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
           <App />
         </BrowserRouter>
       );
-      const home = screen.getByText(/^smashmate$/i);
-      await user.click(home);
+      const homeNav = screen.getByRole('link', { name: /^smashmate$/i });
+      expect(homeNav).toHaveAttribute('href', '/');
+      await userEvent.click(homeNav);
       await screen.findByTestId(/^joker$/i);
     });
   });
@@ -158,17 +157,18 @@ describe('Testing App.tsx UI/UX', () => {
 describe('testing /api/get/fighters route', () => {
 
   it('Returns an array of fighters with 200 status code', async () => {
-    const fighterArray = {};
+    const fighterArray = { length: 0, fighterData: {} };
     const result = await getFighters();
     for(const obj of result) {
-      fighterArray[obj.fighter] = obj;
+      fighterArray.fighterData[obj.fighter] = obj;
+      fighterArray.length++;
     }
-    expect(fighterArray['inkling']).toBeTruthy();
-    expect(fighterArray['inkling']).toHaveProperty('fighter');
-    expect(fighterArray['inkling']).toHaveProperty('displayName');
-    expect(fighterArray['inkling']).toHaveProperty('rosterId');
-    expect(fighterArray['inkling']).toHaveProperty('fighterId');
-    expect(Object.keys(fighterArray)[5]).toBe('captainFalcon');
+    expect(fighterArray.fighterData['inkling']).toBeTruthy();
+    expect(fighterArray.fighterData['inkling']).toHaveProperty('fighter');
+    expect(fighterArray.fighterData['inkling']).toHaveProperty('displayName');
+    expect(fighterArray.fighterData['inkling']).toHaveProperty('rosterId');
+    expect(fighterArray.fighterData['inkling']).toHaveProperty('fighterId');
+    expect(Object.keys(fighterArray.fighterData)[5]).toBe('captainFalcon');
   })
 });
 

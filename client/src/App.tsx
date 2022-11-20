@@ -29,7 +29,6 @@ export default function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-  console.log(fighterArray)
   useEffect(() => {
     async function fetchData(getFavoritesQuery: {email: string}) {
       const result = await handleGetFavorites(getFavoritesQuery);
@@ -66,7 +65,7 @@ export default function App() {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [location])
 
   async function fetchFighters() {
     setIsLoading(true);
@@ -89,6 +88,7 @@ export default function App() {
     }
     try {
       const { status, data }: any = await axios.post(url, query, headers);
+      console.log({data});
       if (status !== 201) throw new Error('favoriting failed!');
       return data;
     } catch (e: any) {

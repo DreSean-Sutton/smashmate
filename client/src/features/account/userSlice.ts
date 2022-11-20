@@ -1,11 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-export interface UserState {
-  user: any
-}
-
-const initialState: UserState = { user: null };
+const initialState: any = { user: null };
 
 const userSlice = createSlice({
   name: 'user',
