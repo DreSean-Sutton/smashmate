@@ -9,7 +9,7 @@ describe('Registration creation route', () => {
   const url = 'http://localhost:5000/api/registration/account/add';
   const myProfile = {
     email: 'dreseansutton@gmail.com',
-    password: 'test password',
+    password: '123456789',
     username: 'Dre Sean'
   }
   const controller = new AbortController()

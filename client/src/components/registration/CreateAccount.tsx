@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { selectFavorites } from '../../features/favorites/favoritingSlice';
+import { useAppSelector } from '../../app/hook';
 import Loading from '../Loading';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
@@ -11,13 +13,15 @@ import axios from 'axios';
 interface Profile {
   username: string,
   email: string,
-  password: string
+  password: string,
+  favorites: any
 }
 export default function CreateAccount() {
 
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const favorites: any = useAppSelector(selectFavorites)
 
   const loadSpinner = isLoading ? <Loading /> : '';
 
@@ -55,10 +59,12 @@ export default function CreateAccount() {
     if(!form.reportValidity()) {
       event.stopPropagation();
     } else {
+      console.error({favorites})
       const profile: Profile = {
         username: username.value,
         email: email.value,
-        password: password.value
+        password: password.value,
+        favorites: favorites
       }
       setIsLoading(true);
       const result = await handleUploadProfile(profile);

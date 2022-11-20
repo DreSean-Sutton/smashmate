@@ -18,6 +18,7 @@ import Favorites from './pages/Favorites';
 import User from './features/account/User';
 import Loading from './components/Loading';
 import axios from 'axios';
+import getFighters from './lib/fetch-fighters';
 
 export default function App() {
 
@@ -28,13 +29,7 @@ export default function App() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
-
-
   useEffect(() => {
-    async function fetchData(getFavoritesQuery: {email: string}) {
-      const result = await handleGetFavorites(getFavoritesQuery);
-      dispatch(setFavorites(result.favorites));
-    }
     if(user) {
       const getFavoritesQuery = { email: user.user.email };
       fetchData(getFavoritesQuery)
@@ -44,7 +39,14 @@ export default function App() {
         dispatch(setFavorites(JSON.parse(favoriteItem)));
       }
     }
-  }, [user, dispatch]);
+    async function fetchData(getFavoritesQuery: {email: string}) {
+      const { favorites} = await handleGetFavorites(getFavoritesQuery);
+      if(typeof favorites !== 'object' || !favorites || Array.isArray(favorites)) return;
+      if (favorites.hasOwnProperty('length')) {
+        dispatch(setFavorites(favorites));
+      }
+    }
+  }, [user]);
 
   useEffect(() => {
     if(user) {
@@ -70,23 +72,19 @@ export default function App() {
 
   async function fetchFighters() {
     setIsLoading(true);
-    try {
-      const res = await axios.get('https://the-ultimate-api.dreseansutton.com/api/get/fighters')
-      if (res.status === 200) {
-        dispatch(setFighterArray(res.data));
-      } else {
-        throw Error(res.statusText);
-      }
-    } catch (e) {
-      console.error('Fetch failed!', e);
-    } finally {
-      setIsLoading(false);
-    }
+    const result = await getFighters();
+    const objResult: any = { length: 0, fighterData: {} };
+    result.map((elem: any) => {
+      objResult.fighterData[elem.fighter] = elem;
+      objResult.length++;
+    })
+    dispatch(setFighterArray(objResult));
+    setIsLoading(false);
   }
 
   async function handleUploadFavorites(query: any) {
     const url = '/api/favoriting/characters/upsert';
-    const controller = new AbortController()
+    const controller = new AbortController();
     const headers = {
       signal: controller.signal,
       validateStatus: () => true
