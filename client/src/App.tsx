@@ -30,10 +30,6 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    async function fetchData(getFavoritesQuery: {email: string}) {
-      const result = await handleGetFavorites(getFavoritesQuery);
-      dispatch(setFavorites(result.favorites));
-    }
     if(user) {
       const getFavoritesQuery = { email: user.user.email };
       fetchData(getFavoritesQuery)
@@ -43,7 +39,15 @@ export default function App() {
         dispatch(setFavorites(JSON.parse(favoriteItem)));
       }
     }
-  }, [user, dispatch]);
+    async function fetchData(getFavoritesQuery: {email: string}) {
+      const { favorites} = await handleGetFavorites(getFavoritesQuery);
+      console.log({favorites})
+      if(typeof favorites !== 'object' || !favorites || Array.isArray(favorites)) return;
+      if (favorites.hasOwnProperty('length')) {
+        dispatch(setFavorites(favorites));
+      }
+    }
+  }, [user]);
 
   useEffect(() => {
     if(user) {
