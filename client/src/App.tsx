@@ -35,12 +35,8 @@ export default function App() {
       fetchData(getFavoritesQuery)
     } else {
       const favoriteItem: string | null = localStorage.getItem('favorites');
-      let parsedItem;
-      if (favoriteItem) {
-        parsedItem = JSON.parse(favoriteItem);
-      }
-      if (!Array.isArray(parsedItem)) { // A failsafe for previous users to flush their local storage
-        dispatch(setFavorites(parsedItem));
+      if (favoriteItem && !Array.isArray(favoriteItem)) {
+        dispatch(setFavorites(JSON.parse(favoriteItem)));
       }
     }
     async function fetchData(getFavoritesQuery: {email: string}) {
