@@ -30,7 +30,7 @@ describe('Registration sign in routes', () => {
       .post('/api/registration/account/sign-in')
       .reply(200, {
         token: 'teststringofrandomcharacters',
-        user: {
+        account: {
           email: 'testemail@gmail.com',
           id: '2138948205',
           username: 'test username'
@@ -47,7 +47,7 @@ describe('Registration sign in routes', () => {
     expect(result).toEqual(
       expect.objectContaining({
         token: expect.any(String),
-        user: expect.objectContaining({
+        account: expect.objectContaining({
           email: expect.any(String),
           id: expect.any(String),
           username: expect.any(String)

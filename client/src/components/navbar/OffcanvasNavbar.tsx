@@ -9,7 +9,7 @@ import './OffcanvasNavbar.css';
 export default function OffcanvasNavbar() {
 
   const user = useAppSelector(selectUser);
-  const menuName = user ? user.user.username : 'Guest';
+  const menuName = user ? user.account.username : 'Guest';
   const loggingIcon = user ? 'fa-arrow-right-from-bracket' : 'fa-arrow-right-to-bracket';
   const loggingTitle = user ? 'Logout' : 'Login';
   const dispatch = useAppDispatch();

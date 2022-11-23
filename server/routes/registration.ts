@@ -74,7 +74,7 @@ registrationRoute
         const token = jwt.sign(payload, process.env.TOKEN_SECRET);
         response.status(200).json({
           token: token,
-          user: payload
+          account: payload
         });
       } catch(e) {
         next(e);

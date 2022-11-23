@@ -31,7 +31,7 @@ export default function App() {
 
   useEffect(() => {
     if(user) {
-      const getFavoritesQuery = { email: user.user.email };
+      const getFavoritesQuery = { email: user.account.email };
       fetchData(getFavoritesQuery)
     } else {
       const favoriteItem: string | null = localStorage.getItem('favorites');
@@ -51,7 +51,7 @@ export default function App() {
   useEffect(() => {
     if(user) {
       const uploadFavoritesQuery = {
-        email: user.user.email,
+        email: user.account.email,
         favorites: favorites
       }
       handleUploadFavorites(uploadFavoritesQuery);
