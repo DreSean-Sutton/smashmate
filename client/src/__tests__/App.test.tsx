@@ -1,6 +1,6 @@
 import App from '../App';
 import React from 'react';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
@@ -155,8 +155,26 @@ describe('Testing App.tsx UI/UX', () => {
 });
 
 describe('testing /api/get/fighters route', () => {
+  afterEach(nock.cleanAll);
 
   it('Returns an array of fighters with 200 status code', async () => {
+    nock('https://the-ultimate-api.dreseansutton.com')
+      .persist()
+      .get('/api/get/fighters')
+      .reply(200, [
+        {
+          displayName: 'Inkling',
+          fighter: 'inkling',
+          fighterId: 25,
+          rosterId: 70
+        },
+        {
+          displayName: "Bowser Jr",
+          fighter: "bowserJr",
+          fighterId: 4,
+          rosterId: 63
+        }
+      ])
     const fighterArray = { length: 0, fighterData: {} };
     const result = await getFighters();
     for(const obj of result) {
@@ -164,11 +182,25 @@ describe('testing /api/get/fighters route', () => {
       fighterArray.length++;
     }
     expect(fighterArray.fighterData['inkling']).toBeTruthy();
+    expect(fighterArray.fighterData['bowserJr']).toBeTruthy();
     expect(fighterArray.fighterData['inkling']).toHaveProperty('fighter');
     expect(fighterArray.fighterData['inkling']).toHaveProperty('displayName');
     expect(fighterArray.fighterData['inkling']).toHaveProperty('rosterId');
     expect(fighterArray.fighterData['inkling']).toHaveProperty('fighterId');
-    expect(Object.keys(fighterArray.fighterData)[5]).toBe('captainFalcon');
+    expect(fighterArray.fighterData['bowserJr']).toHaveProperty('fighter');
+    expect(fighterArray.fighterData['bowserJr']).toHaveProperty('displayName');
+    expect(fighterArray.fighterData['bowserJr']).toHaveProperty('rosterId');
+    expect(fighterArray.fighterData['bowserJr']).toHaveProperty('fighterId');
+  })
+
+  it('Returns an error on 404 response', async () => {
+    nock('https://the-ultimate-api.dreseansutton.com')
+      .persist()
+      .get('/api/get/fighters')
+      .reply(404)
+    const { error } = await getFighters();
+    expect(error).toBeTruthy();
+    expect(error).toBe('An error has occurred');
   })
 });
 
