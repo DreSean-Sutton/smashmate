@@ -3,10 +3,9 @@
   "version": "4.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node build/server.js",
-    "dev:server": "nodemon build/server.js",
-    "tsc": "./node_modules/typescript/bin/tsc",
-    "tsc:watch": "tsc -w"
+    "start": "ts-node server.ts",
+    "dev:server": "nodemon --exec ts-node server.ts",
+    "tsc": "./node_modules/typescript/bin/tsc"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +20,7 @@
     "typescript": "^4.8.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
   }
 }
