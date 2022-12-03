@@ -12,7 +12,7 @@ const favoritingSlice = createSlice({
     },
     addFavorites: (state, action: PayloadAction<any>) => {
       state.favoriteFighters.fighterData[action.payload.fighter] = action.payload;
-      state.favoriteFighters = Object.fromEntries(Object.entries(state.favoriteFighters).sort());
+      state.favoriteFighters.fighterData = Object.fromEntries(Object.entries(state.favoriteFighters.fighterData).sort());
       state.favoriteFighters.length++;
     },
     deleteFavorites: (state, action: PayloadAction<any>) => {
