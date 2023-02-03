@@ -62,10 +62,12 @@ registrationRoute
           throw err
         };
         if (!res) {
-          throw new ClientError(401, 'Invalid email');
+          throw new ClientError(400, 'Invalid email');
         }
         const checkPassword = await argon2.verify(res.password, password);
-        if(!checkPassword) throw new ClientError(401, 'Invalid password');
+        if(!checkPassword) {
+          throw new ClientError(400, 'Invalid password');
+        }
         const payload: { id: number, username: string, email: string } = {
           id: res._id,
           username: res.username,
