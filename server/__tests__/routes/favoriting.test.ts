@@ -10,13 +10,35 @@ describe.only("Favoriting route: POST /api/favoriting/characters/upsert", () => 
     const res = await request(baseURL)
       .post(postURL)
       .send({
-
+        email: 'testemail@gmail.com',
+        favorites: [ 'character1', 'character2' ]
       })
     return res;
   }
-  describe("", () => {
-    it("does nothing", async () => {
 
+  describe("Successful upsert", () => {
+    it("returns a 201 response and updates a users favorites", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(201, { lastErrorObject: {
+          upsert: true
+        }
+      })
+
+      const res = await fetchData();
+      expect(res.statusCode).toBe(201);
+      expect(res.body.lastErrorObject.upsert).toBeTruthy();
+    })
+  })
+
+  describe("Unsuccessful upsert", () => {
+    it("returns a 500 response and error", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(500, { error: 'an error has occurred' });
+      const res = await fetchData();
+      expect(res.statusCode).toBe(500);
+      expect(res.body).toHaveProperty('error');
     })
   })
 })
