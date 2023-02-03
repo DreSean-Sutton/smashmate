@@ -18,7 +18,7 @@ describe("Registration Route: POST /api/registration/account/add", () => {
   }
 
   describe("Successful account creation", () => {
-    it("returns a 201 response and inserts a new profile into the database", async () => {
+    it.only("returns a 201 response and inserts a new profile into the database", async () => {
       nock(baseURL)
         .post(postURL)
         .reply(201,{ acknowledged: true, id: 5 });

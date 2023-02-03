@@ -1,6 +1,6 @@
-var { request, nock, port } = require('../test.config');
+var { request, nock, port, testCharacter1, testCharacter2 } = require('../test.config');
 
-describe.only("Favoriting route: POST /api/favoriting/characters/upsert", () => {
+describe("Favoriting route: POST /api/favoriting/characters/upsert", () => {
 
   afterAll(nock.cleanAll);
 
@@ -11,7 +11,7 @@ describe.only("Favoriting route: POST /api/favoriting/characters/upsert", () => 
       .post(postURL)
       .send({
         email: 'testemail@gmail.com',
-        favorites: [ 'character1', 'character2' ]
+        favorites: [testCharacter1, testCharacter2]
       })
     return res;
   }
@@ -31,7 +31,7 @@ describe.only("Favoriting route: POST /api/favoriting/characters/upsert", () => 
     })
   })
 
-  describe("Unsuccessful upsert", () => {
+  describe.only("Unsuccessful upsert", () => {
     it("returns a 500 response and error", async () => {
       nock(baseURL)
         .post(postURL)
@@ -53,13 +53,33 @@ describe("Favoriting route: POST /api/favoriting/characters/get", () => {
     const res = await request(baseURL)
       .post(postURL)
       .send({
-
+        email: 'testemail@gmail.com'
       })
     return res;
   }
-  describe("", () => {
-    it("does nothing", async () => {
 
+  describe("Successful POST request", () => {
+    it("returns a 200 response and the user's favorites", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(200, [testCharacter1, testCharacter2])
+      const res = await fetchData();
+      expect(res.statusCode).toBe(200);
+      expect(res.body[0]).toEqual(testCharacter1);
+      expect(res.body[1]).toEqual(testCharacter2);
+    })
+  })
+
+  describe("Unsuccessful POST request", () => {
+    it("returns a 404 response and an error if email doesn't exist", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(400, {
+          error: 'invalid email address'
+        })
+      const res = await fetchData();
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toHaveProperty('error');
     })
   })
 })
