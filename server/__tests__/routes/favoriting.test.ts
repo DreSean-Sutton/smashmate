@@ -31,7 +31,7 @@ describe("Favoriting route: POST /api/favoriting/characters/upsert", () => {
     })
   })
 
-  describe.only("Unsuccessful upsert", () => {
+  describe("Unsuccessful upsert", () => {
     it("returns a 500 response and error", async () => {
       nock(baseURL)
         .post(postURL)
