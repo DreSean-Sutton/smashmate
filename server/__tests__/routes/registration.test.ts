@@ -1,4 +1,4 @@
-var { request, nock, port } = require('../test.config');
+const { request, nock, port } = require('../test.config');
 
 describe("Registration Route: POST /api/registration/account/add", () => {
   afterEach(nock.cleanAll);
@@ -137,3 +137,5 @@ describe("Registration route: POST /api/registration/account/sign-in", () => {
     })
   })
 })
+
+export {}

@@ -1,4 +1,4 @@
-var { request, nock, port, testCharacter1, testCharacter2 } = require('../test.config');
+const { request, nock, port, testCharacter1, testCharacter2 } = require('../test.config');
 
 describe("Favoriting route: POST /api/favoriting/characters/upsert", () => {
 
@@ -83,3 +83,5 @@ describe("Favoriting route: POST /api/favoriting/characters/get", () => {
     })
   })
 })
+
+export {}
