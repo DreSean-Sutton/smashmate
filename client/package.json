@@ -43,7 +43,7 @@
     "testEnvironment": "jsdom",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "./src/**"
+      "<rootDir>/src/**"
     ],
     "coverageThreshold": {
       "global": {

@@ -4,9 +4,9 @@
   "description": "A web application for Smash Ultimate nerds interested in seeing the raw data behind the Fighters.",
   "scripts": {
     "start": "npm run --prefix server start",
+    "test": "npm run --parallel test:*",
     "test:client": "npm run --prefix client test",
     "test:server": "npm run --prefix server test",
-    "coverage": "npm run --prefix client coverage",
     "build": "npm-run-all build:*",
     "build:client": "npm run --prefix client build",
     "build:server": "npm run --prefix server tsc",

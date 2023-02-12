@@ -10,7 +10,7 @@ import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 import getFighters from '../lib/fetch-fighters';
-import { renderWithProviders } from './test-utils';
+import { renderWithProviders } from '../util/test-utils';
 
 describe('Testing App.tsx UI/UX', () => {
 
