@@ -3,17 +3,20 @@ li {
   list-style: none;
 }
 
+.offcanvas-body {
+  overflow-y: hidden;
+}
+
 .offcanvas-navbar {
   max-width: 100%;
   background-color: var(--primary-theme);
 }
 
 .offcanvas-ul {
-  position: relative;
   padding: 0;
 }
 
-.offcanvas-li+.offcanvas-li {
+.offcanvas-li + .offcanvas-li {
   margin-top: 0.25rem;
 }
 
@@ -50,7 +53,11 @@ li {
 }
 
 @media screen and (min-width: 992px) {
+  .offcanvas-body {
+    overflow-y: initial;
+  }
   .offcanvas-ul {
+    position: relative;
     top: 0.5rem;
   }
 

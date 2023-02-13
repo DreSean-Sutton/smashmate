@@ -27,7 +27,7 @@ return (
       placement="start"
       className='offcanvas-navbar'
       style={{
-        maxHeight: '23%',
+        maxHeight: '25%',
         borderRadius: '0 0 8px 0'
       }} >
       <Offcanvas.Header closeButton>
@@ -35,7 +35,7 @@ return (
           { menuName }
         </Offcanvas.Title>
       </Offcanvas.Header>
-      <Offcanvas.Body className='pb-0 pt-0'>
+      <Offcanvas.Body className='offcanvas-body pb-0 pt-0'>
         <Nav>
           <ul className='d-lg-flex offcanvas-ul'>
             <li className='offcanvas-li'>
