@@ -1,11 +1,13 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
 import { selectFavorites, addFavorites, deleteFavorites } from '../features/favorites/favoritingSlice';
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import Searchbar from './Searchbar'
 import './RenderCards.css';
 
 interface EventProps {
@@ -15,6 +17,7 @@ interface EventProps {
 
 export default function RenderCards() {
 
+  const [searchbarOpened, setSearchbarOpened] = useState(false);
   const fighterArray: any = useAppSelector(selectFighterArray);
   const favorites: any = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
@@ -54,12 +57,13 @@ export default function RenderCards() {
       return fighterArray.fighterData;
     }
   }
+
   const objValues = Object.values(homeOrFavorites())
   const allCards = objValues.map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div data-testid={card.fighter} onClick={handleShowDetails} className='row character-card p-0' data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} id='character-card'>
+          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName}>
             <div>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
@@ -71,9 +75,27 @@ export default function RenderCards() {
       </React.Fragment>
     );
   });
+  const searchContents = searchbarOpened
+    ? <Searchbar />
+    : <div className='search-icon d-flex justify-content-center text-center'>
+        <i className="fa-solid fa-magnifying-glass"></i>
+      </div>
+
   return (
-    <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
-      { allCards }
-    </Container>
+    <>
+    {/*
+    Add a search icon under navbar
+    Clicking the icon opens search bar
+    Screen doesn't darken (maybe)
+    Search bar stays open until X is clicked (maybe)
+    */}
+      <Container fluid className='search-container'>
+        { searchContents }
+      </Container>
+      <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
+        { allCards }
+      </Container>
+
+    </>
   );
 }

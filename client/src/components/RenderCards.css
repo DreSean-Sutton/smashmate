@@ -1,3 +1,13 @@
+.search-container {
+  position: fixed;
+  top: 13%;
+  z-index: 10;
+}
+
+.search-icon {
+
+}
+
 .content-layout {
   margin: auto;
 }
