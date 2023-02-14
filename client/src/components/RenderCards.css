@@ -9,12 +9,13 @@
   padding: 0.5rem;
   border-radius: 5rem;
   background-color: var(--secondary-theme);
-  transition: 300ms transform;
+  transition: 300ms opacity;
 }
 
 .search-icon:hover {
-  transform: scale(1.2);
+  opacity: 0.85;
 }
+
 .content-layout {
   margin: auto;
 }

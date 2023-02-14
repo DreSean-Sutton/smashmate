@@ -1,6 +1,24 @@
+.searchbar {
+
+}
+
 .searchbar > input {
-  width: 30%;
-  border-radius: 4px;
-  color: white;
-  /* background-color: var(--secondary-theme); */
+  border-radius: 12px;
+  color: var(--primary-theme);
+  border: none;
+  background-color: var(--secondary-theme);
+}
+
+.searchbar > input::placeholder {
+  color: rgba(230, 230, 230, 0.9);
+}
+
+.searchbar > input::selection {
+  background-color: var(--primary-theme);
+}
+
+@media screen and (min-width: 575px) {
+  .searchbar > input {
+    padding: 5px;
+  }
 }
