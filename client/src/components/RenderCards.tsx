@@ -77,10 +77,7 @@ export default function RenderCards() {
   });
   const searchContents = searchbarOpened
     ? <Searchbar />
-    : <div className='search-icon d-flex justify-content-center text-center'>
-        <i className="fa-solid fa-magnifying-glass"></i>
-      </div>
-
+    : <i className="search-icon fa-solid fa-magnifying-glass"></i>
   return (
     <>
     {/*
@@ -89,7 +86,7 @@ export default function RenderCards() {
     Screen doesn't darken (maybe)
     Search bar stays open until X is clicked (maybe)
     */}
-      <Container fluid className='search-container'>
+      <Container fluid className='search-container d-flex justify-content-center'>
         { searchContents }
       </Container>
       <Container fluid={'lg'} className="row content-layout" data-view='character-list'>

@@ -1,13 +1,20 @@
 .search-container {
   position: fixed;
-  top: 13%;
+  top: 10%;
   z-index: 10;
 }
 
 .search-icon {
-
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 5rem;
+  background-color: var(--secondary-theme);
+  transition: 300ms transform;
 }
 
+.search-icon:hover {
+  transform: scale(1.2);
+}
 .content-layout {
   margin: auto;
 }
@@ -101,6 +108,14 @@
 }
 
 @media screen and (min-width: 575px) {
+  .search-icon {
+    font-size: 1.5rem;
+    padding: 0.75rem;
+  }
+
+  .content-layout {
+    margin: 7.5rem auto 0;
+  }
   .character-card {
     height: 270px;
   }
@@ -131,7 +146,14 @@
   }
 }
 
-@media screen and (min-width: 1220px) {
+@media screen and (min-width: 1200px) {
+  .search-container {
+    top: 10.5%;
+  }
+  .search-icon {
+    font-size: 1.75rem;
+    padding: 0.75rem;
+  }
   .card-column {
     margin: 1.5rem auto;
   }
