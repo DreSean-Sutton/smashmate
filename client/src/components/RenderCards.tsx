@@ -88,19 +88,12 @@ export default function RenderCards() {
 
   return (
     <>
-    {/*
-    Add a search icon under navbar
-    Clicking the icon opens search bar
-    Screen doesn't darken (maybe)
-    Search bar stays open until X is clicked (maybe)
-    */}
       <Container fluid className='search-container d-flex justify-content-center'>
         { searchContents }
       </Container>
       <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
         { allCards }
       </Container>
-
     </>
   );
 }
