@@ -3,6 +3,17 @@
   top: 0;
   width: 100%;
   height: 100vh;
+  animation: dark-background 100ms ease-in;
   background-color: rgba(0, 0, 0, 0.75);
   z-index: -1; /* -1 allows the searchbar to be above it */
+}
+
+@keyframes dark-background {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.75;
+  }
 }

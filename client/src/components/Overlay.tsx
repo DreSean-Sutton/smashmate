@@ -1,8 +1,16 @@
 import React from 'react';
 import './Overlay.css';
 
-export default function Overlay() {
+interface OverlayProps {
+  toggleSearchbar: () => void;
+}
+export default function Overlay(props: OverlayProps) {
+
+  function handleToggleSearchbar() {
+    props.toggleSearchbar();
+  }
+
   return (
-    <div className='overlay'></div>
+    <div onClick={handleToggleSearchbar} className='overlay'></div>
   )
 }

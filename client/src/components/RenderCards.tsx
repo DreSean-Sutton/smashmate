@@ -59,7 +59,9 @@ export default function RenderCards() {
   }
 
   function searchIconOrSearchbar() {
-    setSearchbarOpened(true);
+    searchbarOpened
+    ? setSearchbarOpened(false)
+    : setSearchbarOpened(true);
   }
 
   const objValues = Object.values(homeOrFavorites())
@@ -81,7 +83,7 @@ export default function RenderCards() {
   });
 
   const searchContents = searchbarOpened
-    ? <Searchbar />
+    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} />
     : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass"></i>
 
   return (
