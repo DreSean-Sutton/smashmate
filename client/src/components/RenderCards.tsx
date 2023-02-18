@@ -84,7 +84,7 @@ export default function RenderCards() {
 
   const searchContents = searchbarOpened
     ? <Searchbar toggleSearchbar={searchIconOrSearchbar} />
-    : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass"></i>
+    : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></i>
 
   return (
     <>

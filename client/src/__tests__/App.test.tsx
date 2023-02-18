@@ -1,7 +1,7 @@
 import App from '../App';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { screen, waitFor } from '@testing-library/react';
+import { findByTestId, screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
@@ -34,6 +34,26 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^joker-heart$/i);
     });
 
+  })
+
+  describe('testing searchbar', () => {
+
+    test('Searchbar and search icon are toggleable', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      );
+      const searchIcon = await screen.findByTestId(/search-icon/i);
+      await user.click(searchIcon);
+      const searchbar = screen.getByTestId(/searchbar/i);
+      const overlay = screen.getByTestId(/overlay/i)
+      expect(searchIcon).not.toBeInTheDocument();
+      await user.click(overlay);
+      expect(searchbar).not.toBeInTheDocument();
+      expect(overlay).not.toBeInTheDocument();
+    })
   })
 
   describe('testing navbar links', () => {
@@ -310,13 +330,11 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       expect(result).not.toHaveProperty('error');
     });
 
-    it('Returns an error when fetch fails', async () => {
-      nock('http://localhost:5000')
-        .persist()
-        .post('/api/favoriting/characters/get')
-        .replyWithError('An unexpected error occurred')
-      const result = await getFavorites();
-      expect(result).toHaveProperty('error')
-    })
+    it('returns an error message when an error occurs', async () => {
+
+      axios.get = jest.fn(() => Promise.reject(new Error('Request failed')));
+      const result = await getFighters();
+      expect(result).toEqual({ error: 'Request failed' });
+    });
   });
 });

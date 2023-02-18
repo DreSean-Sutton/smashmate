@@ -11,6 +11,6 @@ export default function Overlay(props: OverlayProps) {
   }
 
   return (
-    <div onClick={handleToggleSearchbar} className='overlay'></div>
+    <div onClick={handleToggleSearchbar} className='overlay' data-testid='overlay'></div>
   )
 }
