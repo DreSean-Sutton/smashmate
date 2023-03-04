@@ -38,10 +38,6 @@ export default function RenderCards() {
     })
   }, [searchbar])
 
-  function handleChangeSearchbar(search: string) {
-    setSearchbar(search);
-  }
-
   function handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
@@ -75,6 +71,10 @@ export default function RenderCards() {
     } else {
       return fighterArray.fighterData;
     }
+  }
+
+  function handleChangeSearchbar(search: string) {
+    setSearchbar(search);
   }
 
   function searchIconOrSearchbar() {
