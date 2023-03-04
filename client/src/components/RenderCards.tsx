@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
@@ -18,10 +18,29 @@ interface EventProps {
 export default function RenderCards() {
 
   const [searchbarOpened, setSearchbarOpened] = useState(false);
+  const [searchbar, setSearchbar] = useState('');
   const fighterArray: any = useAppSelector(selectFighterArray);
   const favorites: any = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const allCards: any = document.querySelectorAll('.card-column');
+    const myRegex = new RegExp(`^${searchbar}`, 'i');
+    if(allCards.length === 0) return;
+    const allCardsArray = Array.from(allCards);
+    allCardsArray.map((card: any) => {
+      const fighterElement = card.querySelector('.character-card');
+      myRegex.test(fighterElement.dataset.cardDisplayName)
+      ? card.classList.remove('d-none')
+      : card.classList.add('d-none')
+      console.log(fighterElement.dataset.cardDisplayName);
+    })
+  }, [searchbar])
+
+  function handleChangeSearchbar(search: string) {
+    setSearchbar(search);
+  }
 
   function handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
@@ -83,7 +102,7 @@ export default function RenderCards() {
   });
 
   const searchContents = searchbarOpened
-    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} />
+    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} />
     : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></i>
 
   return (
