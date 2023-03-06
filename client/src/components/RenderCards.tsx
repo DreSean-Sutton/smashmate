@@ -34,7 +34,6 @@ export default function RenderCards() {
       myRegex.test(fighterElement.dataset.cardDisplayName)
       ? card.classList.remove('d-none')
       : card.classList.add('d-none')
-      console.log(fighterElement.dataset.cardDisplayName);
     })
   }, [searchbar])
 

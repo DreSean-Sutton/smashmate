@@ -1,7 +1,3 @@
-.searchbar {
-
-}
-
 .searchbar > input {
   border-radius: 12px;
   color: var(--primary-theme);

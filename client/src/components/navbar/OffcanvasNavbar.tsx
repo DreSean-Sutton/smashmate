@@ -9,7 +9,6 @@ import './OffcanvasNavbar.css';
 
 export default function OffcanvasNavbar() {
 
-  const [doubleClick, setDoubleClick] = useState(false);
   const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const menuName = user ? user.account.username : 'Guest';
@@ -18,7 +17,6 @@ export default function OffcanvasNavbar() {
 
   function closeOffcanvas () {
     // Manually closes offcanvas navbar and removes it's running functionality
-
     // A ridiculous solution to the ridiculous mobile problem bootstrap offcanvas has
 
     const offcanvasNavbar: any = document.querySelector('#offcanvasNavbar');
@@ -27,29 +25,19 @@ export default function OffcanvasNavbar() {
     });
     const body: any = document.querySelector('body');
     const originalStyle = { ...body.style };
+    const closeButton: any = document.querySelector('.btn-close');
+    const navbarToggler: any = document.querySelector('.navbar-toggler'); // class automatically given by bootstrap
     body.style = { ...originalStyle, overflow: "initial" };
     body.style = originalStyle;
     body.classList.remove('modal-open');
     offcanvasNavbar.classList.remove('show');
     document.querySelector('.offcanvas-backdrop')?.classList.remove('show');
     document.querySelector('.offcanvas-backdrop')?.classList.remove('offcanvas-backdrop');
-    setDoubleClick(true);
+    closeButton.click();
+    setTimeout(() => { // if user doesn't do any inputs within 3000ms, navbar icon will unfocus
+      navbarToggler.blur();
+    }, 3000)
     return;
-  }
-
-  function handleDoubleClick () {
-    // If offcanvas navbar has been closed during the session,
-    // clicking on menu icon will do an additional click 50ms later
-    // Fixes problem with 2 clicks being required to open menu item
-    // after offcanvas navlink click closes offcanvas
-
-    const navbarToggler: any = document.querySelector('.navbar-toggler'); // class automatically given by bootstrap
-    if(doubleClick) {
-      setTimeout(() => {
-        navbarToggler.click();
-      }, 50)
-      setDoubleClick(false);
-    }
   }
 
   function handleSignOut() {
@@ -59,7 +47,7 @@ export default function OffcanvasNavbar() {
 
 return (
   <>
-    <Navbar.Toggle onClick={handleDoubleClick} aria-controls={`offcanvasNavbar`} />
+    <Navbar.Toggle aria-controls={`offcanvasNavbar`} />
     <Navbar.Offcanvas
       id={`offcanvasNavbar`}
       aria-labelledby={`offcanvasNavbarLabel-expand`}
