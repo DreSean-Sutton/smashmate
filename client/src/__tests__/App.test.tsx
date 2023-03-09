@@ -1,7 +1,7 @@
 import App from '../App';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { findByTestId, screen, waitFor } from '@testing-library/react';
+import { findByTestId, screen, waitFor, act } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
@@ -53,6 +53,27 @@ describe('Testing App.tsx UI/UX', () => {
       await user.click(overlay);
       expect(searchbar).not.toBeInTheDocument();
       expect(overlay).not.toBeInTheDocument();
+    })
+
+    it('correctly filters character cards from user input', async () => {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      );
+      const searchIcon = await screen.findByTestId(/search-icon/i);
+      await user.click(searchIcon);
+      const searchbar = await screen.findByTestId(/searchbar/i);
+      const searchbarInput: any = searchbar.querySelector('input');
+      const banjo = screen.getByTestId('banjo');
+      const bayonetta = screen.getByTestId('bayonetta');
+      const bowser = screen.getByTestId('bowser');
+      await user.type(searchbarInput, 'ba');
+      expect(searchbarInput).toHaveValue('ba');
+      expect(banjo).toBeInTheDocument();
+      expect(bayonetta).toBeInTheDocument();
+      expect(bowser.closest('.card-column')).toHaveClass('d-none'); // .toBeInTheDocument() is not working. Possibly due to being a bootstrap class?
     })
   })
 

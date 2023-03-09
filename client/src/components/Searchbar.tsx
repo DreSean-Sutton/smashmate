@@ -16,7 +16,6 @@ export default function Searchbar(props: SearchbarProps) {
   }, []);
 
   function handleOnClick(event: any) {
-    console.log(event.target);
     inputRef.current?.focus();
   }
 

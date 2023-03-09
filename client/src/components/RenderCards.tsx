@@ -26,8 +26,8 @@ export default function RenderCards() {
 
   useEffect(() => {
     const allCards: any = document.querySelectorAll('.card-column');
-    const myRegex = new RegExp(`^${searchbar}`, 'i');
     if(allCards.length === 0) return;
+    const myRegex = new RegExp(`^${searchbar}`, 'i');
     const allCardsArray = Array.from(allCards);
     allCardsArray.map((card: any) => {
       const fighterElement = card.querySelector('.character-card');
