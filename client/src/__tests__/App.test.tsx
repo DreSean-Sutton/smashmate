@@ -17,11 +17,7 @@ describe("Testing App.tsx UI/UX", () => {
   describe("Testing Home page", () => {
 
     it("Renders Home on page after loading", async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       /**
        * Cards on page aren't rendered until a database
        * fetch is received.
@@ -40,11 +36,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     test("Searchbar and search icon are toggleable", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
 
       const searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
@@ -62,11 +54,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("closes the searchbar when 'enter' is pressed", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
 
       const searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
@@ -82,11 +70,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("maintains the last input when searchbar is reopened", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
 
       let searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
@@ -107,11 +91,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("correctly filters character cards from user input", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
 
       const searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
@@ -135,11 +115,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("Renders signIn component when Login link is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const loginNav = screen.getByRole('link', { name: /^login$/i });
       expect(loginNav).toHaveAttribute('href', '/registration/sign-in');
       await user.click(loginNav);
@@ -147,11 +123,7 @@ describe("Testing App.tsx UI/UX", () => {
     });
 
     it("Renders Home component when Home nav is clicked", async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const homeNav = screen.getByRole('link', { name: /^home$/i });
       expect(homeNav).toHaveAttribute('href', '/');
       await userEvent.click(homeNav);
@@ -160,11 +132,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("Renders Favorites component when Favorites nav is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const favoritesNav = screen.getByRole('link', { name: /^favorites$/i });
       expect(favoritesNav).toHaveAttribute('href', '/favorites');
       await user.click(favoritesNav);
@@ -174,21 +142,13 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("Renders signIn component when Login icon is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByTestId(/^profile-icon$/i));
       await screen.findByTestId(/^sign-in-form$/i);
     });
 
     it("Renders Home when Smashmate title is clicked", async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const homeNav = screen.getByRole('link', { name: /^smashmate$/i });
       expect(homeNav).toHaveAttribute('href', '/');
       await userEvent.click(homeNav);
@@ -200,11 +160,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("Favorites a fighter and they appear on Favorites page", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByText(/^home$/i));
       const heart = await screen.findByTestId(/^pyra-heart$/i);
       const favorites = await screen.findByText(/^favorites$/i);
@@ -215,11 +171,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("unfavorites a fighter and they disappear from the Favorites page", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByRole('link', { name: /^favorites$/i }));
       const heart = await screen.findByTestId(/^pyra-heart$/i);
       expect(heart).toBeInTheDocument();
@@ -233,11 +185,7 @@ describe("Testing App.tsx UI/UX", () => {
 
     it("renders fighterDetails component when a fighter's card is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByText(/^home$/i));
       const joker = await screen.findByTestId(/^joker$/i);
       await user.click(joker);
