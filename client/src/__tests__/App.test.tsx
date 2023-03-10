@@ -12,11 +12,11 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 import getFighters from '../lib/fetch-fighters';
 import { renderWithProviders } from '../util/test-utils';
 
-describe('Testing App.tsx UI/UX', () => {
+describe("Testing App.tsx UI/UX", () => {
 
-  describe('Testing Home page', () => {
+  describe("Testing Home page", () => {
 
-    it('Renders Home on page after loading', async () => {
+    it("Renders Home on page after loading", async () => {
       renderWithProviders(
         <BrowserRouter>
           <App />
@@ -36,36 +36,83 @@ describe('Testing App.tsx UI/UX', () => {
 
   })
 
-  describe('testing searchbar', () => {
+  describe("testing searchbar", () => {
 
-    test('Searchbar and search icon are toggleable', async () => {
+    test("Searchbar and search icon are toggleable", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
           <App />
         </BrowserRouter>
       );
+
       const searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
       const searchbar = screen.getByTestId(/searchbar/i);
-      const overlay = screen.getByTestId(/overlay/i)
+      const searchbarInput: any = searchbar.querySelector('input');
+      const overlay = screen.getByTestId(/overlay/i);
+      expect(searchbar).toBeInTheDocument();
+      expect(overlay).toBeInTheDocument();
+      expect(searchbarInput).toHaveFocus();
       expect(searchIcon).not.toBeInTheDocument();
       await user.click(overlay);
       expect(searchbar).not.toBeInTheDocument();
       expect(overlay).not.toBeInTheDocument();
-      await user.click(searchIcon);
-      await user.type(searchbar.querySelector('input'), '{enter}');
-      expect(searchbar).not.toBeInTheDocument();
-      expect(overlay).not.toBeInTheDocument();
     })
 
-    it('correctly filters character cards from user input', async () => {
+    it("closes the searchbar when 'enter' is pressed", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
           <App />
         </BrowserRouter>
       );
+
+      const searchIcon = await screen.findByTestId(/search-icon/i);
+      await user.click(searchIcon);
+      const searchbar = screen.getByTestId(/searchbar/i);
+      const searchbarInput: any = searchbar.querySelector('input');
+      const overlay = screen.getByTestId(/overlay/i);
+      expect(searchbar).toBeInTheDocument();
+      expect(overlay).toBeInTheDocument();
+      await user.type(searchbarInput, '{enter}');
+      expect(searchbar).not.toBeInTheDocument();
+      expect(overlay).not.toBeInTheDocument();
+    })
+
+    it("maintains the last input when searchbar is reopened", async () => {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      );
+
+      let searchIcon = await screen.findByTestId(/search-icon/i);
+      await user.click(searchIcon);
+      let searchbar = screen.getByTestId(/searchbar/i);
+      let searchbarInput: any = searchbar.querySelector('input');
+      let overlay = screen.getByTestId(/overlay/i);
+      expect(searchbar).toBeInTheDocument();
+      expect(overlay).toBeInTheDocument();
+      expect(searchbarInput.value).toBe('');
+      user.type(searchbarInput, 'ba{enter}');
+      searchIcon = await screen.findByTestId(/search-icon/i);
+      await user.click(searchIcon);
+      searchbar = screen.getByTestId(/searchbar/i);
+      searchbarInput = searchbar.querySelector('input');
+      expect(searchbarInput.value).toBe('ba');
+      expect(searchbar).toBeInTheDocument();
+    })
+
+    it("correctly filters character cards from user input", async () => {
+      const user = userEvent.setup();
+      renderWithProviders(
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      );
+
       const searchIcon = await screen.findByTestId(/search-icon/i);
       await user.click(searchIcon);
       const searchbar = await screen.findByTestId(/searchbar/i);
@@ -84,9 +131,9 @@ describe('Testing App.tsx UI/UX', () => {
     })
   })
 
-  describe('testing navbar links', () => {
+  describe("testing navbar links", () => {
 
-    it('Renders signIn component when Login link is clicked', async () => {
+    it("Renders signIn component when Login link is clicked", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -99,7 +146,7 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^sign-in-form$/i);
     });
 
-    it('Renders Home component when Home nav is clicked', async () => {
+    it("Renders Home component when Home nav is clicked", async () => {
       renderWithProviders(
         <BrowserRouter>
           <App />
@@ -111,7 +158,7 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^joker$/i);
     });
 
-    it('Renders Favorites component when Favorites nav is clicked', async () => {
+    it("Renders Favorites component when Favorites nav is clicked", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -125,7 +172,7 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByRole('link', {name: /^add some!$/i});
     });
 
-    it('Renders signIn component when Login icon is clicked', async () => {
+    it("Renders signIn component when Login icon is clicked", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -136,7 +183,7 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^sign-in-form$/i);
     });
 
-    it('Renders Home when Smashmate title is clicked', async () => {
+    it("Renders Home when Smashmate title is clicked", async () => {
       renderWithProviders(
         <BrowserRouter>
           <App />
@@ -149,9 +196,9 @@ describe('Testing App.tsx UI/UX', () => {
     });
   });
 
-  describe('Testing favoriting/unfavoriting fighters', () => {
+  describe("Testing favoriting/unfavoriting fighters", () => {
 
-    it('Favorites a fighter and they appear on Favorites page', async () => {
+    it("Favorites a fighter and they appear on Favorites page", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -166,7 +213,7 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^pyra$/i);
     });
 
-    it('unfavorites a fighter and they disappear from the Favorites page', async () => {
+    it("unfavorites a fighter and they disappear from the Favorites page", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -182,9 +229,9 @@ describe('Testing App.tsx UI/UX', () => {
 
   });
 
-  describe('Testing fighterDetails', () => {
+  describe("Testing fighterDetails", () => {
 
-    it('renders fighterDetails component when a fighter\'s card is clicked', async () => {
+    it("renders fighterDetails component when a fighter's card is clicked", async () => {
       const user = userEvent.setup();
       renderWithProviders(
         <BrowserRouter>
@@ -202,10 +249,10 @@ describe('Testing App.tsx UI/UX', () => {
   })
 });
 
-describe('testing /api/get/fighters route', () => {
+describe("testing /api/get/fighters route", () => {
   afterEach(nock.cleanAll);
 
-  it('Returns an array of fighters with 200 status code', async () => {
+  it("Returns an array of fighters with 200 status code", async () => {
     nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters')
@@ -241,7 +288,7 @@ describe('testing /api/get/fighters route', () => {
     expect(fighterArray.fighterData['bowserJr']).toHaveProperty('fighterId');
   })
 
-  it('Returns an error on 404 response', async () => {
+  it("Returns an error on 404 response", async () => {
     nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters')
@@ -252,9 +299,9 @@ describe('testing /api/get/fighters route', () => {
   })
 });
 
-describe('Testing /api/favoriting/characters/upsert', () => {
+describe("Testing /api/favoriting/characters/upsert", () => {
 
-  describe('Testing add/remove favorites', () => {
+  describe("Testing add/remove favorites", () => {
     afterEach(nock.cleanAll);
 
     const url = 'http://localhost:5000/api/favoriting/characters/upsert';
@@ -290,7 +337,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       }
     }
 
-    it('responds with 201 status data if inserted correctly', async () => {
+    it("responds with 201 status data if inserted correctly", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/upsert')
@@ -304,7 +351,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       expect(result.lastErrorObject.updatedExisting).toBeTruthy();
     })
 
-    it('returns an error message if insert fails', async () => {
+    it("returns an error message if insert fails", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/upsert')
@@ -314,7 +361,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     });
   });
 
-  describe('Testing /api/favoriting/characters/get', () => {
+  describe("Testing /api/favoriting/characters/get", () => {
     afterEach(nock.cleanAll);
 
     const url = 'http://localhost:5000/api/favoriting/characters/get';
@@ -334,7 +381,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       }
     }
 
-    it('Returns an array of favorites from database', async () => {
+    it("Returns an array of favorites from database", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/get')
@@ -358,7 +405,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       expect(result).not.toHaveProperty('error');
     });
 
-    it('returns an error message when an error occurs', async () => {
+    it("returns an error message when an error occurs", async () => {
 
       axios.get = jest.fn(() => Promise.reject(new Error('Request failed')));
       const result = await getFighters();

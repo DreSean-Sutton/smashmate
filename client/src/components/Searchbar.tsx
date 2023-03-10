@@ -12,7 +12,6 @@ export default function Searchbar(props: SearchbarProps) {
 
   const inputRef: any = useRef<HTMLInputElement>(null);
 
-  console.log(inputRef.current?.value);
   useEffect(() => {
     if(inputRef.current?.value === '') {
       inputRef.current.value = props.searchbarValue;
