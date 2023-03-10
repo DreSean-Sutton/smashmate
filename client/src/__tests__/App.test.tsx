@@ -53,6 +53,10 @@ describe('Testing App.tsx UI/UX', () => {
       await user.click(overlay);
       expect(searchbar).not.toBeInTheDocument();
       expect(overlay).not.toBeInTheDocument();
+      await user.click(searchIcon);
+      await user.type(searchbar.querySelector('input'), '{enter}');
+      expect(searchbar).not.toBeInTheDocument();
+      expect(overlay).not.toBeInTheDocument();
     })
 
     it('correctly filters character cards from user input', async () => {
@@ -66,14 +70,17 @@ describe('Testing App.tsx UI/UX', () => {
       await user.click(searchIcon);
       const searchbar = await screen.findByTestId(/searchbar/i);
       const searchbarInput: any = searchbar.querySelector('input');
-      const banjo = screen.getByTestId('banjo');
-      const bayonetta = screen.getByTestId('bayonetta');
-      const bowser = screen.getByTestId('bowser');
+      const banjo = screen.getByTestId('banjo').closest('.card-column');
+      const bayonetta = screen.getByTestId('bayonetta').closest('.card-column');
+      const bowser = screen.getByTestId('bowser').closest('.card-column');
       await user.type(searchbarInput, 'ba');
       expect(searchbarInput).toHaveValue('ba');
-      expect(banjo).toBeInTheDocument();
-      expect(bayonetta).toBeInTheDocument();
-      expect(bowser.closest('.card-column')).toHaveClass('d-none'); // .toBeInTheDocument() is not working. Possibly due to being a bootstrap class?
+      expect(banjo).not.toHaveClass('d-none');
+      expect(bayonetta).not.toHaveClass('d-none');
+      expect(bowser).toHaveClass('d-none'); // .toBeInTheDocument() is not working. Possibly due to being a bootstrap class?
+      await user.type(searchbarInput, '{backspace}');
+      expect(searchbarInput).toHaveValue('b');
+      expect(bowser).not.toHaveClass('d-none');
     })
   })
 

@@ -3,19 +3,24 @@ import Overlay from './Overlay';
 import './Searchbar.css';
 
 interface SearchbarProps {
-  toggleSearchbar: () => void;
   changeSearchbar: (search: string) => void;
+  searchbarValue: string;
+  toggleSearchbar: () => void;
 }
 
 export default function Searchbar(props: SearchbarProps) {
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef: any = useRef<HTMLInputElement>(null);
 
+  console.log(inputRef.current?.value);
   useEffect(() => {
+    if(inputRef.current?.value === '') {
+      inputRef.current.value = props.searchbarValue;
+    }
     inputRef.current?.focus();
   }, []);
 
-  function handleOnClick(event: any) {
+  function handleOnClick() {
     inputRef.current?.focus();
   }
 
