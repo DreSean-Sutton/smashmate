@@ -6,11 +6,7 @@ interface OverlayProps {
 }
 export default function Overlay(props: OverlayProps) {
 
-  function handleToggleSearchbar() {
-    props.toggleSearchbar();
-  }
-
   return (
-    <div onClick={handleToggleSearchbar} className='overlay' data-testid='overlay'></div>
+    <div onClick={props.toggleSearchbar} className='overlay' data-testid='overlay'></div>
   )
 }

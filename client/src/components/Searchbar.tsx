@@ -19,10 +19,6 @@ export default function Searchbar(props: SearchbarProps) {
     inputRef.current?.focus();
   }, []);
 
-  function handleOnClick() {
-    inputRef.current?.focus();
-  }
-
   function handleChangeSearchbar(event: any) {
     props.changeSearchbar(event.target.value);
   }
@@ -33,12 +29,11 @@ export default function Searchbar(props: SearchbarProps) {
     }
   }
 
-
   return (
     <>
       <Overlay toggleSearchbar={props.toggleSearchbar} />
       <form className='searchbar d-flex justify-content-center mt-sm-2' data-testid='searchbar'>
-        <input onClick={handleOnClick} onChange={handleChangeSearchbar} onKeyDown={handleKeydown}  ref={inputRef} type="text" placeholder='search' className='text-center' />
+        <input onChange={handleChangeSearchbar} onKeyDown={handleKeydown} ref={inputRef} type="text" placeholder='search' className='text-center' />
       </form>
     </>
   )

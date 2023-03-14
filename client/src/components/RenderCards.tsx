@@ -82,6 +82,10 @@ export default function RenderCards() {
     : setSearchbarOpened(true);
   }
 
+  const searchContents = searchbarOpened
+    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} searchbarValue={searchbar} />
+    : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></i>
+
   const objValues = Object.values(homeOrFavorites())
   const allCards = objValues.map((card: any) => {
     return (
@@ -99,10 +103,6 @@ export default function RenderCards() {
       </React.Fragment>
     );
   });
-
-  const searchContents = searchbarOpened
-    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} searchbarValue={searchbar} />
-    : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></i>
 
   return (
     <>
