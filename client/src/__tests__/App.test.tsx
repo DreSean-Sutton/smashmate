@@ -1,6 +1,6 @@
 import App from '../App';
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
@@ -109,10 +109,34 @@ describe("Testing App.tsx UI/UX", () => {
       await user.click(screen.getByText(/^home$/i));
       const joker = await screen.findByTestId(/^joker$/i);
       await user.click(joker);
-      await screen.findByText(/^Moves$/i);
-      await screen.findByText(/^Grabs\/Throws$/i);
-      await screen.findByText(/^Dodges\/Rolls$/i);
-      await screen.findByText(/^Stats$/i);
+      const moves = await screen.findByText(/^Moves$/i);
+      const grabs = await screen.findByText(/^Grabs\/Throws$/i);
+      const dodges = await screen.findByText(/^Dodges\/Rolls$/i);
+      const stats = await screen.findByText(/^Stats$/i);
+      expect(moves).toBeInTheDocument();
+      expect(grabs).toBeInTheDocument();
+      expect(dodges).toBeInTheDocument();
+      expect(stats).toBeInTheDocument();
+    });
+
+    it("renders fighterDetails component when 'enter' is pressed on a focused card", async () => {
+      const user = userEvent.setup();
+      renderWithProviders(<App />);
+      await user.click(screen.getByText(/^home$/i));
+      const joker = await screen.findByTestId(/^joker$/i);
+      joker.focus();
+      expect(document.activeElement).toBe(joker);
+      await user.keyboard('abc');
+      expect(document.activeElement).toBe(joker);
+      await user.keyboard('{Enter}');
+      const moves = await screen.findByText(/^Moves$/i);
+      const grabs = await screen.findByText(/^Grabs\/Throws$/i);
+      const dodges = await screen.findByText(/^Dodges\/Rolls$/i);
+      const stats = await screen.findByText(/^Stats$/i);
+      expect(moves).toBeInTheDocument();
+      expect(grabs).toBeInTheDocument();
+      expect(dodges).toBeInTheDocument();
+      expect(stats).toBeInTheDocument();
     });
   })
 });

@@ -12,7 +12,8 @@ import './RenderCards.css';
 
 interface EventProps {
   target?: any,
-  matches?: any
+  matches?: any,
+  key?: string
 }
 
 export default function RenderCards() {
@@ -41,6 +42,11 @@ export default function RenderCards() {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
     navigate(`/character-details/${characterCard.cardName}`);
+  }
+
+  function handleEnterShowDetails(event: EventProps) {
+    if(event.key !== 'Enter') return;
+    handleShowDetails(event);
   }
 
   function handleFavoriting(event: EventProps): void {
@@ -96,7 +102,7 @@ export default function RenderCards() {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} tabIndex={0} title={card.displayName}>
+          <div onClick={handleShowDetails} onKeyDown={handleEnterShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} tabIndex={0} title={card.displayName}>
             <div>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
