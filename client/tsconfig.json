@@ -21,7 +21,8 @@
     "./global.d.ts"
   ],
   "exclude": [
-    "src/__tests__/**"
+    "src/__tests__/**",
+    "src/util/test-utils.tsx"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
