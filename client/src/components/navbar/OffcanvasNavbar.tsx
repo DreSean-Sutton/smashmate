@@ -66,19 +66,19 @@ return (
         <Nav>
           <ul className='d-lg-flex offcanvas-ul'>
             <li className='offcanvas-li'>
-              <Link onClick={closeOffcanvas}  className='offcanvas-link' to='/'>
+              <Link onClick={closeOffcanvas}  className='offcanvas-link' to='/' title='Home'>
                 <i className={'fa-solid d-lg-none fa-house-chimney'}></i>
                 <span>Home</span>
               </Link>
             </li>
             <li className='offcanvas-li'>
-              <Link onClick={closeOffcanvas} className='offcanvas-link mt-2' to='/favorites'>
+              <Link onClick={closeOffcanvas} className='offcanvas-link mt-2' to='/favorites' title='Favorites'>
                 <i className={'fa-solid d-lg-none fa-heart'}></i>
                 <span>Favorites</span>
               </Link>
             </li>
             <li className='offcanvas-li'>
-              <Link onClick={handleSignOut} className='offcanvas-link mt-2' to='/registration/sign-in'>
+              <Link onClick={handleSignOut} className='offcanvas-link mt-2' to='/registration/sign-in' title={loggingTitle}>
                 <i className={`fa-solid d-lg-none ${loggingIcon}`}></i>
                 <span>{loggingTitle}</span>
               </Link>

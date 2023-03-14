@@ -12,6 +12,7 @@ export default function SiteNavbar() {
   const user = useAppSelector(selectUser);
   const profileIcon = user ? 'fa-solid profile-logged-in' : 'fa-regular';
   const profileIconLink = user ? '#' : 'registration/sign-in';
+  const profileIconTitle = user ? 'You are logged in' : 'Click to login';
 
   return (
     <Navbar expand={'lg'} className='primary-theme-bg navbar-top'>
@@ -20,12 +21,12 @@ export default function SiteNavbar() {
           <OffcanvasNavbar />
         </Col>
         <Col className='text-center'>
-          <Link to='/'>
+          <Link to='/' tabIndex={-1}>
             <h1 className='d-inline text-light'>SmashMate</h1>
           </Link>
         </Col>
         <Col className='text-end'>
-          <Link data-testid='profile-icon' className={`${profileIcon} fa-user profile-icon`} to={profileIconLink}></Link>
+          <Link data-testid='profile-icon' className={`${profileIcon} fa-user profile-icon`} to={profileIconLink} title={profileIconTitle}></Link>
         </Col>
       </Container>
     </Navbar>

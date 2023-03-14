@@ -84,14 +84,14 @@ export default function RenderCards() {
 
   const searchContents = searchbarOpened
     ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} searchbarValue={searchbar} />
-    : <i onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></i>
+    : <button onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></button>
 
   const objValues = Object.values(homeOrFavorites())
   const allCards = objValues.map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName}>
+          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} tabIndex={0} title={card.displayName}>
             <div>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>

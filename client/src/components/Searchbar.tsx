@@ -24,6 +24,7 @@ export default function Searchbar(props: SearchbarProps) {
   }
 
   function handleKeydown(event: any) {
+    console.log(event.key);
     if(event.key === 'Enter') {
       props.toggleSearchbar();
     }
@@ -33,7 +34,8 @@ export default function Searchbar(props: SearchbarProps) {
     <>
       <Overlay toggleSearchbar={props.toggleSearchbar} />
       <form className='searchbar d-flex justify-content-center mt-sm-2' data-testid='searchbar'>
-        <input onChange={handleChangeSearchbar} onKeyDown={handleKeydown} ref={inputRef} type="text" placeholder='search' className='text-center' />
+        <label htmlFor="searchbar"></label>
+        <input id='searchbar' onChange={handleChangeSearchbar} onKeyDown={handleKeydown} ref={inputRef} type="text" placeholder='search' className='text-center' aria-label='Search for a fighter' />
       </form>
     </>
   )
