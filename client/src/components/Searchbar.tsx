@@ -1,11 +1,41 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
+import { useEffect, useRef } from 'react';
+import Overlay from './Overlay';
 import './Searchbar.css';
 
-export default function Searchbar() {
+interface SearchbarProps {
+  changeSearchbar: (search: string) => void;
+  searchbarValue: string;
+  toggleSearchbar: () => void;
+}
+
+export default function Searchbar(props: SearchbarProps) {
+
+  const inputRef: any = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if(!inputRef.current?.value) {
+      inputRef.current.value = props.searchbarValue;
+    }
+    inputRef.current?.focus();
+  }, []);
+
+  function handleChangeSearchbar(event: any) {
+    props.changeSearchbar(event.target.value);
+  }
+
+  function handleKeydown(event: any) {
+    if(event.key === 'Enter') {
+      props.toggleSearchbar();
+    }
+  }
+
   return (
-    <form className='search-bar d-flex justify-content-center'>
-      <input type="text" placeholder='search' className='text-center' />
-    </form>
+    <>
+      <Overlay toggleSearchbar={props.toggleSearchbar} />
+      <form className='searchbar d-flex justify-content-center mt-sm-2' data-testid='searchbar'>
+        <label htmlFor="searchbar"></label>
+        <input id='searchbar' onChange={handleChangeSearchbar} onKeyDown={handleKeydown} ref={inputRef} type="text" placeholder='search' className='text-center' aria-label='Search for a fighter' />
+      </form>
+    </>
   )
 }

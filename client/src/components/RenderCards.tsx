@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
@@ -18,10 +18,24 @@ interface EventProps {
 export default function RenderCards() {
 
   const [searchbarOpened, setSearchbarOpened] = useState(false);
+  const [searchbar, setSearchbar] = useState('');
   const fighterArray: any = useAppSelector(selectFighterArray);
   const favorites: any = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const allCards: any = document.querySelectorAll('.card-column');
+    if(allCards.length === 0) return;
+    const myRegex = new RegExp(`^${searchbar}`, 'i');
+    const allCardsArray = Array.from(allCards);
+    allCardsArray.map((card: any) => {
+      const fighterElement = card.querySelector('.character-card');
+      myRegex.test(fighterElement.dataset.cardDisplayName)
+      ? card.classList.remove('d-none')
+      : card.classList.add('d-none')
+    })
+  }, [searchbar])
 
   function handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
@@ -43,6 +57,11 @@ export default function RenderCards() {
       : '';
   }
 
+  function handleHeartTitles(fighter: string): string {
+    return favorites.fighterData.hasOwnProperty(fighter)
+      ? 'Unfavorite'
+      : 'Favorite';
+  }
   function noOneDigitNums(num: number) {
     return num < 10
       ? `0${num}`
@@ -58,16 +77,30 @@ export default function RenderCards() {
     }
   }
 
+  function handleChangeSearchbar(search: string) {
+    setSearchbar(search);
+  }
+
+  function searchIconOrSearchbar() {
+    searchbarOpened
+    ? setSearchbarOpened(false)
+    : setSearchbarOpened(true);
+  }
+
+  const searchContents = searchbarOpened
+    ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} searchbarValue={searchbar} />
+    : <button onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon' title='Open searchbar'></button>
+
   const objValues = Object.values(homeOrFavorites())
   const allCards = objValues.map((card: any) => {
     return (
       <React.Fragment key={card.fighterId}>
         <Row className='card-column w-auto'>
-          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName}>
+          <div onClick={handleShowDetails} id='character-card' className='row character-card p-0' data-testid={card.fighter} data-card-fighter-id={card.fighterId} data-card-name={card.fighter} data-card-roster-id={card.rosterId} data-card-display-name={card.displayName} tabIndex={0} title={card.displayName}>
             <div>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
-              <i data-testid={`${card.fighter}-heart`} onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighter)}`}></i>
+              <button data-testid={`${card.fighter}-heart`} onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighter)}`} title={handleHeartTitles(card.fighter)}></button>
               <h3 className='character-card-name'>{card.displayName}</h3>
             </div>
           </div>
@@ -75,27 +108,15 @@ export default function RenderCards() {
       </React.Fragment>
     );
   });
-  const searchContents = searchbarOpened
-    ? <Searchbar />
-    : <div className='search-icon d-flex justify-content-center text-center'>
-        <i className="fa-solid fa-magnifying-glass"></i>
-      </div>
 
   return (
     <>
-    {/*
-    Add a search icon under navbar
-    Clicking the icon opens search bar
-    Screen doesn't darken (maybe)
-    Search bar stays open until X is clicked (maybe)
-    */}
-      <Container fluid className='search-container'>
+      <Container fluid className='search-container d-flex justify-content-center'>
         { searchContents }
       </Container>
       <Container fluid={'lg'} className="row content-layout" data-view='character-list'>
         { allCards }
       </Container>
-
     </>
   );
 }

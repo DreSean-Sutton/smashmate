@@ -5,7 +5,6 @@ import type { RenderOptions } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
-
 import { setupStore } from '../app/store'
 import type { AppStore, RootState } from '../app/store'
 
@@ -17,7 +16,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 }
 
 export function renderWithProviders(
-  ui: React.ReactElement,
+  component: React.ReactElement,
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
@@ -30,5 +29,5 @@ export function renderWithProviders(
       <Provider store={ store }> { children } </Provider>
     )
   }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+  return { store, ...render(<Router>{ component }</Router>, { wrapper: Wrapper, ...renderOptions }) }
 }

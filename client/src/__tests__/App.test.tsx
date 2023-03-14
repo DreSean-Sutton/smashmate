@@ -1,6 +1,5 @@
 import App from '../App';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { screen, waitFor } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
@@ -12,16 +11,12 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 import getFighters from '../lib/fetch-fighters';
 import { renderWithProviders } from '../util/test-utils';
 
-describe('Testing App.tsx UI/UX', () => {
+describe("Testing App.tsx UI/UX", () => {
 
-  describe('Testing Home page', () => {
+  describe("Testing Home page", () => {
 
-    it('Renders Home on page after loading', async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+    it("Renders Home on page after loading", async () => {
+      renderWithProviders(<App />);
       /**
        * Cards on page aren't rendered until a database
        * fetch is received.
@@ -36,40 +31,28 @@ describe('Testing App.tsx UI/UX', () => {
 
   })
 
-  describe('testing navbar links', () => {
+  describe("testing navbar links", () => {
 
-    it('Renders signIn component when Login link is clicked', async () => {
+    it("Renders signIn component when Login link is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const loginNav = screen.getByRole('link', { name: /^login$/i });
       expect(loginNav).toHaveAttribute('href', '/registration/sign-in');
       await user.click(loginNav);
       await screen.findByTestId(/^sign-in-form$/i);
     });
 
-    it('Renders Home component when Home nav is clicked', async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+    it("Renders Home component when Home nav is clicked", async () => {
+      renderWithProviders(<App />);
       const homeNav = screen.getByRole('link', { name: /^home$/i });
       expect(homeNav).toHaveAttribute('href', '/');
       await userEvent.click(homeNav);
       await screen.findByTestId(/^joker$/i);
     });
 
-    it('Renders Favorites component when Favorites nav is clicked', async () => {
+    it("Renders Favorites component when Favorites nav is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       const favoritesNav = screen.getByRole('link', { name: /^favorites$/i });
       expect(favoritesNav).toHaveAttribute('href', '/favorites');
       await user.click(favoritesNav);
@@ -77,23 +60,15 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByRole('link', {name: /^add some!$/i});
     });
 
-    it('Renders signIn component when Login icon is clicked', async () => {
+    it("Renders signIn component when Login icon is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByTestId(/^profile-icon$/i));
       await screen.findByTestId(/^sign-in-form$/i);
     });
 
-    it('Renders Home when Smashmate title is clicked', async () => {
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+    it("Renders Home when Smashmate title is clicked", async () => {
+      renderWithProviders(<App />);
       const homeNav = screen.getByRole('link', { name: /^smashmate$/i });
       expect(homeNav).toHaveAttribute('href', '/');
       await userEvent.click(homeNav);
@@ -101,15 +76,11 @@ describe('Testing App.tsx UI/UX', () => {
     });
   });
 
-  describe('Testing favoriting/unfavoriting fighters', () => {
+  describe("Testing favoriting/unfavoriting fighters", () => {
 
-    it('Favorites a fighter and they appear on Favorites page', async () => {
+    it("Favorites a fighter and they appear on Favorites page", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByText(/^home$/i));
       const heart = await screen.findByTestId(/^pyra-heart$/i);
       const favorites = await screen.findByText(/^favorites$/i);
@@ -118,13 +89,9 @@ describe('Testing App.tsx UI/UX', () => {
       await screen.findByTestId(/^pyra$/i);
     });
 
-    it('unfavorites a fighter and they disappear from the Favorites page', async () => {
+    it("unfavorites a fighter and they disappear from the Favorites page", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByRole('link', { name: /^favorites$/i }));
       const heart = await screen.findByTestId(/^pyra-heart$/i);
       expect(heart).toBeInTheDocument();
@@ -134,15 +101,11 @@ describe('Testing App.tsx UI/UX', () => {
 
   });
 
-  describe('Testing fighterDetails', () => {
+  describe("Testing fighterDetails", () => {
 
-    it('renders fighterDetails component when a fighter\'s card is clicked', async () => {
+    it("renders fighterDetails component when a fighter's card is clicked", async () => {
       const user = userEvent.setup();
-      renderWithProviders(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
+      renderWithProviders(<App />);
       await user.click(screen.getByText(/^home$/i));
       const joker = await screen.findByTestId(/^joker$/i);
       await user.click(joker);
@@ -154,10 +117,10 @@ describe('Testing App.tsx UI/UX', () => {
   })
 });
 
-describe('testing /api/get/fighters route', () => {
+describe("testing /api/get/fighters route", () => {
   afterEach(nock.cleanAll);
 
-  it('Returns an array of fighters with 200 status code', async () => {
+  it("Returns an array of fighters with 200 status code", async () => {
     nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters')
@@ -193,7 +156,7 @@ describe('testing /api/get/fighters route', () => {
     expect(fighterArray.fighterData['bowserJr']).toHaveProperty('fighterId');
   })
 
-  it('Returns an error on 404 response', async () => {
+  it("Returns an error on 404 response", async () => {
     nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters')
@@ -204,9 +167,9 @@ describe('testing /api/get/fighters route', () => {
   })
 });
 
-describe('Testing /api/favoriting/characters/upsert', () => {
+describe("Testing /api/favoriting/characters/upsert", () => {
 
-  describe('Testing add/remove favorites', () => {
+  describe("Testing add/remove favorites", () => {
     afterEach(nock.cleanAll);
 
     const url = 'http://localhost:5000/api/favoriting/characters/upsert';
@@ -242,7 +205,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       }
     }
 
-    it('responds with 201 status data if inserted correctly', async () => {
+    it("responds with 201 status data if inserted correctly", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/upsert')
@@ -256,7 +219,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       expect(result.lastErrorObject.updatedExisting).toBeTruthy();
     })
 
-    it('returns an error message if insert fails', async () => {
+    it("returns an error message if insert fails", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/upsert')
@@ -266,7 +229,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
     });
   });
 
-  describe('Testing /api/favoriting/characters/get', () => {
+  describe("Testing /api/favoriting/characters/get", () => {
     afterEach(nock.cleanAll);
 
     const url = 'http://localhost:5000/api/favoriting/characters/get';
@@ -286,7 +249,7 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       }
     }
 
-    it('Returns an array of favorites from database', async () => {
+    it("Returns an array of favorites from database", async () => {
       nock('http://localhost:5000')
         .persist()
         .post('/api/favoriting/characters/get')
@@ -310,13 +273,11 @@ describe('Testing /api/favoriting/characters/upsert', () => {
       expect(result).not.toHaveProperty('error');
     });
 
-    it('Returns an error when fetch fails', async () => {
-      nock('http://localhost:5000')
-        .persist()
-        .post('/api/favoriting/characters/get')
-        .replyWithError('An unexpected error occurred')
-      const result = await getFavorites();
-      expect(result).toHaveProperty('error')
-    })
+    it("returns an error message when an error occurs", async () => {
+
+      axios.get = jest.fn(() => Promise.reject(new Error('Request failed')));
+      const result = await getFighters();
+      expect(result).toEqual({ error: 'Request failed' });
+    });
   });
 });
