@@ -124,7 +124,7 @@ export default function SignIn () {
         <Row className='sign-in-divider justify-content-center mt-4 pt-3 ms-3 me-3'>
           <Col xs={10} className='text-center guest-column'>
             <p>
-              <a onClick={handleDemo} className='text-primary demo-account'>Demo</a>
+              <a tabIndex={0} onClick={handleDemo} className='text-primary demo-account'>Demo</a>
             </p>
           </Col>
           <Col xs={10} className='text-center'>

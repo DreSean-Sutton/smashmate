@@ -33,6 +33,7 @@
 .fighter-details-img {
   background-color: rgb(225, 225, 225);
   box-shadow: var(--character-name-border);
+  user-select: none;
 }
 
 .frame-data-backdrop {

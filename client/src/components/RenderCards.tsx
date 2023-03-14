@@ -57,6 +57,11 @@ export default function RenderCards() {
       : '';
   }
 
+  function handleHeartTitles(fighter: string): string {
+    return favorites.fighterData.hasOwnProperty(fighter)
+      ? 'Unfavorite'
+      : 'Favorite';
+  }
   function noOneDigitNums(num: number) {
     return num < 10
       ? `0${num}`
@@ -84,7 +89,7 @@ export default function RenderCards() {
 
   const searchContents = searchbarOpened
     ? <Searchbar toggleSearchbar={searchIconOrSearchbar} changeSearchbar={handleChangeSearchbar} searchbarValue={searchbar} />
-    : <button onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon'></button>
+    : <button onClick={searchIconOrSearchbar} className="search-icon fa-solid fa-magnifying-glass" data-testid='search-icon' title='Open searchbar'></button>
 
   const objValues = Object.values(homeOrFavorites())
   const allCards = objValues.map((card: any) => {
@@ -95,7 +100,7 @@ export default function RenderCards() {
             <div>
               <img className='character-card-img' src={`./images/smash-ultimate-sprites/${card.fighter}.png`} alt={card.displayName} />
               <span className='character-card-number'>{noOneDigitNums(card.fighterId)}</span>
-              <i data-testid={`${card.fighter}-heart`} onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighter)}`}></i>
+              <button data-testid={`${card.fighter}-heart`} onClick={handleFavoriting} className={`fa-solid fa-heart card-heart ${handleHearts(card.fighter)}`} title={handleHeartTitles(card.fighter)}></button>
               <h3 className='character-card-name'>{card.displayName}</h3>
             </div>
           </div>

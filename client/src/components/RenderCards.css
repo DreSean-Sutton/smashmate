@@ -7,6 +7,7 @@
 .search-icon {
   font-size: 1rem;
   padding: 0.5rem;
+  border: 0;
   border-radius: 5rem;
   background-color: var(--secondary-theme);
   transition: 300ms opacity;
@@ -72,7 +73,10 @@
   top: 5px;
   right: 5px;
   font-size: 1.5rem;
+  padding: 0;
   color: rgba(75, 75, 75, 0.90);
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
   transition: 200ms ease-in transform;
 }
 
