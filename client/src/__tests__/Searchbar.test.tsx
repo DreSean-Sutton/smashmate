@@ -5,11 +5,9 @@ import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 import 'jest-extended';
-import axios from 'axios';
-axios.defaults.adapter = require('axios/lib/adapters/http');
 import { renderWithProviders } from '../util/test-utils';
 
-describe("testing searchbar", () => {
+describe("searchbar", () => {
 
   test("Searchbar and search icon are toggleable", async () => {
     const user = userEvent.setup();
@@ -75,9 +73,9 @@ describe("testing searchbar", () => {
     const searchbar = await screen.findByTestId(/searchbar/i);
     const searchbarInput: any = searchbar.querySelector('input');
     await user.type(searchbarInput, 'ba');
-    const banjo = screen.getByTestId('banjo').closest('.card-column'); // move this down and test .toBeInDocument() again
-    const bayonetta = screen.getByTestId('bayonetta').closest('.card-column'); // move this down and test .toBeInDocument() again
-    const bowser = screen.getByTestId('bowser').closest('.card-column'); // move this down and test .toBeInDocument() again
+    const banjo = screen.getByTestId('banjo').closest('.card-column');
+    const bayonetta = screen.getByTestId('bayonetta').closest('.card-column');
+    const bowser = screen.getByTestId('bowser').closest('.card-column');
     expect(searchbarInput).toHaveValue('ba');
     expect(banjo).not.toHaveClass('d-none');
     expect(bayonetta).not.toHaveClass('d-none');

@@ -13,7 +13,7 @@ export default function Searchbar(props: SearchbarProps) {
   const inputRef: any = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if(inputRef.current?.value === '') {
+    if(!inputRef.current?.value) {
       inputRef.current.value = props.searchbarValue;
     }
     inputRef.current?.focus();
@@ -24,7 +24,6 @@ export default function Searchbar(props: SearchbarProps) {
   }
 
   function handleKeydown(event: any) {
-    console.log(event.key);
     if(event.key === 'Enter') {
       props.toggleSearchbar();
     }
