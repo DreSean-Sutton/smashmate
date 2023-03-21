@@ -8,7 +8,7 @@ describe('Testing stats data fetching', () => {
   afterEach(nock.cleanAll);
 
   it('sends stat data on 200 status code', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inkling')
       .reply(200, {
@@ -43,7 +43,7 @@ describe('Testing stats data fetching', () => {
     expect(data.type).toMatch('stat');
   });
   it('sends error message on 400 status', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/stats?fighter=inklingsssss')
       .reply(400, { error: 'inklingsssss doesn\'t exist' })

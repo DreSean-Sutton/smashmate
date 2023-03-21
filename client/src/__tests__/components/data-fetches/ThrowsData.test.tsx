@@ -7,20 +7,8 @@ axios.defaults.adapter = require('axios/lib/adapters/http');
 describe('Testing throw data fetching', () => {
   afterEach(nock.cleanAll);
 
-  const controller = new AbortController()
-  async function fetchData(currentFighter: string) {
-    const { status, data } = await axios.get(`https://the-ultimate-api.dreseansutton.com/api/get/fighters/data/throws?fighter=${currentFighter}`, {
-      signal: controller.signal,
-      validateStatus: () => true
-    });
-    if (status !== 200) {
-      return { error: `${currentFighter} doesn't exist` }
-    }
-    return data
-  }
-
   it('sends throw data on 200 status code', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/throws?fighter=inkling')
       .reply(200, {
@@ -61,7 +49,7 @@ describe('Testing throw data fetching', () => {
     expect(data.type).toMatch('throw');
   })
   it('sends error message on 400 status', async() => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/throws?fighter=inklingsssss')
       .reply(400, { error: 'inklingsssss doesn\'t exist' })

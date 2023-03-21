@@ -4,13 +4,11 @@ import nock from 'nock';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
-// Note to self: console.log increases test response delay
-
 describe('Testing moves data fetch', () => {
   afterEach(nock.cleanAll);
 
   it('sends move data on 200 status code', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/moves?fighter=inkling')
       .reply(200, {
@@ -60,7 +58,7 @@ describe('Testing moves data fetch', () => {
     expect(data.type).toMatch('move');
   })
   it('Correctly returns error', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
+    nock('https://the-ultimate-api.dreseansutton.com')
       .persist()
       .get('/api/get/fighters/data/moves?fighter=inklingsssss')
       .reply(400, { error: 'inklingsssss doesn\'t exist' })

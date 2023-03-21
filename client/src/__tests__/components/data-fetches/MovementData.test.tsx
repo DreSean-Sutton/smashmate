@@ -9,8 +9,7 @@ describe('Testing movement data fetching', () => {
   afterEach(nock.cleanAll);
 
   it('sends movement data on 200 status code', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
-      .persist()
+    nock('https://the-ultimate-api.dreseansutton.com')
       .get('/api/get/fighters/data/movements?fighter=inkling')
       .reply(200, {
         "activeFrames": "3-17",
@@ -47,8 +46,7 @@ describe('Testing movement data fetching', () => {
     expect(data.type).toMatch('movement');
   })
   it('sends error message on 400 status', async () => {
-    const scope = nock('https://the-ultimate-api.dreseansutton.com')
-      .persist()
+    nock('https://the-ultimate-api.dreseansutton.com')
       .get('/api/get/fighters/data/movements?fighter=inklingsssss')
       .reply(400, { error: 'inklingsssss doesn\'t exist' })
       const { status, data } = await fetchDetailsData('movements', 'inklingsssss');
