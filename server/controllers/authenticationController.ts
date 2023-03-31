@@ -3,7 +3,6 @@ const dbo = require('../db/conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
-
 async function createAccount(req: any, res: any, next: Function) {
   let db_connect = dbo.getDb();
   const hashedPassword = await argon2.hash(req.body.password);
@@ -73,7 +72,7 @@ async function signin(req: any, res: any, next: Function) {
   })
 }
 
-  module.exports = {
-    createAccount,
-    signin,
-  }
+module.exports = {
+  createAccount,
+  signin,
+}

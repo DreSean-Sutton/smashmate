@@ -2,7 +2,7 @@ import ClientError from "../client-error";
 const dbo = require('../db/conn');
 const { ObjectId } = require('mongodb');
 
-async function updateFavorites(req: any, res: any, next: Function) {
+export async function updateFavorites(req: any, res: any, next: Function) {
   let db_connect = dbo.getDb();
   try {
     db_connect
@@ -16,7 +16,7 @@ async function updateFavorites(req: any, res: any, next: Function) {
   }
 }
 
-async function getFavorites(req: any, res: any, next: Function) {
+export async function getFavorites(req: any, res: any, next: Function) {
   let db_connect = dbo.getDb();
   try {
     db_connect
@@ -30,8 +30,3 @@ async function getFavorites(req: any, res: any, next: Function) {
     next(e);
   }
 }
-
-module.exports = {
-  updateFavorites,
-  getFavorites,
-};
