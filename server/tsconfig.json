@@ -26,6 +26,6 @@
   "include": [
     "*.ts",
     "db",
-    "routes"
+    "controllers"
   ]
 }

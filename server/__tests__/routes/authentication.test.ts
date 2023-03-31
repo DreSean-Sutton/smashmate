@@ -1,10 +1,10 @@
 const { request, nock, port } = require('../../utils/test.config');
 
-describe("Registration Route: POST /api/registration/account/add", () => {
+describe("Authentication Route: POST /api/auth/register", () => {
   afterEach(nock.cleanAll);
 
   const baseURL = `http://localhost:${port}`;
-  const postURL = '/api/registration/account/add';
+  const postURL = '/api/auth/register';
   async function fetchData() {
     const res = await request(baseURL)
       .post(postURL)
@@ -56,11 +56,11 @@ describe("Registration Route: POST /api/registration/account/add", () => {
   })
 })
 
-describe("Registration route: POST /api/registration/account/sign-in", () => {
+describe("Authentication route: POST /api/auth/sign-in", () => {
   afterEach(nock.cleanAll);
 
   const baseURL = `http://localhost:${port}`;
-  const postURL = '/api/registration/account/sign-in';
+  const postURL = '/api/auth/sign-in';
   async function fetchData() {
     const res = await request(baseURL)
       .post(postURL)
