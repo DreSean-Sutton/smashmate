@@ -15,10 +15,10 @@ app.use(function (req: any, res: any, next: any) {
   next();
 });
 
-const registrationRoute = require('./routes/registration');
-const favoritingRoute = require('./routes/favoriting');
-app.use('/api/registration', registrationRoute);
-app.use('/api/favoriting', favoritingRoute);
+const authenticationRoutes = require('./controllers/authenticationRoutes');
+const favoritingRoutes = require('./controllers/favoritingRoutes');
+app.use('/api/auth', authenticationRoutes);
+app.use('/api/favoriting', favoritingRoutes);
 
 if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir

@@ -29,7 +29,7 @@ export default function SignIn () {
   const navigate = useNavigate();
 
   const loadSpinner = isloading ? <Loading /> : '';
-  const url = `/api/registration/account/sign-in`;
+  const url = `/api/auth/sign-in`;
   const controller = new AbortController();
   const headers = {
     signal: controller.signal,
