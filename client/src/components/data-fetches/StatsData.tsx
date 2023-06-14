@@ -6,10 +6,19 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
-import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-export default function StatsData(props: DataProps) {
+interface StatsDataProps {
+  currentFighter: string
+}
+
+interface StatProps {
+  name: string,
+  statId: number,
+  statValue: string
+}
+
+export default function StatsData(props: StatsDataProps) {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -39,7 +48,7 @@ export default function StatsData(props: DataProps) {
       <FetchDataFail data={'Stats'} />
     );
   } else {
-    const renderStats = (stat: any) => {
+    const renderStats = (stat: StatProps) => {
       return (
         <React.Fragment key={stat.statId}>
           <Col className='p-3 text-center'>

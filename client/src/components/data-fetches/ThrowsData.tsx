@@ -6,10 +6,21 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
-import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-export default function ThrowsData(props: DataProps) {
+interface ThrowsDataProps {
+  currentFighter: string
+}
+
+interface ThrowProps {
+  name: string,
+  damage: string,
+  throwId: number,
+  activeFrames: string,
+  totalFrames: string
+}
+
+export default function ThrowsData(props: ThrowsDataProps) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -45,7 +56,7 @@ export default function ThrowsData(props: DataProps) {
       <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const renderThrows = (grapple: any) => {
+    const renderThrows = (grapple: ThrowProps) => {
       return (
         <React.Fragment key={grapple.throwId}>
           <Col className='p-3'>

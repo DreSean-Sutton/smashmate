@@ -6,10 +6,23 @@ import { Card } from 'react-bootstrap';
 import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
-import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-export default function MovesData(props: DataProps) {
+interface MovesDataProps {
+  currentFighter: string
+}
+
+interface MoveProps {
+  name: string,
+  damage: string,
+  firstFrame: string,
+  moveType: string,
+  moveId: number,
+  activeFrames: string,
+  totalFrames: string
+}
+
+export default function MovesData(props: MovesDataProps) {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -44,15 +57,6 @@ export default function MovesData(props: DataProps) {
       <FetchDataFail data='Moves'/>
     );
   } else {
-    interface MoveProps {
-      name: string,
-      damage: string,
-      firstFrame: string,
-      moveType: string,
-      moveId: number,
-      activeFrames: string,
-      totalFrames: string
-    }
     const renderMoves = (move: MoveProps): JSX.Element => {
       return (
         <React.Fragment key={move.moveId}>

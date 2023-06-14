@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hook';
 import { selectFighterArray } from '../features/fighters/fightersArraySlice';
+import DataTables from '../components/DataTables';
 import MovesData from '../components/data-fetches/MovesData';
 import ThrowsData from '../components/data-fetches/ThrowsData';
 import MovementData from '../components/data-fetches/MovementData';
@@ -116,10 +117,7 @@ export default function FighterDetails() {
           <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
         </Col>
       </Row>
-      <MovesData currentFighter={fighter} />
-      <ThrowsData currentFighter={fighter} />
-      <MovementData currentFighter={fighter} />
-      <StatsData currentFighter={fighter} />
+        <DataTables currentFighter={fighter} />
       <div className='up-arrow-div'>
         <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i>
       </div>

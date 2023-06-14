@@ -6,10 +6,20 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
-import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-export default function MovementData(props: DataProps) {
+interface MovementsDataProps {
+  currentFighter: string
+}
+
+interface MovementProps {
+  name: string,
+  movementId: number,
+  activeFrames: string,
+  totalFrames: string
+}
+
+export default function MovementData(props: MovementsDataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
@@ -40,7 +50,7 @@ export default function MovementData(props: DataProps) {
     );
   } else {
 
-    const renderMovements = (movement: any) => {
+    const renderMovements = (movement: MovementProps) => {
       return (
         <React.Fragment key={movement.movementId}>
           <Col className='p-3'>
