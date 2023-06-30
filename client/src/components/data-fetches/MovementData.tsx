@@ -24,14 +24,15 @@ export default function MovementData(props: MovementsDataProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  useEffect(() => {
+  async function fetchData() {
     setIsLoading(true);
-    async function fetchData() {
-      const { status, data } = await fetchDetailsData('movements', props.currentFighter);
-      if(status !== 200) return setFetchFailed(true);
-      setIsLoading(false);
-      setMovements(data);
-    }
+    const { status, data } = await fetchDetailsData('movements', props.currentFighter);
+    if(status !== 200) return setFetchFailed(true);
+    setIsLoading(false);
+    setMovements(data);
+  }
+
+  useEffect(() => {
     fetchData();
   }, [props.currentFighter]);
 
@@ -50,12 +51,12 @@ export default function MovementData(props: MovementsDataProps) {
     );
   } else {
 
-    const renderMovements = (movement: MovementProps) => {
+    const renderMovements = (movement: MovementProps): JSX.Element => {
       return (
         <React.Fragment key={movement.movementId}>
           <Col className='p-3'>
             <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
-              <Card.Title className='text-center fw-bold'>{movement.name}</Card.Title>
+              <Card.Title className='text-center fw-bold text-uppercase'>{movement.name}</Card.Title>
               <p className='mb-0 pt-1 border-top'>Active Frames: {movement.activeFrames}</p>
               <p className='mb-0 pt-1 border-top'>Total Frames: {movement.totalFrames}</p>
             </Card>

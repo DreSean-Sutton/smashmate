@@ -27,14 +27,15 @@ export default function MovesData(props: MovesDataProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  useEffect(() => {
+  async function fetchData() {
     setIsLoading(true);
-    async function fetchData() {
-      const { status, data } = await fetchDetailsData('moves', props.currentFighter);
-      if (status !== 200) return setFetchFailed(true);
-      setIsLoading(false);
-      setMoves(data);
-    }
+    const { status, data } = await fetchDetailsData('moves', props.currentFighter);
+    if (status !== 200) return setFetchFailed(true);
+    setIsLoading(false);
+    setMoves(data);
+  }
+
+  useEffect(() => {
     fetchData();
   }, [props.currentFighter]);
 
@@ -60,29 +61,34 @@ export default function MovesData(props: MovesDataProps) {
     const renderMoves = (move: MoveProps): JSX.Element => {
       return (
         <React.Fragment key={move.moveId}>
-          <Col className='p-3'>
-            <Card className='p-2 bg-light text-dark typical-box-shadow text-capitalize'>
-              <Card.Title className='text-center fw-bold primary-theme-color'>{move.name}</Card.Title>
-              <p className='mb-0 pt-1 border-top'>First Frame: {checkNull(move.firstFrame)}</p>
-              <p className='mb-0 pt-1 border-top'>Damage: {checkNull(move.damage)}</p>
-              <p className='mb-0 pt-1 border-top'>Active Frames: {checkNull(move.activeFrames)}</p>
-              <p className='mb-0 pt-1 border-top'>Total Frames: {checkNull(move.totalFrames)}</p>
-              <p className='mb-0 pt-1 border-top'>Hitbox Type: {move.moveType}</p>
-            </Card>
-          </Col>
+          <tr>
+            <td>{move.name}</td>
+            <td>{checkNull(move.firstFrame)}</td>
+            <td>{checkNull(move.damage)}</td>
+            <td>{checkNull(move.activeFrames)}</td>
+            <td>{checkNull(move.totalFrames)}</td>
+            <td>{move.moveType}</td>
+          </tr>
         </React.Fragment>
       );
     }
     const allMoves = moves.map(renderMoves);
     return (
-      <>
-        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title secondary-theme-bg rounded'>
-          <h2 className='text-dark text-center fs-2 mt-3 mb-3 p-2'>Moves</h2>
-        </Col>
-        <Row id='moves' xs={1} lg={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+      <table className='table table-striped table-bordered rounded text-capitalize m-0'>
+        <thead className='text-center'>
+          <tr>
+            <th>Name</th>
+            <th>First Frame</th>
+            <th>Damage</th>
+            <th>Active Frames</th>
+            <th>Total Frames</th>
+            <th>Hitbox Type</th>
+          </tr>
+        </thead>
+        <tbody>
           { allMoves }
-        </Row>
-      </>
+        </tbody>
+      </table>
     )
   }
 }

@@ -117,7 +117,9 @@ export default function FighterDetails() {
           <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
         </Col>
       </Row>
+      <Row className='bg-light table-responsive p-3 rounded'>
         <DataTables currentFighter={fighter} />
+      </Row>
       <div className='up-arrow-div'>
         <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i>
       </div>

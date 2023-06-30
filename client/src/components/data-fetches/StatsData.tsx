@@ -18,19 +18,20 @@ interface StatProps {
   statValue: string
 }
 
-export default function StatsData(props: StatsDataProps) {
+export default function StatsData(props: StatsDataProps): JSX.Element {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  useEffect(() => {
+  async function fetchData() {
     setIsLoading(true);
-    async function fetchData() {
-      const { status, data } = await fetchDetailsData('stats', props.currentFighter);
-      if (status !== 200) return setFetchFailed(true);
-      setIsLoading(false);
-      setStats(data);
-    }
+    const { status, data } = await fetchDetailsData('stats', props.currentFighter);
+    if (status !== 200) return setFetchFailed(true);
+    setIsLoading(false);
+    setStats(data);
+  }
+
+  useEffect(() => {
     fetchData();
   }, [props.currentFighter]);
 

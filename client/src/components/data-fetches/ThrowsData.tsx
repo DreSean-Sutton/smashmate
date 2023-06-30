@@ -25,14 +25,15 @@ export default function ThrowsData(props: ThrowsDataProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  useEffect(() => {
+  async function fetchData() {
     setIsLoading(true);
-    async function fetchData() {
-      const { status, data } = await fetchDetailsData('throws', props.currentFighter);
-      if (status !== 200) return setFetchFailed(true);
-      setIsLoading(false);
-      setThrows(data);
-    }
+    const { status, data } = await fetchDetailsData('throws', props.currentFighter);
+    if (status !== 200) return setFetchFailed(true);
+    setIsLoading(false);
+    setThrows(data);
+  }
+
+  useEffect(() => {
     fetchData();
   }, [props.currentFighter]);
 
@@ -56,7 +57,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
       <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const renderThrows = (grapple: ThrowProps) => {
+    const renderThrows = (grapple: ThrowProps): JSX.Element => {
       return (
         <React.Fragment key={grapple.throwId}>
           <Col className='p-3'>
