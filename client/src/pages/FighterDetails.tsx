@@ -7,6 +7,7 @@ import MovesData from '../components/data-fetches/MovesData';
 import ThrowsData from '../components/data-fetches/ThrowsData';
 import MovementData from '../components/data-fetches/MovementData';
 import StatsData from '../components/data-fetches/StatsData';
+import DataModal from '../components/data-fetches/DataModal';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -115,13 +116,12 @@ export default function FighterDetails() {
         </Col>
       </Row> */}
       <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
+        <DataModal />
         <DataTables currentFighter={fighter} />
       </Row>
       <div className='options-bar-div'>
-      <a className='options-bar-anchor'>
-        <i class="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
-        {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
-      </a>
+        <i className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
+          {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
       </div>
     </Container>
   );
