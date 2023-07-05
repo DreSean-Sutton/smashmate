@@ -5,6 +5,18 @@
   margin: auto;
 }
 
+.modal-content {
+  background-color: var(--primary-theme);
+}
+
+.close-button {
+  color: white;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 1100;
+}
+
 .buttons-div {
   width: 50%;
 }

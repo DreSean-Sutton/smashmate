@@ -2,16 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Container, Row } from 'react-bootstrap';
 import './DataModal.css';
 
-export default function DataModal(props: any) {
+interface DataModalProps {
+  modalIsOpen: boolean;
+  closeModal: () => void;
+}
+export default function DataModal(props: DataModalProps) {
+
+  const [modalShow, setModalShow] = useState(true);
+
   return (
-    <Modal show='true' className='modal-sm data-modal' tabIndex='-1'>
+    <Modal show={props.modalIsOpen} className='modal-sm data-modal' tabIndex='-1'>
+      <button onClick={props.closeModal} className='btn-close close-button' data-bs-dismiss='modal' aria-label="Close"></button>
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content border-0'>
           <div className='buttons-div m-auto'>
-            <Button className='w-100 my-2'>Moves</Button>
-            <Button className='w-100 my-2'>Throws</Button>
-            <Button className='w-100 my-2'>Movements</Button>
-            <Button className='w-100 my-2'>Stats</Button>
+            <Button onClick={props.closeModal} className='w-100 my-2 btn-warning'>Moves</Button>
+            <Button onClick={props.closeModal} className='w-100 my-2'>Throws</Button>
+            <Button onClick={props.closeModal} className='w-100 my-2'>Movements</Button>
+            <Button onClick={props.closeModal} className='w-100 my-2'>Stats</Button>
+            {/* Add a searchbar button some day */}
           </div>
         </div>
       </div>

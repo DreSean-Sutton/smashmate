@@ -21,23 +21,9 @@ export default function FighterDetails() {
   let navigate = useNavigate();
   let { fighter }: any = useParams();
   const [offset, setOffset] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const fighterDataValues: any[] = Object.values(fighterArray.fighterData);
   let fighterIndex: number = binarySearcher(Object.values(fighterDataValues), fighter);
-
-  useEffect(() => {
-
-    const onScroll = () => setOffset(window.pageYOffset);
-    // This cleans up code
-    window.removeEventListener('scroll', onScroll);
-    handleArrowDimming();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [fighter]);
 
   function binarySearcher (array: any, key: any) {
     let start = 0;
@@ -71,16 +57,12 @@ export default function FighterDetails() {
     navigate(`/character-details/${fighterDataValues[fighterIndex + 1].fighter}`);
   }
 
-  const handleArrowDimming = () => {
-    const leftArrow: any = document.querySelector('#left-arrow');
-    const rightArrow: any = document.querySelector('#right-arrow');
-    if (offset !== 0) {
-      leftArrow.classList.add('arrow-icon-scrolling');
-      rightArrow.classList.add('arrow-icon-scrolling');
-    } else {
-      leftArrow.classList.remove('arrow-icon-scrolling');
-      rightArrow.classList.remove('arrow-icon-scrolling');
-    }
+  function handleOpenModal() {
+    setModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setModalOpen(false);
   }
 
   function handleCheckTitle() {
@@ -91,10 +73,6 @@ export default function FighterDetails() {
   }
 }
 
-  function handleScrollToTop() {
-    window.scrollTo(0, 0);
-  }
-
   return (
     <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
       <Row className='justify-content-between align-items-center'>
@@ -102,7 +80,7 @@ export default function FighterDetails() {
           <i id='left-arrow' onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
         </Col>
         <Col xs={6} md={4} xl={3}>
-          <Card className='secondary-theme-bg w-100 text-center mb-2 p-1'>
+          <Card className='tertiary-theme-bg w-100 text-center mb-2 p-1'>
             <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
           </Card>
         </Col>
@@ -116,13 +94,11 @@ export default function FighterDetails() {
         </Col>
       </Row> */}
       <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
-        <DataModal />
+        <DataModal modalIsOpen={modalOpen} closeModal={handleCloseModal} />
         <DataTables currentFighter={fighter} />
       </Row>
-      <div className='options-bar-div'>
-        <i className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
+      <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
           {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
-      </div>
     </Container>
   );
 }
