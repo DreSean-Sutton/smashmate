@@ -74,7 +74,7 @@ export default function MovesData(props: MovesDataProps) {
     }
     const allMoves = moves.map(renderMoves);
     return (
-      <table className='table table-striped table-bordered rounded text-capitalize m-0'>
+      <table className='table table-striped table-bordered text-capitalize m-0'>
         <thead className='text-center'>
           <tr>
             <th>Name</th>

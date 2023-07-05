@@ -26,10 +26,6 @@
   opacity: 0.85;
 }
 
-.arrow-icon-scrolling {
-  opacity: 0.25;
-}
-
 .fighter-details-img {
   background-color: rgb(225, 225, 225);
   box-shadow: var(--character-name-border);
@@ -40,7 +36,11 @@
   background-color: #0000000b;
 }
 
-.up-arrow {
+.bar-div {
+  background-color: white
+}
+
+.options-bar {
   padding: 1rem;
   position: fixed;
   bottom: 5%;

@@ -73,15 +73,12 @@ export default function FighterDetails() {
   const handleArrowDimming = () => {
     const leftArrow: any = document.querySelector('#left-arrow');
     const rightArrow: any = document.querySelector('#right-arrow');
-    const upArrow: any = document.querySelector('#up-arrow');
     if (offset !== 0) {
       leftArrow.classList.add('arrow-icon-scrolling');
       rightArrow.classList.add('arrow-icon-scrolling');
-      upArrow.classList.remove('arrow-icon-scrolling');
     } else {
       leftArrow.classList.remove('arrow-icon-scrolling');
       rightArrow.classList.remove('arrow-icon-scrolling');
-      upArrow.classList.add('arrow-icon-scrolling');
     }
   }
 
@@ -112,16 +109,19 @@ export default function FighterDetails() {
           <i id='right-arrow' onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
         </Col>
       </Row>
-      <Row className='justify-content-center align-items-center mb-5'>
+      {/* <Row className='justify-content-center align-items-center mb-5'>
         <Col xs={8} md={6} xl={5} className='fighter-details-img p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
           <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
         </Col>
-      </Row>
-      <Row className='bg-light table-responsive p-3 rounded'>
+      </Row> */}
+      <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
         <DataTables currentFighter={fighter} />
       </Row>
-      <div className='up-arrow-div'>
-        <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i>
+      <div className='options-bar-div'>
+      <a className='options-bar-anchor'>
+        <i class="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
+        {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
+      </a>
       </div>
     </Container>
   );

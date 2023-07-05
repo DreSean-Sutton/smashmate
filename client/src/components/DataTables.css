@@ -1,2 +1,11 @@
 .test-col {
+  overflow-x: auto;
+  max-height: 65vh;
+  scrollbar-width: thin;
+}
+
+@media screen and (min-width: 992px) {
+  .test-col {
+    max-height: 60vh;
+  }
 }
