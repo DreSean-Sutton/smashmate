@@ -80,12 +80,17 @@ describe("Testing App.tsx UI/UX", () => {
       const favorites = await screen.findByText(/^favorites$/i);
       await act (async () => await userEvent.click(heart));
       await act (async () => await userEvent.click(favorites));
-      console.log(window.location.pathname);
       await screen.findByTestId(/^pyra$/i);
     });
 
-    // At some point rewrite unfavoriting tests that kept failing due to jsdom hating the location object
-
+    it("unfavorites a fighter and they disappear from the Favorites page", async () => {
+      renderWithProviders(<App />);
+      userEvent.click(screen.getByRole('link', { name: /^favorites$/i }));
+      const heart = await screen.findByTestId(/^pyra-heart$/i);
+      expect(heart).toBeInTheDocument();
+      await act(async () => await userEvent.click(heart));
+      expect(heart).not.toBeInTheDocument();
+    });
   });
 
   describe("Testing fighterDetails", () => {
@@ -96,7 +101,6 @@ describe("Testing App.tsx UI/UX", () => {
       const joker = await screen.findByTestId(/^joker$/i);
       userEvent.click(joker);
       const moves = await screen.findByText(/^Joker's moves$/i);
-      // console.log(window.location.pathname);
       // const grabs = await screen.findByText(/^Grabs\/Throws$/i);
       // const dodges = await screen.findByText(/^Dodges\/Rolls$/i);
       // const stats = await screen.findByText(/^Stats$/i);
