@@ -48,11 +48,13 @@ export default function MovesData(props: MovesDataProps) {
       ? '--'
       : data;
   }
+
   if (isLoading) {
     return (
       <Loading />
     );
   }
+
   if (fetchFailed) {
     return (
       <FetchDataFail data='Moves'/>

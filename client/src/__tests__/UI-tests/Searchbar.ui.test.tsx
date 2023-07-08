@@ -1,11 +1,11 @@
-import App from '../App';
+import App from '../../App';
 import React from 'react';
 import { screen } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 import 'jest-extended';
-import { renderWithProviders } from '../util/test-utils';
+import { renderWithProviders } from '../../util/test-utils';
 
 describe("searchbar", () => {
 

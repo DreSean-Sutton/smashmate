@@ -7,7 +7,7 @@ import '@testing-library/jest-dom';
 import 'jest-extended';
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http');
-import { renderWithProviders } from '../../../util/test-utils';
+import { renderWithProviders } from '../../../../util/test-utils';
 
 describe('Testing SiteNavbar UI/UX', () => {
   it('renders SiteNavbar', async () => {
