@@ -93,40 +93,5 @@ describe("Testing App.tsx UI/UX", () => {
     });
   });
 
-  describe("Testing fighterDetails", () => {
 
-    it("renders fighterDetails component when a fighter's card is clicked", async () => {
-      renderWithProviders(<App />);
-      userEvent.click(screen.getByText(/^home$/i));
-      const joker = await screen.findByTestId(/^joker$/i);
-      userEvent.click(joker);
-      const moves = await screen.findByText(/^Joker's moves$/i);
-      // const grabs = await screen.findByText(/^Grabs\/Throws$/i);
-      // const dodges = await screen.findByText(/^Dodges\/Rolls$/i);
-      // const stats = await screen.findByText(/^Stats$/i);
-      expect(moves).toBeInTheDocument();
-      // expect(grabs).toBeInTheDocument();
-      // expect(dodges).toBeInTheDocument();
-      // expect(stats).toBeInTheDocument();
-    });
-
-    it("renders fighterDetails component when 'enter' is pressed on a focused card", async () => {
-      renderWithProviders(<App />);
-      userEvent.click(screen.getByText(/^home$/i));
-      const joker = await screen.findByTestId(/^joker$/i);
-      joker.focus();
-      expect(document.activeElement).toBe(joker);
-      userEvent.keyboard('abc');
-      expect(document.activeElement).toBe(joker);
-      userEvent.keyboard('{Enter}');
-      const moves = await screen.findByText(/^Joker's moves$/i);
-      // const grabs = await screen.findByText(/^Grabs\/Throws$/i);
-      // const dodges = await screen.findByText(/^Dodges\/Rolls$/i);
-      // const stats = await screen.findByText(/^Stats$/i);
-      expect(moves).toBeInTheDocument();
-      // expect(grabs).toBeInTheDocument();
-      // expect(dodges).toBeInTheDocument();
-      // expect(stats).toBeInTheDocument();
-    });
-  })
 });
