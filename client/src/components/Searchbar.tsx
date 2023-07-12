@@ -24,7 +24,7 @@ export default function Searchbar(props: SearchbarProps) {
   }
 
   function handleKeydown(event: any) {
-    if(event.key === 'Enter') {
+    if(event.key === 'Enter' || event.key === 'Escape') {
       props.toggleSearchbar();
     }
   }

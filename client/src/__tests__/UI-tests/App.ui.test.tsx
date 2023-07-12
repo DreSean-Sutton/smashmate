@@ -93,5 +93,29 @@ describe("Testing App.tsx UI/UX", () => {
     });
   });
 
+  describe("Testing fighterDetails", () => {
+
+    it("renders fighterDetails component when a fighter's card is clicked", async () => {
+      renderWithProviders(<App />);
+      userEvent.click(screen.getByText(/^home$/i));
+      const bayonetta = await screen.findByTestId(/^bayonetta$/i);
+      userEvent.click(bayonetta);
+      const moves = await screen.findByText(/^bayonetta's moves$/i);
+      expect(moves).toBeInTheDocument();
+    });
+
+    it("renders fighterDetails component when 'enter' is pressed on a focused card", async () => {
+      renderWithProviders(<App />);
+      userEvent.click(screen.getByText(/^home$/i));
+      const bayonetta = await screen.findByTestId(/^bayonetta$/i);
+      bayonetta.focus();
+      expect(document.activeElement).toBe(bayonetta);
+      userEvent.keyboard('abc');
+      expect(document.activeElement).toBe(bayonetta);
+      userEvent.keyboard('{Enter}');
+      const moves = await screen.findByText(/^bayonetta's moves$/i);
+      expect(moves).toBeInTheDocument();
+    });
+  })
 
 });
