@@ -11,7 +11,7 @@ export default function DataModal(props: DataModalProps) {
   const [modalShow, setModalShow] = useState(true);
 
   return (
-    <Modal show={props.modalIsOpen} className='modal-sm data-modal' tabIndex='-1'>
+    <Modal show={props.modalIsOpen} className='modal-sm data-modal' tabIndex='-1' data-testid='data-modal'>
       <button onClick={props.closeModal} className='btn-close close-button' data-bs-dismiss='modal' aria-label="Close"></button>
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content border-0'>
