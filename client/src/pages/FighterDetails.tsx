@@ -97,7 +97,7 @@ export default function FighterDetails() {
         <DataModal modalIsOpen={modalOpen} closeModal={handleCloseModal} />
         <DataTables currentFighter={fighter} />
       </Row>
-      <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color"></i>
+      <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color" data-testid='data-navbar'></i>
           {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
     </Container>
   );

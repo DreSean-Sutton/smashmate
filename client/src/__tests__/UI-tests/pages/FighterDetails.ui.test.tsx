@@ -24,5 +24,18 @@ describe("Testing fighterDetails", () => {
       expect(screen.getByRole('table')).toBeInTheDocument();
     });
 
+    it("opens the DataModel component when the data navbar is clicked", async () => {
+      renderWithProviders(<FighterDetails />);
+      const dataNavbar = await screen.findByTestId(/data-navbar/);
+      expect(dataNavbar).toBeInTheDocument();
+      userEvent.click(dataNavbar);
+      const dataModal = await screen.findByTestId(/data-modal/);
+      expect(dataModal).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /moves/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /throws/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /movements/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /stats/i })).toBeInTheDocument();
+    })
+
   })
 });
