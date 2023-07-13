@@ -10,6 +10,13 @@ export default function DataModal(props: DataModalProps) {
 
   const [modalShow, setModalShow] = useState(true);
 
+  useEffect(() => {
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if(modalBackdrop) {
+      modalBackdrop.addEventListener('click', (props.closeModal));
+    }
+  })
+
   return (
     <Modal show={props.modalIsOpen} className='modal-sm data-modal' tabIndex='-1' data-testid='data-modal'>
       <button onClick={props.closeModal} className='btn-close close-button' data-bs-dismiss='modal' aria-label="Close"></button>
