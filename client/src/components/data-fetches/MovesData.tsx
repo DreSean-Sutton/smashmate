@@ -44,9 +44,9 @@ export default function MovesData(props: MovesDataProps) {
   }
 
   function checkNull(data: string | null) {
-    return data === null
-      ? '--'
-      : data;
+    return data
+      ? data
+      : '--';
   }
 
   if (isLoading) {

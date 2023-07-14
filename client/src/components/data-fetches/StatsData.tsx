@@ -39,6 +39,12 @@ export default function StatsData(props: StatsDataProps): JSX.Element {
     showHideData('stats');
   }
 
+  function checkNull(data:any) {
+    return data
+      ? data
+      : '--';
+  }
+
   if (isLoading) {
     return (
       <Loading />
@@ -52,25 +58,27 @@ export default function StatsData(props: StatsDataProps): JSX.Element {
     const renderStats = (stat: StatProps) => {
       return (
         <React.Fragment key={stat.statId}>
-          <Col className='p-3 text-center'>
-            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
-              <Card.Title className='fw-bold'>{stat.name}</Card.Title>
-              <p className='mb-0 pt-1 border-top'>{stat.statValue}</p>
-            </Card>
-          </Col>
+          <tr>
+            <td>{stat.name}</td>
+            <td>{checkNull(stat.statValue)}</td>
+          </tr>
         </React.Fragment>
       );
     }
     const allStats = stats.map(renderStats);
     return (
-      <>
-        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title secondary-theme-bg rounded'>
-          <h2 className='text-dark text-center fs-2 mt-3 mb-3 p-2'>Stats</h2>
-        </Col>
-        <Row id='stats' xs={1} sm={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
-          { allStats };
-        </Row>
-      </>
+      <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='stats-table'>
+        <caption>{props.currentFighter}'s Stats</caption>
+        <thead className='text-center'>
+          <tr>
+            <th>Name</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          { allStats }
+        </tbody>
+      </table>
     )
   }
 }

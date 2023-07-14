@@ -47,7 +47,7 @@ describe("Testing fighterDetails", () => {
       expect(dataModal).not.toBeInTheDocument();
     });
 
-    it("renders Bayonetta's Throw data when DataModal's throw button is clicked", async () => {
+    it("renders Bayonetta's throw data when DataModal's throws button is clicked", async () => {
       renderWithProviders(<FighterDetails />);
       const movesTable = await screen.findByTestId(/^moves-table$/);
       userEvent.click(await screen.findByTestId(/data-navbar/));
@@ -57,6 +57,30 @@ describe("Testing fighterDetails", () => {
       expect(dataModal).not.toBeInTheDocument();
       expect(movesTable).not.toBeInTheDocument();
       expect(await screen.findByTestId(/^throws-table$/)).toBeInTheDocument();
+    });
+
+    it("renders Bayonetta's movement data when DataModal's movements button is clicked", async () => {
+      renderWithProviders(<FighterDetails />);
+      const movesTable = await screen.findByTestId(/^moves-table$/);
+      userEvent.click(await screen.findByTestId(/data-navbar/));
+      const dataModal = await screen.findByTestId(/data-modal/);
+      const movementButton = await screen.findByRole('button', { name: /movements/i });
+      await act(() => userEvent.click(movementButton));
+      expect(dataModal).not.toBeInTheDocument();
+      expect(movesTable).not.toBeInTheDocument();
+      expect(await screen.findByTestId(/^movements-table$/)).toBeInTheDocument();
+    });
+
+    it("renders Bayonetta's stat data when DataModal's stats button is clicked", async () => {
+      renderWithProviders(<FighterDetails />);
+      const movesTable = await screen.findByTestId(/^moves-table$/);
+      userEvent.click(await screen.findByTestId(/data-navbar/));
+      const dataModal = await screen.findByTestId(/data-modal/);
+      const statButton = await screen.findByRole('button', { name: /stats/i });
+      await act(() => userEvent.click(statButton));
+      expect(dataModal).not.toBeInTheDocument();
+      expect(movesTable).not.toBeInTheDocument();
+      expect(await screen.findByTestId(/^stats-table$/)).toBeInTheDocument();
     });
 
   })

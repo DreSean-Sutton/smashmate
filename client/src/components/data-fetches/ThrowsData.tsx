@@ -42,9 +42,9 @@ export default function ThrowsData(props: ThrowsDataProps) {
   }
 
   function checkNull(data:any) {
-    return data === null
-      ? '--'
-      : data;
+    return data
+      ? data
+      : '--';
   }
 
   if (isLoading) {

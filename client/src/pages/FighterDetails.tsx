@@ -95,7 +95,7 @@ export default function FighterDetails() {
         </Col>
       </Row> */}
       <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
-        <DataModal changeCurrentDataType={handleChangeCurrentDataType} modalIsOpen={modalOpen} closeModal={handleCloseModal} />
+        <DataModal currentDataType={currentDataType} changeCurrentDataType={handleChangeCurrentDataType} modalIsOpen={modalOpen} closeModal={handleCloseModal} />
         <DataTables currentDataType={currentDataType} currentFighter={fighter} />
       </Row>
       <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color" data-testid='data-navbar'></i>

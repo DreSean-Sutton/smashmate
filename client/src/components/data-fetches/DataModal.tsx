@@ -4,19 +4,25 @@ import './DataModal.css';
 
 interface DataModalProps {
   modalIsOpen: boolean;
+  currentDataType: string;
   closeModal: () => void;
   changeCurrentDataType: (string) => void;
 }
 export default function DataModal(props: DataModalProps) {
 
   const [modalShow, setModalShow] = useState(true);
-
   useEffect(() => {
     const modalBackdrop = document.querySelector('.modal-backdrop');
     if(modalBackdrop) {
       modalBackdrop.addEventListener('click', (props.closeModal));
     }
   })
+
+  function handleCheckSelection(button: string) {
+    return button === props.currentDataType
+      ? 'btn-warning'
+      : '';
+  }
 
   return (
     <Modal show={props.modalIsOpen} className='modal-sm data-modal' tabIndex='-1' data-testid='data-modal'>
@@ -29,28 +35,28 @@ export default function DataModal(props: DataModalProps) {
                 props.closeModal();
                 props.changeCurrentDataType('moves');
               }}
-              className='w-100 my-2 btn-warning'>Moves
+              className={`w-100 my-2 ${handleCheckSelection('moves')}`}>Moves
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('throws');
               }}
-              className='w-100 my-2'>Throws
+              className={`w-100 my-2 ${handleCheckSelection('throws')}`}>Throws
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('movements');
               }}
-              className='w-100 my-2'>Movements
+              className={`w-100 my-2 ${handleCheckSelection('movements')}`}>Movements
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('stats');
               }}
-              className='w-100 my-2'>Stats
+              className={`w-100 my-2 ${handleCheckSelection('stats')}`}>Stats
             </Button>
             {/* Add a searchbar button some day */}
           </div>

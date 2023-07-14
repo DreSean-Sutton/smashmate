@@ -40,6 +40,12 @@ export default function MovementsData(props: MovementsDataProps) {
     showHideData('movements');
   }
 
+  function checkNull(data: string | null) {
+    return data
+      ? data
+      : '--';
+  }
+
   if (isLoading) {
     return (
       <Loading />
@@ -54,26 +60,29 @@ export default function MovementsData(props: MovementsDataProps) {
     const renderMovements = (movement: MovementProps): JSX.Element => {
       return (
         <React.Fragment key={movement.movementId}>
-          <Col className='p-3'>
-            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
-              <Card.Title className='text-center fw-bold text-uppercase'>{movement.name}</Card.Title>
-              <p className='mb-0 pt-1 border-top'>Active Frames: {movement.activeFrames}</p>
-              <p className='mb-0 pt-1 border-top'>Total Frames: {movement.totalFrames}</p>
-            </Card>
-          </Col>
+          <tr>
+            <td>{movement.name}</td>
+            <td>{checkNull(movement.activeFrames)}</td>
+            <td>{checkNull(movement.totalFrames)}</td>
+          </tr>
         </React.Fragment>
       );
     }
     const allMovements = movements.map(renderMovements);
     return (
-      <>
-        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title secondary-theme-bg rounded'>
-          <h2 className='text-dark text-center fs-2 mt-3 mb-3 p-2'>Dodges/Rolls</h2>
-        </Col>
-        <Row id='movements' xs={1} sm={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+      <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='movements-table'>
+        <caption>{props.currentFighter}'s Movements</caption>
+        <thead className='text-center'>
+          <tr>
+            <th>Name</th>
+            <th>Active Frames</th>
+            <th>Total Frames</th>
+          </tr>
+        </thead>
+        <tbody>
           { allMovements }
-        </Row>
-      </>
+        </tbody>
+      </table>
     )
   }
 }
