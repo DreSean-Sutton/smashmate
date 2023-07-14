@@ -13,11 +13,12 @@ import fetchAFighter from '../lib/fetch-a-fighter';
 import './FighterDetails.css';
 
 export default function FighterDetails() {
+  const [offset, setOffset] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentDataType, setCurrentDataType] = useState('moves');
   const fighterArray = useAppSelector(selectFighterArray);
   let navigate = useNavigate();
   let { fighter }: any = useParams();
-  const [offset, setOffset] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
   const fighterDataValues: any[] = Object.values(fighterArray.fighterData);
   let fighterIndex: number = binarySearcher(Object.values(fighterDataValues), fighter);
 
@@ -51,6 +52,10 @@ export default function FighterDetails() {
       fighterIndex = -1;
     }
     navigate(`/character-details/${fighterDataValues[fighterIndex + 1].fighter}`);
+  }
+
+  function handleChangeCurrentDataType(dataType: string) {
+    setCurrentDataType(dataType);
   }
 
   function handleOpenModal() {
@@ -90,11 +95,10 @@ export default function FighterDetails() {
         </Col>
       </Row> */}
       <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
-        <DataModal modalIsOpen={modalOpen} closeModal={handleCloseModal} />
-        <DataTables currentFighter={fighter} />
+        <DataModal changeCurrentDataType={handleChangeCurrentDataType} modalIsOpen={modalOpen} closeModal={handleCloseModal} />
+        <DataTables currentDataType={currentDataType} currentFighter={fighter} />
       </Row>
       <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color" data-testid='data-navbar'></i>
-          {/* <i id='up-arrow' onClick={handleScrollToTop} className="fa-solid fa-circle-arrow-up arrow-icons up-arrow arrow-icon-scrolling secondary-theme-color"></i> */}
     </Container>
   );
 }

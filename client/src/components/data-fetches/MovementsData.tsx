@@ -19,7 +19,7 @@ interface MovementProps {
   totalFrames: string
 }
 
-export default function MovementData(props: MovementsDataProps) {
+export default function MovementsData(props: MovementsDataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

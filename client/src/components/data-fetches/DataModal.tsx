@@ -5,6 +5,7 @@ import './DataModal.css';
 interface DataModalProps {
   modalIsOpen: boolean;
   closeModal: () => void;
+  changeCurrentDataType: (string) => void;
 }
 export default function DataModal(props: DataModalProps) {
 
@@ -23,10 +24,34 @@ export default function DataModal(props: DataModalProps) {
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content border-0'>
           <div className='buttons-div m-auto'>
-            <Button onClick={props.closeModal} className='w-100 my-2 btn-warning'>Moves</Button>
-            <Button onClick={props.closeModal} className='w-100 my-2'>Throws</Button>
-            <Button onClick={props.closeModal} className='w-100 my-2'>Movements</Button>
-            <Button onClick={props.closeModal} className='w-100 my-2'>Stats</Button>
+            <Button
+              onClick={() => {
+                props.closeModal();
+                props.changeCurrentDataType('moves');
+              }}
+              className='w-100 my-2 btn-warning'>Moves
+            </Button>
+            <Button
+              onClick={() => {
+                props.closeModal();
+                props.changeCurrentDataType('throws');
+              }}
+              className='w-100 my-2'>Throws
+            </Button>
+            <Button
+              onClick={() => {
+                props.closeModal();
+                props.changeCurrentDataType('movements');
+              }}
+              className='w-100 my-2'>Movements
+            </Button>
+            <Button
+              onClick={() => {
+                props.closeModal();
+                props.changeCurrentDataType('stats');
+              }}
+              className='w-100 my-2'>Stats
+            </Button>
             {/* Add a searchbar button some day */}
           </div>
         </div>

@@ -49,11 +49,14 @@ describe("Testing fighterDetails", () => {
 
     it("renders Bayonetta's Throw data when DataModal's throw button is clicked", async () => {
       renderWithProviders(<FighterDetails />);
+      const movesTable = await screen.findByTestId(/^moves-table$/);
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const throwButton = await screen.findByRole('button', { name: /throws/i });
       await act(() => userEvent.click(throwButton));
       expect(dataModal).not.toBeInTheDocument();
+      expect(movesTable).not.toBeInTheDocument();
+      expect(await screen.findByTestId(/^throws-table$/)).toBeInTheDocument();
     });
 
   })
