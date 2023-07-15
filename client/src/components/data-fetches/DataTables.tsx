@@ -30,7 +30,7 @@ export default function DataTables(props: DataTablesProps) {
   stats: <StatsData currentFighter={props.currentFighter} />
 };
 
-const currentDataComponent = dataComponents[props.currentDataType];
+const currentDataComponent: any = dataComponents[props.currentDataType];
 
   return (
     <Col className='test-col p-0'>
