@@ -68,7 +68,7 @@ export default function App() {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [location]);
 
   async function fetchFighters() {
     setIsLoading(true);

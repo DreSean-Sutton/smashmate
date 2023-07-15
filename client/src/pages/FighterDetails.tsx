@@ -75,10 +75,10 @@ export default function FighterDetails() {
 }
 
   return (
-    <Container className='frame-data-backdrop pt-4 pb-4 fighter-details' data-view='characterDetails'>
+    <Container className='pt-4 pb-4 fighter-details' data-view='characterDetails'>
       <Row className='justify-content-between align-items-center'>
         <Col xs={2} md={3} xl={3} className='pr-0 text-center'>
-          <i id='left-arrow' onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
+          <i id='left-arrow' data-testid='left-arrow' onClick={handlePreviousFighter} className="fa-solid fa-circle-arrow-left arrow-icons arrow-icon-left secondary-theme-color"></i>
         </Col>
         <Col xs={6} md={4} xl={3}>
           <Card className='tertiary-theme-bg w-100 text-center mb-2 p-1'>
@@ -86,15 +86,10 @@ export default function FighterDetails() {
           </Card>
         </Col>
         <Col xs={2} md={3} xl={3} className='pl-0 text-center'>
-          <i id='right-arrow' onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
+          <i id='right-arrow' data-testid='right-arrow' onClick={handleNextFighter} className="fa-solid fa-circle-arrow-right arrow-icons arrow-icon-right secondary-theme-color"></i>
         </Col>
       </Row>
-      {/* <Row className='justify-content-center align-items-center mb-5'>
-        <Col xs={8} md={6} xl={5} className='fighter-details-img p-2 bg-light typical-box-shadow rounded' style={{ zIndex: '0' }}>
-          <Image rounded={true} src={`./images/smash-ultimate-sprites/${fighter}.png`} />
-        </Col>
-      </Row> */}
-      <Row className='bg-light table-responsive p-2 mt-sm-2 mt-lg-4 rounded'>
+      <Row className='data-row bg-light p-2 mt-sm-2 mt-lg-4 rounded'>
         <DataModal currentDataType={currentDataType} changeCurrentDataType={handleChangeCurrentDataType} modalIsOpen={modalOpen} closeModal={handleCloseModal} />
         <DataTables currentDataType={currentDataType} currentFighter={fighter} />
       </Row>

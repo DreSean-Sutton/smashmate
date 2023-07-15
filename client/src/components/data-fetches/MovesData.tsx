@@ -77,7 +77,7 @@ export default function MovesData(props: MovesDataProps) {
     const allMoves = moves.map(renderMoves);
     return (
       <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='moves-table'>
-        <caption>{props.currentFighter}'s Moves</caption>
+        <caption className='fw-bold text-center text-dark'>Moves</caption>
         <thead className='text-center'>
           <tr>
             <th>Name</th>

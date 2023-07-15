@@ -72,7 +72,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
     const allThrows = throws.map(renderThrows);
     return(
       <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='throws-table'>
-        <caption>{props.currentFighter}'s Throws</caption>
+        <caption className='fw-bold text-center text-dark'>Throws</caption>
         <thead className='text-center'>
           <tr>
             <th>Name</th>

@@ -1,3 +1,7 @@
+table {
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
 td {
   vertical-align: middle;
 }

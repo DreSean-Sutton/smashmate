@@ -68,7 +68,7 @@ export default function StatsData(props: StatsDataProps): JSX.Element {
     const allStats = stats.map(renderStats);
     return (
       <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='stats-table'>
-        <caption>{props.currentFighter}'s Stats</caption>
+        <caption className='fw-bold text-center text-dark'>Stats</caption>
         <thead className='text-center'>
           <tr>
             <th>Name</th>
