@@ -14,16 +14,9 @@ interface DataTablesProps {
   currentDataType: string;
 }
 
-interface DataComponentsTypes {
-  moves: React.ReactNode;
-  throws: React.ReactNode;
-  movements: React.ReactNode;
-  stats: React.ReactNode;
-}
-
 export default function DataTables(props: DataTablesProps) {
 
-  const dataComponents: DataComponentsTypes = {
+  const dataComponents: any = {
   moves: <MovesData currentFighter={props.currentFighter} />,
   throws: <ThrowsData currentFighter={props.currentFighter} />,
   movements: <MovementsData currentFighter={props.currentFighter} />,
