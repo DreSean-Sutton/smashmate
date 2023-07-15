@@ -1,29 +1,43 @@
-import RenderCards from '../../../components/RenderCards';
-import SiteNavbar from '../../../components/navbar/SiteNavbar';
+import FighterDetails from '../../../pages/FighterDetails';
+import App from '../../../App';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useParams } from 'react-router-dom';
 import { screen, waitFor, act } from '@testing-library/react';
 import '@testing-library/user-event';
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom';
 import 'jest-extended';
 import { renderWithProviders } from '../../../util/test-utils';
-import App from '../../../App';
-import FighterDetails from '../../../pages/FighterDetails';
 
 describe("Testing fighterDetails", () => {
 
-  describe("Walking through Bayonetta's data", () => {
-
-    it("renders Bayonetta's Moves data", async () => {
-      renderWithProviders(<FighterDetails />);
-      const moves = await (waitFor(() => screen.findByText(/^bayonetta's moves$/i), { timeout: 3000 }));
-      // const moves = await screen.findByText(/^bayonetta's moves$/i);
-      const movesTable = await screen.findByTestId(/^moves-table$/);
-      expect(moves).toBeInTheDocument();
-      expect(movesTable).toBeInTheDocument();
-      expect(screen.getByRole('table')).toBeInTheDocument();
+  describe("testing arrows", () => {
+    afterEach(() => {
+      useParams.mockReturnValue({ fighter: 'bayonetta' });
     });
+
+    test("previous arrow should switch shown data to previous fighter", async () => {
+      renderWithProviders(<App />);
+      await (waitFor(() => screen.findByText(/bayonetta/i), { timeout: 3000 }));
+      userEvent.click(screen.getByTestId(/^bayonetta$/i));
+      const leftArrow = await screen.findByTestId(/left-arrow/i);
+      userEvent.click(leftArrow);
+      const rightArrow = await screen.findByTestId(/right-arrow/);
+      useParams.mockReturnValue({ fighter: 'banjo' });
+      expect(await screen.findByText(/^banjo/i)).toBeInTheDocument();
+    });
+
+    test("next arrow should switch shown data to next fighter", async () => {
+      renderWithProviders(<App />);
+      const rightArrow = await screen.findByTestId(/right-arrow/i);
+      userEvent.click(rightArrow);
+      const leftArrow = await screen.findByTestId(/left-arrow/);
+      useParams.mockReturnValue({ fighter: 'bowser' });
+      expect(await screen.findByText(/^bowser/i)).toBeInTheDocument();
+
+    });
+  });
+  describe("Walking through Bayonetta's data", () => {
 
     it("opens the DataModal component when the data navbar is clicked", async () => {
       renderWithProviders(<FighterDetails />);
@@ -50,9 +64,16 @@ describe("Testing fighterDetails", () => {
       expect(dataModal).not.toBeInTheDocument();
     });
 
+    it("renders Bayonetta's Moves data", async () => {
+      renderWithProviders(<FighterDetails />);
+      const movesTable = await (waitFor(() => screen.findByTestId(/^moves-table$/), { timeout: 3000 }));
+      expect(movesTable).toBeInTheDocument();
+      expect(screen.getByRole('table')).toBeInTheDocument();
+    });
+
     it("renders Bayonetta's throw data when DataModal's throws button is clicked", async () => {
       renderWithProviders(<FighterDetails />);
-      const movesTable = await screen.findByTestId(/^moves-table$/);
+      const movesTable = await (waitFor(() => screen.findByTestId(/^moves-table$/), { timeout: 3000 }));
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const throwButton = await screen.findByRole('button', { name: /throws/i });
@@ -64,7 +85,7 @@ describe("Testing fighterDetails", () => {
 
     it("renders Bayonetta's movement data when DataModal's movements button is clicked", async () => {
       renderWithProviders(<FighterDetails />);
-      const movesTable = await screen.findByTestId(/^moves-table$/);
+      const movesTable = await (waitFor(() => screen.findByTestId(/^moves-table$/), { timeout: 3000 }));
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const movementButton = await screen.findByRole('button', { name: /movements/i });
@@ -76,7 +97,7 @@ describe("Testing fighterDetails", () => {
 
     it("renders Bayonetta's stat data when DataModal's stats button is clicked", async () => {
       renderWithProviders(<FighterDetails />);
-      const movesTable = await screen.findByTestId(/^moves-table$/);
+      const movesTable = await (waitFor(() => screen.findByTestId(/^moves-table$/), { timeout: 3000 }));
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const statButton = await screen.findByRole('button', { name: /stats/i });
@@ -85,6 +106,5 @@ describe("Testing fighterDetails", () => {
       expect(movesTable).not.toBeInTheDocument();
       expect(await screen.findByTestId(/^stats-table$/)).toBeInTheDocument();
     });
-
   })
 });

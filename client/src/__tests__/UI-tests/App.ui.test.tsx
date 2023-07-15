@@ -100,8 +100,8 @@ describe("Testing App.tsx UI/UX", () => {
       userEvent.click(screen.getByText(/^home$/i));
       const bayonetta = await screen.findByTestId(/^bayonetta$/i);
       userEvent.click(bayonetta);
-      const moves = await screen.findByText(/^bayonetta's moves$/i);
-      expect(moves).toBeInTheDocument();
+      const movesTable = await screen.findByTestId(/^moves-table$/);
+      expect(movesTable).toBeInTheDocument();
     });
 
     it("renders fighterDetails component when 'enter' is pressed on a focused card", async () => {
@@ -113,8 +113,8 @@ describe("Testing App.tsx UI/UX", () => {
       userEvent.keyboard('abc');
       expect(document.activeElement).toBe(bayonetta);
       userEvent.keyboard('{Enter}');
-      const moves = await screen.findByText(/^bayonetta's moves$/i);
-      expect(moves).toBeInTheDocument();
+      const movesTable = await screen.findByTestId(/^moves-table$/);
+      expect(movesTable).toBeInTheDocument();
     });
   })
 
