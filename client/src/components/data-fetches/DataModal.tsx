@@ -35,30 +35,33 @@ export default function DataModal(props: DataModalProps) {
                 props.closeModal();
                 props.changeCurrentDataType('moves');
               }}
-              className={`w-100 my-2 ${handleCheckSelection('moves')}`}>Moves
+              className={`w-100 my-2 ${handleCheckSelection('moves')}`}
+              title='Move data'>Moves
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('throws');
               }}
-              className={`w-100 my-2 ${handleCheckSelection('throws')}`}>Throws
+              className={`w-100 my-2 ${handleCheckSelection('throws')}`}
+              title='Throw data'>Throws
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('movements');
               }}
-              className={`w-100 my-2 ${handleCheckSelection('movements')}`}>Movements
+              className={`w-100 my-2 ${handleCheckSelection('movements')}`}
+              title='Movement data'>Movements
             </Button>
             <Button
               onClick={() => {
                 props.closeModal();
                 props.changeCurrentDataType('stats');
               }}
-              className={`w-100 my-2 ${handleCheckSelection('stats')}`}>Stats
+              className={`w-100 my-2 ${handleCheckSelection('stats')}`}
+              title='Stat data'>Stats
             </Button>
-            {/* Add a searchbar button some day */}
           </div>
         </div>
       </div>

@@ -31,11 +31,14 @@ describe("Testing fighterDetails", () => {
       expect(dataNavbar).toBeInTheDocument();
       userEvent.click(dataNavbar);
       const dataModal = await screen.findByTestId(/data-modal/);
+      const movesButton = screen.getByRole('button', { name: /moves/i });
       expect(dataModal).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /moves/i })).toBeInTheDocument();
+      expect(movesButton).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /throws/i })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /movements/i })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /stats/i })).toBeInTheDocument();
+      await act(() => userEvent.click(movesButton));
+      expect(dataModal).not.toBeInTheDocument();
     });
 
     it("closes the DataModal component when the outside of the modal is clicked", async () => {
