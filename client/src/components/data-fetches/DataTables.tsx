@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppSelectoor } from '../../app/hook';
+import { useAppSelector } from '../../app/hook';
 import { selectFighterArray } from '../../features/fighters/fightersArraySlice';
 import MovesData from './MovesData';
 import ThrowsData from './ThrowsData';
@@ -11,11 +11,19 @@ import './DataTables.css';
 
 interface DataTablesProps {
   currentFighter: string;
-  currentDataType: string;
+  currentDataType: 'moves' | 'throws' | 'movements' | 'stats';
+}
+
+interface DataComponentsTypes {
+  moves: React.ReactNode;
+  throws: React.ReactNode;
+  movements: React.ReactNode;
+  stats: React.ReactNode;
 }
 
 export default function DataTables(props: DataTablesProps) {
-  const dataComponents = {
+
+  const dataComponents: DataComponentsTypes = {
   moves: <MovesData currentFighter={props.currentFighter} />,
   throws: <ThrowsData currentFighter={props.currentFighter} />,
   movements: <MovementsData currentFighter={props.currentFighter} />,

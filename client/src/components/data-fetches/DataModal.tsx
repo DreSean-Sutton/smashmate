@@ -6,7 +6,7 @@ interface DataModalProps {
   modalIsOpen: boolean;
   currentDataType: string;
   closeModal: () => void;
-  changeCurrentDataType: (string) => void;
+  changeCurrentDataType: (arg0: string) => void;
 }
 export default function DataModal(props: DataModalProps) {
 
