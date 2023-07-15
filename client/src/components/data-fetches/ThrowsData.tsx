@@ -37,10 +37,6 @@ export default function ThrowsData(props: ThrowsDataProps) {
     fetchData();
   }, [props.currentFighter]);
 
-  function handleShowHideData() {
-    showHideData('throws');
-  }
-
   function checkNull(data:any) {
     return data
       ? data
@@ -72,7 +68,7 @@ export default function ThrowsData(props: ThrowsDataProps) {
     const allThrows = throws.map(renderThrows);
     return(
       <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='throws-table'>
-        <caption className='fw-bold text-center text-dark'>Throws</caption>
+        <caption className='fw-bold text-sm-center text-dark'>Throws</caption>
         <thead className='text-center'>
           <tr>
             <th>Name</th>

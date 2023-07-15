@@ -39,10 +39,6 @@ export default function MovesData(props: MovesDataProps) {
     fetchData();
   }, [props.currentFighter]);
 
-  function handleShowHideData() {
-    showHideData('moves');
-  }
-
   function checkNull(data: string | null) {
     return data
       ? data
@@ -77,7 +73,7 @@ export default function MovesData(props: MovesDataProps) {
     const allMoves = moves.map(renderMoves);
     return (
       <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='moves-table'>
-        <caption className='fw-bold text-center text-dark'>Moves</caption>
+        <caption className='fw-bold text-sm-center text-dark'>Moves</caption>
         <thead className='text-center'>
           <tr>
             <th>Name</th>
