@@ -11,7 +11,7 @@ import './DataTables.css';
 
 interface DataTablesProps {
   currentFighter: string;
-  currentDataType: 'moves' | 'throws' | 'movements' | 'stats';
+  currentDataType: string;
 }
 
 interface DataComponentsTypes {
