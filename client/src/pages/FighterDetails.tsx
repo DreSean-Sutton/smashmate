@@ -15,7 +15,7 @@ import './FighterDetails.css';
 export default function FighterDetails() {
   const [offset, setOffset] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentDataType, setCurrentDataType] = useState('moves');
+  const [currentDataType, setCurrentDataType]: 'moves' | 'throws' | 'movements' | 'stats' = useState('moves');
   const fighterArray = useAppSelector(selectFighterArray);
   let navigate = useNavigate();
   let { fighter }: any = useParams();
