@@ -1,9 +1,29 @@
-.data-title {
-  user-select: none;
-  cursor: pointer;
+table {
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+td {
+  vertical-align: middle;
+}
+
+thead, th {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  border-width: 0;
+}
+
+th, td {
+  font-size: 12px;
 }
 
 .data-title:hover,
 .data-title:active {
   opacity: 90%;
+}
+
+@media screen and (min-width: 575px) {
+  th, td {
+    font-size: 16px;
+  }
 }

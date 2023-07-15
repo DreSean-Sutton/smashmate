@@ -26,8 +26,8 @@ export function renderWithProviders(
 ) {
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return(
-      <Provider store={ store }> { children } </Provider>
+      <Router><Provider store={ store }> { children } </Provider></ Router>
     )
   }
-  return { store, ...render(<Router>{ component }</Router>, { wrapper: Wrapper, ...renderOptions }) }
+  return { store, ...render(component, { wrapper: Wrapper, ...renderOptions }) }
 }

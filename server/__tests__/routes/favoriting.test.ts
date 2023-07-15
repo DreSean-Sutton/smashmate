@@ -1,6 +1,6 @@
 const { request, nock, port, testCharacter1, testCharacter2 } = require('../../utils/test.config');
 
-describe("Favoriting route: POST /api/favoriting/characters/upsert", () => {
+describe("POST /api/favoriting/characters/upsert", () => {
 
   afterAll(nock.cleanAll);
 
@@ -43,7 +43,7 @@ describe("Favoriting route: POST /api/favoriting/characters/upsert", () => {
   })
 })
 
-describe("Favoriting route: POST /api/favoriting/characters/get", () => {
+describe("POST /api/favoriting/characters/get", () => {
 
   afterAll(nock.cleanAll);
 

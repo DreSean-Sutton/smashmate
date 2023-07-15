@@ -6,33 +6,41 @@ import Loading from '../Loading';
 import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
-import { DataProps } from '../../util/types';
 import './DataFetch.css';
 
-export default function ThrowsData(props: DataProps) {
+interface ThrowsDataProps {
+  currentFighter: string
+}
+
+interface ThrowProps {
+  name: string,
+  damage: string,
+  throwId: number,
+  activeFrames: string,
+  totalFrames: string
+}
+
+export default function ThrowsData(props: ThrowsDataProps) {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
 
-  useEffect(() => {
+  async function fetchData() {
     setIsLoading(true);
-    async function fetchData() {
-      const { status, data } = await fetchDetailsData('throws', props.currentFighter);
-      if (status !== 200) return setFetchFailed(true);
-      setIsLoading(false);
-      setThrows(data);
-    }
+    const { status, data } = await fetchDetailsData('throws', props.currentFighter);
+    if (status !== 200) return setFetchFailed(true);
+    setIsLoading(false);
+    setThrows(data);
+  }
+
+  useEffect(() => {
     fetchData();
   }, [props.currentFighter]);
 
-  function handleShowHideData() {
-    showHideData('throws');
-  }
-
   function checkNull(data:any) {
-    return data === null
-      ? '--'
-      : data;
+    return data
+      ? data
+      : '--';
   }
 
   if (isLoading) {
@@ -45,30 +53,34 @@ export default function ThrowsData(props: DataProps) {
       <FetchDataFail data={'Grabs/Throws'} />
     );
   } else {
-    const renderThrows = (grapple: any) => {
+    const renderThrows = (grapple: ThrowProps): JSX.Element => {
       return (
         <React.Fragment key={grapple.throwId}>
-          <Col className='p-3'>
-            <Card className='p-2 bg-light primary-theme-color typical-box-shadow text-capitalize'>
-              <Card.Title className='text-center fw-bold'>{grapple.name}</Card.Title>
-              <p className='mb-0 pt-1 border-top'>Damage: {checkNull(grapple.damage)}</p>
-              <p className='mb-0 pt-1 border-top'>Active Frames: {grapple.activeFrames}</p>
-              <p className='mb-0 pt-1 border-top'>Total Frames: {grapple.totalFrames}</p>
-            </Card>
-          </Col>
+          <tr>
+            <td>{grapple.name}</td>
+            <td>{checkNull(grapple.damage)}</td>
+            <td>{grapple.activeFrames}</td>
+            <td>{grapple.totalFrames}</td>
+          </tr>
         </React.Fragment>
       );
     }
     const allThrows = throws.map(renderThrows);
     return(
-      <>
-        <Col onClick={handleShowHideData} xs={6} md={4} className='m-auto data-title secondary-theme-bg rounded'>
-          <h2 className='text-dark text-center fs-2 mt-3 mb-3 p-2'>Grabs/Throws</h2>
-        </Col>
-        <Row id='throws' xs={1} sm={2} xl={3} className='rounded justify-content-center align-items-start p-1'>
+      <table className='table table-striped table-bordered caption-top text-capitalize m-0' data-testid='throws-table'>
+        <caption className='fw-bold text-sm-center text-dark'>Throws</caption>
+        <thead className='text-center'>
+          <tr>
+            <th>Name</th>
+            <th>Damage</th>
+            <th>Active Frames</th>
+            <th>Total Frames</th>
+          </tr>
+        </thead>
+        <tbody>
           { allThrows }
-        </Row>
-      </>
+        </tbody>
+      </table>
     )
   }
 }

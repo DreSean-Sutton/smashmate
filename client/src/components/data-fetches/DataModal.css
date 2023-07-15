@@ -1,0 +1,23 @@
+.data-modal {
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: auto;
+}
+
+.modal-content {
+  background-color: var(--primary-theme);
+}
+
+.close-button {
+  color: white;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  z-index: 1100;
+}
+
+.buttons-div {
+  width: 50%;
+}

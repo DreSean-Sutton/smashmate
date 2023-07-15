@@ -5,7 +5,7 @@ import {
   Route,
   useLocation,
   Navigate
-} from "react-router-dom";
+} from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './app/hook';
 import { selectUser } from './features/account/userSlice';
 import { setFighterArray, selectFighterArray } from './features/fighters/fightersArraySlice';
@@ -68,7 +68,7 @@ export default function App() {
       fetchFighters();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [location]);
 
   async function fetchFighters() {
     setIsLoading(true);

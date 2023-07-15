@@ -66,9 +66,9 @@ async function signin(req: any, res: any, next: Function) {
         token: token,
         account: payload
       });
-  } catch (e) {
-  next(e);
-  }
+    } catch (e) {
+    next(e);
+    }
   })
 }
 

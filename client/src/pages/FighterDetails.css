@@ -26,25 +26,15 @@
   opacity: 0.85;
 }
 
-.arrow-icon-scrolling {
-  opacity: 0.25;
-}
-
-.fighter-details-img {
-  background-color: rgb(225, 225, 225);
-  box-shadow: var(--character-name-border);
-  user-select: none;
-}
-
-.frame-data-backdrop {
-  background-color: #0000000b;
-}
-
-.up-arrow {
+.options-bar {
   padding: 1rem;
   position: fixed;
-  bottom: 5%;
-  right: 1%;
+  bottom: 0;
+  right: 0;
+}
+
+.data-row {
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.4);
 }
 
 @media screen and (min-width: 575px) {
