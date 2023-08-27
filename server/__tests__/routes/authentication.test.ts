@@ -19,9 +19,9 @@ describe("Authentication Route: POST /api/auth/register", () => {
 
   describe("Successful account creation", () => {
     it("returns a 201 response and inserts a new profile into the database", async () => {
-      nock(baseURL)
-        .post(postURL)
-        .reply(201,{ acknowledged: true, insertedId: 5 });
+      // nock(baseURL)
+      //   .post(postURL)
+      //   .reply(201,{ acknowledged: true, insertedId: 5 });
 
       const res = await fetchData();
       console.log(res.body);
@@ -136,6 +136,53 @@ describe("Authentication route: POST /api/auth/sign-in", () => {
       expect(res.body).toHaveProperty('error');
     });
   });
+});
+
+describe('Authentication route: POST /api/auth/delete-account', () => {
+
+  const baseURL = `http://localhost:${port}`;
+  const postURL = '/api/auth/delete-account';
+  async function fetchData() {
+    const res = await request(baseURL)
+      .post(postURL)
+      .send({
+        username: 'test account',
+        password: 'test_password',
+      });
+
+    return res;
+  }
+
+  describe("successful requests", () => {
+    it("returns a 204 status code if a user is deleted", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(204, {});
+
+      const res = await fetchData();
+      expect(res.statusCode).toBe(204);
+    });
+  });
+  describe('unsuccessful requests', () => {
+    it("returns a 404 status code if user doesn't exist", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(404, { error: "User doesn't exist"});
+
+      const res = await fetchData();
+      expect(res.statusCode).toBe(404);
+      expect(res.body).toHaveProperty('error');
+    })
+    it("returns a 400 status code if password is incorrect", async () => {
+      nock(baseURL)
+        .post(postURL)
+        .reply(400, { error: "Invalid password"});
+
+      const res = await fetchData();
+      expect(res.statusCode).toBe(400);
+      expect(res.body).toHaveProperty('error');
+    })
+  })
 });
 
 export {}
