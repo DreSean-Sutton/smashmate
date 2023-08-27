@@ -13,29 +13,18 @@ async function createAccount(req: any, res: any, next: Function) {
     favorites: req.body.favorites
   };
   try {
-    db_connect
-      .collection('profiles')
-      .findOne({ username: profileObj.username }, (err: any, existingUser: { username?: string }) => {
-        if (err) throw err;
-        if (existingUser) {
-          return res.status(400).json({ username: existingUser.username });
-        }
-        db_connect
-          .collection('profiles')
-          .findOne({ email: profileObj.email }, (err: any, existingUser: { email?: string }) => {
-            if (err) throw err;
-            if (existingUser) {
-              return res.status(400).json({ email: existingUser.email });
-            }
-            db_connect
-              .collection('profiles')
-              .insertOne(profileObj, (err: any, existingUser: { acknowledged: boolean, id: number }) => {
-                if (err) throw err;
-                res.status(201).json(existingUser);
-              });
-          })
-      })
+    const { username } = await db_connect.collection('profiles').findOne({ username: profileObj.username });
+    if (username) {
+      return res.status(400).json({ username: username });
+    }
+    const { email } = await db_connect.collection('profiles').findOne({ email: profileObj.email });
+    if (email) {
+      return res.status(400).json({ email: email });
+    }
+    const insertResult = await db_connect.collection('profiles').insertOne(profileObj);
+    res.status(201).json(insertResult);
   } catch (e) {
+    console.error(e);
     next(e);
   }
 }
@@ -46,30 +35,27 @@ async function signin(req: any, res: any, next: Function) {
   if (email === 'demoaccount@gmail.com' && !password) {
     password = process.env.DEMO_ACCOUNT;
   }
-  db_connect
-  .collection('profiles')
-  .findOne({ email: email }, async function (err: any, existingUser: any) {
-    try {
-      if (err) throw err;
-      if (!existingUser) throw new ClientError(400, 'Invalid email');
-      const checkPassword = await argon2.verify(existingUser.password, password);
-      if (!checkPassword) {
-        throw new ClientError(400, 'Invalid password');
-      }
-      const payload: { id: number, username: string, email: string } = {
-        id: existingUser._id,
-        username: existingUser.username,
-        email: existingUser.email
-      }
-      const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-      res.status(200).json({
-        token: token,
-        account: payload
-      });
-    } catch (e) {
-    next(e);
+  const result = await db_connect.collection('profiles').findOne({ email: email });
+  try {
+    if (!result) throw new ClientError(400, 'Invalid email');
+    const checkPassword = await argon2.verify(result.password, password);
+    if (!checkPassword) {
+      throw new ClientError(400, 'Invalid password');
     }
-  })
+    const payload: { id: number, username: string, email: string } = {
+      id: result._id,
+      username: result.username,
+      email: result.email
+    }
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    res.status(200).json({
+      token: token,
+      account: payload
+    });
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
 }
 
 module.exports = {
