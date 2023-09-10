@@ -9,10 +9,6 @@ import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import './DataFetch.css';
 
-interface MovementsDataProps {
-  currentFighter: string
-}
-
 interface MovementProps {
   name: string,
   movementId: number,
@@ -20,7 +16,7 @@ interface MovementProps {
   totalFrames: string
 }
 
-export default function MovementsData(props: MovementsDataProps) {
+export default function MovementsData() {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

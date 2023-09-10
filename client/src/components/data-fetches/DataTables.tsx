@@ -10,7 +10,7 @@ import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import './DataTables.css';
 
-export default function DataTables(props: DataTablesProps) {
+export default function DataTables() {
 
   const { currentDataType } = useParams();
 

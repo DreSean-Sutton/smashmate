@@ -9,10 +9,6 @@ import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import './DataFetch.css';
 
-interface ThrowsDataProps {
-  currentFighter: string
-}
-
 interface ThrowProps {
   name: string,
   damage: string,
@@ -21,7 +17,7 @@ interface ThrowProps {
   totalFrames: string
 }
 
-export default function ThrowsData(props: ThrowsDataProps) {
+export default function ThrowsData() {
   const [throws, setThrows] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);

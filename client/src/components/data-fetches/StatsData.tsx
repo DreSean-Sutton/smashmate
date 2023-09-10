@@ -9,17 +9,13 @@ import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import './DataFetch.css';
 
-interface StatsDataProps {
-  currentFighter: string
-}
-
 interface StatProps {
   name: string,
   statId: number,
   statValue: string
 }
 
-export default function StatsData(props: StatsDataProps): JSX.Element {
+export default function StatsData(): JSX.Element {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
