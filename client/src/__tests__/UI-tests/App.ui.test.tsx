@@ -93,9 +93,9 @@ describe("Testing App.tsx UI/UX", () => {
     });
   });
 
-  describe("Testing fighterDetails", () => {
+  describe("Testing navigation to FighterDetails component", () => {
 
-    it("renders fighterDetails component when a fighter's card is clicked", async () => {
+    it("renders FighterDetails component when a fighter's card is clicked", async () => {
       renderWithProviders(<App />);
       userEvent.click(screen.getByText(/^home$/i));
       const bayonetta = await screen.findByTestId(/^bayonetta$/i);
@@ -104,7 +104,7 @@ describe("Testing App.tsx UI/UX", () => {
       expect(movesTable).toBeInTheDocument();
     });
 
-    it("renders fighterDetails component when 'enter' is pressed on a focused card", async () => {
+    it("renders FighterDetails component when 'enter' is pressed on a focused card", async () => {
       renderWithProviders(<App />);
       userEvent.click(screen.getByText(/^home$/i));
       const bayonetta = await screen.findByTestId(/^bayonetta$/i);

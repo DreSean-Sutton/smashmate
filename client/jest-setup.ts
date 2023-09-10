@@ -13,4 +13,4 @@ jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
 }));
 
-useParams.mockReturnValue({ fighter: 'bayonetta' });
+useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'moves' });

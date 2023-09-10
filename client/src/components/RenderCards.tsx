@@ -41,7 +41,7 @@ export default function RenderCards() {
   function handleShowDetails(event: EventProps) {
     if (event.target.matches('.fa-heart')) return;
     const characterCard = event.target.closest('#character-card').dataset;
-    navigate(`/character-details/${characterCard.cardName}`);
+    navigate(`/character-details/${characterCard.cardName}/moves`);
   }
 
   function handleEnterShowDetails(event: EventProps) {
