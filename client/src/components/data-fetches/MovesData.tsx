@@ -8,6 +8,7 @@ import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import './DataFetch.css';
+import { RouteParams } from '../../util/types';
 
 interface MoveProps {
   name: string,

@@ -11,6 +11,7 @@ import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 import fetchAFighter from '../lib/fetch-a-fighter';
 import './FighterDetails.css';
+import { RouteParams } from '../util/types';
 
 export default function FighterDetails() {
   const [offset, setOffset] = useState(0);
