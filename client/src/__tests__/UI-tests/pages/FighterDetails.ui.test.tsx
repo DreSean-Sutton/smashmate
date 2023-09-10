@@ -13,7 +13,7 @@ describe("Testing fighterDetails", () => {
 
   describe("testing arrows", () => {
     afterEach(() => {
-      useParams.mockReturnValue({ fighter: 'bayonetta' });
+      useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'moves' });
     });
 
     test("previous arrow should switch shown data to previous fighter", async () => {
@@ -38,6 +38,9 @@ describe("Testing fighterDetails", () => {
     });
   });
   describe("Walking through Bayonetta's data", () => {
+    beforeEach(() => {
+      useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'moves' });
+    });
 
     it("opens the DataModal component when the data navbar is clicked", async () => {
       renderWithProviders(<FighterDetails />);
@@ -77,6 +80,7 @@ describe("Testing fighterDetails", () => {
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const throwButton = await screen.findByRole('button', { name: /throws/i });
+      useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'throws' });
       await act(() => userEvent.click(throwButton));
       expect(dataModal).not.toBeInTheDocument();
       expect(movesTable).not.toBeInTheDocument();
@@ -89,6 +93,7 @@ describe("Testing fighterDetails", () => {
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const movementButton = await screen.findByRole('button', { name: /movements/i });
+      useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'movements' });
       await act(() => userEvent.click(movementButton));
       expect(dataModal).not.toBeInTheDocument();
       expect(movesTable).not.toBeInTheDocument();
@@ -101,6 +106,7 @@ describe("Testing fighterDetails", () => {
       userEvent.click(await screen.findByTestId(/data-navbar/));
       const dataModal = await screen.findByTestId(/data-modal/);
       const statButton = await screen.findByRole('button', { name: /stats/i });
+      useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'stats' });
       await act(() => userEvent.click(statButton));
       expect(dataModal).not.toBeInTheDocument();
       expect(movesTable).not.toBeInTheDocument();
