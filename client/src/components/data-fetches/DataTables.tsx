@@ -12,7 +12,7 @@ import './DataTables.css';
 import { RouteParams } from '../../util/types';
 export default function DataTables() {
 
-  const { currentDataType } = useParams<RouteParams>();
+  const { currentDataType } = useParams<keyof RouteParams>() as RouteParams;
 
   const dataComponents: any = {
   moves: <MovesData />,

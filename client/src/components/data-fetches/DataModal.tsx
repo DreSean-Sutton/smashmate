@@ -11,7 +11,7 @@ interface DataModalProps {
 export default function DataModal(props: DataModalProps) {
 
   const [modalShow, setModalShow] = useState(true);
-  const { fighter, currentDataType } = useParams<RouteParams>();
+  const { fighter, currentDataType } = useParams<keyof RouteParams>() as RouteParams;
   const navigate = useNavigate();
 
   useEffect(() => {

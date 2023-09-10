@@ -1,4 +1,4 @@
 export type RouteParams = {
-  fighter: string,
-  currentDataType: string
+  fighter: string;
+  currentDataType: string;
 }
