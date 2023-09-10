@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Modal, Button, Container, Row } from 'react-bootstrap';
 import './DataModal.css';
+import { RouteParams } from '../../util/types';
 
 interface DataModalProps {
   modalIsOpen: boolean;
@@ -10,7 +11,7 @@ interface DataModalProps {
 export default function DataModal(props: DataModalProps) {
 
   const [modalShow, setModalShow] = useState(true);
-  const { fighter, currentDataType } = useParams();
+  const { fighter, currentDataType } = useParams<RouteParams>();
   const navigate = useNavigate();
 
   useEffect(() => {

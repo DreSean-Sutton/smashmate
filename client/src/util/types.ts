@@ -1,5 +1,4 @@
-export interface UserProps {
-  username: string
-  email: string
-  favorites: any
+export type RouteParams = {
+  fighter: string,
+  currentDatatype: string
 }

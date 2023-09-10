@@ -17,7 +17,7 @@ export default function FighterDetails() {
   const [modalOpen, setModalOpen] = useState(false);
   const fighterArray = useAppSelector(selectFighterArray);
   let navigate = useNavigate();
-  let { fighter, currentDataType }: any = useParams();
+  let { fighter, currentDataType }: any = useParams<RouteParams>();
   const fighterDataValues: any[] = Object.values(fighterArray.fighterData);
   let fighterIndex: number = binarySearcher(Object.values(fighterDataValues), fighter);
 

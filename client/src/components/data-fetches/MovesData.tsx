@@ -23,7 +23,7 @@ export default function MovesData() {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
-  const { fighter } = useParams();
+  const { fighter } = useParams<RouteParams>();
 
   async function fetchData() {
     setIsLoading(true);

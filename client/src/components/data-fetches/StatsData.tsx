@@ -19,7 +19,7 @@ export default function StatsData(): JSX.Element {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
-  const { fighter } = useParams();
+  const { fighter } = useParams<RouteParams>();
 
   async function fetchData() {
     setIsLoading(true);

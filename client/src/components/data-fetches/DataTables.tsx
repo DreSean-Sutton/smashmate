@@ -9,10 +9,10 @@ import StatsData from './StatsData';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import './DataTables.css';
-
+import { RouteParams } from '../../util/types';
 export default function DataTables() {
 
-  const { currentDataType } = useParams();
+  const { currentDataType } = useParams<RouteParams>();
 
   const dataComponents: any = {
   moves: <MovesData />,
