@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -23,10 +24,11 @@ export default function MovementsData(props: MovementsDataProps) {
   const [movements, setMovements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const { fighter } = useParams();
 
   async function fetchData() {
     setIsLoading(true);
-    const { status, data } = await fetchDetailsData('movements', props.currentFighter);
+    const { status, data } = await fetchDetailsData('movements', fighter);
     if(status !== 200) return setFetchFailed(true);
     setIsLoading(false);
     setMovements(data);
@@ -34,7 +36,7 @@ export default function MovementsData(props: MovementsDataProps) {
 
   useEffect(() => {
     fetchData();
-  }, [props.currentFighter]);
+  }, [fighter]);
 
   function checkNull(data: string | null) {
     return data

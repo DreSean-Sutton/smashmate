@@ -145,14 +145,12 @@ export default function App() {
               <Favorites />
             </>
           } />
-          <Route path='/character-details'>
-            <Route path={':fighter'} element={
-              <>
-                <BackgroundCarousel />
-                <FighterDetails />
-              </>
-            } />
-          </Route>
+          <Route path={'/character-details/:fighter/:currentDataType'} element={
+            <>
+              <BackgroundCarousel />
+              <FighterDetails />
+            </>
+          } />
           <Route path='/registration'>
             <Route path="create-account" element={
               <User />

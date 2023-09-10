@@ -15,10 +15,9 @@ import './FighterDetails.css';
 export default function FighterDetails() {
   const [offset, setOffset] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentDataType, setCurrentDataType] = useState('moves');
   const fighterArray = useAppSelector(selectFighterArray);
   let navigate = useNavigate();
-  let { fighter }: any = useParams();
+  let { fighter, currentDataType }: any = useParams();
   const fighterDataValues: any[] = Object.values(fighterArray.fighterData);
   let fighterIndex: number = binarySearcher(Object.values(fighterDataValues), fighter);
 
@@ -44,18 +43,14 @@ export default function FighterDetails() {
     if(fighterIndex === 0) {
       fighterIndex = fighterArray.length;
     }
-    navigate(`/character-details/${fighterDataValues[fighterIndex - 1].fighter}`);
+    navigate(`/character-details/${fighterDataValues[fighterIndex - 1].fighter}/${currentDataType}`);
   }
 
   function handleNextFighter () {
     if (fighterIndex === fighterArray.length - 1) {
       fighterIndex = -1;
     }
-    navigate(`/character-details/${fighterDataValues[fighterIndex + 1].fighter}`);
-  }
-
-  function handleChangeCurrentDataType(dataType: string) {
-    setCurrentDataType(dataType);
+    navigate(`/character-details/${fighterDataValues[fighterIndex + 1].fighter}/${currentDataType}`);
   }
 
   function handleOpenModal() {
@@ -90,8 +85,8 @@ export default function FighterDetails() {
         </Col>
       </Row>
       <Row className='data-row bg-light p-2 mt-sm-2 mt-lg-4 rounded'>
-        <DataModal currentDataType={currentDataType} changeCurrentDataType={handleChangeCurrentDataType} modalIsOpen={modalOpen} closeModal={handleCloseModal} />
-        <DataTables currentDataType={currentDataType} currentFighter={fighter} />
+        <DataModal modalIsOpen={modalOpen} closeModal={handleCloseModal} />
+        <DataTables />
       </Row>
       <i onClick={handleOpenModal} className="fa-solid fa-bars arrow-icons options-bar secondary-theme-color" data-testid='data-navbar'></i>
     </Container>

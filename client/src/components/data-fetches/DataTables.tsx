@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/hook';
 import { selectFighterArray } from '../../features/fighters/fightersArraySlice';
+import { useParams } from 'react-router-dom';
 import MovesData from './MovesData';
 import ThrowsData from './ThrowsData';
 import MovementsData from './MovementsData';
@@ -9,21 +10,18 @@ import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import './DataTables.css';
 
-interface DataTablesProps {
-  currentFighter: string;
-  currentDataType: string;
-}
-
 export default function DataTables(props: DataTablesProps) {
 
+  const { currentDataType } = useParams();
+
   const dataComponents: any = {
-  moves: <MovesData currentFighter={props.currentFighter} />,
-  throws: <ThrowsData currentFighter={props.currentFighter} />,
-  movements: <MovementsData currentFighter={props.currentFighter} />,
-  stats: <StatsData currentFighter={props.currentFighter} />
+  moves: <MovesData />,
+  throws: <ThrowsData />,
+  movements: <MovementsData />,
+  stats: <StatsData />
 };
 
-const currentDataComponent: any = dataComponents[props.currentDataType];
+const currentDataComponent: any = dataComponents[currentDataType];
 
   return (
     <Col className='test-col p-0'>

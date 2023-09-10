@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
@@ -22,10 +23,11 @@ export default function StatsData(props: StatsDataProps): JSX.Element {
   const [stats, setStats] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const { fighter } = useParams();
 
   async function fetchData() {
     setIsLoading(true);
-    const { status, data } = await fetchDetailsData('stats', props.currentFighter);
+    const { status, data } = await fetchDetailsData('stats', fighter);
     if (status !== 200) return setFetchFailed(true);
     setIsLoading(false);
     setStats(data);
@@ -33,7 +35,7 @@ export default function StatsData(props: StatsDataProps): JSX.Element {
 
   useEffect(() => {
     fetchData();
-  }, [props.currentFighter]);
+  }, [fighter]);
 
   function checkNull(data:any) {
     return data

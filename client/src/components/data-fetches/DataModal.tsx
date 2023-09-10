@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Modal, Button, Container, Row } from 'react-bootstrap';
 import './DataModal.css';
 
 interface DataModalProps {
   modalIsOpen: boolean;
-  currentDataType: string;
   closeModal: () => void;
-  changeCurrentDataType: (arg0: string) => void;
 }
 export default function DataModal(props: DataModalProps) {
 
   const [modalShow, setModalShow] = useState(true);
+  const { fighter, currentDataType } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const modalBackdrop = document.querySelector('.modal-backdrop');
     if(modalBackdrop) {
@@ -19,7 +21,7 @@ export default function DataModal(props: DataModalProps) {
   })
 
   function handleCheckSelection(button: string) {
-    return button === props.currentDataType
+    return button === currentDataType
       ? 'btn-warning'
       : '';
   }
@@ -33,7 +35,7 @@ export default function DataModal(props: DataModalProps) {
             <Button
               onClick={() => {
                 props.closeModal();
-                props.changeCurrentDataType('moves');
+                navigate(`/character-details/${fighter}/moves`);
               }}
               className={`w-100 my-2 ${handleCheckSelection('moves')}`}
               title='Move data'>Moves
@@ -41,7 +43,7 @@ export default function DataModal(props: DataModalProps) {
             <Button
               onClick={() => {
                 props.closeModal();
-                props.changeCurrentDataType('throws');
+                navigate(`/character-details/${fighter}/throws`);
               }}
               className={`w-100 my-2 ${handleCheckSelection('throws')}`}
               title='Throw data'>Throws
@@ -49,7 +51,7 @@ export default function DataModal(props: DataModalProps) {
             <Button
               onClick={() => {
                 props.closeModal();
-                props.changeCurrentDataType('movements');
+                navigate(`/character-details/${fighter}/movements`);
               }}
               className={`w-100 my-2 ${handleCheckSelection('movements')}`}
               title='Movement data'>Movements
@@ -57,7 +59,7 @@ export default function DataModal(props: DataModalProps) {
             <Button
               onClick={() => {
                 props.closeModal();
-                props.changeCurrentDataType('stats');
+                navigate(`/character-details/${fighter}/stats`);
               }}
               className={`w-100 my-2 ${handleCheckSelection('stats')}`}
               title='Stat data'>Stats

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Loading from '../Loading';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
@@ -7,10 +8,6 @@ import FetchDataFail from './FetchDataFail';
 import fetchDetailsData from '../../lib/fetch-details-data';
 import showHideData from '../../util/show-hide-data';
 import './DataFetch.css';
-
-interface MovesDataProps {
-  currentFighter: string
-}
 
 interface MoveProps {
   name: string,
@@ -22,14 +19,15 @@ interface MoveProps {
   totalFrames: string
 }
 
-export default function MovesData(props: MovesDataProps) {
+export default function MovesData() {
   const [moves, setMoves] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchFailed, setFetchFailed] = useState(false);
+  const { fighter } = useParams();
 
   async function fetchData() {
     setIsLoading(true);
-    const { status, data } = await fetchDetailsData('moves', props.currentFighter);
+    const { status, data } = await fetchDetailsData('moves', fighter);
     if (status !== 200) return setFetchFailed(true);
     setIsLoading(false);
     setMoves(data);
@@ -37,7 +35,7 @@ export default function MovesData(props: MovesDataProps) {
 
   useEffect(() => {
     fetchData();
-  }, [props.currentFighter]);
+  }, [fighter]);
 
   function checkNull(data: string | null) {
     return data
