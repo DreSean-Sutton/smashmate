@@ -68,7 +68,7 @@ async function deleteAccount(req: any, res: any, next: Function) {
     if (!findResult) throw new ClientError(404, 'User does not exist');
     const checkPassword = await argon2.verify(findResult.password, password);
     if(!checkPassword) throw new ClientError(400, 'Invalid password');
-    const { deleteResult } = await Profile.deleteOne({ username: username });
+    await Profile.deleteOne({ username: username });
     return res.status(204).json({});
   } catch (e: any) {
     console.error(e);
