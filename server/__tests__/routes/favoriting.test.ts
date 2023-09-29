@@ -18,12 +18,12 @@ describe("POST /api/favoriting/characters/upsert", () => {
 
   describe("Successful upsert", () => {
     it("returns a 201 response and updates a users favorites", async () => {
-      nock(baseURL)
-        .post(postURL)
-        .reply(201, { lastErrorObject: {
-          upsert: true
-        }
-      })
+      // nock(baseURL)
+      //   .post(postURL)
+      //   .reply(201, { lastErrorObject: {
+        //   upsert: true
+        // }
+      // })
 
       const res = await fetchData();
       expect(res.statusCode).toBe(201);
@@ -33,9 +33,9 @@ describe("POST /api/favoriting/characters/upsert", () => {
 
   describe("Unsuccessful upsert", () => {
     it("returns a 500 response and error", async () => {
-      nock(baseURL)
-        .post(postURL)
-        .reply(500, { error: 'an error has occurred' });
+      // nock(baseURL)
+      //   .post(postURL)
+      //   .reply(500, { error: 'an error has occurred' });
       const res = await fetchData();
       expect(res.statusCode).toBe(500);
       expect(res.body).toHaveProperty('error');
@@ -60,9 +60,9 @@ describe("POST /api/favoriting/characters/get", () => {
 
   describe("Successful POST request", () => {
     it("returns a 200 response and the user's favorites", async () => {
-      nock(baseURL)
-        .post(postURL)
-        .reply(200, [testCharacter1, testCharacter2])
+      // nock(baseURL)
+      //   .post(postURL)
+      //   .reply(200, [testCharacter1, testCharacter2])
       const res = await fetchData();
       expect(res.statusCode).toBe(200);
       expect(res.body[0]).toEqual(testCharacter1);
@@ -72,11 +72,11 @@ describe("POST /api/favoriting/characters/get", () => {
 
   describe("Unsuccessful POST request", () => {
     it("returns a 404 response and an error if email doesn't exist", async () => {
-      nock(baseURL)
-        .post(postURL)
-        .reply(400, {
-          error: 'invalid email address'
-        })
+      // nock(baseURL)
+      //   .post(postURL)
+      //   .reply(400, {
+        //   error: 'invalid email address'
+        // })
       const res = await fetchData();
       expect(res.statusCode).toBe(400);
       expect(res.body).toHaveProperty('error');

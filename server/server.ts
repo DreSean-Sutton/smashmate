@@ -3,7 +3,7 @@ import errorMiddleware from "./error-middleware";
 const path = require('path');
 require('dotenv').config({ path: '../.env' });
 var express = require('express');
-var dbo = require('./db/conn');
+var db = require('./db/conn');
 const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
@@ -37,8 +37,15 @@ app.use((req: any, res: any) => {
 app.use(errorMiddleware);
 
 app.listen(port, () => {
-  dbo.connectToServer(function (err: any) {
-    if (err) console.error(err);
-  });
-  console.log(`Server is running on port: ${port}`);
+
+  db.on('error', (err: any) => {
+  console.error('Mongoose connection error: ', err);
+});
+db.once('open', () => {
+  console.log('Successfully connected using Mongoose');
+});
+  // dbo.connectToServer(function (err: any) {
+  //   if (err) console.error(err);
+  // });
+  // console.log(`Server is running on port: ${port}`);
 });
