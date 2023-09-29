@@ -1,16 +1,15 @@
 import ClientError from "../client-error";
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const { Profile } = require("../models/profile");
+const Profile = require("../models/profile");
 
-console.log(`Profile value in ${__filename}: `, Profile);
 async function createAccount(req: any, res: any, next: Function) {
   const hashedPassword = await argon2.hash(req.body.password);
   let profileObj = {
     username: req.body.username,
     email: req.body.email,
     password: hashedPassword,
-    favorites: req.body.favorites
+    favorites: { fighterData: {}, length: 0 }
   };
   try {
     const findUsernameResult = await Profile.findOne({ username: profileObj.username });
@@ -21,11 +20,12 @@ async function createAccount(req: any, res: any, next: Function) {
     if (findEmailResult) {
       return res.status(400).json({ email: findEmailResult.email });
     }
-    const insertResult = await Profile.insertOne(profileObj);
-    res.status(201).json(insertResult);
+    const newProfile = new Profile(profileObj);
+    const { email, username } = await newProfile.save();
+    res.status(201).json({ email: email, username: username });
 
   } catch (e) {
-    console.error(e);
+    console.error('Create account failed: ', e);
     next(e);
   }
 }
