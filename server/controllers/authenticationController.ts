@@ -25,7 +25,7 @@ async function createAccount(req: any, res: any, next: Function) {
     res.status(201).json({ email: email, username: username });
 
   } catch (e) {
-    console.error('Create account failed: ', e);
+    console.error('Account creation failed: ', e);
     next(e);
   }
 }
@@ -53,7 +53,7 @@ async function signin(req: any, res: any, next: Function) {
     });
 
   } catch (e) {
-    console.error(e);
+    console.error('Sign in failed: ', e);
     next(e);
   }
 }
@@ -71,7 +71,7 @@ async function deleteAccount(req: any, res: any, next: Function) {
     await Profile.deleteOne({ username: username });
     return res.status(204).json({});
   } catch (e: any) {
-    console.error(e);
+    console.error('Account deletion failed: ', e);
     next(e);
   }
 }

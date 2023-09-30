@@ -25,7 +25,7 @@ describe("POST /api/favoriting/characters/upsert", () => {
     return res;
   }
 
-  describe("Successful upsert", () => {
+  describe("Successful requests", () => {
     it("returns a 201 response and updates a users favorites", async () => {
       nock(baseURL)
         .post(postURL)
@@ -42,14 +42,13 @@ describe("POST /api/favoriting/characters/upsert", () => {
       });
 
       const res = await fetchData();
-      console.log(res.body);
       expect(res.statusCode).toBe(201);
       expect(res.body).toHaveProperty('favorites');
       expect(res.body.favorites.length).toBe(2);
     })
   })
 
-  describe("Unsuccessful upsert", () => {
+  describe("Unsuccessful requests", () => {
     it("returns a 500 response and error", async () => {
       nock(baseURL)
         .post(postURL)
@@ -79,7 +78,7 @@ describe("POST /api/favoriting/characters/get", () => {
     return res;
   }
 
-  describe("Successful POST request", () => {
+  describe("Successful requests", () => {
     it("returns a 200 response and the user's favorites", async () => {
       nock(baseURL)
         .post(postURL)
@@ -92,14 +91,13 @@ describe("POST /api/favoriting/characters/get", () => {
         }
       });
       const res = await fetchData();
-      console.log(res.body);
       expect(res.statusCode).toBe(200);
-      // expect(res.body.favorites.fighterData.fighter1).toEqual(testCharacter1);
-      // expect(res.body.favorites.fighterData.fighter2).toEqual(testCharacter2);
+      expect(res.body.favorites.fighterData.fighter1).toEqual(testCharacter1);
+      expect(res.body.favorites.fighterData.fighter2).toEqual(testCharacter2);
     })
   })
 
-  describe("Unsuccessful POST request", () => {
+  describe("Unsuccessful requests", () => {
     it("returns a 404 response and an error if email doesn't exist", async () => {
       nock(baseURL)
         .post(postURL)
