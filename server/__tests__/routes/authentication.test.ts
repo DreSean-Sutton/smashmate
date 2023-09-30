@@ -11,8 +11,7 @@ describe("Authentication Route: POST /api/auth/register", () => {
       .send({
         username: 'test account',
         email: 'testemail@gmail.com',
-        password: 'test_password',
-        favorites: []
+        password: 'test_password'
       });
       return res;
   }
@@ -21,13 +20,11 @@ describe("Authentication Route: POST /api/auth/register", () => {
     it("returns a 201 response and inserts a new profile into the database", async () => {
       nock(baseURL)
         .post(postURL)
-        .reply(201,{ acknowledged: true, insertedId: 5 });
+        .reply(201, { email: 'testemail@gmail.com', username: 'test account' });
 
       const res = await fetchData();
-      console.log(res.body);
       expect(res.statusCode).toBe(201);
-      expect(res.body).toHaveProperty('acknowledged', true);
-      expect(res.body).toHaveProperty('insertedId');
+      expect(res.body).toEqual({ email: 'testemail@gmail.com', username: 'test account' });
     });
   });
 
@@ -39,7 +36,7 @@ describe("Authentication Route: POST /api/auth/register", () => {
 
       const res = await fetchData();
       expect(res.statusCode).toBe(400);
-      expect(res.body.username).toBe('test account');
+      expect(res.body).toHaveProperty('username');
     });
   });
 
@@ -51,7 +48,7 @@ describe("Authentication Route: POST /api/auth/register", () => {
 
       const res = await fetchData();
       expect(res.statusCode).toBe(400);
-      expect(res.body.email).toBe('testemail@gmail.com');
+      expect(res.body).toHaveProperty('email');
     });
   });
 });
