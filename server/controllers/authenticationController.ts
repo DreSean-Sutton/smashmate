@@ -27,8 +27,8 @@ async function createAccount(req: any, res: any, next: Function) {
   } catch (e) {
     console.error('Account creation failed: ', e);
     next(e);
-  }
-}
+  };
+};
 
 async function signin(req: any, res: any, next: Function) {
   let { email, password } = req.body;
@@ -73,8 +73,8 @@ async function deleteAccount(req: any, res: any, next: Function) {
   } catch (e: any) {
     console.error('Account deletion failed: ', e);
     next(e);
-  }
-}
+  };
+};
 
 module.exports = {
   createAccount,
