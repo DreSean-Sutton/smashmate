@@ -1,7 +1,7 @@
 import ClientError from "../client-error";
+import Profile from "../model/profile";
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const { Profile } = require("../models/profile");
 
 async function createAccount(req: any, res: any, next: Function) {
   const hashedPassword = await argon2.hash(req.body.password);

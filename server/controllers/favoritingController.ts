@@ -1,5 +1,5 @@
 import ClientError from "../client-error";
-const { Profile } = require("../models/profile");
+import Profile from "../model/profile";
 
 export async function updateFavorites(req: any, res: any, next: Function) {
   try {
