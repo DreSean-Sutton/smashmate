@@ -12,14 +12,19 @@ async function createAccount(req: any, res: any, next: Function) {
     favorites: { fighterData: {}, length: 0 }
   };
   try {
-    const findUsernameResult = await Profile.findOne({ username: profileObj.username });
-    if (findUsernameResult) {
-      return res.status(400).json({ username: findUsernameResult.username });
+    const findResult = await Profile.findOne({
+      $or: [
+        { username: profileObj.username },
+        { email: profileObj.email },
+      ]
+    });
+    if(findResult?.username === profileObj.username) {
+        return res.status(400).json({ username: findResult.username });
     }
-    const findEmailResult = await Profile.findOne({ email: profileObj.email });
-    if (findEmailResult) {
-      return res.status(400).json({ email: findEmailResult.email });
+    if (findResult?.email === profileObj.email) {
+      return res.status(400).json({ email: findResult.email });
     }
+
     const newProfile = new Profile(profileObj);
     const { email, username } = await newProfile.save();
     res.status(201).json({ email: email, username: username });
