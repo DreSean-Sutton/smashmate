@@ -43,7 +43,11 @@ export default function App() {
       const { favorites} = await handleGetFavorites(getFavoritesQuery);
       if(typeof favorites !== 'object' || !favorites || Array.isArray(favorites)) return;
       if (favorites.hasOwnProperty('length')) {
-        dispatch(setFavorites(favorites));
+        if(!favorites.hasOwnProperty('fighterData')) {
+          dispatch(setFavorites({ length: 0, fighterData: {} }))
+        } else {
+          dispatch(setFavorites(favorites));
+        }
       }
     }
   }, [user]);
