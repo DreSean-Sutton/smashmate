@@ -15,6 +15,7 @@ import SiteNavbar from './components/navbar/SiteNavbar';
 import Home from './pages/Home';
 import FighterDetails from './pages/FighterDetails';
 import Favorites from './pages/Favorites';
+import ErrorPage from './pages/ErrorPage';
 import User from './features/account/User';
 import Loading from './components/Loading';
 import axios from 'axios';
@@ -137,33 +138,36 @@ export default function App() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={
+          <Route path='/' element={
             <>
               <BackgroundCarousel />
               <Home />
             </>
           } />
-          <Route path="/favorites" element={
+          <Route path='/favorites' element={
             <>
               <BackgroundCarousel />
               <Favorites />
             </>
           } />
-          <Route path={'/character-details/:fighter/:currentDataType'} element={
+          <Route path='/character-details/:fighter/:currentDataType' element={
             <>
               <BackgroundCarousel />
               <FighterDetails />
             </>
           } />
           <Route path='/registration'>
-            <Route path="create-account" element={
+            <Route path='create-account' element={
               <User />
             } />
-            <Route path="sign-in" element={
+            <Route path='sign-in' element={
               <User />
             } />
           </Route>
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path='/error-page' element={
+            <ErrorPage />
+          } />
+          <Route path='*' element={<Navigate to='/' />} />
         </Routes>
       </main>
     </>
