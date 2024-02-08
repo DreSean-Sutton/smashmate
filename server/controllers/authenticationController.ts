@@ -8,8 +8,7 @@ async function createAccount(req: any, res: any, next: Function) {
   let profileObj = {
     username: req.body.username,
     email: req.body.email,
-    password: hashedPassword,
-    favorites: { fighterData: {}, length: 0 }
+    password: hashedPassword
   };
   try {
     const findResult = await Profile.findOne({
@@ -19,7 +18,7 @@ async function createAccount(req: any, res: any, next: Function) {
       ]
     });
     if(findResult?.username === profileObj.username) {
-        return res.status(400).json({ username: findResult.username });
+      return res.status(400).json({ username: findResult.username });
     }
     if (findResult?.email === profileObj.email) {
       return res.status(400).json({ email: findResult.email });
@@ -29,7 +28,7 @@ async function createAccount(req: any, res: any, next: Function) {
     const { email, username } = await newProfile.save();
     res.status(201).json({ email: email, username: username });
 
-  } catch (e) {
+  } catch (e: any) {
     console.error('Account creation failed: ', e);
     next(e);
   };

@@ -52,7 +52,7 @@ export default function RenderCards() {
   function handleFavoriting(event: EventProps): void {
     const heart = event.target;
     const currentFighter = heart.closest('#character-card').dataset.cardName;
-    favorites.fighterData.hasOwnProperty(currentFighter)
+    favorites.fighterData?.hasOwnProperty(currentFighter)
       ? dispatch(deleteFavorites(fighterArray.fighterData[currentFighter]))
       : dispatch(addFavorites(fighterArray.fighterData[currentFighter]));
   }

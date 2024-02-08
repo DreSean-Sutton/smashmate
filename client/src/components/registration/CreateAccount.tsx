@@ -69,9 +69,9 @@ export default function CreateAccount() {
       setIsLoading(true);
       const result = await handleUploadProfile(profile);
       setIsLoading(false);
-      if(result.username) {
+      if(result.hasOwnProperty('username') && !result.hasOwnProperty('email')) {
         username.setCustomValidity('Username must be unique');
-      } else if(result.email) {
+      } else if(!result.hasOwnProperty('username') && result.hasOwnProperty('email')) {
         email.setCustomValidity('This email has already been registered');
       } else if(result.error) {
         // Need to add a page for 500 responses
