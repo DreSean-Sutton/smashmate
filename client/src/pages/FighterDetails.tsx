@@ -1,3 +1,4 @@
+import ErrorPage from './ErrorPage';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hook';
@@ -62,13 +63,9 @@ export default function FighterDetails() {
     setModalOpen(false);
   }
 
-  function handleCheckTitle() {
-    if (fighterArray.length !== 0) {
-      return fighterDataValues[fighterIndex].displayName
-    } else {
-      fetchAFighter(fighter).then((res: any)=> res.displayName);
+  if(!fighterArray.fighterData[fighter]) {
+    return <ErrorPage />;
   }
-}
 
   return (
     <Container className='pt-4 pb-4 fighter-details' data-view='characterDetails'>
@@ -78,7 +75,7 @@ export default function FighterDetails() {
         </Col>
         <Col xs={6} md={4} xl={3}>
           <Card className='tertiary-theme-bg w-100 text-center mb-2 p-1'>
-            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{handleCheckTitle()}</Card.Title>
+            <Card.Title className='mb-0 pt-2 pb-2 fw-bolder'>{fighterDataValues[fighterIndex].displayName}</Card.Title>
           </Card>
         </Col>
         <Col xs={2} md={3} xl={3} className='pl-0 text-center'>

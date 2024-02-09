@@ -13,27 +13,22 @@ import { renderWithProviders } from '../../../util/test-utils';
 describe("Testing ErrorPage Component", () => {
   it("should render ErrorPage", async ()=> {
     renderWithProviders(<ErrorPage />);
-    await (waitFor(() => screen.findByText(/This is the error page/i), { timeout: 3000 }));
-  })
+    const errorPage = await screen.findByTestId(/^error-page$/);
+    expect(errorPage).toBeInTheDocument();
+  });
+
   describe("Testing ErrorPage rendering", () => {
     beforeEach(() => {
       useParams.mockReturnValue({ fighter: 'bayonetta', currentDataType: 'moves' });
     });
 
     it("Should render ErrorPage if fighter doesn't exist", async () => {
-      renderWithProviders(<FighterDetails />);
-      const dataNavbar = await screen.findByTestId(/data-navbar/);
-      expect(dataNavbar).toBeInTheDocument();
-      useParams.mockReturnValue({ fighter: 'i-dont-exist'});
-      const errorPage = await screen.findByTestId(/^error-page$/);
-      expect(errorPage).toBeInTheDocument();
-    });
-
-    it("Should render ErrorPage if currentDataType doesn't exist", async () => {
-      renderWithProviders(<FighterDetails />);
-      const dataNavbar = await screen.findByTestId(/data-navbar/);
-      expect(dataNavbar).toBeInTheDocument();
-      useParams.mockReturnValue({ fighter: 'i-dont-exist'});
+      renderWithProviders(<App />);
+      const homeNav = screen.getByRole('link', { name: /^home$/i });
+      userEvent.click(homeNav);
+      await (waitFor(() => screen.findByText(/bayonetta/i), { timeout: 3000 }));
+      userEvent.click(screen.getByTestId(/^bayonetta$/i));
+      useParams.mockReturnValue({ fighter: 'bayonexcngtta', currentDataType: 'moves' });
       const errorPage = await screen.findByTestId(/^error-page$/);
       expect(errorPage).toBeInTheDocument();
     });

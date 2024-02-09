@@ -26,7 +26,7 @@ export default function App() {
   const user = useAppSelector(selectUser);
   const fighterArray = useAppSelector(selectFighterArray);
   const favorites = useAppSelector(selectFavorites);
-  const [loading, setIsLoading]: any[] = useState(false);
+  const [loading, setIsLoading]: any[] = useState(true);
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -167,7 +167,7 @@ export default function App() {
           <Route path='/error-page' element={
             <ErrorPage />
           } />
-          <Route path='*' element={<Navigate to='/' />} />
+          <Route path='*' element={<Navigate to='/error-page' />} />
         </Routes>
       </main>
     </>
