@@ -67,6 +67,7 @@ export default function App() {
 
   useEffect(() => {
     if (window.location.pathname.includes('registration')) {
+      setIsLoading(false);
       return;
     }
     if(fighterArray.length === 0) {

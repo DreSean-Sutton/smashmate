@@ -1,5 +1,6 @@
 import CreateAccount from '../../components/registration/CreateAccount';
 import SignIn from '../../components/registration/SignIn';
+import ErrorPage from '../../pages/ErrorPage';
 import Container from 'react-bootstrap/Container';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
@@ -12,9 +13,11 @@ export default function User() {
   if (window.location.pathname.includes('sign-in')) {
     currentView = <SignIn />;
     title = 'Sign In';
-  } else {
+  } else if(window.location.pathname.includes('create-account')) {
     currentView = <CreateAccount />;
     title = 'Create an Account';
+  } else {
+    return (<ErrorPage />);
   }
   return (
     <>
