@@ -24,16 +24,19 @@ if(process.env.NODE_ENV === 'production') {
   // serve files from the client's build dir
   app.use(express.static(path.join(__dirname, '../../client/dist')));
 }
+app.use((req: any, res: any) => {
+  res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
+})
 
 app.use('/api', (req: any, res: any) => {
   res.status(404).json({ error: `cannot ${req.method} ${req.url}` })
 });
 
-app.use((req: any, res: any) => {
-  res.sendFile('/index.html', {
-    root: path.join(__dirname, '../../client/dist')
-  });
+// Serve index.html for everything else (for SPA routing)
+app.get('*', (req: any, res: any) => {
+  res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
 });
+
 app.use(errorMiddleware);
 
 app.listen(port, () => {
