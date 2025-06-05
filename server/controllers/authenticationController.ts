@@ -8,7 +8,11 @@ async function createAccount(req: any, res: any, next: Function) {
   let profileObj = {
     username: req.body.username,
     email: req.body.email,
-    password: hashedPassword
+    password: hashedPassword,
+    favorites: {
+      fighterData: {},
+      length: 0
+    }
   };
   try {
     const findResult = await Profile.findOne({
@@ -41,6 +45,7 @@ async function signin(req: any, res: any, next: Function) {
   }
   try {
     const result = await Profile.findOne({ email: email });
+    console.log('Signin result: ', result);
     if (!result) throw new ClientError(400, 'Invalid email');
     const checkPassword = await argon2.verify(result.password, password);
     if (!checkPassword) throw new ClientError(400, 'Invalid password');
