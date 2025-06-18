@@ -42,13 +42,9 @@ app.use(errorMiddleware);
 app.listen(port, () => {
 
   db.on('error', (err: any) => {
-  console.error('Mongoose connection error: ', err);
-});
-db.once('open', () => {
-  console.log('Successfully connected using Mongoose');
-});
-  // dbo.connectToServer(function (err: any) {
-  //   if (err) console.error(err);
-  // });
-  // console.log(`Server is running on port: ${port}`);
+    console.error('Mongoose connection error: ', err);
+  });
+  db.once('open', () => {
+    console.log('Successfully connected using Mongoose');
+  });
 });
