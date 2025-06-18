@@ -4,6 +4,7 @@ const registrationRoute = express.Router();
 
 registrationRoute.post('/register', authenticationController.createAccount);
 registrationRoute.post('/sign-in', authenticationController.signin);
+registrationRoute.post('/demo-sign-in/', authenticationController.signinDemo);
 registrationRoute.post('/delete-account', authenticationController.deleteAccount);
 
 module.exports = registrationRoute;

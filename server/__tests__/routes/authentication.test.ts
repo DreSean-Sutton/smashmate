@@ -135,6 +135,43 @@ describe("Authentication route: POST /api/auth/sign-in", () => {
   });
 });
 
+describe("Authentication route: POST /api/auth/demo-sign-in", () => {
+  afterEach(nock.cleanAll);
+
+  const baseURL = `http://localhost:${port}`;
+  const postURL = '/api/auth/demo-sign-in';
+  async function fetchData() {
+    const res = await request(baseURL)
+      .post(postURL)
+      .send({
+        username: 'Demo',
+        email: 'demoaccount@gmail.com',
+        password: '14d95249a7e7d6f10da4',
+      });
+    return res;
+    }
+    it("temporarily testing fetchData function", async () => {
+
+      nock(baseURL)
+        .post(postURL)
+        .reply(200, {
+          token: 'shhh_its_a_secret',
+          account: {
+            id: 'demo_id',
+            username: 'demo',
+            email: 'demoaccount@gmail.com'
+          }
+        });
+
+      const res = await fetchData();
+      console.log( { res: res.body } );
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toHaveProperty('token');
+      expect(res.body).toHaveProperty('account');
+      expect(res.body.account.username).toBe('demo');
+    });
+});
+
 describe('Authentication route: POST /api/auth/delete-account', () => {
 
   const baseURL = `http://localhost:${port}`;

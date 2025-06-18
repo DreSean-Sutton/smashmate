@@ -36,9 +36,9 @@ export default function SignIn () {
     validateStatus: () => true
   };
 
-  async function handleFetchProfile(query: any) {
+  async function handleFetchProfile(signInPath: string, query: any) {
     try {
-      const { status, data }: any = await axios.post(url, query, headers);
+      const { status, data }: any = await axios.post(signInPath, query, headers);
       if (status !== 200) throw data.error;
       return data;
     } catch (e) {
@@ -47,11 +47,13 @@ export default function SignIn () {
   }
 
   async function handleDemo() {
+    const demoUrl = '/api/auth/demo-sign-in';
     const myQuery = {
+      username: 'Demo',
       email: 'demoaccount@gmail.com'
     }
     setIsLoading(true);
-    const result: QueryResult = await handleFetchProfile(myQuery);
+    const result: QueryResult = await handleFetchProfile(demoUrl, myQuery);
     dispatch(setUser(result));
     navigate('/');
     setIsLoading(false);
@@ -70,7 +72,7 @@ export default function SignIn () {
       password: password.value
     }
     setIsLoading(true);
-    const result: QueryResult = await handleFetchProfile(myQuery);
+    const result: QueryResult = await handleFetchProfile(url, myQuery);
     setIsLoading(false);
     if(result.error) {
       if(result.error === 'Invalid email') {

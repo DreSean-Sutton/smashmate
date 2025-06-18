@@ -1,3 +1,4 @@
+import { sign } from "crypto";
 import ClientError from "../client-error";
 import Profile from "../model/profile";
 const argon2 = require('argon2');
@@ -5,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 async function createAccount(req: any, res: any, next: Function) {
   const hashedPassword = await argon2.hash(req.body.password);
-  let profileObj = {
+  const profileObj = {
     username: req.body.username,
     email: req.body.email,
     password: hashedPassword,
@@ -40,9 +41,6 @@ async function createAccount(req: any, res: any, next: Function) {
 
 async function signin(req: any, res: any, next: Function) {
   let { email, password } = req.body;
-  if (email === 'demoaccount@gmail.com' && !password) {
-    password = process.env.DEMO_ACCOUNT;
-  }
   try {
     const result = await Profile.findOne({ email: email });
     console.log('Signin result: ', result);
@@ -63,6 +61,56 @@ async function signin(req: any, res: any, next: Function) {
 
   } catch (e) {
     console.error('Sign in failed: ', e);
+    next(e);
+  }
+}
+
+async function signinDemo(req: any, res: any, next: Function) {
+  let { username, email, password } = req.body;
+  if (username === 'Demo' && email === 'demoaccount@gmail.com' && !password) {
+    password = process.env.DEMO_ACCOUNT;
+  }
+
+  try {
+    let findResult = await Profile.findOne({ username: username, email: email });
+
+    // If demo account does not exist, create it
+    if (!findResult) {
+      console.log('Creating demo account');
+      const hashedPassword = await argon2.hash(password);
+      const profileObj = {
+        username: req.body.username,
+        email: req.body.email,
+        password: hashedPassword,
+        favorites: {
+          fighterData: {},
+          length: 0
+        }
+      };
+
+      const newProfile = new Profile(profileObj);
+      const { email, username } = await newProfile.save();
+      if (!email || !username) {
+        throw new ClientError(500, 'Demo account creation failed');
+      }
+      console.log('Demo account created');
+      findResult = await Profile.findOne({ username: username, email: email });
+    }
+
+    const payload: { id: number, username: string, email: string } = {
+      id: findResult._id,
+      username: findResult.username,
+      email: findResult.email
+    }
+    const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+    console.log('Demo sign in successful, token generated');
+    res.status(200).json({
+      token: token,
+      account: payload
+    });
+
+  } catch (e: any) {
+    console.error('Demo sign in failed: ', e);
     next(e);
   }
 }
@@ -88,5 +136,6 @@ async function deleteAccount(req: any, res: any, next: Function) {
 module.exports = {
   createAccount,
   signin,
+  signinDemo,
   deleteAccount,
 }
